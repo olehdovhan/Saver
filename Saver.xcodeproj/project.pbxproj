@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* Mainscrin2.swift */; };
+		B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */; };
+		B41618B828B1380C002629F7 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B728B1380C002629F7 /* Calendar.swift */; };
+		B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsAndGoals.swift */; };
+		B41618BC28B139A6002629F7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* Menu.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
-		FABB4BC028B124410070F300 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* ContentView.swift */; };
+		FABB4BC028B124410070F300 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* MainView.swift */; };
 		FABB4BC228B124420070F300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC128B124420070F300 /* Assets.xcassets */; };
 		FABB4BC528B124420070F300 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC428B124420070F300 /* Preview Assets.xcassets */; };
 		FABB4BC728B124420070F300 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC628B124420070F300 /* Persistence.swift */; };
@@ -16,9 +21,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B41618B328B1361C002629F7 /* Mainscrin2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mainscrin2.swift; sourceTree = "<group>"; };
+		B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeAndExpenses.swift; sourceTree = "<group>"; };
+		B41618B728B1380C002629F7 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		B41618B928B13962002629F7 /* SavingsAndGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsAndGoals.swift; sourceTree = "<group>"; };
+		B41618BB28B139A6002629F7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
-		FABB4BBF28B124410070F300 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FABB4BBF28B124410070F300 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FABB4BC128B124420070F300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FABB4BC428B124420070F300 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FABB4BC628B124420070F300 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -36,6 +46,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B41618B228B135CE002629F7 /* tabView */ = {
+			isa = PBXGroup;
+			children = (
+				B41618B328B1361C002629F7 /* Mainscrin2.swift */,
+				B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */,
+				B41618B728B1380C002629F7 /* Calendar.swift */,
+				B41618B928B13962002629F7 /* SavingsAndGoals.swift */,
+				B41618BB28B139A6002629F7 /* Menu.swift */,
+			);
+			path = tabView;
+			sourceTree = "<group>";
+		};
 		FABB4BB128B124410070F300 = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				FABB4BBD28B124410070F300 /* SaverApp.swift */,
-				FABB4BBF28B124410070F300 /* ContentView.swift */,
-				FABB4BC128B124420070F300 /* Assets.xcassets */,
+				FABB4BBF28B124410070F300 /* MainView.swift */,
+				B41618B228B135CE002629F7 /* tabView */,
 				FABB4BC628B124420070F300 /* Persistence.swift */,
+				FABB4BC128B124420070F300 /* Assets.xcassets */,
 				FABB4BC828B124420070F300 /* Saver.xcdatamodeld */,
 				FABB4BC328B124420070F300 /* Preview Content */,
 			);
@@ -143,10 +166,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
-				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
+				FABB4BC028B124410070F300 /* MainView.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
+				B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */,
+				B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */,
+				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
+				B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

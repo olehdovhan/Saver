@@ -1,0 +1,16 @@
+<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="11.2727" cy="20.091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="11.2727" cy="26.9091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="11.2727" cy="33.7273" r="2.27273" fill="#A9A9A9"/>
+<circle cx="35.1364" cy="20.091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="35.1364" cy="26.9091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="35.1364" cy="33.7273" r="2.27273" fill="#A9A9A9"/>
+<circle cx="27.1818" cy="20.091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="27.1818" cy="26.9091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="27.1818" cy="33.7273" r="2.27273" fill="#A9A9A9"/>
+<circle cx="19.2273" cy="20.091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="19.2273" cy="26.9091" r="2.27273" fill="#A9A9A9"/>
+<circle cx="19.2273" cy="33.7273" r="2.27273" fill="#A9A9A9"/>
+<line x1="2" y1="10.25" x2="43" y2="10.25" stroke="#A9A9A9" stroke-width="1.5"/>
+<rect x="0.75" y="44.25" width="43.5" height="43.5" rx="14.25" transform="rotate(-90 0.75 44.25)" stroke="#A9A9A9" stroke-width="1.5"/>
+</svg>
