@@ -7,17 +7,41 @@
 
 import SwiftUI
 
+
+
+
 struct Mainscrin2: View {
     var body: some View {
         ZStack{
-            Color.green.ignoresSafeArea(edges: .top)
-        Text("Mainscrin 2")
+            Color.white.ignoresSafeArea(edges: .top)
+            VStack(alignment: .center, spacing: 0){
+                BalanceView()
+                CardsPlace()
+                StatisticsPlace()
+                
+                LinearGradient(colors: [.myGreen, .myBlue],
+                               startPoint: .leading,
+                               endPoint: .trailing)
+                    .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
+                
+                
+                CoastsPlace()
+                
+                
+                Spacer(minLength: 200)
+                
+            }
+         
         }
+        
+        .ignoresSafeArea(.all)
+ 
     }
 }
 
-struct Mainscrin2_Previews: PreviewProvider {
-    static var previews: some View {
-        Mainscrin2()
-    }
-}
+//struct Mainscrin2_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Mainscrin2()
+//    }
+//
+//}

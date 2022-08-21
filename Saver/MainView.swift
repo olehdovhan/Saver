@@ -11,47 +11,47 @@ import CoreData
 struct MainView: View {
 
     
-    @State var tabSelected = 0
+    @State var selectionTab = 0
 
     var body: some View {
 
-        
-        TabView(selection: $tabSelected.animation()) {
+        CustomTabView(selection: $selectionTab) {
             
             Mainscrin2()
-                .tabItem {
-                    Image("tabIcon0")
+                .myTabItem {
+                    TabItem(text: "", icon: "tabIcon0")
                 }
-                .tag(0)
+                .opacity(selectionTab == 0 ? 1 : 0)
             
             IncomeAndExpenses()
-                .tabItem {
-                    Image("tabIcon1")
+                .myTabItem {
+                    TabItem(text: "", icon: "tabIcon1")
                 }
-                .tag(1)
+                .opacity(selectionTab == 1 ? 1 : 0)
             
             Calendar()
-                .tabItem {
-                    Image("tabIcon2")
+                .myTabItem {
+                    TabItem(text: "", icon: "tabIcon2")
                 }
-                .tag(2)
+                .opacity(selectionTab == 2 ? 1 : 0)
             
             SavingsAndGoals()
-                .tabItem {
-                    Image("tabIcon3")
+                .myTabItem {
+                    TabItem(text: "", icon: "tabIcon3")
                 }
-                .tag(3)
+                .opacity(selectionTab == 3 ? 1 : 0)
             
             Menu()
-                .tabItem {
-                    Image("tabIcon4")
+                .myTabItem {
+                    TabItem(text: "", icon: "tabIcon4")
                 }
-                .tag(4)
+                .opacity(selectionTab == 4 ? 1 : 0)
+
             
             
-    }
-
-
+            
+        }
+  
 }
 }
 
@@ -61,3 +61,8 @@ struct ContentView_Previews: PreviewProvider {
         MainView()
     }
 }
+
+
+
+
+

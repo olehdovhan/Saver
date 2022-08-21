@@ -1,0 +1,18 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="50" height="50" rx="15" fill="white"/>
+<path d="M19.75 18C19.75 15.6528 21.6528 13.75 24 13.75H34C36.3472 13.75 38.25 15.6528 38.25 18V34.25H19.75V18Z" stroke="#A9A9A9" stroke-width="1.5"/>
+<line x1="20" y1="27.25" x2="38" y2="27.25" stroke="#A9A9A9" stroke-width="1.5"/>
+<line x1="20" y1="17.25" x2="38" y2="17.25" stroke="#A9A9A9" stroke-width="1.5"/>
+<mask id="path-5-inside-1_145_563" fill="white">
+<rect x="19" y="34" width="5" height="4" rx="1"/>
+</mask>
+<rect x="19" y="34" width="5" height="4" rx="1" stroke="#A9A9A9" stroke-width="3" mask="url(#path-5-inside-1_145_563)"/>
+<mask id="path-6-inside-2_145_563" fill="white">
+<rect x="34" y="34" width="5" height="4" rx="1"/>
+</mask>
+<rect x="34" y="34" width="5" height="4" rx="1" stroke="#A9A9A9" stroke-width="3" mask="url(#path-6-inside-2_145_563)"/>
+<circle cx="23.5" cy="30.5" r="1" fill="#D9D9D9" stroke="#A9A9A9"/>
+<circle cx="34.5" cy="30.5" r="1" fill="#D9D9D9" stroke="#A9A9A9"/>
+<line x1="13.25" y1="37.25" x2="13.25" y2="19.75" stroke="#A9A9A9" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="13.5" cy="16.5" r="2.75" stroke="#A9A9A9" stroke-width="1.5"/>
+</svg>

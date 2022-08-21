@@ -12,6 +12,13 @@
 		B41618B828B1380C002629F7 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B728B1380C002629F7 /* Calendar.swift */; };
 		B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsAndGoals.swift */; };
 		B41618BC28B139A6002629F7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* Menu.swift */; };
+		B458555728B1AB660047C81E /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B458555628B1AB660047C81E /* CustomTabView.swift */; };
+		B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9528B26114001230BF /* ExtensionColor.swift */; };
+		B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9828B269D1001230BF /* Modifiers.swift */; };
+		B4A9AA9B28B2708C001230BF /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9A28B2708C001230BF /* BalanceView.swift */; };
+		B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9C28B2770A001230BF /* CardsPlace.swift */; };
+		B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */; };
+		B4A9AAA228B27EAB001230BF /* CoastsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
 		FABB4BC028B124410070F300 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* MainView.swift */; };
 		FABB4BC228B124420070F300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC128B124420070F300 /* Assets.xcassets */; };
@@ -26,6 +33,13 @@
 		B41618B728B1380C002629F7 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsAndGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsAndGoals.swift; sourceTree = "<group>"; };
 		B41618BB28B139A6002629F7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		B458555628B1AB660047C81E /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		B4A9AA9528B26114001230BF /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
+		B4A9AA9828B269D1001230BF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		B4A9AA9A28B2708C001230BF /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
+		B4A9AA9C28B2770A001230BF /* CardsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsPlace.swift; sourceTree = "<group>"; };
+		B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlace.swift; sourceTree = "<group>"; };
+		B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoastsPlace.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
 		FABB4BBF28B124410070F300 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -50,12 +64,41 @@
 			isa = PBXGroup;
 			children = (
 				B41618B328B1361C002629F7 /* Mainscrin2.swift */,
+				B4A9AAA028B27E37001230BF /* Components */,
 				B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */,
 				B41618B728B1380C002629F7 /* Calendar.swift */,
 				B41618B928B13962002629F7 /* SavingsAndGoals.swift */,
 				B41618BB28B139A6002629F7 /* Menu.swift */,
 			);
 			path = tabView;
+			sourceTree = "<group>";
+		};
+		B458555828B1AB7F0047C81E /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				B458555628B1AB660047C81E /* CustomTabView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		B4A9AA9728B2698F001230BF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B4A9AA9528B26114001230BF /* ExtensionColor.swift */,
+				B4A9AA9828B269D1001230BF /* Modifiers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B4A9AAA028B27E37001230BF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B4A9AA9A28B2708C001230BF /* BalanceView.swift */,
+				B4A9AA9C28B2770A001230BF /* CardsPlace.swift */,
+				B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */,
+				B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		FABB4BB128B124410070F300 = {
@@ -81,6 +124,8 @@
 				FABB4BBF28B124410070F300 /* MainView.swift */,
 				B41618B228B135CE002629F7 /* tabView */,
 				FABB4BC628B124420070F300 /* Persistence.swift */,
+				B4A9AA9728B2698F001230BF /* Extensions */,
+				B458555828B1AB7F0047C81E /* CustomView */,
 				FABB4BC128B124420070F300 /* Assets.xcassets */,
 				FABB4BC828B124420070F300 /* Saver.xcdatamodeld */,
 				FABB4BC328B124420070F300 /* Preview Content */,
@@ -166,15 +211,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4A9AAA228B27EAB001230BF /* CoastsPlace.swift in Sources */,
 				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
+				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
+				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
 				FABB4BC028B124410070F300 /* MainView.swift in Sources */,
+				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */,
 				B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */,
 				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
+				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
+				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
 				B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */,
+				B4A9AA9B28B2708C001230BF /* BalanceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
