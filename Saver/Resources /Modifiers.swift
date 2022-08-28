@@ -27,3 +27,31 @@ extension View {
     
 }
 
+
+
+struct DragGestureCustom: ViewModifier{
+    func body(content: Content) -> some View {
+
+//        var drag: some Gesture{
+//            DragGesture()
+//                .onChanged({ value in
+//                    withAnimation {
+//                        currentOffsetX = value.translation.width
+//                        currentOffsetY = value.translation.height
+//                        isDragging.toggle()
+//                    }
+//                })
+//                .onEnded { _ in
+//                    withAnimation(.spring()) {
+//                        isDragging.toggle()
+//                        currentOffsetX = 0
+//                        currentOffsetY = 0
+//                    }
+//                }
+//        }
+
+
+
+
+    }
+}

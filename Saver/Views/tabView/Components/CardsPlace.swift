@@ -8,6 +8,30 @@
 import SwiftUI
 
 struct CardsPlace: View{
+    
+    @State var isDragging = false
+    @State var currentOffsetX: CGFloat = 0
+    @State var currentOffsetY: CGFloat = 0
+    
+    var drag: some Gesture{
+        DragGesture()
+            .onChanged({ value in
+                withAnimation {
+                    currentOffsetX = value.translation.width
+                    currentOffsetY = value.translation.height
+                    isDragging.toggle()
+                }
+            })
+            .onEnded { _ in
+                withAnimation(.spring()) {
+                    isDragging.toggle()
+                    currentOffsetX = 0
+                    currentOffsetY = 0
+                }
+            }
+    }
+    
+    
     var body: some View{
         
         ZStack{
@@ -32,7 +56,11 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
+                    .offset(x: currentOffsetX)
+                    .offset(y: currentOffsetY)
+                    .gesture(drag)
                 }
+                
             
                 
                 Button {

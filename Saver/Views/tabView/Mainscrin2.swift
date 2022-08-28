@@ -13,11 +13,11 @@ import SwiftUI
 struct Mainscrin2: View {
     var body: some View {
         ZStack{
-            Color.white.ignoresSafeArea(edges: .top)
+            Color.white //.ignoresSafeArea(edges: .top)
             VStack(alignment: .center, spacing: 0){
-                BalanceView()
-                CardsPlace()
-                StatisticsPlace()
+                BalanceView().zIndex(3)
+                CardsPlace().zIndex(2)
+                StatisticsPlace().zIndex(1)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,

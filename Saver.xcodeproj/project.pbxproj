@@ -75,6 +75,13 @@
 			path = tabView;
 			sourceTree = "<group>";
 		};
+		B42A1C9B28BB531100AF95DA /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
 		B458555828B1AB7F0047C81E /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +144,7 @@
 				FABB4BBD28B124410070F300 /* SaverApp.swift */,
 				FAB594E428BB3F50002D3916 /* Views */,
 				FAB594E528BB3F61002D3916 /* Resources  */,
+				B42A1C9B28BB531100AF95DA /* Gesture */,
 				FABB4BC128B124420070F300 /* Assets.xcassets */,
 				FABB4BC828B124420070F300 /* Saver.xcdatamodeld */,
 				FABB4BC328B124420070F300 /* Preview Content */,

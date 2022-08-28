@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct BalanceView: View {
+    
+    @State var isDragging = false
+    
+   
+
+    
     var body: some View {
         ZStack{
             
@@ -37,6 +43,8 @@ struct BalanceView: View {
                     
                 
             }
+            
+            
             Spacer()
             
             VStack{
@@ -66,6 +74,10 @@ struct BalanceView: View {
         .padding(.trailing, 30)
     }
 }
+    
+    
+    
+    
 }
 
 //struct BalanceView_Previews: PreviewProvider {
