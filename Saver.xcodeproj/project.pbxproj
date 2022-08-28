@@ -20,7 +20,7 @@
 		B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */; };
 		B4A9AAA228B27EAB001230BF /* CoastsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
-		FABB4BC028B124410070F300 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* MainView.swift */; };
+		FABB4BC028B124410070F300 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* ContentView.swift */; };
 		FABB4BC228B124420070F300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC128B124420070F300 /* Assets.xcassets */; };
 		FABB4BC528B124420070F300 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC428B124420070F300 /* Preview Assets.xcassets */; };
 		FABB4BC728B124420070F300 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC628B124420070F300 /* Persistence.swift */; };
@@ -42,7 +42,7 @@
 		B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoastsPlace.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
-		FABB4BBF28B124410070F300 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FABB4BBF28B124410070F300 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FABB4BC128B124420070F300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FABB4BC428B124420070F300 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FABB4BC628B124420070F300 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -81,15 +81,6 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		B4A9AA9728B2698F001230BF /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B4A9AA9528B26114001230BF /* ExtensionColor.swift */,
-				B4A9AA9828B269D1001230BF /* Modifiers.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		B4A9AAA028B27E37001230BF /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,10 +112,11 @@
 			isa = PBXGroup;
 			children = (
 				FABB4BBD28B124410070F300 /* SaverApp.swift */,
-				FABB4BBF28B124410070F300 /* MainView.swift */,
+				FABB4BBF28B124410070F300 /* ContentView.swift */,
 				B41618B228B135CE002629F7 /* tabView */,
 				FABB4BC628B124420070F300 /* Persistence.swift */,
-				B4A9AA9728B2698F001230BF /* Extensions */,
+				B4A9AA9528B26114001230BF /* ExtensionColor.swift */,
+				B4A9AA9828B269D1001230BF /* Modifiers.swift */,
 				B458555828B1AB7F0047C81E /* CustomView */,
 				FABB4BC128B124420070F300 /* Assets.xcassets */,
 				FABB4BC828B124420070F300 /* Saver.xcdatamodeld */,
@@ -216,7 +208,7 @@
 				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
-				FABB4BC028B124410070F300 /* MainView.swift in Sources */,
+				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */,

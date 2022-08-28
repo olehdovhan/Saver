@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct MainView: View {
+struct ContentView: View {
 
     
     @State var selectionTab = 0
@@ -58,7 +58,7 @@ struct MainView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        ContentView()
     }
 }
 
