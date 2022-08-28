@@ -9,28 +9,9 @@ import SwiftUI
 
 struct CardsPlace: View{
     
-    @State var isDragging = false
-    @State var currentOffsetX: CGFloat = 0
-    @State var currentOffsetY: CGFloat = 0
-    
-    var drag: some Gesture{
-        DragGesture()
-            .onChanged({ value in
-                withAnimation {
-                    currentOffsetX = value.translation.width
-                    currentOffsetY = value.translation.height
-                    isDragging.toggle()
-                }
-            })
-            .onEnded { _ in
-                withAnimation(.spring()) {
-                    isDragging.toggle()
-                    currentOffsetX = 0
-                    currentOffsetY = 0
-                }
-            }
-    }
-    
+    @State var firstZ: Double = 3
+    @State var secondZ: Double = 2
+    @State var thirdZ: Double = 1
     
     var body: some View{
         
@@ -56,8 +37,9 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable()
+                    .draggable(zIndex: $firstZ)
                 }
+                .zIndex(firstZ)
                 
             
                 
@@ -78,9 +60,9 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable()
+                    .draggable(zIndex: $secondZ)
                 }
-      
+                .zIndex(secondZ)
                 
                 Button {
                     print("new card")
@@ -94,8 +76,9 @@ struct CardsPlace: View{
                         
                         
                     }
-                    .draggable()
+                    .draggable(zIndex: $thirdZ)
                 }
+                .zIndex(thirdZ)
                
                 
                 Spacer()

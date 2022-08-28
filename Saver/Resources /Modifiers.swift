@@ -16,15 +16,14 @@ struct ShadowCustom : ViewModifier{
     }
 }
 
-
 extension View {
     
     func myShadow(radiusShadow: Int) -> some View{
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
     
-    func draggable() -> some View {
-        modifier(DragGestureCustom())
+    func draggable(zIndex: Binding<Double>) -> some View {
+        modifier(DragGestureCustom(zIndex: zIndex))
     }
 }
 
@@ -36,11 +35,12 @@ struct DragGestureCustom: ViewModifier{
     @State var isDragging = false
     @State var currentOffsetX: CGFloat = 0
     @State var currentOffsetY: CGFloat = 0
-    
+    @Binding var zIndex: Double
     var drag: some Gesture{
         DragGesture()
             .onChanged({ value in
                 withAnimation {
+                    zIndex = 5
                     currentOffsetX = value.translation.width
                     currentOffsetY = value.translation.height
                     isDragging.toggle()
@@ -48,6 +48,7 @@ struct DragGestureCustom: ViewModifier{
             })
             .onEnded { _ in
                 withAnimation(.spring()) {
+                    zIndex = 1
                     isDragging.toggle()
                     currentOffsetX = 0
                     currentOffsetY = 0
