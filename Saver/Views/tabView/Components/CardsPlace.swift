@@ -56,9 +56,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .offset(x: currentOffsetX)
-                    .offset(y: currentOffsetY)
-                    .gesture(drag)
+                    .draggable()
                 }
                 
             
@@ -80,6 +78,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
+                    .draggable()
                 }
       
                 
@@ -95,6 +94,7 @@ struct CardsPlace: View{
                         
                         
                     }
+                    .draggable()
                 }
                
                 

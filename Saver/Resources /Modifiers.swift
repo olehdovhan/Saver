@@ -23,35 +23,42 @@ extension View {
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
     
-    
-    
+    func draggable() -> some View {
+        modifier(DragGestureCustom())
+    }
 }
 
 
 
 struct DragGestureCustom: ViewModifier{
+    
+    
+    @State var isDragging = false
+    @State var currentOffsetX: CGFloat = 0
+    @State var currentOffsetY: CGFloat = 0
+    
+    var drag: some Gesture{
+        DragGesture()
+            .onChanged({ value in
+                withAnimation {
+                    currentOffsetX = value.translation.width
+                    currentOffsetY = value.translation.height
+                    isDragging.toggle()
+                }
+            })
+            .onEnded { _ in
+                withAnimation(.spring()) {
+                    isDragging.toggle()
+                    currentOffsetX = 0
+                    currentOffsetY = 0
+                }
+            }
+    }
+    
     func body(content: Content) -> some View {
-
-//        var drag: some Gesture{
-//            DragGesture()
-//                .onChanged({ value in
-//                    withAnimation {
-//                        currentOffsetX = value.translation.width
-//                        currentOffsetY = value.translation.height
-//                        isDragging.toggle()
-//                    }
-//                })
-//                .onEnded { _ in
-//                    withAnimation(.spring()) {
-//                        isDragging.toggle()
-//                        currentOffsetX = 0
-//                        currentOffsetY = 0
-//                    }
-//                }
-//        }
-
-
-
-
+              content
+            .offset(x: currentOffsetX)
+            .offset(y: currentOffsetY)
+            .gesture(drag)
     }
 }
