@@ -31,13 +31,14 @@ extension View {
 
 struct DragGestureCustom: ViewModifier{
     
-    
     @State var isDragging = false
     @State var currentOffsetX: CGFloat = 0
     @State var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
+   
+    
     var drag: some Gesture{
-        DragGesture()
+        DragGesture(coordinateSpace: .global)
             .onChanged({ value in
                 withAnimation {
                     zIndex = 5
@@ -45,13 +46,43 @@ struct DragGestureCustom: ViewModifier{
                     currentOffsetY = value.translation.height
                     isDragging.toggle()
                 }
+                print(value.location.y)
+               
             })
-            .onEnded { _ in
-                withAnimation(.spring()) {
-                    zIndex = 1
-                    isDragging.toggle()
-                    currentOffsetX = 0
-                    currentOffsetY = 0
+            .onEnded { gesture in
+                var locs = PurchaseLocation.standard.locations
+                
+                for item in locs {
+                    let startXRange = item.value.x - 35
+                    let finisXRange = item.value.x + 35
+                    let xRange = startXRange...finisXRange
+                    
+                    let startYRange = item.value.y - 35
+                    let finishYRange = item.value.y + 35
+                    let yRange = startYRange...finishYRange
+                    
+                    if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
+                        print(item.key.rawValue)
+                    }
+                }
+                    
+                if abs(gesture.location.x) > 49 && abs(gesture.location.x) < 95 && abs(gesture.location.y) > 419 && abs(gesture.location.y) < 470 {
+                 
+                    print("moped")
+                    withAnimation(.spring()) {
+                        zIndex = 1
+                        isDragging.toggle()
+                        currentOffsetX = 0
+                        currentOffsetY = 0
+                    }
+                            
+                } else {
+                    withAnimation(.spring()) {
+                        zIndex = 1
+                        isDragging.toggle()
+                        currentOffsetX = 0
+                        currentOffsetY = 0
+                    }
                 }
             }
     }
@@ -61,5 +92,6 @@ struct DragGestureCustom: ViewModifier{
             .offset(x: currentOffsetX)
             .offset(y: currentOffsetY)
             .gesture(drag)
+        
     }
 }

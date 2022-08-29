@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct CoastsPlace: View{
+
+    
     var body: some View{
-        
+      
         ZStack{
 //            Color.blue.opacity(0.2)
             
@@ -32,7 +34,21 @@ struct CoastsPlace: View{
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
                 }
-         
+                .overlay(
+                    GeometryReader { geo in
+                        Color.clear
+                            .onAppear {
+                                var location = CGPoint(x: geo.frame(in: .global).midX,
+                                                       y: geo.frame(in: .global).midY)
+                                PurchaseLocation.standard.locations[.products] = location
+                                
+                                
+                      }
+                    }
+                )
+
+                
+                
                 Spacer()
                 
                 Button {
@@ -50,6 +66,16 @@ struct CoastsPlace: View{
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
                 }
+                .overlay(
+                    GeometryReader { geo in
+                        Color.clear
+                            .onAppear {
+                                var location = CGPoint(x: geo.frame(in: .global).midX,
+                                                       y: geo.frame(in: .global).midY)
+                                PurchaseLocation.standard.locations[.transport] = location
+                        }
+                    }
+                )
        
                 Spacer()
                 
@@ -68,6 +94,16 @@ struct CoastsPlace: View{
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
                 }
+                .overlay(
+                    GeometryReader { geo in
+                        Color.clear
+                            .onAppear {
+                                var location = CGPoint(x: geo.frame(in: .global).midX,
+                                                       y: geo.frame(in: .global).midY)
+                                PurchaseLocation.standard.locations[.clouthing] = location
+                      }
+                    }
+                )
 
                 Spacer()
                 
@@ -86,13 +122,21 @@ struct CoastsPlace: View{
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
                 }
+                .overlay(
+                    GeometryReader { geo in
+                        Color.clear
+                            .onAppear {
+                                var location = CGPoint(x: geo.frame(in: .global).midX,
+                                                       y: geo.frame(in: .global).midY)
+                                PurchaseLocation.standard.locations[.restaurant] = location
+                      }
+                    }
+                )
                 Spacer(minLength: 30)
-                
-                
-            
             }
             .padding(EdgeInsets(top: 20, leading:0, bottom: 20, trailing: 0))
            
         }
-    }
+        } 
+    
 }

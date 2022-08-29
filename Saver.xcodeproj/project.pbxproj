@@ -19,6 +19,8 @@
 		B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9C28B2770A001230BF /* CardsPlace.swift */; };
 		B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */; };
 		B4A9AAA228B27EAB001230BF /* CoastsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */; };
+		FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */; };
+		FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */; };
 		FAB594E328BB3F1A002D3916 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB594E228BB3F1A002D3916 /* Test.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
 		FABB4BC028B124410070F300 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* ContentView.swift */; };
@@ -41,6 +43,8 @@
 		B4A9AA9C28B2770A001230BF /* CardsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsPlace.swift; sourceTree = "<group>"; };
 		B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlace.swift; sourceTree = "<group>"; };
 		B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoastsPlace.swift; sourceTree = "<group>"; };
+		FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategory.swift; sourceTree = "<group>"; };
+		FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLocation.swift; sourceTree = "<group>"; };
 		FAB594E228BB3F1A002D3916 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
@@ -101,6 +105,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FA9D14D128BC9D3800EEFA12 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */,
+				FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		FAB594E428BB3F50002D3916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +154,7 @@
 		FABB4BBC28B124410070F300 /* Saver */ = {
 			isa = PBXGroup;
 			children = (
+				FA9D14D128BC9D3800EEFA12 /* Models */,
 				FABB4BBD28B124410070F300 /* SaverApp.swift */,
 				FAB594E428BB3F50002D3916 /* Views */,
 				FAB594E528BB3F61002D3916 /* Resources  */,
@@ -238,11 +252,13 @@
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
 				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
+				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */,
 				B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */,
 				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
+				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
 				B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */,

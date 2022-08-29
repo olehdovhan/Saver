@@ -14,7 +14,7 @@ struct CardsPlace: View{
     @State var thirdZ: Double = 1
     
     var body: some View{
-        
+        GeometryReader{ geo in
         ZStack{
 //            Color.purple.opacity(0.2)
             //Cards
@@ -22,6 +22,7 @@ struct CardsPlace: View{
                 
                 Button {
                     print("Bank card")
+                    print(PurchaseLocation.standard.locations)
                 } label: {
                     VStack(spacing: 5){
                         Text("Bank card")
@@ -40,10 +41,12 @@ struct CardsPlace: View{
                     .draggable(zIndex: $firstZ)
                 }
                 .zIndex(firstZ)
+              
                 
-            
                 
-                Button {
+                
+                
+              Button {
                     print("Wallet")
                 } label: {
                     VStack(spacing: 5){
@@ -68,23 +71,19 @@ struct CardsPlace: View{
                     print("new card")
                 } label: {
                     VStack{
-                        
                         Image("iconPlus")
                             .resizable()
                             .frame(width: 50, height: 50)
                             .myShadow(radiusShadow: 5)
-                        
-                        
                     }
                     .draggable(zIndex: $thirdZ)
                 }
                 .zIndex(thirdZ)
                
-                
                 Spacer()
             }
             .padding(EdgeInsets(top: 20, leading: 30, bottom: 20, trailing: 30))
-           
+        }
         }
     }
 }
