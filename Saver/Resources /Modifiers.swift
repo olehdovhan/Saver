@@ -22,8 +22,8 @@ extension View {
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
     
-    func draggable(zIndex: Binding<Double>) -> some View {
-        modifier(DragGestureCustom(zIndex: zIndex))
+    func draggable(zIndex: Binding<Double>, isAlertShow: Binding<Bool>) -> some View {
+        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow))
     }
 }
 
@@ -35,6 +35,7 @@ struct DragGestureCustom: ViewModifier{
     @State var currentOffsetX: CGFloat = 0
     @State var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
+    @Binding var isAlertShow: Bool
    
     
     var drag: some Gesture{
@@ -63,6 +64,14 @@ struct DragGestureCustom: ViewModifier{
                     
                     if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
                         print(item.key.rawValue)
+                        
+                        if item.key.rawValue == "transport" {
+                            
+                            
+                            isAlertShow.toggle()
+                            print(isAlertShow)
+                        }
+                        
                     }
                 }
                     
@@ -84,6 +93,8 @@ struct DragGestureCustom: ViewModifier{
                         currentOffsetY = 0
                     }
                 }
+                
+                
             }
     }
     
@@ -95,3 +106,9 @@ struct DragGestureCustom: ViewModifier{
         
     }
 }
+//
+//class AlertView: ObservableObject{
+//    @Published var name = ""
+//    @Published var imageName = ""
+//
+//}

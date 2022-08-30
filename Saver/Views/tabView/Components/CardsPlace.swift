@@ -9,9 +9,15 @@ import SwiftUI
 
 struct CardsPlace: View{
     
+    
     @State var firstZ: Double = 3
     @State var secondZ: Double = 2
     @State var thirdZ: Double = 1
+    
+    @Binding var isAlertShow: Bool
+    
+    
+    
     
     var body: some View{
         GeometryReader{ geo in
@@ -38,7 +44,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $firstZ)
+                    .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow)
                 }
                 .zIndex(firstZ)
               
@@ -63,7 +69,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $secondZ)
+                    .draggable(zIndex: $secondZ, isAlertShow: $isAlertShow)
                 }
                 .zIndex(secondZ)
                 
@@ -76,14 +82,28 @@ struct CardsPlace: View{
                             .frame(width: 50, height: 50)
                             .myShadow(radiusShadow: 5)
                     }
-                    .draggable(zIndex: $thirdZ)
+                    .draggable(zIndex: $thirdZ, isAlertShow: $isAlertShow)
                 }
                 .zIndex(thirdZ)
                
                 Spacer()
             }
             .padding(EdgeInsets(top: 20, leading: 30, bottom: 20, trailing: 30))
+            
+           
+            
         }
         }
+        
+        
+            
+        
     }
+    
+    
+    
+    
 }
+
+
+

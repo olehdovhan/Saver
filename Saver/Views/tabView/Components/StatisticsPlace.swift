@@ -36,7 +36,9 @@ struct StatisticsPlace: View{
                 Spacer()
                 
                 Button {
+                    
                     print("Goals")
+                    
                 } label: {
                     VStack(spacing: 5){
                         

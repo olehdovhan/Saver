@@ -8,16 +8,17 @@
 import SwiftUI
 
 
-
-
 struct Mainscrin2: View {
+    
+    @State var isAlertShow = false
+    
     var body: some View {
         ZStack{
             Color.white //.ignoresSafeArea(edges: .top)
             VStack(alignment: .center, spacing: 0){
-                BalanceView().zIndex(3)
-                CardsPlace().zIndex(2)
-                StatisticsPlace().zIndex(1)
+                BalanceView().zIndex(4)
+                CardsPlace(isAlertShow: $isAlertShow).zIndex(3)
+                StatisticsPlace().zIndex(0)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,
@@ -32,11 +33,23 @@ struct Mainscrin2: View {
                 
             }
          
+            if isAlertShow{
+                CustomAlert(isAlertShow: $isAlertShow)
+                    .zIndex(10)
+            }
+            
         }
         
         .ignoresSafeArea(.all)
+        
  
     }
+    
+    
+    
+    
+    
+    
 }
 
 //struct Mainscrin2_Previews: PreviewProvider {
