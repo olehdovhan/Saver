@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* Mainscrin2.swift */; };
+		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */; };
 		B41618B828B1380C002629F7 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B728B1380C002629F7 /* Calendar.swift */; };
 		B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsAndGoals.swift */; };
@@ -20,8 +20,11 @@
 		B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */; };
 		B4A9AAA228B27EAB001230BF /* CoastsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */; };
 		B4E94DC328BDD93B0054B16F /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E94DC228BDD93B0054B16F /* CustomAlert.swift */; };
+		FA6C156128C7778F0079AF6B /* CashSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C156028C7778F0079AF6B /* CashSource.swift */; };
+		FA7B94BB28C61AA200772845 /* ExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7B94BA28C61AA200772845 /* ExpenseView.swift */; };
 		FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */; };
 		FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */; };
+		FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */; };
 		FAB594E328BB3F1A002D3916 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB594E228BB3F1A002D3916 /* Test.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
 		FABB4BC028B124410070F300 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* ContentView.swift */; };
@@ -32,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B41618B328B1361C002629F7 /* Mainscrin2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mainscrin2.swift; sourceTree = "<group>"; };
+		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeAndExpenses.swift; sourceTree = "<group>"; };
 		B41618B728B1380C002629F7 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsAndGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsAndGoals.swift; sourceTree = "<group>"; };
@@ -45,8 +48,11 @@
 		B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlace.swift; sourceTree = "<group>"; };
 		B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoastsPlace.swift; sourceTree = "<group>"; };
 		B4E94DC228BDD93B0054B16F /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		FA6C156028C7778F0079AF6B /* CashSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSource.swift; sourceTree = "<group>"; };
+		FA7B94BA28C61AA200772845 /* ExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseView.swift; sourceTree = "<group>"; };
 		FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategory.swift; sourceTree = "<group>"; };
 		FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLocation.swift; sourceTree = "<group>"; };
+		FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		FAB594E228BB3F1A002D3916 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
@@ -71,7 +77,7 @@
 		B41618B228B135CE002629F7 /* tabView */ = {
 			isa = PBXGroup;
 			children = (
-				B41618B328B1361C002629F7 /* Mainscrin2.swift */,
+				B41618B328B1361C002629F7 /* MainScreen.swift */,
 				B4E94DC228BDD93B0054B16F /* CustomAlert.swift */,
 				B4A9AAA028B27E37001230BF /* Components */,
 				B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */,
@@ -108,18 +114,36 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FA7B94B928C61A3600772845 /* ExpenseView */ = {
+			isa = PBXGroup;
+			children = (
+				FA7B94BA28C61AA200772845 /* ExpenseView.swift */,
+			);
+			path = ExpenseView;
+			sourceTree = "<group>";
+		};
 		FA9D14D128BC9D3800EEFA12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */,
 				FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */,
+				FA6C156028C7778F0079AF6B /* CashSource.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FAB0DF0728C8C588006D78B9 /* UICustomObjects */ = {
+			isa = PBXGroup;
+			children = (
+				FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */,
+			);
+			path = UICustomObjects;
 			sourceTree = "<group>";
 		};
 		FAB594E428BB3F50002D3916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA7B94B928C61A3600772845 /* ExpenseView */,
 				FABB4BBF28B124410070F300 /* ContentView.swift */,
 				FAB594E228BB3F1A002D3916 /* Test.swift */,
 				B41618B228B135CE002629F7 /* tabView */,
@@ -157,6 +181,7 @@
 		FABB4BBC28B124410070F300 /* Saver */ = {
 			isa = PBXGroup;
 			children = (
+				FAB0DF0728C8C588006D78B9 /* UICustomObjects */,
 				FA9D14D128BC9D3800EEFA12 /* Models */,
 				FABB4BBD28B124410070F300 /* SaverApp.swift */,
 				FAB594E428BB3F50002D3916 /* Views */,
@@ -258,13 +283,16 @@
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */,
+				FA6C156128C7778F0079AF6B /* CashSource.swift in Sources */,
 				B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */,
 				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
-				B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */,
+				FA7B94BB28C61AA200772845 /* ExpenseView.swift in Sources */,
+				B41618B428B1361C002629F7 /* MainScreen.swift in Sources */,
+				FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */,
 				B4A9AA9B28B2708C001230BF /* BalanceView.swift in Sources */,
 				B4E94DC328BDD93B0054B16F /* CustomAlert.swift in Sources */,
 			);
