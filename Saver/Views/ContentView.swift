@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
 
     
-    @State var selectionTab = 0
+    @State var selectionTab = 1
 
     var body: some View {
 
@@ -23,7 +23,7 @@ struct ContentView: View {
                 }
                 .opacity(selectionTab == 0 ? 1 : 0)
             
-            IncomeAndExpenses()
+            ExpensesCircularDiagram()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon1")
                 }

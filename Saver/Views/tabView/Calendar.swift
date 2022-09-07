@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct Calendar: View {
+    
+    @State var currentDate: Date = Date()
+    
     var body: some View {
         ZStack{
             Color.red.ignoresSafeArea(edges: .top)
-        Text("Calendar")
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(spacing: 20) {
+                    CustomDatePicker(currentDate: $currentDate)
+                }
+            }
         }
     }
 }

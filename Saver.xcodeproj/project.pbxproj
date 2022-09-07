@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B41618B428B1361C002629F7 /* Mainscrin2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* Mainscrin2.swift */; };
-		B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */; };
+		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
 		B41618B828B1380C002629F7 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B728B1380C002629F7 /* Calendar.swift */; };
 		B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsAndGoals.swift */; };
 		B41618BC28B139A6002629F7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* Menu.swift */; };
+		B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */; };
 		B458555728B1AB660047C81E /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B458555628B1AB660047C81E /* CustomTabView.swift */; };
 		B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9528B26114001230BF /* ExtensionColor.swift */; };
 		B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9828B269D1001230BF /* Modifiers.swift */; };
@@ -20,6 +21,7 @@
 		B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */; };
 		B4A9AAA228B27EAB001230BF /* CoastsPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */; };
 		B4E94DC328BDD93B0054B16F /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E94DC228BDD93B0054B16F /* CustomAlert.swift */; };
+		B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FA432828C88A6600FA19DB /* CustomDatePicker.swift */; };
 		FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */; };
 		FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */; };
 		FAB594E328BB3F1A002D3916 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB594E228BB3F1A002D3916 /* Test.swift */; };
@@ -33,10 +35,11 @@
 
 /* Begin PBXFileReference section */
 		B41618B328B1361C002629F7 /* Mainscrin2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mainscrin2.swift; sourceTree = "<group>"; };
-		B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeAndExpenses.swift; sourceTree = "<group>"; };
+		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
 		B41618B728B1380C002629F7 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsAndGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsAndGoals.swift; sourceTree = "<group>"; };
 		B41618BB28B139A6002629F7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceOfPie.swift; sourceTree = "<group>"; };
 		B458555628B1AB660047C81E /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		B4A9AA9528B26114001230BF /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		B4A9AA9828B269D1001230BF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
@@ -45,6 +48,7 @@
 		B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlace.swift; sourceTree = "<group>"; };
 		B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoastsPlace.swift; sourceTree = "<group>"; };
 		B4E94DC228BDD93B0054B16F /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		B4FA432828C88A6600FA19DB /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategory.swift; sourceTree = "<group>"; };
 		FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLocation.swift; sourceTree = "<group>"; };
 		FAB594E228BB3F1A002D3916 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
@@ -73,13 +77,23 @@
 			children = (
 				B41618B328B1361C002629F7 /* Mainscrin2.swift */,
 				B4E94DC228BDD93B0054B16F /* CustomAlert.swift */,
-				B4A9AAA028B27E37001230BF /* Components */,
-				B41618B528B1379A002629F7 /* IncomeAndExpenses.swift */,
+				B4A9AAA028B27E37001230BF /* ComponentsMainscrin */,
+				B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */,
+				B419BB5E28C0CB43002F58EC /* ComponentsExp */,
 				B41618B728B1380C002629F7 /* Calendar.swift */,
+				B4FA432728C88A1A00FA19DB /* ComponentsCalendar */,
 				B41618B928B13962002629F7 /* SavingsAndGoals.swift */,
 				B41618BB28B139A6002629F7 /* Menu.swift */,
 			);
 			path = tabView;
+			sourceTree = "<group>";
+		};
+		B419BB5E28C0CB43002F58EC /* ComponentsExp */ = {
+			isa = PBXGroup;
+			children = (
+				B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */,
+			);
+			path = ComponentsExp;
 			sourceTree = "<group>";
 		};
 		B42A1C9B28BB531100AF95DA /* Gesture */ = {
@@ -97,7 +111,7 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		B4A9AAA028B27E37001230BF /* Components */ = {
+		B4A9AAA028B27E37001230BF /* ComponentsMainscrin */ = {
 			isa = PBXGroup;
 			children = (
 				B4A9AA9A28B2708C001230BF /* BalanceView.swift */,
@@ -105,7 +119,15 @@
 				B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */,
 				B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */,
 			);
-			path = Components;
+			path = ComponentsMainscrin;
+			sourceTree = "<group>";
+		};
+		B4FA432728C88A1A00FA19DB /* ComponentsCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				B4FA432828C88A6600FA19DB /* CustomDatePicker.swift */,
+			);
+			path = ComponentsCalendar;
 			sourceTree = "<group>";
 		};
 		FA9D14D128BC9D3800EEFA12 /* Models */ = {
@@ -251,14 +273,16 @@
 				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
 				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
+				B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */,
 				FAB594E328BB3F1A002D3916 /* Test.swift in Sources */,
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
+				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
 				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsAndGoals.swift in Sources */,
-				B41618B628B1379A002629F7 /* IncomeAndExpenses.swift in Sources */,
+				B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */,
 				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,

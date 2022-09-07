@@ -14,6 +14,7 @@ struct SaverApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//            PieChart()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
