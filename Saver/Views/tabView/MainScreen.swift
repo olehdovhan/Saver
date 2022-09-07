@@ -30,7 +30,7 @@ struct MainScreen: View {
             }
          
             if isAlertShow{
-                ExpenseView()
+                ExpenseView(closeSelf: $isAlertShow)
 //                CustomAlert(isAlertShow: $isAlertShow)
                     .zIndex(10)
             }

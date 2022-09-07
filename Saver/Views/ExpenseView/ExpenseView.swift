@@ -8,6 +8,9 @@ import SwiftUI
 
 struct ExpenseView: View {
     
+    
+    @Binding var closeSelf: Bool
+    
     @State private var expense = 0.0
     @State private var comment = ""
     
@@ -40,7 +43,9 @@ struct ExpenseView: View {
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
                     Spacer()
-                    Button {}
+                    Button {
+                        closeSelf = false
+                    }
                      label: {
                         Image("btnClose")
                     }
@@ -163,7 +168,9 @@ struct ExpenseView: View {
                 .padding(.trailing, 35)
         
                 Spacer()
-                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone") {}
+                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone") {
+                    
+                }
                 Spacer()
             }
             .frame(width: 300,
@@ -185,6 +192,7 @@ struct ExpenseView: View {
 
 struct ExpenseView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseView()
+        
+        ExpenseView(closeSelf: .constant(true))
     }
 }
