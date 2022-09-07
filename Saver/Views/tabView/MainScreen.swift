@@ -25,31 +25,18 @@ struct MainScreen: View {
                                endPoint: .trailing)
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
                 
-                
                 CoastsPlace()
-                
-                
                 Spacer(minLength: 200)
-                
             }
          
             if isAlertShow{
-                CustomAlert(isAlertShow: $isAlertShow)
+                ExpenseView()
+//                CustomAlert(isAlertShow: $isAlertShow)
                     .zIndex(10)
             }
-            
         }
-        
         .ignoresSafeArea(.all)
-        
- 
     }
-    
-    
-    
-    
-    
-    
 }
 
 //struct Mainscrin2_Previews: PreviewProvider {
