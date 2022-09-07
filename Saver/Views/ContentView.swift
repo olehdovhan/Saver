@@ -17,7 +17,7 @@ struct ContentView: View {
 
         CustomTabView(selection: $selectionTab) {
             
-            Mainscrin2()
+            MainScreen()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon0")
                 }

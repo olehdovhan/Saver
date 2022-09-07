@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct Mainscrin2: View {
+struct MainScreen: View {
     
     @State var isAlertShow = false
     
