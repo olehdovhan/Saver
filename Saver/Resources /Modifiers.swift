@@ -22,8 +22,8 @@ extension View {
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
     
-    func draggable(zIndex: Binding<Double>, isAlertShow: Binding<Bool>) -> some View {
-        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow))
+    func draggable(zIndex: Binding<Double>, isAlertShow: Binding<Bool>, purchaseType: Binding<ExpenseCategory>, cashType: CashSource , cashSource: Binding<CashSource> ) -> some View {
+        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource))
     }
 }
 
@@ -36,6 +36,9 @@ struct DragGestureCustom: ViewModifier{
     @State var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
     @Binding var isAlertShow: Bool
+    @Binding var purchaseType: ExpenseCategory
+    @State var cashType: CashSource
+    @Binding var cashSource: CashSource
    
     
     var drag: some Gesture{
@@ -65,12 +68,16 @@ struct DragGestureCustom: ViewModifier{
                     if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
                         print(item.key.rawValue)
                         
-                        if item.key.rawValue == "transport" {
-                            
-                            
-                            isAlertShow.toggle()
-                            print(isAlertShow)
+                        switch item.key {
+                        case .products: purchaseType = .products
+                        case .transport: purchaseType = .transport
+                        case .clouthing: purchaseType = .clothing
+                        case .restaurant: purchaseType = .restaurant
                         }
+                        cashSource = cashType
+             
+                            isAlertShow.toggle()
+                 
                         
                     }
                 }

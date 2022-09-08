@@ -10,19 +10,18 @@ struct ExpenseView: View {
     
     
     @Binding var closeSelf: Bool
+    @State  var cashSource: CashSource
+    @State  var expenseCategory: ExpenseCategory
+    
+    
+    
     
     @State private var expense = 0.0
     @State private var comment = ""
-    
     @State private var isDone = false
-    
-    // Should be initialized when tapEnded
-    @State private var cashSource = CashSource.bankCard
-    @State private var cashSources = [CashSource.bankCard, CashSource.wallet]
     @State private var expenseDate = Date.now
     
-    // Should be initialized when tapEnded
-    @State private var expenseCategory = ExpenseCategory.clothing
+
     @FocusState private var editing: Bool
     
     var body: some View {
@@ -72,23 +71,18 @@ struct ExpenseView: View {
                     Spacer()
                 
                     Picker("Tip percentage", selection: $cashSource) {
-                        ForEach(cashSources,id: \.self) {
+                        ForEach(CashSource.allCases ,id: \.self) {
                             Text($0.rawValue)
                         }
-                      
                     }
                     .colorMultiply(.black)
                    // .foregroundColor(.brown)
-            
                     .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke( .gray, lineWidth: 3)
-                        .padding(.leading, -20)
-                        .padding(.trailing, -20)
-
+                                 .stroke( .gray, lineWidth: 3)
+                                 .padding(.leading, -20)
+                                 .padding(.trailing, -20)
                     )
-                    
                 //    .tint(.black)
-                    
                 }
                 .padding(.leading, 30)
                 .padding(.trailing, 60)
@@ -193,6 +187,8 @@ struct ExpenseView: View {
 struct ExpenseView_Previews: PreviewProvider {
     static var previews: some View {
         
-        ExpenseView(closeSelf: .constant(true))
+        ExpenseView(closeSelf: .constant(true),
+                    cashSource: .wallet,
+                    expenseCategory: .clothing)
     }
 }

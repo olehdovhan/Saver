@@ -15,20 +15,17 @@ struct CardsPlace: View{
     @State var thirdZ: Double = 1
     
     @Binding var isAlertShow: Bool
-    
-    
-    
+    @Binding var purchaseType: ExpenseCategory
+    @Binding var cashSource: CashSource
     
     var body: some View{
         GeometryReader{ geo in
         ZStack{
-//            Color.purple.opacity(0.2)
-            //Cards
+
             HStack(spacing: 16){
                 
                 Button {
-                    print("Bank card")
-                    print(PurchaseLocation.standard.locations)
+                 
                 } label: {
                     VStack(spacing: 5){
                         Text("Bank card")
@@ -44,13 +41,11 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow)
+                    .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType, cashType: .bankCard, cashSource: $cashSource)
+                   // .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType)
                 }
                 .zIndex(firstZ)
               
-                
-                
-                
                 
               Button {
                     print("Wallet")
@@ -69,7 +64,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $secondZ, isAlertShow: $isAlertShow)
+                    .draggable(zIndex: $secondZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType, cashType: .wallet, cashSource: $cashSource)
                 }
                 .zIndex(secondZ)
                 
@@ -82,27 +77,16 @@ struct CardsPlace: View{
                             .frame(width: 50, height: 50)
                             .myShadow(radiusShadow: 5)
                     }
-                    .draggable(zIndex: $thirdZ, isAlertShow: $isAlertShow)
+                   // .draggable(zIndex: $thirdZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType)
                 }
                 .zIndex(thirdZ)
                
                 Spacer()
             }
             .padding(EdgeInsets(top: 20, leading: 30, bottom: 20, trailing: 30))
-            
-           
-            
         }
         }
-        
-        
-            
-        
     }
-    
-    
-    
-    
 }
 
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CashSource: String {
+enum CashSource: String, CaseIterable {
     case wallet = "Wallet"
     case bankCard = "Bank Card"
 }

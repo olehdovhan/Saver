@@ -12,4 +12,5 @@ struct PurchaseLocation {
     var locations: [PurchaseCategory: CGPoint]
     
     static var standard = PurchaseLocation(locations: [PurchaseCategory : CGPoint]())
+    
 }

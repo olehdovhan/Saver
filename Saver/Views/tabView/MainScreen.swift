@@ -11,13 +11,15 @@ import SwiftUI
 struct MainScreen: View {
     
     @State var isAlertShow = false
+    @State var cashSource: CashSource = .wallet
+    @State var expenseType: ExpenseCategory = .products
     
     var body: some View {
         ZStack{
             Color.white //.ignoresSafeArea(edges: .top)
             VStack(alignment: .center, spacing: 0){
                 BalanceView().zIndex(4)
-                CardsPlace(isAlertShow: $isAlertShow).zIndex(3)
+                CardsPlace(isAlertShow: $isAlertShow, purchaseType: $expenseType, cashSource: $cashSource).zIndex(3)
                 StatisticsPlace().zIndex(0)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
@@ -30,9 +32,10 @@ struct MainScreen: View {
             }
          
             if isAlertShow{
-                ExpenseView(closeSelf: $isAlertShow)
-//                CustomAlert(isAlertShow: $isAlertShow)
-                    .zIndex(10)
+                ExpenseView(closeSelf: $isAlertShow,
+                            cashSource: cashSource,
+                            expenseCategory: expenseType)
+                .zIndex(10)
             }
         }
         .ignoresSafeArea(.all)
