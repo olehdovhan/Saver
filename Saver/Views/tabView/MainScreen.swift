@@ -13,6 +13,7 @@ struct MainScreen: View {
     @State var isAlertShow = false
     @State var cashSource: CashSource = .wallet
     @State var expenseType: ExpenseCategory = .products
+    @FocusState var editing: Bool
     
     var body: some View {
         ZStack{
@@ -34,11 +35,20 @@ struct MainScreen: View {
             if isAlertShow{
                 ExpenseView(closeSelf: $isAlertShow,
                             cashSource: cashSource,
-                            expenseCategory: expenseType)
+                            expenseCategory: expenseType, editing: $editing)
                 .zIndex(10)
             }
         }
         .ignoresSafeArea(.all)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                   editing = false
+                }
+            }
+        }
+
     }
 }
 

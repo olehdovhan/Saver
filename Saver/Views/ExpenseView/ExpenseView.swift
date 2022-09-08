@@ -14,15 +14,21 @@ struct ExpenseView: View {
     @State  var expenseCategory: ExpenseCategory
     
     
-    
+
     
     @State private var expense = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
     
-
-    @FocusState private var editing: Bool
+    @State var editing: FocusState<Bool>.Binding
+    
+    private var enteredExpense: Bool {
+        switch expense {
+        case let x where x > 0.0 : return false
+        default: return true
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -59,10 +65,10 @@ struct ExpenseView: View {
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
                     .keyboardType(.decimalPad)
-                    .focused($editing)
+                    .focused(editing)
                     .background(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(editing ? Color.red : Color.gray, lineWidth: 3)
+                            .stroke(editing.wrappedValue ? Color.red : Color.gray, lineWidth: 3)
                     ).padding()
 
                 
@@ -162,33 +168,26 @@ struct ExpenseView: View {
                 .padding(.trailing, 35)
         
                 Spacer()
-                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone") {
-                    
+                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: enteredExpense) {
+                    print("tap rap snap")
+                    print(enteredExpense)
                 }
                 Spacer()
             }
             .frame(width: 300,
                    height: 500,
                    alignment: .top)
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") {
-                        editing = false
-                    }
-                }
-            }
         }
     }
 }
 
 
-
-struct ExpenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ExpenseView(closeSelf: .constant(true),
-                    cashSource: .wallet,
-                    expenseCategory: .clothing)
-    }
-}
+//
+//struct ExpenseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExpenseView(closeSelf: .constant(true),
+//                    cashSource: .wallet,
+//                    expenseCategory: .clothing,
+//                    editing: FocusState<Bool>.Binding)
+//    }
+//}

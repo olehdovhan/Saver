@@ -22,10 +22,13 @@ struct ImageButton: View {
     
     var image: String
     var pressedImage: String
+    var disabled: Bool
     var action: () -> Void
+    
     
     var body: some View {
         Button(action: self.action) { }
             .buttonStyle(ImageButtonStyle(image: image, pressedImage: pressedImage))
+            .disabled(disabled)
     }
 }
