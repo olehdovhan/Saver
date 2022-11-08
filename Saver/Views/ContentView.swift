@@ -14,7 +14,6 @@ struct ContentView: View {
     @State var selectionTab = 1
 
     var body: some View {
-       // ExpenseView()
         CustomTabView(selection: $selectionTab) {
 
             MainScreen()
