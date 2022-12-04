@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C67F3B4293C961D002384D4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C67F3B3293C961D002384D4 /* UserDefaultsManager.swift */; };
+		0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E2026291A40EE00F6932B /* UserModel.swift */; };
 		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
 		B41618B828B1380C002629F7 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B728B1380C002629F7 /* Calendar.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C67F3B3293C961D002384D4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		0C8E2026291A40EE00F6932B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
 		B41618B728B1380C002629F7 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -78,7 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B41618B228B135CE002629F7 /* tabView */ = {
+		0C67F3B2293C95C5002384D4 /* UserDefaultsManager  */ = {
+			isa = PBXGroup;
+			children = (
+				0C67F3B3293C961D002384D4 /* UserDefaultsManager.swift */,
+			);
+			path = "UserDefaultsManager ";
+			sourceTree = "<group>";
+		};
+		B41618B228B135CE002629F7 /* TabView */ = {
 			isa = PBXGroup;
 			children = (
 				B41618B328B1361C002629F7 /* MainScreen.swift */,
@@ -91,7 +103,7 @@
 				B41618B928B13962002629F7 /* SavingsAndGoals.swift */,
 				B41618BB28B139A6002629F7 /* Menu.swift */,
 			);
-			path = tabView;
+			path = TabView;
 			sourceTree = "<group>";
 		};
 		B419BB5E28C0CB43002F58EC /* ComponentsExp */ = {
@@ -100,13 +112,6 @@
 				B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */,
 			);
 			path = ComponentsExp;
-			sourceTree = "<group>";
-		};
-		B42A1C9B28BB531100AF95DA /* Gesture */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Gesture;
 			sourceTree = "<group>";
 		};
 		B458555828B1AB7F0047C81E /* CustomView */ = {
@@ -150,6 +155,7 @@
 				FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */,
 				FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */,
 				FA6C156028C7778F0079AF6B /* CashSource.swift */,
+				0C8E2026291A40EE00F6932B /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,7 +174,7 @@
 				FA7B94B928C61A3600772845 /* ExpenseView */,
 				FABB4BBF28B124410070F300 /* ContentView.swift */,
 				FAB594E228BB3F1A002D3916 /* Test.swift */,
-				B41618B228B135CE002629F7 /* tabView */,
+				B41618B228B135CE002629F7 /* TabView */,
 				B458555828B1AB7F0047C81E /* CustomView */,
 			);
 			path = Views;
@@ -203,12 +209,12 @@
 		FABB4BBC28B124410070F300 /* Saver */ = {
 			isa = PBXGroup;
 			children = (
+				0C67F3B2293C95C5002384D4 /* UserDefaultsManager  */,
 				FAB0DF0728C8C588006D78B9 /* UICustomObjects */,
 				FA9D14D128BC9D3800EEFA12 /* Models */,
 				FABB4BBD28B124410070F300 /* SaverApp.swift */,
 				FAB594E428BB3F50002D3916 /* Views */,
 				FAB594E528BB3F61002D3916 /* Resources  */,
-				B42A1C9B28BB531100AF95DA /* Gesture */,
 				FABB4BC128B124420070F300 /* Assets.xcassets */,
 				FABB4BC828B124420070F300 /* Saver.xcdatamodeld */,
 				FABB4BC328B124420070F300 /* Preview Content */,
@@ -312,10 +318,12 @@
 				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
+				0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
 				FA7B94BB28C61AA200772845 /* ExpenseView.swift in Sources */,
 				B41618B428B1361C002629F7 /* MainScreen.swift in Sources */,
+				0C67F3B4293C961D002384D4 /* UserDefaultsManager.swift in Sources */,
 				FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */,
 				B4A9AA9B28B2708C001230BF /* BalanceView.swift in Sources */,
 				B4E94DC328BDD93B0054B16F /* CustomAlert.swift in Sources */,

@@ -8,14 +8,9 @@ import SwiftUI
 
 struct ExpenseView: View {
     
-    
     @Binding var closeSelf: Bool
     @State  var cashSource: CashSource
     @State  var expenseCategory: ExpenseCategory
-    
-    
-
-    
     @State private var expense = 0.0
     @State private var comment = ""
     @State private var isDone = false
@@ -181,13 +176,3 @@ struct ExpenseView: View {
     }
 }
 
-
-//
-//struct ExpenseView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExpenseView(closeSelf: .constant(true),
-//                    cashSource: .wallet,
-//                    expenseCategory: .clothing,
-//                    editing: FocusState<Bool>.Binding)
-//    }
-//}
