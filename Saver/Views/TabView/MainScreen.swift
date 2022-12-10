@@ -10,7 +10,8 @@ import SwiftUI
 
 struct MainScreen: View {
     
-    @State var isAlertShow = false
+    @State var expenseViewShow = false
+    @State var incomeViewShow = false
     @State var cashSource: CashSource = .wallet
     @State var expenseType: ExpenseCategory = .products
     @FocusState var editing: Bool
@@ -20,7 +21,7 @@ struct MainScreen: View {
             Color.white //.ignoresSafeArea(edges: .top)
             VStack(alignment: .center, spacing: 0){
                 BalanceView().zIndex(4)
-                CardsPlace(isAlertShow: $isAlertShow, purchaseType: $expenseType, cashSource: $cashSource).zIndex(3)
+                CardsPlace(incomeViewShow: $incomeViewShow, expenseViewShow: $expenseViewShow, purchaseType: $expenseType, cashSource: $cashSource).zIndex(3)
                 StatisticsPlace().zIndex(0)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
@@ -32,10 +33,17 @@ struct MainScreen: View {
                 Spacer(minLength: 200)
             }
          
-            if isAlertShow{
-                ExpenseView(closeSelf: $isAlertShow,
+            if expenseViewShow{
+                ExpenseView(closeSelf: $expenseViewShow,
                             cashSource: cashSource,
                             expenseCategory: expenseType, editing: $editing)
+                .zIndex(10)
+            }
+            
+            if incomeViewShow {
+                IncomeView(closeSelf: $incomeViewShow,
+                           cashSource: cashSource,
+                           editing: $editing)
                 .zIndex(10)
             }
         }

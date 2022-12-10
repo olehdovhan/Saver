@@ -14,7 +14,8 @@ struct CardsPlace: View{
     @State var secondZ: Double = 2
     @State var thirdZ: Double = 1
     
-    @Binding var isAlertShow: Bool
+    @Binding var incomeViewShow: Bool
+    @Binding var expenseViewShow: Bool
     @Binding var purchaseType: ExpenseCategory
     @Binding var cashSource: CashSource
     
@@ -25,7 +26,8 @@ struct CardsPlace: View{
             HStack(spacing: 16){
                 
                 Button {
-                 
+                    incomeViewShow = true
+                    cashSource = .bankCard
                 } label: {
                     VStack(spacing: 5){
                         Text("Bank card")
@@ -41,14 +43,15 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType, cashType: .bankCard, cashSource: $cashSource)
+                     .draggable(zIndex: $firstZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: .bankCard, cashSource: $cashSource)
                    // .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType)
                 }
                 .zIndex(firstZ)
               
                 
               Button {
-                    print("Wallet")
+                  incomeViewShow = true
+                  cashSource = .wallet
                 } label: {
                     VStack(spacing: 5){
                         Text("Wallet")
@@ -64,7 +67,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $secondZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType, cashType: .wallet, cashSource: $cashSource)
+                    .draggable(zIndex: $secondZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: .wallet, cashSource: $cashSource)
                 }
                 .zIndex(secondZ)
                 

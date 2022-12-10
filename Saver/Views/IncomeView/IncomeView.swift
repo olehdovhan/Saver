@@ -1,25 +1,24 @@
 //
-//  ExpenseView.swift
+//  IncomeView.swift
 //  Saver
 //
-//  Created by O l e h on 05.09.2022.
+//  Created by Oleh Dovhan on 05.12.2022.
 //
+
 import SwiftUI
 
-struct ExpenseView: View {
+struct IncomeView: View {
     
     @Binding var closeSelf: Bool
     @State  var cashSource: CashSource
-    @State  var expenseCategory: ExpenseCategory
-    @State private var expense = 0.0
+    @State private var income = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
-    
     @State var editing: FocusState<Bool>.Binding
     
-    private var enteredExpense: Bool {
-        switch expense {
+    private var enteredIncome: Bool {
+        switch income {
         case let x where x > 0.0:  return false
         default:                   return true
         }
@@ -39,7 +38,7 @@ struct ExpenseView: View {
             
             VStack {
                 HStack {
-                    Text("Expense")
+                    Text("Income")
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
                     Spacer()
@@ -55,7 +54,7 @@ struct ExpenseView: View {
                 .frame(width: 300, alignment: .top)
                 .padding(.top, 24)
             
-                TextField("Expense", value: $expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                TextField("Expense", value: $income, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                     
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
@@ -65,35 +64,13 @@ struct ExpenseView: View {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .stroke(editing.wrappedValue ? Color.red : Color.gray, lineWidth: 3)
                     ).padding()
-
-                
-                HStack {
-                    Text("From")
-                    Spacer()
-                
-                    Picker("Tip percentage", selection: $cashSource) {
-                        ForEach(CashSource.allCases ,id: \.self) {
-                            Text($0.rawValue)
-                        }
-                    }
-                    .colorMultiply(.black)
-                   // .foregroundColor(.brown)
-                    .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                 .stroke( .gray, lineWidth: 3)
-                                 .padding(.leading, -20)
-                                 .padding(.trailing, -20)
-                    )
-                //    .tint(.black)
-                }
-                .padding(.leading, 30)
-                .padding(.trailing, 60)
                 
                 HStack {
                     Text("To")
                     Spacer()
                 
-                    Picker("", selection: $expenseCategory) {
-                        ForEach(ExpenseCategory.allCases,id: \.self) {
+                    Picker("", selection: $cashSource) {
+                        ForEach(CashSource.allCases,id: \.self) {
                             Text($0.rawValue)
                         }
                     }
@@ -125,8 +102,7 @@ struct ExpenseView: View {
                 }
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
-                
-                
+  
                 HStack {
                     Text("Time")
                     Spacer()
@@ -159,9 +135,9 @@ struct ExpenseView: View {
                 .padding(.trailing, 35)
         
                 Spacer()
-                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: enteredExpense) {
+                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: enteredIncome) {
                     print("tap rap snap")
-                    print(enteredExpense)
+                    print(enteredIncome)
                 }
                 Spacer()
             }
@@ -171,4 +147,3 @@ struct ExpenseView: View {
         }
     }
 }
-

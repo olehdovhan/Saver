@@ -11,12 +11,8 @@ struct BalanceView: View {
     
     @State var isDragging = false
     
-   
-
-    
     var body: some View {
         ZStack{
-            
         LinearGradient(colors: [.myGreen, .myBlue],
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)

@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 @main
 struct SaverApp: App {
+    
     let persistenceController = PersistenceController.shared
 
     @Environment(\.scenePhase) var scenePhase
@@ -21,13 +23,13 @@ struct SaverApp: App {
             case .background: print("App State: Background")
             case .inactive:
                 if UserDefaultsManager.shared.userModel == nil {
-                    UserDefaultsManager.shared.userModel = UserModel(avatarSystemName: "person.circle",
+                    UserDefaultsManager.shared.userModel =  UserModel(avatarSystemName: "person.circle",
                                                                      name: "user",
                                                                      registrationDate: Date())
                     print("writed down")
                 } 
             case .active:       print("App State: Active")
-                print(UserDefaultsManager.shared.userModel)
+                                print(UserDefaultsManager.shared.userModel)
             @unknown default:   print("App State: Unknown")
             }
         }

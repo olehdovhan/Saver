@@ -27,9 +27,7 @@ extension View {
     }
 }
 
-
-
-struct DragGestureCustom: ViewModifier{
+struct DragGestureCustom: ViewModifier {
     
     @State var isDragging = false
     @State var currentOffsetX: CGFloat = 0
@@ -40,7 +38,6 @@ struct DragGestureCustom: ViewModifier{
     @State var cashType: CashSource
     @Binding var cashSource: CashSource
    
-    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
@@ -75,10 +72,7 @@ struct DragGestureCustom: ViewModifier{
                         case .restaurant: purchaseType = .restaurant
                         }
                         cashSource = cashType
-             
-                            isAlertShow.toggle()
-                 
-                        
+                        isAlertShow.toggle()
                     }
                 }
                     
@@ -100,17 +94,19 @@ struct DragGestureCustom: ViewModifier{
                         currentOffsetY = 0
                     }
                 }
-                
-                
-            }
+          }
     }
-    
+//    let tapGesture =  TapGesture()
+//                            .onEnded { value in
+//                               print("Bank Card")
+//                            }
+//    
     func body(content: Content) -> some View {
               content
             .offset(x: currentOffsetX)
             .offset(y: currentOffsetY)
-            .gesture(drag)
         
+            .gesture(drag)
     }
 }
 //
