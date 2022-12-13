@@ -15,9 +15,17 @@ struct AddCashSourceView: View {
     @State var cashSourceName = ""
     @State var currentMoneyAmount = ""
     @State var editing: FocusState<Bool>.Binding
-    @State var fieldsAreNotEmpty = false
+  
     @State var showIconsCashSource = false
     @State var selectedCashIconName = ""
+    
+    var fieldsEmpty: Bool {
+      if selectedCashIconName != "",
+               cashSourceName != "",
+            currentMoneyAmount != "" {
+          return false
+      } else { return true }
+    }
     
     var body: some View {
         ZStack {
@@ -26,7 +34,7 @@ struct AddCashSourceView: View {
             
             Color.white
                 .frame(width: 300,
-                       height: 500,
+                       height: 360,
                        alignment: .top)
                 .cornerRadius(25)
                 .shadow(radius: 25)
@@ -71,7 +79,7 @@ struct AddCashSourceView: View {
                     Spacer()
                     Spacer()
     
-                    TextField("enter amount",text: $cashSourceName)
+                    TextField("enter amount",text: $currentMoneyAmount)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( .gray, lineWidth: 3)
@@ -80,10 +88,10 @@ struct AddCashSourceView: View {
                         )
                         .keyboardType(.numberPad)
                         .lineLimit(nil)
-                        .onReceive(Just(cashSourceName)) { newValue in
+                        .onReceive(Just(currentMoneyAmount)) { newValue in
                             let filtered = newValue.filter { "0123456789 ".contains($0) }
                               if filtered != newValue {
-                                  self.cashSourceName = filtered
+                                  self.currentMoneyAmount = filtered
                               }
                         }
                 }
@@ -103,25 +111,29 @@ struct AddCashSourceView: View {
                             .frame(width: 65, height: 65)
                     }
                 }
-          
                 
                 Spacer()
                 ImageButton(image: "btnDoneInactive",
                             pressedImage: "btnDone",
-                            disabled: fieldsAreNotEmpty) {
-                    print("tap rap snap")
-                    print(cashSourceName)
+                            disabled: fieldsEmpty) {
+                    print(fieldsEmpty)
+                    print(selectedCashIconName == "")
+                    print(cashSourceName == "")
+                    print(currentMoneyAmount == "")
                 }
                 Spacer()
             }
             .frame(width: 300,
-                   height: 500,
-                   alignment: .top)
-        }
-        if showIconsCashSource {
-            IconsCashSourceView(closeSelf: $showIconsCashSource) { iconName in
-            selectedCashIconName =  iconName
+                   height: 360)
+            if showIconsCashSource {
+                IconsCashSourceView(closeSelf: $showIconsCashSource) { iconName in
+                selectedCashIconName =  iconName
+                }
             }
         }
+        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+        
+   
+        
     }
 }
