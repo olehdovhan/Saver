@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CardsPlace: View{
     
-    
     @State var firstZ: Double = 3
     @State var secondZ: Double = 2
     @State var thirdZ: Double = 1
     
+    @Binding var addCashSourceViewShow: Bool
     @Binding var incomeViewShow: Bool
     @Binding var expenseViewShow: Bool
     @Binding var purchaseType: ExpenseCategory
@@ -22,9 +22,7 @@ struct CardsPlace: View{
     var body: some View{
         GeometryReader{ geo in
         ZStack{
-
-            HStack(spacing: 16){
-                
+            HStack(spacing: 16) {
                 Button {
                     incomeViewShow = true
                     cashSource = .bankCard
@@ -72,7 +70,7 @@ struct CardsPlace: View{
                 .zIndex(secondZ)
                 
                 Button {
-                    print("new card")
+                  addCashSourceViewShow = true 
                 } label: {
                     VStack{
                         Image("iconPlus")

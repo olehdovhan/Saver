@@ -12,6 +12,7 @@ struct MainScreen: View {
     
     @State var expenseViewShow = false
     @State var incomeViewShow = false
+    @State var addCashSourceViewShow = false
     @State var cashSource: CashSource = .wallet
     @State var expenseType: ExpenseCategory = .products
     @FocusState var editing: Bool
@@ -21,7 +22,11 @@ struct MainScreen: View {
             Color.white //.ignoresSafeArea(edges: .top)
             VStack(alignment: .center, spacing: 0){
                 BalanceView().zIndex(4)
-                CardsPlace(incomeViewShow: $incomeViewShow, expenseViewShow: $expenseViewShow, purchaseType: $expenseType, cashSource: $cashSource).zIndex(3)
+                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
+                           incomeViewShow: $incomeViewShow,
+                           expenseViewShow: $expenseViewShow,
+                           purchaseType: $expenseType,
+                           cashSource: $cashSource).zIndex(3)
                 StatisticsPlace().zIndex(0)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
@@ -36,7 +41,8 @@ struct MainScreen: View {
             if expenseViewShow{
                 ExpenseView(closeSelf: $expenseViewShow,
                             cashSource: cashSource,
-                            expenseCategory: expenseType, editing: $editing)
+                            expenseCategory: expenseType,
+                            editing: $editing)
                 .zIndex(10)
             }
             
@@ -45,6 +51,11 @@ struct MainScreen: View {
                            cashSource: cashSource,
                            editing: $editing)
                 .zIndex(10)
+            }
+             
+            if addCashSourceViewShow {
+                AddCashSourceView(closeSelf: $addCashSourceViewShow,
+                                  editing: $editing)
             }
         }
         .ignoresSafeArea(.all)
