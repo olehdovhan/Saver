@@ -22,11 +22,14 @@ struct MainScreen: View {
             Color.white //.ignoresSafeArea(edges: .top)
             VStack(alignment: .center, spacing: 0){
                 BalanceView().zIndex(4)
-                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
-                           incomeViewShow: $incomeViewShow,
-                           expenseViewShow: $expenseViewShow,
-                           purchaseType: $expenseType,
-                           cashSource: $cashSource).zIndex(3)
+                if let cashSources = UserDefaultsManager.shared.userModel?.cashSources {
+                    CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
+                               incomeViewShow: $incomeViewShow,
+                               expenseViewShow: $expenseViewShow,
+                               purchaseType: $expenseType,
+                               cashSource: $cashSource,
+                               cashSources: cashSources).zIndex(3)
+                }
                 StatisticsPlace().zIndex(0)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],

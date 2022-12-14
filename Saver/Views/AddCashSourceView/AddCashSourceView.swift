@@ -114,10 +114,17 @@ struct AddCashSourceView: View {
                 ImageButton(image: "btnDoneInactive",
                             pressedImage: "btnDone",
                             disabled: fieldsEmpty) {
-                    print(fieldsEmpty)
-                    print(selectedCashIconName == "")
-                    print(cashSourceName == "")
-                    print(currentMoneyAmount == "")
+                    let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
+                    if var copyUser = UserDefaultsManager.shared.userModel {
+                        copyUser.cashSources.append(newCashSource)
+                        UserDefaultsManager.shared.userModel? = copyUser
+                    }
+              
+                    closeSelf = false
+//                    print(fieldsEmpty)
+//                    print(selectedCashIconName == "")
+//                    print(cashSourceName == "")
+//                    print(currentMoneyAmount == "")
                 }
                 Spacer()
             }

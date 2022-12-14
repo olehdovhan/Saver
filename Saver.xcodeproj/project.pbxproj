@@ -139,7 +139,7 @@
 			children = (
 				B41618B328B1361C002629F7 /* MainScreen.swift */,
 				B4E94DC228BDD93B0054B16F /* CustomAlert.swift */,
-				B4A9AAA028B27E37001230BF /* ComponentsMainscrin */,
+				B4A9AAA028B27E37001230BF /* ComponentsMainScreen */,
 				B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */,
 				B419BB5E28C0CB43002F58EC /* ComponentsExp */,
 				B41618B728B1380C002629F7 /* Calendar.swift */,
@@ -166,7 +166,7 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		B4A9AAA028B27E37001230BF /* ComponentsMainscrin */ = {
+		B4A9AAA028B27E37001230BF /* ComponentsMainScreen */ = {
 			isa = PBXGroup;
 			children = (
 				B4A9AA9A28B2708C001230BF /* BalanceView.swift */,
@@ -174,7 +174,7 @@
 				B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */,
 				B4A9AAA128B27EAB001230BF /* CoastsPlace.swift */,
 			);
-			path = ComponentsMainscrin;
+			path = ComponentsMainScreen;
 			sourceTree = "<group>";
 		};
 		B4FA432728C88A1A00FA19DB /* ComponentsCalendar */ = {
