@@ -25,7 +25,7 @@ struct ExpenseView: View {
         }
     }
     
-    @State  var cashSources: [String]
+    @State var cashSources: [String]
       
     var body: some View {
         ZStack {
