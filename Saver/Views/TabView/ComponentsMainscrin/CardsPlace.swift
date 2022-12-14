@@ -17,17 +17,17 @@ struct CardsPlace: View{
     @Binding var incomeViewShow: Bool
     @Binding var expenseViewShow: Bool
     @Binding var purchaseType: ExpenseCategory
-    @Binding var cashSource: CashSource
+    @Binding var cashSource: String
     
-    var body: some View{
-        GeometryReader{ geo in
-        ZStack{
+    var body: some View {
+        GeometryReader { geo in
+        ZStack {
             HStack(spacing: 16) {
                 Button {
                     incomeViewShow = true
-                    cashSource = .bankCard
+                    cashSource = "Bank card"
                 } label: {
-                    VStack(spacing: 5){
+                    VStack(spacing: 5) {
                         Text("Bank card")
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
@@ -41,15 +41,13 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                     .draggable(zIndex: $firstZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: .bankCard, cashSource: $cashSource)
-                   // .draggable(zIndex: $firstZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType)
+                     .draggable(zIndex: $firstZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: "Bank card", cashSource: $cashSource)
                 }
                 .zIndex(firstZ)
               
-                
               Button {
                   incomeViewShow = true
-                  cashSource = .wallet
+                  cashSource = "Wallet"
                 } label: {
                     VStack(spacing: 5){
                         Text("Wallet")
@@ -65,7 +63,7 @@ struct CardsPlace: View{
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
-                    .draggable(zIndex: $secondZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: .wallet, cashSource: $cashSource)
+                    .draggable(zIndex: $secondZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: "Wallet", cashSource: $cashSource)
                 }
                 .zIndex(secondZ)
                 
@@ -78,14 +76,12 @@ struct CardsPlace: View{
                             .frame(width: 50, height: 50)
                             .myShadow(radiusShadow: 5)
                     }
-                   // .draggable(zIndex: $thirdZ, isAlertShow: $isAlertShow, purchaseType: $purchaseType)
                 }
                 .zIndex(thirdZ)
-               
                 Spacer()
             }
             .padding(EdgeInsets(top: 20, leading: 30, bottom: 20, trailing: 30))
-        }
+          }
         }
     }
 }

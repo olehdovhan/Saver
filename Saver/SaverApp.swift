@@ -25,7 +25,13 @@ struct SaverApp: App {
                 if UserDefaultsManager.shared.userModel == nil {
                     UserDefaultsManager.shared.userModel =  UserModel(avatarSystemName: "person.circle",
                                                                      name: "user",
-                                                                     registrationDate: Date())
+                                                                      registrationDate: Date(),
+                                                                      cashSources: [CashSource(name: "Bank card",
+                                                                                               amount: 0.0,
+                                                                                               iconName: "iconBankCard"),
+                                                                      CashSource(name: "Wallet",
+                                                                                 amount: 0.0,
+                                                                                 iconName: "iconWallet")])
                     print("writed down")
                 } 
             case .active:       print("App State: Active")

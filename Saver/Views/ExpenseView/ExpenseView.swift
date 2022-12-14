@@ -9,7 +9,7 @@ import SwiftUI
 struct ExpenseView: View {
     
     @Binding var closeSelf: Bool
-    @State  var cashSource: CashSource
+    @State  var cashSource: String
     @State  var expenseCategory: ExpenseCategory
     @State private var expense = 0.0
     @State private var comment = ""
@@ -25,6 +25,8 @@ struct ExpenseView: View {
         }
     }
     
+    @State  var cashSources: [String]
+      
     var body: some View {
         ZStack {
             Color(hex: 0xC4C4C4, alpha: 0.7)
@@ -65,33 +67,27 @@ struct ExpenseView: View {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .stroke(editing.wrappedValue ? Color.red : Color.gray, lineWidth: 3)
                     ).padding()
-
-                
                 HStack {
                     Text("From")
                     Spacer()
-                
-                    Picker("Tip percentage", selection: $cashSource) {
-                        ForEach(CashSource.allCases ,id: \.self) {
-                            Text($0.rawValue)
+                        Picker("", selection: $cashSource) {
+                            ForEach(cashSources ,id: \.self) {
+                                Text($0)
+                            }
                         }
-                    }
-                    .colorMultiply(.black)
-                   // .foregroundColor(.brown)
-                    .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                 .stroke( .gray, lineWidth: 3)
-                                 .padding(.leading, -20)
-                                 .padding(.trailing, -20)
-                    )
-                //    .tint(.black)
-                }
+                        .colorMultiply(.black)
+                        .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke( .gray, lineWidth: 3)
+                            .padding(.leading, -20)
+                            .padding(.trailing, -20)
+                        )
+                                  }
                 .padding(.leading, 30)
                 .padding(.trailing, 60)
                 
                 HStack {
                     Text("To")
                     Spacer()
-                
                     Picker("", selection: $expenseCategory) {
                         ForEach(ExpenseCategory.allCases,id: \.self) {
                             Text($0.rawValue)
@@ -117,11 +113,11 @@ struct ExpenseView: View {
                  
                     DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                         .labelsHidden()
-                        .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                              .stroke( .gray, lineWidth: 3)
                         )
                         .id(expenseDate)
-                       // .foregroundColor(.red)
                 }
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
@@ -130,7 +126,6 @@ struct ExpenseView: View {
                 HStack {
                     Text("Time")
                     Spacer()
-                    
                     DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -169,6 +164,7 @@ struct ExpenseView: View {
                    height: 500,
                    alignment: .top)
         }
+       
     }
 }
 

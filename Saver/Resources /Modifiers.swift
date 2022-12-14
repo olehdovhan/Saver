@@ -22,7 +22,7 @@ extension View {
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
     
-    func draggable(zIndex: Binding<Double>, isAlertShow: Binding<Bool>, purchaseType: Binding<ExpenseCategory>, cashType: CashSource , cashSource: Binding<CashSource> ) -> some View {
+    func draggable(zIndex: Binding<Double>, isAlertShow: Binding<Bool>, purchaseType: Binding<ExpenseCategory>, cashType: String , cashSource: Binding<String> ) -> some View {
         modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource))
     }
 }
@@ -35,8 +35,8 @@ struct DragGestureCustom: ViewModifier {
     @Binding var zIndex: Double
     @Binding var isAlertShow: Bool
     @Binding var purchaseType: ExpenseCategory
-    @State var cashType: CashSource
-    @Binding var cashSource: CashSource
+    @State var cashType: String
+    @Binding var cashSource: String
    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)

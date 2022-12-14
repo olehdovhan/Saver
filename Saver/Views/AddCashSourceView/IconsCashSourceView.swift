@@ -12,7 +12,9 @@ struct IconsCashSourceView: View {
     @Binding var closeSelf: Bool
     var closure: (String) -> ()
     
-    let data = ["briefcase",
+    let data = ["iconBankCard",
+                "iconWallet",
+                "briefcase",
                 "case",
                 "dollarsign",
                 "dollarsign.square",
@@ -21,6 +23,19 @@ struct IconsCashSourceView: View {
                 "banknote",
                 "eurosign.circle",
                 "bitcoinsign.circle"]
+    
+    var sortedDate: [String] {
+        if let existedIcons = UserDefaultsManager.shared.userModel?.cashSources.map {$0.iconName} {
+          var dataCopy = data
+            for exist in existedIcons {
+                if let existedItem = dataCopy.firstIndex(of: exist) {
+                    dataCopy.remove(at: existedItem)
+                }
+            }
+            return dataCopy
+        } else { return data }
+    
+    }
 
     let columns = [ GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()) ]
 

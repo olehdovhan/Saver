@@ -13,6 +13,9 @@ struct UserModel: Codable {
     var name: String
     var registrationDate: Date
     
+    // CashSources
+    var cashSources: [CashSource]
+    
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
     var previousMonthesSpendings: [ExpenseModel]?
@@ -97,4 +100,11 @@ struct DebtModel: Codable {
 // описати PercentageDividerCounterToGoalInMonthes
 enum DebtEnum: Codable  {
     case gave, took
+}
+
+
+struct CashSource: Codable, Hashable {
+    var name: String
+    var amount: Double
+    var iconName: String
 }

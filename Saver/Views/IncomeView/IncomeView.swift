@@ -10,7 +10,7 @@ import SwiftUI
 struct IncomeView: View {
     
     @Binding var closeSelf: Bool
-    @State  var cashSource: CashSource
+    @State  var cashSource: String
     @State private var income = 0.0
     @State private var comment = ""
     @State private var isDone = false
@@ -68,19 +68,21 @@ struct IncomeView: View {
                 HStack {
                     Text("To")
                     Spacer()
-                
-                    Picker("", selection: $cashSource) {
-                        ForEach(CashSource.allCases,id: \.self) {
-                            Text($0.rawValue)
+                    if let cashSources = UserDefaultsManager.shared.userModel?.cashSources {
+                        Picker("", selection: $cashSource) {
+                            ForEach(cashSources ,id: \.self) {
+                                Text($0.name)
+                            }
                         }
+                        
+                        .colorMultiply(.black)
+                        
+                        .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke( .gray, lineWidth: 3)
+                            .padding(.leading, -20)
+                            .padding(.trailing, -20)
+                        )
                     }
-                    .colorMultiply(.black)
-                    
-                    .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke( .gray, lineWidth: 3)
-                        .padding(.leading, -20)
-                        .padding(.trailing, -20)
-                    )
                 }
                 .padding(.leading, 30)
                 .padding(.trailing, 60)

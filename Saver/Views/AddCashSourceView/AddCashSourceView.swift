@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Combine
-import SFSymbolsPicker
 
 struct AddCashSourceView: View {
     
@@ -78,7 +77,6 @@ struct AddCashSourceView: View {
                     Spacer()
                     Spacer()
                     Spacer()
-    
                     TextField("enter amount",text: $currentMoneyAmount)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -132,8 +130,5 @@ struct AddCashSourceView: View {
             }
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-        
-   
-        
     }
 }

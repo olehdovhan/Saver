@@ -13,7 +13,7 @@ struct MainScreen: View {
     @State var expenseViewShow = false
     @State var incomeViewShow = false
     @State var addCashSourceViewShow = false
-    @State var cashSource: CashSource = .wallet
+    @State var cashSource: String = ""
     @State var expenseType: ExpenseCategory = .products
     @FocusState var editing: Bool
     
@@ -38,11 +38,15 @@ struct MainScreen: View {
                 Spacer(minLength: 200)
             }
          
-            if expenseViewShow{
+            if expenseViewShow,
+               let cashes = UserDefaultsManager.shared.userModel?.cashSources,
+             let cashSources = cashes.map { $0.name}
+            {
                 ExpenseView(closeSelf: $expenseViewShow,
                             cashSource: cashSource,
                             expenseCategory: expenseType,
-                            editing: $editing)
+                            editing: $editing,
+                            cashSources: cashSources)
                 .zIndex(10)
             }
             
@@ -58,6 +62,9 @@ struct MainScreen: View {
                                   editing: $editing)
             }
         }
+        .onAppear() {
+            cashSource = UserDefaultsManager.shared.userModel?.cashSources[0].name ?? ""
+        }
         .ignoresSafeArea(.all)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -70,10 +77,3 @@ struct MainScreen: View {
 
     }
 }
-
-//struct Mainscrin2_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Mainscrin2()
-//    }
-//
-//}

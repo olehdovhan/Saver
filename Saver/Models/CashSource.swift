@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum CashSource: String, CaseIterable, Codable {
-    case wallet = "Wallet"
-    case bankCard = "Bank Card"
-}
+//enum CashSource: String, CaseIterable, Codable {
+//    case wallet = "Wallet"
+//    case bankCard = "Bank Card"
+//}
 
 enum ExpenseCategory: String, CaseIterable, Codable {
     case products = "Products"
