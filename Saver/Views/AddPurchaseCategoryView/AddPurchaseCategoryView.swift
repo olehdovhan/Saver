@@ -1,14 +1,14 @@
 //
-//  AddCashSourceView.swift
+//  AddPurchaseCategoryView.swift
 //  Saver
 //
-//  Created by Oleh Dovhan on 10.12.2022.
+//  Created by Oleh Dovhan on 17.12.2022.
 //
 
 import SwiftUI
 import Combine
 
-struct AddCashSourceView: View {
+struct AddPurchaseCategoryView: View {
     
     @Binding var closeSelf: Bool
     @State var cashSourceName = ""
@@ -26,6 +26,7 @@ struct AddCashSourceView: View {
       } else { return true }
     }
     
+    
     var body: some View {
         ZStack {
             Color(hex: 0xC4C4C4, alpha: 0.7)
@@ -40,7 +41,7 @@ struct AddCashSourceView: View {
             
             VStack {
                 HStack {
-                    Text("Add new money source")
+                    Text("Add new purchase category")
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
                     Spacer()
@@ -73,11 +74,11 @@ struct AddCashSourceView: View {
                 .padding(.trailing, 35)
                 
                 HStack {
-                    Text("Money amount")
+                    Text("Plannning to spend ")
                     Spacer()
                     Spacer()
                     Spacer()
-                    TextField("enter amount",text: $currentMoneyAmount)
+                    TextField("sum to spend per month", text: $currentMoneyAmount)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( .gray, lineWidth: 3)
@@ -98,23 +99,26 @@ struct AddCashSourceView: View {
                 
                 // Icon - with
                 Button {
-                   showIconsCashSource = true 
+                   showIconsCashSource = true
                 } label: {
                     if selectedCashIconName == "" {
                         CircleTextView(text: "ICON")
                             .foregroundColor(.cyan)
                     } else {
-                        
                         switch selectedCashIconName {
-                        case "iconBankCard", "iconWallet":          Image(selectedCashIconName)
-                                                                    .resizable()
-                                                                    .frame(width: 65, height: 65)
+                        case "iconClothing",
+                             "iconEntertainment",
+                             "iconHealth",
+                             "iconHousehold",
+                             "iconProducts",
+                             "iconRestaurant",
+                             "iconTransport":          Image(selectedCashIconName)
+                                                        .resizable()
+                                                        .frame(width: 65, height: 65)
                         default:         Image(systemName: selectedCashIconName)
-                                .resizable()
-                                .frame(width: 65, height: 65)
+                                         .resizable()
+                                         .frame(width: 65, height: 65)
                         }
-                        
-                     
                     }
                 }
                 
@@ -122,21 +126,24 @@ struct AddCashSourceView: View {
                 ImageButton(image: "btnDoneInactive",
                             pressedImage: "btnDone",
                             disabled: fieldsEmpty) {
-                    let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
+                    let newPurchaseCategory = PurchaseCategory(name: cashSourceName,
+                                                         iconName: selectedCashIconName,
+                                                         planSpentPerMonth: Double(currentMoneyAmount) ?? 0.0)
                     if var copyUser = UserDefaultsManager.shared.userModel {
-                        copyUser.cashSources.append(newCashSource)
+                        copyUser.purchaseCategories.append(newPurchaseCategory)
                         UserDefaultsManager.shared.userModel? = copyUser
-                        print("AAAA\(newCashSource)")
+                        print("AAAA\(newPurchaseCategory)")
                     }
-                    
                     closeSelf = false
                 }
                 Spacer()
             }
             .frame(width: 300,
                    height: 360)
+            
             if showIconsCashSource {
-                AddIconsView(closeSelf: $showIconsCashSource, type: .cashSource) { iconName in
+                AddIconsView(closeSelf: $showIconsCashSource,
+                             type: .purchaseCategory) { iconName in
                 selectedCashIconName = iconName
                 }
             }
@@ -144,3 +151,4 @@ struct AddCashSourceView: View {
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
     }
 }
+

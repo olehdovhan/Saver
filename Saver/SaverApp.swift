@@ -23,25 +23,24 @@ struct SaverApp: App {
             case .background: print("App State: Background")
             case .inactive:
                 if UserDefaultsManager.shared.userModel == nil {
-                    UserDefaultsManager.shared.userModel =  UserModel(avatarSystemName: "person.circle",
-                                                                     name: "user",
-                                                                      registrationDate: Date(),
-                                                                      cashSources: [CashSource(name: "Bank card",
-                                                                                               amount: 0.0,
-                                                                                               iconName: "iconBankCard"),
-                                                                                      CashSource(name: "Wallet",
-                                                                                                 amount: 0.0,
-                                                                                                 iconName: "iconWallet")],
-                                                                      purchaseCategories: [PurchaseCategory(name: "Products",
-                                                                                                          iconName: "iconProducts"),
-                                                                                           PurchaseCategory(name: "Transport",
-                                                                                                           iconName: "iconTransport"),
-                                                                                          PurchaseCategory(name: "Clothing",
-                                                                                                          iconName: "iconClothing"),
-                                                                                          PurchaseCategory(name: "Restaurant",
-                                                                                                          iconName: "iconRestaurant")])
-                    print("writed down")
-                } 
+                    UserDefaultsManager.shared.userModel =
+                    UserModel(avatarSystemName: "person.circle",
+                              name: "user",
+                              registrationDate: Date(),
+                              cashSources: [CashSource(name: "Bank card",
+                                                       amount: 0.0,
+                                                       iconName: "iconBankCard"),
+                                              CashSource(name: "Wallet",
+                                                         amount: 0.0,
+                                                         iconName: "iconWallet")],
+                              purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+//                                                   PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+//                                                   PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+//                                                   PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+//                                                   PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+//                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                                   PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                     }
             case .active:       print("App State: Active")
                                 print(UserDefaultsManager.shared.userModel)
             @unknown default:   print("App State: Unknown")

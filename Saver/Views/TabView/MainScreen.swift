@@ -13,6 +13,7 @@ struct MainScreen: View {
     @State var expenseViewShow = false
     @State var incomeViewShow = false
     @State var addCashSourceViewShow = false
+    @State var addPurchaseCategoryViewShow = false
     @State var cashSource: String = ""
     @State var expenseType: String = "" {
         willSet {
@@ -23,7 +24,7 @@ struct MainScreen: View {
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
     var body: some View {
-        ZStack{
+        ZStack {
             Color.white
             VStack(alignment: .center, spacing: 0) {
                 BalanceView().zIndex(4)
@@ -43,7 +44,12 @@ struct MainScreen: View {
                                endPoint: .trailing)
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
                 
-                CoastsPlace(purchaseCategories: $purchaseCategories)
+                PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
+                                       addPurchaseCategoryShow: $addPurchaseCategoryViewShow)
+                .onChange(of: addPurchaseCategoryViewShow) { newValue in
+                    if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
+                }
+
                 Spacer(minLength: 200)
             }
          
@@ -52,7 +58,7 @@ struct MainScreen: View {
              let cashSources = cashes.map { $0.name} {
                 ExpenseView(closeSelf: $expenseViewShow,
                             cashSource: cashSource,
-                            expenseCategoryName: $expenseType,
+                            purchaseCategoryName: $expenseType,
                             editing: $editing,
                             cashSources: cashSources)
                             .zIndex(10)
@@ -69,6 +75,10 @@ struct MainScreen: View {
             if addCashSourceViewShow {
                 AddCashSourceView(closeSelf: $addCashSourceViewShow,
                                   editing: $editing)
+            }
+            if addPurchaseCategoryViewShow {
+                AddPurchaseCategoryView(closeSelf: $addPurchaseCategoryViewShow,
+                                        editing: $editing)
             }
         }
         .onAppear() {

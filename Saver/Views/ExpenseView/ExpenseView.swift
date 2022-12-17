@@ -10,17 +10,13 @@ struct ExpenseView: View {
     
     @Binding var closeSelf: Bool
     @State  var cashSource: String
-    @Binding var expenseCategoryName: String
+    @Binding var purchaseCategoryName: String
     @State private var expense = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
     
-    @State var expenseCategories = ["Products",
-                                    "Transport",
-                                    "Clothing",
-                                    "Restaraunt"]
-    
+    @State var purchaseCategories: [String] = []
     @State var editing: FocusState<Bool>.Binding
     
     private var enteredExpense: Bool {
@@ -93,8 +89,10 @@ struct ExpenseView: View {
                 HStack {
                     Text("To")
                     Spacer()
-                    Picker("", selection: $expenseCategoryName) {
-                        ForEach(expenseCategories,id: \.self) {
+                    Picker("", selection: $purchaseCategoryName) {
+                        Text("").tag("")
+                            .frame(height: 1)
+                        ForEach(purchaseCategories,id: \.self) {
                             Text($0)
                         }
                     }
@@ -169,7 +167,13 @@ struct ExpenseView: View {
                    height: 500,
                    alignment: .top)
         }
-       
+        .onAppear() {
+            print(cashSource)
+            print( purchaseCategoryName)
+            if let purchCats = UserDefaultsManager.shared.userModel?.purchaseCategories {
+                purchaseCategories = purchCats.map { $0.name}
+            }
+        }
     }
 }
 

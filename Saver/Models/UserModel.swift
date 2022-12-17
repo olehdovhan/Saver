@@ -115,4 +115,5 @@ struct CashSource: Codable, Hashable {
 struct PurchaseCategory: Codable, Hashable {
     var name: String
     var iconName: String
+    var planSpentPerMonth: Double?
 }
