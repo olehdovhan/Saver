@@ -17,7 +17,7 @@ struct UserModel: Codable {
     var cashSources: [CashSource]
     
     // ExpenseCategories
-    var expenseCategories: [ExpenseCategory]
+    var purchaseCategories: [PurchaseCategory]
     
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
@@ -89,7 +89,7 @@ struct ExpenseModel: Codable {
     var comment: String
     var expenseDate: Date
     var cashSource: CashSource
-    var spentCategory: ExpenseCategory
+    var spentCategory: PurchaseCategory
 }
 
 struct DebtModel: Codable {
@@ -112,7 +112,7 @@ struct CashSource: Codable, Hashable {
     var iconName: String
 }
 
-struct ExpenseCategory: Codable, Hashable {
+struct PurchaseCategory: Codable, Hashable {
     var name: String
     var iconName: String
 }

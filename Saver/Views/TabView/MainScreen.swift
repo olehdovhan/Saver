@@ -21,7 +21,7 @@ struct MainScreen: View {
     }
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
-    
+    @State var purchaseCategories: [PurchaseCategory] = []
     var body: some View {
         ZStack{
             Color.white
@@ -43,7 +43,7 @@ struct MainScreen: View {
                                endPoint: .trailing)
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
                 
-                CoastsPlace()
+                CoastsPlace(purchaseCategories: $purchaseCategories)
                 Spacer(minLength: 200)
             }
          
@@ -75,6 +75,9 @@ struct MainScreen: View {
             cashSource = UserDefaultsManager.shared.userModel?.cashSources[0].name ?? ""
             if let sources = UserDefaultsManager.shared.userModel?.cashSources {
                 cashSources = sources
+            }
+            if let categories = UserDefaultsManager.shared.userModel?.purchaseCategories {
+                purchaseCategories = categories
             }
         }
         .ignoresSafeArea(.all)
