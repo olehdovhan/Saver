@@ -12,69 +12,83 @@ struct PurchaseCategoriesView: View{
     @Binding var purchaseCategories: [PurchaseCategory]
     @Binding var addPurchaseCategoryShow: Bool
     
+    @State var purchaseDetailViewShow = false
+    @State var selectedCategory: PurchaseCategory?
+    
     let columns = [ GridItem(.flexible()),
                     GridItem(.flexible()),
                     GridItem(.flexible()),
                     GridItem(.flexible())]
     
     var body: some View{
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(purchaseCategories, id: \.self) { item in
+        
+        ZStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(purchaseCategories, id: \.self) { item in
+                        Button {
+                            print(item.name)
+                            selectedCategory = item
+                            purchaseDetailViewShow = true
+                        } label: {
+                            VStack(spacing: 5) {
+                                
+                                
+                                
+                                switch item.iconName {
+                                case "iconClothing",
+                                    "iconEntertainment",
+                                    "iconHealth",
+                                    "iconHousehold",
+                                    "iconProducts",
+                                    "iconRestaurant",
+                                    "iconTransport":
+                                    Image(item.iconName)
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .myShadow(radiusShadow: 5)
+                                    
+                                default:
+                                    Image(systemName: item.iconName)
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .myShadow(radiusShadow: 5)
+                                }
+                                
+                                
+                                Text(item.name)
+                                    .foregroundColor(.black)
+                                    .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                            }
+                        }
+                        .overlay(
+                            GeometryReader { geo in
+                                Color.clear
+                                    .onAppear {
+                                        var location = CGPoint(x: geo.frame(in: .global).midX,
+                                                               y: geo.frame(in: .global).midY)
+                                        PurchaseLocation.standard.locations[item.name] = location
+                                    }
+                            }
+                        )
+                    }
                     Button {
-                        print(item.name)
+                        addPurchaseCategoryShow = true
                     } label: {
-                        VStack(spacing: 5) {
-                            
-                            
-                            
-                            switch item.iconName {
-                            case "iconClothing",
-                                 "iconEntertainment",
-                                 "iconHealth",
-                                 "iconHousehold",
-                                 "iconProducts",
-                                 "iconRestaurant",
-                                "iconTransport":
-                                Image(item.iconName)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .myShadow(radiusShadow: 5)
-
-                            default:
-                                Image(systemName: item.iconName)
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                    .myShadow(radiusShadow: 5)
-                            }
-                       
-                            
-                            Text(item.name)
-                                .foregroundColor(.black)
-                                .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                        VStack {
+                            Image("iconPlus")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .myShadow(radiusShadow: 5)
                         }
                     }
-                    .overlay(
-                        GeometryReader { geo in
-                            Color.clear
-                                .onAppear {
-                                    var location = CGPoint(x: geo.frame(in: .global).midX,
-                                                           y: geo.frame(in: .global).midY)
-                                    PurchaseLocation.standard.locations[item.name] = location
-                            }
-                        }
-                    )
                 }
-                Button {
-                    addPurchaseCategoryShow = true
-                } label: {
-                    VStack {
-                        Image("iconPlus")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .myShadow(radiusShadow: 5)
-                    }
-                }
+            }
+            
+            if purchaseDetailViewShow, selectedCategory != nil {
+                PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
+                                           purchaseCategories: $purchaseCategories,
+                                           category: selectedCategory!)
             }
         }
     }

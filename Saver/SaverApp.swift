@@ -34,11 +34,11 @@ struct SaverApp: App {
                                                          amount: 0.0,
                                                          iconName: "iconWallet")],
                               purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-//                                                   PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-//                                                   PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-//                                                   PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-//                                                   PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-//                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                                   PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                                   PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                                   PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                                   PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
                                                    PurchaseCategory(name: "Health", iconName: "iconHealth")])
                      }
             case .active:       print("App State: Active")
