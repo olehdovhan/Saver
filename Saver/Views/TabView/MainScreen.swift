@@ -21,7 +21,7 @@ struct MainScreen: View {
     
     var body: some View {
         ZStack{
-            Color.white //.ignoresSafeArea(edges: .top)
+            Color.white
             VStack(alignment: .center, spacing: 0) {
                 BalanceView().zIndex(4)
                     CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
@@ -59,7 +59,8 @@ struct MainScreen: View {
             if incomeViewShow {
                 IncomeView(closeSelf: $incomeViewShow,
                            cashSource: cashSource,
-                           editing: $editing)
+                           editing: $editing,
+                           cashSources: $cashSources)
                 .zIndex(10)
             }
              
@@ -83,6 +84,5 @@ struct MainScreen: View {
                 }
             }
         }
-
     }
 }

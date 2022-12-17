@@ -16,6 +16,7 @@ struct IncomeView: View {
     @State private var isDone = false
     @State private var expenseDate = Date.now
     @State var editing: FocusState<Bool>.Binding
+    @Binding var cashSources: [CashSource]
     
     private var enteredIncome: Bool {
         switch income {
@@ -142,6 +143,22 @@ struct IncomeView: View {
                     print(enteredIncome)
                 }
                 Spacer()
+                Button("delete",role: .destructive) {
+                    if var user = UserDefaultsManager.shared.userModel {
+                        var sources = user.cashSources
+                        for (index,source) in sources.enumerated() {
+                            if source.name == cashSource {
+                                sources.remove(at: index)
+                            }
+                        }
+                        user.cashSources = sources
+                        UserDefaultsManager.shared.userModel = user
+                        if let cashes = UserDefaultsManager.shared.userModel?.cashSources {
+                            cashSources = cashes
+                        }
+                        closeSelf = false
+                    }
+                }
             }
             .frame(width: 300,
                    height: 500,
