@@ -104,9 +104,17 @@ struct AddCashSourceView: View {
                         CircleTextView(text: "ICON")
                             .foregroundColor(.cyan)
                     } else {
-                        Image(systemName: selectedCashIconName)
-                            .resizable()
-                            .frame(width: 65, height: 65)
+                        
+                        switch selectedCashIconName {
+                        case "iconBankCard", "iconWallet":          Image(selectedCashIconName)
+                                                                    .resizable()
+                                                                    .frame(width: 65, height: 65)
+                        default:         Image(systemName: selectedCashIconName)
+                                .resizable()
+                                .frame(width: 65, height: 65)
+                        }
+                        
+                     
                     }
                 }
                 
@@ -118,21 +126,16 @@ struct AddCashSourceView: View {
                     if var copyUser = UserDefaultsManager.shared.userModel {
                         copyUser.cashSources.append(newCashSource)
                         UserDefaultsManager.shared.userModel? = copyUser
+                        print("AAAA\(newCashSource)")
                     }
-              
-                    closeSelf = false
-//                    print(fieldsEmpty)
-//                    print(selectedCashIconName == "")
-//                    print(cashSourceName == "")
-//                    print(currentMoneyAmount == "")
-                }
+                    closeSelf = false                }
                 Spacer()
             }
             .frame(width: 300,
                    height: 360)
             if showIconsCashSource {
                 IconsCashSourceView(closeSelf: $showIconsCashSource) { iconName in
-                selectedCashIconName =  iconName
+                selectedCashIconName = iconName
                 }
             }
         }

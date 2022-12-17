@@ -19,11 +19,12 @@ struct CardsPlace: View{
     @Binding var expenseViewShow: Bool
     @Binding var purchaseType: ExpenseCategory
     @Binding var cashSource: String
-    @State var cashSources: [CashSource]
+    @Binding var cashSources: [CashSource]
+    
     var body: some View {
         GeometryReader { geo in
-        ZStack {
-            HStack(spacing: 16) {
+            ZStack {
+             HStack(spacing: 16) {
                 ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                     Button {
                         incomeViewShow = true
@@ -34,17 +35,29 @@ struct CardsPlace: View{
                                .foregroundColor(.black)
                                .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
 
-                            Image(source.iconName)
-                               .resizable()
-                               .frame(width: 50, height: 50)
-                               .myShadow(radiusShadow: 5)
+                            switch source.iconName {
+                            case "iconBankCard", "iconWallet":          Image(source.iconName)
+                                                                        .resizable()
+                                                                        .frame(width: 50, height: 50)
+                                                                        .myShadow(radiusShadow: 5)
+                            default:          Image(systemName: source.iconName)
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                            .myShadow(radiusShadow: 5)
+                            }
+                   
 
                             Text(String(source.amount))
                                .foregroundColor(.black)
                                .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                        }
                         // TODO: - Зроби zIndex динамічним і змінюй його в момент драгу 
-                        .draggable(zIndex: $firstZ, isAlertShow: $expenseViewShow, purchaseType: $purchaseType, cashType: source.name, cashSource: $cashSource)
+                        .draggable(zIndex: $firstZ,
+                                   isAlertShow: $expenseViewShow,
+                                   purchaseType: $purchaseType,
+                                   cashType: source.name,
+                                   cashSource: $cashSource)
+                        
                     }
                     .zIndex(Double(cashSources.count - index))
                 }

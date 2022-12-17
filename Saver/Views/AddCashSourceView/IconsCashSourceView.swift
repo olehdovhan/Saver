@@ -46,15 +46,22 @@ struct IconsCashSourceView: View {
                 .frame(width: 260, height: 260)
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(data, id: \.self) { item in
+                    ForEach(sortedDate, id: \.self) { item in
+                        
                         Button {
                             closeSelf.toggle()
                             closure(item)
                         } label: {
-                            Image(systemName:item)
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                                .foregroundColor(.white)
+                            
+                            switch item {
+                            case "iconBankCard", "iconWallet":          Image(item)
+                                                                            .resizable()
+                                                                            .frame(width: 60, height: 60)
+                            default:          Image(systemName: item)
+                                                    .resizable()
+                                                    .frame(width: 60, height: 60)
+                                                    .foregroundColor(.white)
+                            }
                         }
                     }
                 }

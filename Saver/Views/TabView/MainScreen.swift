@@ -17,19 +17,22 @@ struct MainScreen: View {
     @State var expenseType: ExpenseCategory = .products
     @FocusState var editing: Bool
     
+    @State var cashSources: [CashSource] = []
+    
     var body: some View {
         ZStack{
             Color.white //.ignoresSafeArea(edges: .top)
-            VStack(alignment: .center, spacing: 0){
+            VStack(alignment: .center, spacing: 0) {
                 BalanceView().zIndex(4)
-                if let cashSources = UserDefaultsManager.shared.userModel?.cashSources {
                     CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
                                incomeViewShow: $incomeViewShow,
                                expenseViewShow: $expenseViewShow,
                                purchaseType: $expenseType,
                                cashSource: $cashSource,
-                               cashSources: cashSources).zIndex(3)
-                }
+                               cashSources: $cashSources).zIndex(3)
+                    .onChange(of: addCashSourceViewShow) { newValue in
+                        if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
+                    }
                 StatisticsPlace().zIndex(0)
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
@@ -67,6 +70,9 @@ struct MainScreen: View {
         }
         .onAppear() {
             cashSource = UserDefaultsManager.shared.userModel?.cashSources[0].name ?? ""
+            if let sources = UserDefaultsManager.shared.userModel?.cashSources {
+                cashSources = sources
+            }
         }
         .ignoresSafeArea(.all)
         .toolbar {
