@@ -9,8 +9,8 @@ import SwiftUI
 
 struct PurchaseLocation {
     
-    var locations: [PurchaseCategory: CGPoint]
+    var locations: [String: CGPoint]
     
-    static var standard = PurchaseLocation(locations: [PurchaseCategory : CGPoint]())
+    static var standard = PurchaseLocation(locations: [String : CGPoint]())
     
 }

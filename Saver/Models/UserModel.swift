@@ -16,6 +16,9 @@ struct UserModel: Codable {
     // CashSources
     var cashSources: [CashSource]
     
+    // ExpenseCategories
+    var expenseCategories: [ExpenseCategory]
+    
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
     var previousMonthesSpendings: [ExpenseModel]?
@@ -106,5 +109,10 @@ enum DebtEnum: Codable  {
 struct CashSource: Codable, Hashable {
     var name: String
     var amount: Double
+    var iconName: String
+}
+
+struct ExpenseCategory: Codable, Hashable {
+    var name: String
     var iconName: String
 }

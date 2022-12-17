@@ -5,7 +5,6 @@
 //  Created by Пришляк Дмитро on 21.08.2022.
 //
 
-
 import SwiftUI
 
 struct ShadowCustom : ViewModifier{
@@ -18,11 +17,15 @@ struct ShadowCustom : ViewModifier{
 
 extension View {
     
-    func myShadow(radiusShadow: Int) -> some View{
+    func myShadow(radiusShadow: Int) -> some View {
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
     
-    func draggable(zIndex: Binding<Double>, isAlertShow: Binding<Bool>, purchaseType: Binding<ExpenseCategory>, cashType: String , cashSource: Binding<String> ) -> some View {
+    func draggable(zIndex: Binding<Double>,
+                   isAlertShow: Binding<Bool>,
+                   purchaseType: Binding<String>,
+                   cashType: String ,
+                   cashSource: Binding<String>) -> some View {
         modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource))
     }
 }
@@ -34,7 +37,7 @@ struct DragGestureCustom: ViewModifier {
     @State var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
     @Binding var isAlertShow: Bool
-    @Binding var purchaseType: ExpenseCategory
+    @Binding var purchaseType: String
     @State var cashType: String
     @Binding var cashSource: String
    
@@ -63,14 +66,15 @@ struct DragGestureCustom: ViewModifier {
                     let yRange = startYRange...finishYRange
                     
                     if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
-                        print(item.key.rawValue)
+//                        print(item.key.rawValue)
                         
-                        switch item.key {
-                        case .products: purchaseType = .products
-                        case .transport: purchaseType = .transport
-                        case .clouthing: purchaseType = .clothing
-                        case .restaurant: purchaseType = .restaurant
-                        }
+//                        switch item.key {
+//                        case .products: purchaseType = "Products"
+//                        case .transport: purchaseType = "Transport"
+//                        case .clouthing: purchaseType = "Clothing"
+//                        case .restaurant: purchaseType = "Restaurant"
+//                        }
+                        purchaseType = item.key
                         cashSource = cashType
                         isAlertShow.toggle()
                     }
@@ -96,22 +100,11 @@ struct DragGestureCustom: ViewModifier {
                 }
           }
     }
-//    let tapGesture =  TapGesture()
-//                            .onEnded { value in
-//                               print("Bank Card")
-//                            }
-//    
+    
     func body(content: Content) -> some View {
               content
             .offset(x: currentOffsetX)
             .offset(y: currentOffsetY)
-        
             .gesture(drag)
     }
 }
-//
-//class AlertView: ObservableObject{
-//    @Published var name = ""
-//    @Published var imageName = ""
-//
-//}

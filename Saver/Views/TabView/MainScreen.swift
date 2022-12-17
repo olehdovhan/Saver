@@ -14,9 +14,12 @@ struct MainScreen: View {
     @State var incomeViewShow = false
     @State var addCashSourceViewShow = false
     @State var cashSource: String = ""
-    @State var expenseType: ExpenseCategory = .products
+    @State var expenseType: String = "" {
+        willSet {
+            print(newValue)
+        }
+    }
     @FocusState var editing: Bool
-    
     @State var cashSources: [CashSource] = []
     
     var body: some View {
@@ -46,14 +49,13 @@ struct MainScreen: View {
          
             if expenseViewShow,
                let cashes = UserDefaultsManager.shared.userModel?.cashSources,
-             let cashSources = cashes.map { $0.name}
-            {
+             let cashSources = cashes.map { $0.name} {
                 ExpenseView(closeSelf: $expenseViewShow,
                             cashSource: cashSource,
-                            expenseCategory: expenseType,
+                            expenseCategoryName: $expenseType,
                             editing: $editing,
                             cashSources: cashSources)
-                .zIndex(10)
+                            .zIndex(10)
             }
             
             if incomeViewShow {
@@ -61,7 +63,7 @@ struct MainScreen: View {
                            cashSource: cashSource,
                            editing: $editing,
                            cashSources: $cashSources)
-                .zIndex(10)
+                           .zIndex(10)
             }
              
             if addCashSourceViewShow {

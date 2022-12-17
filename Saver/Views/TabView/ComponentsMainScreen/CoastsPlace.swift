@@ -40,9 +40,12 @@ struct CoastsPlace: View{
                             .onAppear {
                                 var location = CGPoint(x: geo.frame(in: .global).midX,
                                                        y: geo.frame(in: .global).midY)
-                                PurchaseLocation.standard.locations[.products] = location
+                                PurchaseLocation.standard.locations["Products"] = location
                                 
-                                
+                                ["Products",
+                                                                "Transport",
+                                                                "Clothing",
+                                                                "Restaraunt"]
                       }
                     }
                 )
@@ -72,7 +75,7 @@ struct CoastsPlace: View{
                             .onAppear {
                                 var location = CGPoint(x: geo.frame(in: .global).midX,
                                                        y: geo.frame(in: .global).midY)
-                                PurchaseLocation.standard.locations[.transport] = location
+                                PurchaseLocation.standard.locations["Transport"] = location
                         }
                     }
                 )
@@ -84,12 +87,12 @@ struct CoastsPlace: View{
                 } label: {
                     VStack(spacing: 5){
                         
-                        Image("iconClouthing")
+                        Image("iconClothing")
                             .resizable()
                             .frame(width: 50, height: 50)
                             .myShadow(radiusShadow: 5)
                         
-                        Text("Clouthing")
+                        Text("Clothing")
                             .foregroundColor(.black)
                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                     }
@@ -100,7 +103,7 @@ struct CoastsPlace: View{
                             .onAppear {
                                 var location = CGPoint(x: geo.frame(in: .global).midX,
                                                        y: geo.frame(in: .global).midY)
-                                PurchaseLocation.standard.locations[.clouthing] = location
+                                PurchaseLocation.standard.locations["Clothing"] = location
                       }
                     }
                 )
@@ -112,7 +115,7 @@ struct CoastsPlace: View{
                 } label: {
                     VStack(spacing: 5){
                         
-                        Image("iconRestoran")
+                        Image("iconRestaurant")
                             .resizable()
                             .frame(width: 50, height: 50)
                             .myShadow(radiusShadow: 5)
@@ -128,7 +131,7 @@ struct CoastsPlace: View{
                             .onAppear {
                                 var location = CGPoint(x: geo.frame(in: .global).midX,
                                                        y: geo.frame(in: .global).midY)
-                                PurchaseLocation.standard.locations[.restaurant] = location
+                                PurchaseLocation.standard.locations["Restaraunt"] = location
                       }
                     }
                 )

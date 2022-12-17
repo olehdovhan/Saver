@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-
-enum PurchaseCategory: String {
-    case products
-    case transport
-    case clouthing
-    case restaurant
-}
+//
+//enum PurchaseCategory: String {
+//    case products
+//    case transport
+//    case clouthing
+//    case restaurant
+//}
 
 

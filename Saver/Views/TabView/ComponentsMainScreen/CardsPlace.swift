@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardsPlace: View{
+struct CardsPlace: View {
     
     
     @State var firstZ: Double = 3
@@ -17,9 +17,10 @@ struct CardsPlace: View{
     @Binding var addCashSourceViewShow: Bool
     @Binding var incomeViewShow: Bool
     @Binding var expenseViewShow: Bool
-    @Binding var purchaseType: ExpenseCategory
+    @Binding var purchaseType: String
     @Binding var cashSource: String
     @Binding var cashSources: [CashSource]
+  
     
     var body: some View {
         GeometryReader { geo in
@@ -29,6 +30,7 @@ struct CardsPlace: View{
                     Button {
                         incomeViewShow = true
                         cashSource = source.name
+                        
                     } label: {
                         VStack(spacing: 5) {
                             Text(source.name)

@@ -12,9 +12,9 @@ import Foundation
 //    case bankCard = "Bank Card"
 //}
 
-enum ExpenseCategory: String, CaseIterable, Codable {
-    case products = "Products"
-    case transport = "Transport"
-    case clothing = "Clothing"
-    case restaurant = "Restaraunt"
-}
+//enum ExpenseCategory: String, CaseIterable, Codable {
+//    case products = "Products"
+//    case transport = "Transport"
+//    case clothing = "Clothing"
+//    case restaurant = "Restaraunt"
+//}

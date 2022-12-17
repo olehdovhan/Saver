@@ -10,11 +10,16 @@ struct ExpenseView: View {
     
     @Binding var closeSelf: Bool
     @State  var cashSource: String
-    @State  var expenseCategory: ExpenseCategory
+    @Binding var expenseCategoryName: String
     @State private var expense = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
+    
+    @State var expenseCategories = ["Products",
+                                    "Transport",
+                                    "Clothing",
+                                    "Restaraunt"]
     
     @State var editing: FocusState<Bool>.Binding
     
@@ -88,9 +93,9 @@ struct ExpenseView: View {
                 HStack {
                     Text("To")
                     Spacer()
-                    Picker("", selection: $expenseCategory) {
-                        ForEach(ExpenseCategory.allCases,id: \.self) {
-                            Text($0.rawValue)
+                    Picker("", selection: $expenseCategoryName) {
+                        ForEach(expenseCategories,id: \.self) {
+                            Text($0)
                         }
                     }
                     .colorMultiply(.black)

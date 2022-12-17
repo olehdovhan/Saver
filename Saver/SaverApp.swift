@@ -29,9 +29,17 @@ struct SaverApp: App {
                                                                       cashSources: [CashSource(name: "Bank card",
                                                                                                amount: 0.0,
                                                                                                iconName: "iconBankCard"),
-                                                                      CashSource(name: "Wallet",
-                                                                                 amount: 0.0,
-                                                                                 iconName: "iconWallet")])
+                                                                                      CashSource(name: "Wallet",
+                                                                                                 amount: 0.0,
+                                                                                                 iconName: "iconWallet")],
+                                                                      expenseCategories: [ExpenseCategory(name: "Products",
+                                                                                                          iconName: "iconProducts"),
+                                                                                           ExpenseCategory(name: "Transport",
+                                                                                                           iconName: "iconTransport"),
+                                                                                          ExpenseCategory(name: "Clothing",
+                                                                                                          iconName: "iconClothing"),
+                                                                                          ExpenseCategory(name: "Restaurant",
+                                                                                                          iconName: "iconRestoran")])
                     print("writed down")
                 } 
             case .active:       print("App State: Active")
