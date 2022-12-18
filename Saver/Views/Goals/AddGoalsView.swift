@@ -11,6 +11,7 @@ import Combine
 struct AddGoalsView: View {
     
     @Binding var closeSelf: Bool
+    @Binding var goals: [Goal]
     @State var goalName = ""
     @State var totalPrice = ""
     @State var monthPayment = ""
@@ -127,6 +128,10 @@ struct AddGoalsView: View {
                     if var copyUser = UserDefaultsManager.shared.userModel {
                         copyUser.goals.append(newGoal)
                         UserDefaultsManager.shared.userModel? = copyUser
+                        
+                        if let newGoals = UserDefaultsManager.shared.userModel?.goals {
+                            goals = newGoals
+                        }
                     }
                     closeSelf = false
                 }

@@ -12,8 +12,11 @@ struct SavingsGoalsDebtsView: View {
     @State var addGoalsViewShow = false
     @State var addDebtViewShow = false
     
+    @State var detailGoalsViewShow = false
+    
     @State var user: UserModel?
     @State var goals: [Goal] = []
+    @State var selectedGoal: Goal?
     @State var debts: [DebtModel] = []
     @FocusState var editing: Bool
     
@@ -48,6 +51,10 @@ struct SavingsGoalsDebtsView: View {
                     
                     VStack {
                         ForEach(goals, id: \.self) { goal in
+                            Button { detailGoalsViewShow = true
+                                selectedGoal = goal
+                            }
+                            label : {
                             ZStack {
                                 Color.green.frame(width: 300, height: 100)
                                 HStack {
@@ -55,6 +62,7 @@ struct SavingsGoalsDebtsView: View {
                                     Text("collected \(goal.collectedPrice)$ out of \(goal.totalPrice)$")
                                 }
                             }
+                        }
                         }
                         Button {
                             addGoalsViewShow = true
@@ -108,7 +116,15 @@ struct SavingsGoalsDebtsView: View {
             .padding(.bottom, 100)
             if addGoalsViewShow {
                 AddGoalsView(closeSelf: $addGoalsViewShow,
+                             goals: $goals,
                              editing: $editing)
+            }
+            if detailGoalsViewShow {
+                if let goal = selectedGoal {
+                    DetailGoalView(closeSelf: $detailGoalsViewShow,
+                                   goals: $goals,
+                                   goal: goal)
+                }
             }
         }
         .onAppear() {

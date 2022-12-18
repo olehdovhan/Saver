@@ -104,23 +104,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C02F0D1293E10840033ED65 /* IncomeView */ = {
-			isa = PBXGroup;
-			children = (
-				0C02F0D2293E109D0033ED65 /* IncomeView.swift */,
-			);
-			path = IncomeView;
-			sourceTree = "<group>";
-		};
-		0C62D5CF2944F26C006EA95F /* AddCashSourceView */ = {
-			isa = PBXGroup;
-			children = (
-				0C62D5D02944F295006EA95F /* AddCashSourceView.swift */,
-				0C6A1B1829488B37006E7C13 /* AddIconsView.swift */,
-			);
-			path = AddCashSourceView;
-			sourceTree = "<group>";
-		};
 		0C67F3B2293C95C5002384D4 /* UserDefaultsManager  */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,22 +129,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		0C979292294E1817000D80A2 /* AddPurchaseCategoryView */ = {
-			isa = PBXGroup;
-			children = (
-				0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */,
-			);
-			path = AddPurchaseCategoryView;
-			sourceTree = "<group>";
-		};
-		0C979295294E3752000D80A2 /* PurchaseCategoryDetailView */ = {
-			isa = PBXGroup;
-			children = (
-				0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */,
-			);
-			path = PurchaseCategoryDetailView;
-			sourceTree = "<group>";
-		};
 		0CE75276294F082F0092651C /* Goals */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +145,25 @@
 				0CE75280294F08CC0092651C /* DetailDebtView.swift */,
 			);
 			path = Debts;
+			sourceTree = "<group>";
+		};
+		0CE75282294F22A20092651C /* PurchaseCategory */ = {
+			isa = PBXGroup;
+			children = (
+				0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */,
+				0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */,
+			);
+			path = PurchaseCategory;
+			sourceTree = "<group>";
+		};
+		0CE75283294F22CF0092651C /* CashSource */ = {
+			isa = PBXGroup;
+			children = (
+				0C62D5D02944F295006EA95F /* AddCashSourceView.swift */,
+				0C6A1B1829488B37006E7C13 /* AddIconsView.swift */,
+				0C02F0D2293E109D0033ED65 /* IncomeView.swift */,
+			);
+			path = CashSource;
 			sourceTree = "<group>";
 		};
 		B41618B228B135CE002629F7 /* TabBar */ = {
@@ -261,12 +247,10 @@
 		FAB594E428BB3F50002D3916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0CE75283294F22CF0092651C /* CashSource */,
+				0CE75282294F22A20092651C /* PurchaseCategory */,
 				0CE7527D294F08A20092651C /* Debts */,
 				0CE75276294F082F0092651C /* Goals */,
-				0C979295294E3752000D80A2 /* PurchaseCategoryDetailView */,
-				0C979292294E1817000D80A2 /* AddPurchaseCategoryView */,
-				0C62D5CF2944F26C006EA95F /* AddCashSourceView */,
-				0C02F0D1293E10840033ED65 /* IncomeView */,
 				FA7B94B928C61A3600772845 /* ExpenseView */,
 				FABB4BBF28B124410070F300 /* ContentView.swift */,
 				FAB594E228BB3F1A002D3916 /* Test.swift */,
