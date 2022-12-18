@@ -13,6 +13,11 @@ extension Color {
     static let myGreen = Color(hex: "#90DE58")
     static let myBlue = Color(hex: "#90DE58")
     static let myRed = Color(hex: "#FF2230")
+    static let myGrayDark = Color(hex: "595959")
+    static let myGradeBlue = Color(hex: "#5CCCCC")
+    static let myGradeGreen = Color(hex: "#4CD964")
+    static let myGradeLilac = Color(hex: "#E6399B")
+    static let myGrayCapsule = Color(hex: "#D9D9D9")
     
     
     init(hex: String) {

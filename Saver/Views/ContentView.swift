@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
 
     
-    @State var selectionTab = 0
+    @State var selectionTab = 3
 
     var body: some View {
         CustomTabView(selection: $selectionTab) {
