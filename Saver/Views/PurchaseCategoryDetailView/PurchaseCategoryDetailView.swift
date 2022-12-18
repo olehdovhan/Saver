@@ -27,7 +27,6 @@ struct PurchaseCategoryDetailView: View {
             
         VStack {
             HStack {
-                
                 Image(category.iconName)
                     .resizable()
                     .frame(width: 90, height: 90)
@@ -37,8 +36,6 @@ struct PurchaseCategoryDetailView: View {
                     Image("btnClose")
                         .resizable()
                         .frame(width: 45, height: 45)
-                    
-                    
                 }
             }
             HStack {

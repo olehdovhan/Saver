@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserModel: Codable {
-    
+    // TODO: add cashFlow( general) - Income - expense ( monthly budget) + cashFlow(full) Income - (expense + goals + debts)
     var avatarSystemName: String
     var name: String
     var registrationDate: Date
@@ -22,7 +22,14 @@ struct UserModel: Codable {
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
     var previousMonthesSpendings: [ExpenseModel]?
-    var debts: [DebtModel]?
+    var totalDebtsPaymentPerMonth: Double {
+        var sum = Double()
+        for debt in debts {
+            sum += debt.monthlyDebtPayment
+        }
+        return sum
+    }
+    var debts: [DebtModel]
     
     //Budget
     var planBudget: Budget?
@@ -31,6 +38,7 @@ struct UserModel: Codable {
     var averageBudget: Int? {
         if previousMonthesBudgets?.count != 0 {
             var total = Int()
+            guard previousMonthesBudgets != nil else { return nil}
             for budget in previousMonthesBudgets! {
                 total += budget.totalMonth
             }
@@ -65,9 +73,40 @@ struct UserModel: Codable {
         } else { return nil }
     }
     // savings
-    var saver: Double = 0.0
+    
+    // TODO: Add mandatory monthly payment in your saver, add your goal it deadline / While adding money to saver show percentage of month income or last income - with prompt which percent is good, enough or less
+    var saver: Double
+    
+    var totalGoalsPaymentPerMonth: Int {
+        var sum = Int()
+        for goal in goals {
+            sum += goal.collectingSumPerMonth
+        }
+        return sum
+    }
+    
+    var goals: [Goal]
+    
     // write logic depends on this func will execute every month on the first day
     func renewThisMonthBudgetAndAverage() {}
+}
+
+struct Goal: Codable, Hashable {
+    var name: String
+    var totalPrice: Int
+    var collectedPrice: Int
+    var collectingSumPerMonth: Int
+    
+    
+    var totalMonthesPerGoal: Int {
+        return Int(Double(totalPrice) / Double(collectingSumPerMonth))
+    }
+    
+    var restMonthesPerGoal: Int {
+        totalMonthesPerGoal - monthesSaveForGoal
+    }
+    //TODO: in app notifications every month: Did you save money for this goal? - depends on answer - add changes to collectedPrice
+    var monthesSaveForGoal = 0
 }
 
 struct Budget: Codable {
@@ -92,12 +131,15 @@ struct ExpenseModel: Codable {
     var spentCategory: PurchaseCategory
 }
 
-struct DebtModel: Codable {
-    var startDate: Date
+struct DebtModel: Codable, Hashable {
     var whose: DebtEnum
-    var expirationDate: Date
     var totalAmount: Int
+    var startDate: Date
+    var totalMonthesForReturn: Int
     var returnedAmount: Int
+    //TODO: in app notifications every month: Did you save money for this goal? - depends on answer - add changes to collectedPrice
+    var monthlyDebtPayment: Double { Double(totalAmount) / Double(totalMonthesForReturn) }
+    
 }
 
 // описати PercentageDividerCounterToGoalInMonthes

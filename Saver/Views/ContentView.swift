@@ -36,7 +36,7 @@ struct ContentView: View {
                 }
                 .opacity(selectionTab == 2 ? 1 : 0)
 
-            SavingsAndGoals()
+            SavingsGoalsDebtsView()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon3")
                 }
