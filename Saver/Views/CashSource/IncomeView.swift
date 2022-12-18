@@ -27,7 +27,7 @@ struct IncomeView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color(hex: "C4C4C4").opacity(0.7)
                 .ignoresSafeArea()
             
             Color.white

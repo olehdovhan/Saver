@@ -20,6 +20,8 @@ struct SavingsGoalsDebtsView: View {
     @State var debts: [DebtModel] = []
     @FocusState var editing: Bool
     
+    @State var showAlert = false
+    
     var plus: String{
        var symbol = ""
         if let saver = user?.saver {
@@ -323,6 +325,8 @@ struct SavingsGoalsDebtsView: View {
                     }
 
                 }
+                .blur(radius: addDebtViewShow || addGoalsViewShow ? 5 : 0)
+                .blur(radius: detailGoalsViewShow ? 5 : 0)
             }
             .padding(.bottom, 60)
             if addGoalsViewShow {
@@ -335,6 +339,9 @@ struct SavingsGoalsDebtsView: View {
                     DetailGoalView(closeSelf: $detailGoalsViewShow,
                                    goals: $goals,
                                    goal: goal)
+                    .onDisappear(){
+                        detailGoalsViewShow = false
+                    }
                 }
             }
         }
