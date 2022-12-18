@@ -26,6 +26,8 @@ struct SavingsGoalsDebtsView: View {
             ScrollView {
                 VStack {
                     Text("Saving")
+                        .foregroundColor(.white)
+                        .font(.custom("Lato-ExtraBold", size: 22))
                     
                     HStack {
                         ZStack {
@@ -138,3 +140,8 @@ struct SavingsGoalsDebtsView: View {
 }
 
 
+struct SavingsGoalsDebtsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SavingsGoalsDebtsView()
+    }
+}
