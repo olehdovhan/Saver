@@ -18,6 +18,7 @@ struct SavingsGoalsDebtsView: View {
     @State var goals: [Goal] = []
     @State var selectedGoal: Goal?
     @State var debts: [DebtModel] = []
+//    @State var selectedGoal: DebtModel?
     @FocusState var editing: Bool
     
     @State var showAlert = false
@@ -63,21 +64,6 @@ struct SavingsGoalsDebtsView: View {
                                 Text("\(plus)\(String(format: "%.3f", user?.saver ?? 0.0))$")
                                     .font(.custom("Lato-Medium", size: 25))
                                     .foregroundColor(.black)
-                                
-                                //                                ZStack{
-                                //                                    Capsule().foregroundColor(.myGrayCapsule)
-                                //                                    HStack{
-                                //                                        Capsule().fill(
-                                //                                            LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]), startPoint: .leading, endPoint: .trailing)
-                                //                                        )
-                                //                                        .frame(width: 50)
-                                //                                        //TODO: Settup dependence width of percent <user?.saver>
-                                //                                        Spacer()
-                                //                                    }
-                                //                                }
-                                //                                .frame(height: 5)
-                                //                                .padding(.horizontal, 10)
-                                
                             }
                             .frame(width: squareSide,
                                    height: squareSide)
@@ -130,7 +116,7 @@ struct SavingsGoalsDebtsView: View {
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
                     
-                    LazyVStack(spacing: 20) {
+                    VStack(spacing: 20) {
                         ForEach(goals, id: \.self) { goal in
                             
                             Button { detailGoalsViewShow = true
@@ -172,6 +158,7 @@ struct SavingsGoalsDebtsView: View {
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
+                                    
                                 }
                                 .padding(.vertical, 20)
                                 .padding(.horizontal, 20)
@@ -210,10 +197,15 @@ struct SavingsGoalsDebtsView: View {
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
                     
-                    LazyVStack(spacing: 20) {
+                    VStack(spacing: 20) {
                         ForEach(debts, id: \.self) { debt in
                             
                             Button{
+                                
+                                /*
+                                detailGoalsViewShow = true
+                                selectedGoal = goal
+                                 */
                                 
                             } label: {
                                 
@@ -228,7 +220,7 @@ struct SavingsGoalsDebtsView: View {
                                                 .lineLimit(1)
                                         }
                                         else if debt.whose == .took{
-                                            Text("Took \(dateFormatter.string(from: debt.startDate)))")
+                                            Text("Took \(dateFormatter.string(from: debt.startDate)) ")
                                                 .textCase(.uppercase)
                                                 .foregroundColor(.red)
                                                 .font(.custom("Lato-Medium", size: 15))
@@ -293,11 +285,7 @@ struct SavingsGoalsDebtsView: View {
                                     RoundedRectangle(cornerRadius: 15).fill( debt.whose == .gave ? .white : .white )
                                         .myShadow(radiusShadow: 5)
                                 )
-                                
-                                
-                                
-                                
-                                
+
                             }
                             
                         }
@@ -318,15 +306,20 @@ struct SavingsGoalsDebtsView: View {
                     }
                     
                 }
-                .blur(radius: addDebtViewShow || addGoalsViewShow ? 5 : 0)
-                .blur(radius: detailGoalsViewShow ? 5 : 0)
+                .blur(radius: detailGoalsViewShow || addDebtViewShow || addGoalsViewShow ? 5 : 0)
             }
-            .padding(.bottom, 80)
+            .padding(.bottom, 70)
+            
             if addGoalsViewShow {
                 AddGoalsView(closeSelf: $addGoalsViewShow,
                              goals: $goals,
                              editing: $editing)
             }
+            
+            if addDebtViewShow{
+                AddDebtView(closeSelf: $addDebtViewShow, debts: $debts, editing: $editing)
+            }
+            
             if detailGoalsViewShow {
                 if let goal = selectedGoal {
                     DetailGoalView(closeSelf: $detailGoalsViewShow,
@@ -338,14 +331,14 @@ struct SavingsGoalsDebtsView: View {
                 }
             }
         }
-        .onAppear() {
+        .onAppear {
             if let currentUser = UserDefaultsManager.shared.userModel {
                 user = currentUser
                 goals = currentUser.goals
                 debts = currentUser.debts
-            }
-            withAnimation(Animation.spring(response: 1, dampingFraction: 0.5, blendDuration: 10)) {
-                startAnim = true
+                withAnimation(Animation.easeInOut(duration: 3)) {
+                    startAnim = true
+                }
             }
             
         }

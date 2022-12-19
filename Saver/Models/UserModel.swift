@@ -133,6 +133,7 @@ struct ExpenseModel: Codable {
 
 struct DebtModel: Codable, Hashable {
     var whose: DebtEnum
+    var name: String
     var totalAmount: Int
     var startDate: Date
     var totalMonthesForReturn: Int
@@ -143,8 +144,12 @@ struct DebtModel: Codable, Hashable {
 }
 
 // описати PercentageDividerCounterToGoalInMonthes
-enum DebtEnum: Codable  {
+enum DebtEnum: String, Codable, Equatable, CaseIterable, Identifiable {
     case gave, took
+    
+    
+    
+    var id: DebtEnum { self }
 }
 
 
