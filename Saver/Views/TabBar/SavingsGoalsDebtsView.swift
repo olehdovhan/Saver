@@ -21,9 +21,10 @@ struct SavingsGoalsDebtsView: View {
     @FocusState var editing: Bool
     
     @State var showAlert = false
+    @State var startAnim = false
     
     var plus: String{
-       var symbol = ""
+        var symbol = ""
         if let saver = user?.saver {
             symbol = saver >= 0 ? "+" : "-"
         }
@@ -63,20 +64,20 @@ struct SavingsGoalsDebtsView: View {
                                     .font(.custom("Lato-Medium", size: 25))
                                     .foregroundColor(.black)
                                 
-//                                ZStack{
-//                                    Capsule().foregroundColor(.myGrayCapsule)
-//                                    HStack{
-//                                        Capsule().fill(
-//                                            LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]), startPoint: .leading, endPoint: .trailing)
-//                                        )
-//                                        .frame(width: 50)
-//                                        //TODO: Settup dependence width of percent <user?.saver>
-//                                        Spacer()
-//                                    }
-//                                }
-//                                .frame(height: 5)
-//                                .padding(.horizontal, 10)
-
+                                //                                ZStack{
+                                //                                    Capsule().foregroundColor(.myGrayCapsule)
+                                //                                    HStack{
+                                //                                        Capsule().fill(
+                                //                                            LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]), startPoint: .leading, endPoint: .trailing)
+                                //                                        )
+                                //                                        .frame(width: 50)
+                                //                                        //TODO: Settup dependence width of percent <user?.saver>
+                                //                                        Spacer()
+                                //                                    }
+                                //                                }
+                                //                                .frame(height: 5)
+                                //                                .padding(.horizontal, 10)
+                                
                             }
                             .frame(width: squareSide,
                                    height: squareSide)
@@ -95,12 +96,12 @@ struct SavingsGoalsDebtsView: View {
                                 LinearGradient(gradient: Gradient(colors: [.myGradeLilac, .myGradeBlue]),
                                                startPoint: .topLeading,
                                                endPoint: .bottomTrailing)
-                                    .mask(
-                                        Text("\(Int(user?.freeDays ?? 0.0))")
-                                            .font(.custom("Lato-Medium", size: 65))
-                                    )
-                                    .frame(maxHeight: 61)
-                                    .padding(.bottom, 15)
+                                .mask(
+                                    Text("\(Int(user?.freeDays ?? 0.0))")
+                                        .font(.custom("Lato-Medium", size: 65))
+                                )
+                                .frame(maxHeight: 61)
+                                .padding(.bottom, 15)
                                 
                                 Text("Days of\nfreedom")
                                     .lineLimit(2)
@@ -129,7 +130,7 @@ struct SavingsGoalsDebtsView: View {
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
                     
-                    VStack(spacing: 20) {
+                    LazyVStack(spacing: 20) {
                         ForEach(goals, id: \.self) { goal in
                             
                             Button { detailGoalsViewShow = true
@@ -149,33 +150,28 @@ struct SavingsGoalsDebtsView: View {
                                     .padding(.trailing, 18)
                                     
                                     
-                                        HStack(alignment: .bottom){
-                                            Spacer()
-                                            Text("collected \(goal.collectedPrice)$ out of \(goal.totalPrice)$")
-                                                .foregroundColor(.myGrayDark)
-                                                .font(.custom("Lato-Regular", size: 12))
-                                                .lineLimit(1)
-                                    }
-                                        .padding(.leading, 17)
-                                        .padding(.trailing, 18)
-                                        .padding(.bottom, 12)
                                     
-                                    ZStack{
-                                        Capsule().foregroundColor(.myGrayCapsule)
-                                        HStack{
-                                            Capsule().fill(
-                                                LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]), startPoint: .leading, endPoint: .trailing)
-                                            )
-                                            .frame(width: 150)
-                                            //TODO: Calculate percent goal
-                                            //TODO: Settup dependence width of percent goal
-                                            Spacer()
-                                        }
+                                    HStack(alignment: .bottom){
+                                        Spacer()
+                                        Text("collected \(goal.collectedPrice)$ out of \(goal.totalPrice)$")
+                                            .foregroundColor(.myGrayDark)
+                                            .font(.custom("Lato-Regular", size: 12))
+                                            .lineLimit(1)
                                     }
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, 18)
+                                    .padding(.bottom, 12)
+                                    
+                                    let percentGoal = CGFloat(goal.collectedPrice) / CGFloat(goal.totalPrice)
+                                    
+                                    Capsule().fill(LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]),
+                                                                  startPoint: .leading,
+                                                                  endPoint: .trailing))
+                                    .scaleEffect(x: startAnim ? 0 : percentGoal,  anchor: .leading)
+                                    .background(Capsule().foregroundColor(.myGrayCapsule))
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-                                    
                                 }
                                 .padding(.vertical, 20)
                                 .padding(.horizontal, 20)
@@ -183,9 +179,9 @@ struct SavingsGoalsDebtsView: View {
                                     RoundedRectangle(cornerRadius: 15).fill(.white)
                                         .myShadow(radiusShadow: 5)
                                 )
+                            }
                         }
-                        }
-               
+                        
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 25)
@@ -203,7 +199,7 @@ struct SavingsGoalsDebtsView: View {
                     }
                     .padding(.bottom, 34)
                     
-                //Block Debts
+                    //Block Debts
                     HStack{
                         Text("Debts")
                             .textCase(.uppercase)
@@ -214,93 +210,90 @@ struct SavingsGoalsDebtsView: View {
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
                     
-                    //----------------------
-                    VStack(spacing: 20) {
+                    LazyVStack(spacing: 20) {
                         ForEach(debts, id: \.self) { debt in
                             
                             Button{
                                 
                             } label: {
-                               
-                                    VStack(spacing: 0){
-                                        HStack(alignment: .bottom){
-                                           
-                                            if debt.whose == .gave {
-                                                Text("Gave \(dateFormatter.string(from: debt.startDate))")
-                                                    .textCase(.uppercase)
-                                                    .foregroundColor(.orange)
-                                                    .font(.custom("Lato-Medium", size: 15))
-                                                    .lineLimit(1)
-                                            }
-                                            else if debt.whose == .took{
-                                                Text("Took \(dateFormatter.string(from: debt.startDate)))")
-                                                    .textCase(.uppercase)
-                                                    .foregroundColor(.red)
-                                                    .font(.custom("Lato-Medium", size: 15))
-                                                    .lineLimit(1)
-                                            }
-                                                
-                                            Spacer()
+                                
+                                VStack(spacing: 0){
+                                    HStack(alignment: .bottom){
+                                        
+                                        if debt.whose == .gave {
+                                            Text("Gave \(dateFormatter.string(from: debt.startDate))")
+                                                .textCase(.uppercase)
+                                                .foregroundColor(.orange)
+                                                .font(.custom("Lato-Medium", size: 15))
+                                                .lineLimit(1)
                                         }
-                                        .padding(.leading, 17)
-                                        .padding(.trailing, 18)
+                                        else if debt.whose == .took{
+                                            Text("Took \(dateFormatter.string(from: debt.startDate)))")
+                                                .textCase(.uppercase)
+                                                .foregroundColor(.red)
+                                                .font(.custom("Lato-Medium", size: 15))
+                                                .lineLimit(1)
+                                        }
                                         
+                                        Spacer()
+                                    }
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, 18)
+                                    
+                                    
+                                    HStack(){
+                                        Spacer()
+                                        Text("returned \(Int(debt.returnedAmount))$ of \(Int(debt.totalAmount))$")
+                                            .foregroundColor(.myGrayDark)
+                                            .font(.custom("Lato-Regular", size: 12))
+                                            .lineLimit(1)
+                                    }
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, 18)
+                                    .padding(.bottom, 12)
+                                    
+                                    HStack(alignment: .bottom){
+                                        Spacer()
                                         
-                                        HStack(){
-                                            Spacer()
-                                            Text("returned \(Int(debt.returnedAmount))$ of \(Int(debt.totalAmount))$")
+                                        if debt.whose == .gave {
+                                            
+                                            Text("Return \(Int(debt.monthlyDebtPayment))$ per month")
                                                 .foregroundColor(.myGrayDark)
                                                 .font(.custom("Lato-Regular", size: 12))
                                                 .lineLimit(1)
                                         }
-                                        .padding(.leading, 17)
-                                        .padding(.trailing, 18)
-                                        .padding(.bottom, 12)
-                                        
-                                        HStack(alignment: .bottom){
-                                            Spacer()
-                                            if debt.whose == .gave {
-                                                
-                                                Text("Return \(Int(debt.monthlyDebtPayment))$ per month")
-                                                    .foregroundColor(.myGrayDark)
-                                                    .font(.custom("Lato-Regular", size: 12))
-                                                    .lineLimit(1)
-                                            }
-                                            else if debt.whose == .took {
-                                                Text("Receive \(Int(debt.monthlyDebtPayment))$ per month")
-                                                    .foregroundColor(.myGrayDark)
-                                                    .font(.custom("Lato-Regular", size: 12))
-                                                    .lineLimit(1)
-                                            }
+                                        else if debt.whose == .took {
+                                            Text("Receive \(Int(debt.monthlyDebtPayment))$ per month")
+                                                .foregroundColor(.myGrayDark)
+                                                .font(.custom("Lato-Regular", size: 12))
+                                                .lineLimit(1)
                                         }
-                                        .padding(.leading, 17)
-                                        .padding(.trailing, 18)
-                                        .padding(.bottom, 12)
-                                        
-                                        ZStack{
-                                            Capsule().foregroundColor(.myGrayCapsule)
-                                            HStack{
-                                                Capsule().fill(
-                                                    LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]), startPoint: .leading, endPoint: .trailing)
-                                                )
-                                                .frame(width: 150)
-                                                //TODO: Calculate percent debt
-                                                //TODO: Settup dependence width of percent debt
-                                                Spacer()
-                                            }
-                                        }
-                                        .frame(height: 5)
-                                        .padding(.leading, 17)
-                                        .padding(.trailing, 18)
-                                        
                                     }
-                                    .padding(.vertical, 20)
-                                    .padding(.horizontal, 20)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 15).fill( debt.whose == .gave ? .white : .white )
-                                            .myShadow(radiusShadow: 5)
-                                    )
-                            
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, 18)
+                                    .padding(.bottom, 12)
+                                    
+                                    let percentDebt = CGFloat(debt.returnedAmount) / CGFloat(debt.totalAmount)
+                                    
+                                    Capsule().fill(LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]),
+                                                                  startPoint: .leading,
+                                                                  endPoint: .trailing))
+                                    .scaleEffect(x: startAnim ? percentDebt : 0,  anchor: .leading)
+                                    .background(Capsule().foregroundColor(.myGrayCapsule))
+                                    .frame(height: 5)
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, 18)
+                                    
+                                    
+                                    
+                                }
+                                .padding(.vertical, 20)
+                                .padding(.horizontal, 20)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15).fill( debt.whose == .gave ? .white : .white )
+                                        .myShadow(radiusShadow: 5)
+                                )
+                                
                                 
                                 
                                 
@@ -308,7 +301,7 @@ struct SavingsGoalsDebtsView: View {
                             }
                             
                         }
-               
+                        
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 25)
@@ -323,12 +316,12 @@ struct SavingsGoalsDebtsView: View {
                                 .myShadow(radiusShadow: 5)
                         }
                     }
-
+                    
                 }
                 .blur(radius: addDebtViewShow || addGoalsViewShow ? 5 : 0)
                 .blur(radius: detailGoalsViewShow ? 5 : 0)
             }
-            .padding(.bottom, 60)
+            .padding(.bottom, 80)
             if addGoalsViewShow {
                 AddGoalsView(closeSelf: $addGoalsViewShow,
                              goals: $goals,
@@ -351,6 +344,10 @@ struct SavingsGoalsDebtsView: View {
                 goals = currentUser.goals
                 debts = currentUser.debts
             }
+            withAnimation(Animation.spring(response: 1, dampingFraction: 0.5, blendDuration: 10)) {
+                startAnim = true
+            }
+            
         }
     }
 }
