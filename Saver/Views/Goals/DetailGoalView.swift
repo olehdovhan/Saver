@@ -83,16 +83,7 @@ struct DetailGoalView: View {
                         RoundedRectangle(cornerRadius: 15).fill(.white)
                             .myShadow(radiusShadow: 5)
                     )
-                  
-                
-                
-//                HStack {
-//                    Text("You shold invest \(goal.collectingSumPerMonth)$ per month to achieve this goal in \(goal.totalMonthesPerGoal)")
-//
-//
-//                }
-                
-                
+ 
             }
             .padding(.horizontal, 20)
             

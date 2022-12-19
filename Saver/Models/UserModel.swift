@@ -22,8 +22,8 @@ struct UserModel: Codable {
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
     var previousMonthesSpendings: [ExpenseModel]?
-    var totalDebtsPaymentPerMonth: Double {
-        var sum = Double()
+    var totalDebtsPaymentPerMonth: Int {
+        var sum = Int()
         for debt in debts {
             sum += debt.monthlyDebtPayment
         }
@@ -139,7 +139,7 @@ struct DebtModel: Codable, Hashable {
     var totalMonthesForReturn: Int
     var returnedAmount: Int
     //TODO: in app notifications every month: Did you save money for this goal? - depends on answer - add changes to collectedPrice
-    var monthlyDebtPayment: Double { Double(totalAmount) / Double(totalMonthesForReturn) }
+    var monthlyDebtPayment: Int {Int( Double(totalAmount) / Double(totalMonthesForReturn)) }
     
 }
 

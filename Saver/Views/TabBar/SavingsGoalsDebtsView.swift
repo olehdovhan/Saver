@@ -13,12 +13,13 @@ struct SavingsGoalsDebtsView: View {
     @State var addDebtViewShow = false
     
     @State var detailGoalsViewShow = false
+    @State var detailDebtsViewShow = false
     
     @State var user: UserModel?
     @State var goals: [Goal] = []
     @State var selectedGoal: Goal?
     @State var debts: [DebtModel] = []
-//    @State var selectedGoal: DebtModel?
+    @State var selectedDebt: DebtModel?
     @FocusState var editing: Bool
     
     @State var showAlert = false
@@ -55,7 +56,7 @@ struct SavingsGoalsDebtsView: View {
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
-                    
+
                     HStack(spacing: 0) {
                         Button {
                             //TODO: SaverDetailView
@@ -72,11 +73,11 @@ struct SavingsGoalsDebtsView: View {
                                     .myShadow(radiusShadow: 5)
                             )
                         }
-                        
+
                         Spacer()
-                        
+
                         Button {
-                            
+
                         } label: {
                             VStack(spacing: 0){
                                 LinearGradient(gradient: Gradient(colors: [.myGradeLilac, .myGradeBlue]),
@@ -88,7 +89,7 @@ struct SavingsGoalsDebtsView: View {
                                 )
                                 .frame(maxHeight: 61)
                                 .padding(.bottom, 15)
-                                
+
                                 Text("Days of\nfreedom")
                                     .lineLimit(2)
                                     .foregroundColor(.myGrayDark)
@@ -104,7 +105,7 @@ struct SavingsGoalsDebtsView: View {
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 34)
-                    
+
                     //Block Goals
                     HStack{
                         Text("Goals")
@@ -115,10 +116,10 @@ struct SavingsGoalsDebtsView: View {
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
-                    
+
                     VStack(spacing: 20) {
                         ForEach(goals, id: \.self) { goal in
-                            
+
                             Button { detailGoalsViewShow = true
                                 selectedGoal = goal
                             }
@@ -134,9 +135,9 @@ struct SavingsGoalsDebtsView: View {
                                     }
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-                                    
-                                    
-                                    
+
+
+
                                     HStack(alignment: .bottom){
                                         Spacer()
                                         Text("collected \(goal.collectedPrice)$ out of \(goal.totalPrice)$")
@@ -147,9 +148,9 @@ struct SavingsGoalsDebtsView: View {
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
                                     .padding(.bottom, 12)
-                                    
+
                                     let percentGoal = CGFloat(goal.collectedPrice) / CGFloat(goal.totalPrice)
-                                    
+
                                     Capsule().fill(LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]),
                                                                   startPoint: .leading,
                                                                   endPoint: .trailing))
@@ -158,7 +159,7 @@ struct SavingsGoalsDebtsView: View {
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-                                    
+
                                 }
                                 .padding(.vertical, 20)
                                 .padding(.horizontal, 20)
@@ -168,11 +169,11 @@ struct SavingsGoalsDebtsView: View {
                                 )
                             }
                         }
-                        
+
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 25)
-                    
+
                     Button {
                         addGoalsViewShow = true
                         // TODO: Forecast: If it will be 0.25, 0.5, 0.7, 1.5, 2.5, 4.0 coef of monthlyPayment - your totalMonthes for achieve will be
@@ -185,7 +186,7 @@ struct SavingsGoalsDebtsView: View {
                         }
                     }
                     .padding(.bottom, 34)
-                    
+
                     //Block Debts
                     HStack{
                         Text("Debts")
@@ -196,22 +197,44 @@ struct SavingsGoalsDebtsView: View {
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 28)
-                    
+
                     VStack(spacing: 20) {
                         ForEach(debts, id: \.self) { debt in
-                            
+
                             Button{
-                                
-                                /*
-                                detailGoalsViewShow = true
-                                selectedGoal = goal
-                                 */
-                                
+                                detailDebtsViewShow = true
+                                 selectedDebt = debt
                             } label: {
-                                
+
                                 VStack(spacing: 0){
+
                                     HStack(alignment: .bottom){
-                                        
+
+                                        if debt.whose == .gave {
+                                            Text("\(debt.name)")
+                                                .textCase(.uppercase)
+                                                .foregroundColor(.orange)
+                                                .font(.custom("Lato-Medium", size: 15))
+                                                .lineLimit(1)
+                                        }
+
+                                        else if debt.whose == .took{
+                                            Text("\(debt.name)")
+                                                .textCase(.uppercase)
+                                                .foregroundColor(.red)
+                                                .font(.custom("Lato-Medium", size: 15))
+                                                .lineLimit(1)
+                                        }
+
+                                        Spacer()
+                                    }
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, 18)
+
+
+
+                                    HStack(alignment: .bottom){
+
                                         if debt.whose == .gave {
                                             Text("Gave \(dateFormatter.string(from: debt.startDate))")
                                                 .textCase(.uppercase)
@@ -219,6 +242,7 @@ struct SavingsGoalsDebtsView: View {
                                                 .font(.custom("Lato-Medium", size: 15))
                                                 .lineLimit(1)
                                         }
+
                                         else if debt.whose == .took{
                                             Text("Took \(dateFormatter.string(from: debt.startDate)) ")
                                                 .textCase(.uppercase)
@@ -226,13 +250,13 @@ struct SavingsGoalsDebtsView: View {
                                                 .font(.custom("Lato-Medium", size: 15))
                                                 .lineLimit(1)
                                         }
-                                        
+
                                         Spacer()
                                     }
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-                                    
-                                    
+
+
                                     HStack(){
                                         Spacer()
                                         Text("returned \(Int(debt.returnedAmount))$ of \(Int(debt.totalAmount))$")
@@ -243,12 +267,12 @@ struct SavingsGoalsDebtsView: View {
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
                                     .padding(.bottom, 12)
-                                    
+
                                     HStack(alignment: .bottom){
                                         Spacer()
-                                        
+
                                         if debt.whose == .gave {
-                                            
+
                                             Text("Return \(Int(debt.monthlyDebtPayment))$ per month")
                                                 .foregroundColor(.myGrayDark)
                                                 .font(.custom("Lato-Regular", size: 12))
@@ -264,9 +288,9 @@ struct SavingsGoalsDebtsView: View {
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
                                     .padding(.bottom, 12)
-                                    
+
                                     let percentDebt = CGFloat(debt.returnedAmount) / CGFloat(debt.totalAmount)
-                                    
+
                                     Capsule().fill(LinearGradient(gradient: Gradient(colors: [.myGradeBlue, .myGradeGreen]),
                                                                   startPoint: .leading,
                                                                   endPoint: .trailing))
@@ -275,9 +299,9 @@ struct SavingsGoalsDebtsView: View {
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-                                    
-                                    
-                                    
+
+
+
                                 }
                                 .padding(.vertical, 20)
                                 .padding(.horizontal, 20)
@@ -287,13 +311,13 @@ struct SavingsGoalsDebtsView: View {
                                 )
 
                             }
-                            
+
                         }
-                        
+
                     }
                     .padding(.horizontal, 26)
                     .padding(.bottom, 25)
-                    
+
                     Button {
                         addDebtViewShow = true
                     } label: {
@@ -304,22 +328,22 @@ struct SavingsGoalsDebtsView: View {
                                 .myShadow(radiusShadow: 5)
                         }
                     }
-                    
+
                 }
                 .blur(radius: detailGoalsViewShow || addDebtViewShow || addGoalsViewShow ? 5 : 0)
             }
             .padding(.bottom, 70)
-            
+
             if addGoalsViewShow {
                 AddGoalsView(closeSelf: $addGoalsViewShow,
                              goals: $goals,
                              editing: $editing)
             }
-            
+
             if addDebtViewShow{
                 AddDebtView(closeSelf: $addDebtViewShow, debts: $debts, editing: $editing)
             }
-            
+
             if detailGoalsViewShow {
                 if let goal = selectedGoal {
                     DetailGoalView(closeSelf: $detailGoalsViewShow,
@@ -328,6 +352,14 @@ struct SavingsGoalsDebtsView: View {
                     .onDisappear(){
                         detailGoalsViewShow = false
                     }
+                }
+            }
+
+            if detailDebtsViewShow{
+                if let debt = selectedDebt{
+                    DetailDebtView(closeSelf: $detailDebtsViewShow,
+                                   debts: $debts,
+                                   debt: debt)
                 }
             }
         }
@@ -340,14 +372,14 @@ struct SavingsGoalsDebtsView: View {
                     startAnim = true
                 }
             }
-            
+
         }
     }
 }
 
 
-struct SavingsGoalsDebtsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SavingsGoalsDebtsView()
-    }
-}
+//struct SavingsGoalsDebtsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SavingsGoalsDebtsView()
+//    }
+//}
