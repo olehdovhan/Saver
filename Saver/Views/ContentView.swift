@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
                 .opacity(selectionTab == 1 ? 1 : 0)
 
-            Calendar()
+            CalendarView()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon2")
                 }

@@ -8,8 +8,8 @@
 import SwiftUI
 import Combine
 
-
 struct AddDebtView: View {
+    
     @Binding var closeSelf: Bool
     @Binding var debts: [DebtModel]
     @State var whose = DebtEnum.took
@@ -150,7 +150,7 @@ struct AddDebtView: View {
                 }
                 .padding(.horizontal, 20)
                 
-                //---Monthes for return 
+                //---Monthes for return
                 
                 HStack {
                     Text("Monthes for return")
@@ -188,8 +188,7 @@ struct AddDebtView: View {
                                             startDate: startDate,
                                             totalMonthesForReturn: Int(totalMonthesForReturn) ?? 0,
                                             returnedAmount: 0)
-                    
-                    
+                
                     if var copyUser = UserDefaultsManager.shared.userModel {
                         copyUser.debts.append(newDebt)
                         UserDefaultsManager.shared.userModel? = copyUser
@@ -200,19 +199,13 @@ struct AddDebtView: View {
                     }
                     closeSelf = false
                 }
-                
                 Spacer()
-                
             }
-      
             .frame(width: UIScreen.main.bounds.width/1.2,
                    height: UIScreen.main.bounds.height/1.3)
             .offset(y: -40)
-            
-        
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-        
     }
 }
 

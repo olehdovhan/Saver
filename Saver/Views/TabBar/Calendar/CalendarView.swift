@@ -1,22 +1,20 @@
 //
-//  Calendar.swift
+//  CalendarView.swift
 //  Saver
 //
-//  Created by Пришляк Дмитро on 20.08.2022.
+//  Created by Pryshliak Dmytro on 20.12.2022.
 //
 
 import SwiftUI
 
-struct Calendar: View {
-    
-    @State var currentDate: Date = Date()
+struct CalendarView: View {
     
     var body: some View {
         ZStack{
-            Color.red.ignoresSafeArea(edges: .top)
+//            Color.red.ignoresSafeArea(edges: .top)
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 20) {
-                    CustomDatePicker(currentDate: $currentDate)
+                    CustomDatePicker3()
                 }
             }
         }
@@ -25,6 +23,7 @@ struct Calendar: View {
 
 struct Calendar_Previews: PreviewProvider {
     static var previews: some View {
-        Calendar()
+        CalendarView()
     }
 }
+ 
