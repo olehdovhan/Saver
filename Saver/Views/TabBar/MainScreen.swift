@@ -24,22 +24,40 @@ struct MainScreen: View {
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
+    @State var dragging = false
+    
     var body: some View {
         ZStack {
-            Color.white
-            VStack(alignment: .center, spacing: 0) {
+            GeometryReader { reader in
+                               Color.myGreen
+                                   .frame(height: reader.safeAreaInsets.top, alignment: .top)
+                                   .ignoresSafeArea()
+                           }
+            
+            VStack{
+                Color.myGreen.frame(height: 30)
+                Color.white
+            }
+            VStack(alignment: .center, spacing: 15) {
                 
                 BalanceView().zIndex(4)
-                    CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
-                               incomeViewShow: $incomeViewShow,
-                               expenseViewShow: $expenseViewShow,
-                               purchaseType: $expenseType,
-                               cashSource: $cashSource,
-                               cashSources: $cashSources).zIndex(3)
-                    .onChange(of: addCashSourceViewShow) { newValue in
-                        if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
-                    }
+                
+                
+                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
+                           incomeViewShow: $incomeViewShow,
+                           expenseViewShow: $expenseViewShow,
+                           purchaseType: $expenseType,
+                           cashSource: $cashSource,
+                           cashSources: $cashSources,
+                           dragging: $dragging).zIndex(dragging ? 3 : 0)
+                .onChange(of: addCashSourceViewShow) { newValue in
+                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
+                }
+                .frame(height: 100)
+                    
                 StatisticsPlace().zIndex(0)
+                
+                
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,
@@ -97,7 +115,7 @@ struct MainScreen: View {
                 purchaseCategories = categories
             }
         }
-        .ignoresSafeArea(.all)
+//        .ignoresSafeArea(.all)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()

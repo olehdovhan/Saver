@@ -25,8 +25,9 @@ extension View {
                    isAlertShow: Binding<Bool>,
                    purchaseType: Binding<String>,
                    cashType: String ,
-                   cashSource: Binding<String>) -> some View {
-        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource))
+                   cashSource: Binding<String>,
+                   dragging: Binding<Bool>) -> some View {
+        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource, dragging: dragging))
     }
 }
 
@@ -40,10 +41,12 @@ struct DragGestureCustom: ViewModifier {
     @Binding var purchaseType: String
     @State var cashType: String
     @Binding var cashSource: String
+    @Binding var dragging: Bool
    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
+                dragging = true
                 withAnimation {
                     zIndex = 5
                     currentOffsetX = value.translation.width
@@ -54,6 +57,7 @@ struct DragGestureCustom: ViewModifier {
                
             })
             .onEnded { gesture in
+                dragging = false
                 var locs = PurchaseLocation.standard.locations
                 
                 for item in locs {
@@ -108,3 +112,61 @@ struct DragGestureCustom: ViewModifier {
             .gesture(drag)
     }
 }
+
+
+
+
+
+
+extension View {
+    func delaysTouches(for duration: TimeInterval = 0.25, onTap action: @escaping () -> Void = {}) -> some View {
+        modifier(DelaysTouches(duration: duration, action: action))
+    }
+}
+
+fileprivate struct DelaysTouches: ViewModifier {
+    @State private var disabled = false
+    @State private var touchDownDate: Date? = nil
+
+    var duration: TimeInterval
+    var action: () -> Void
+
+    func body(content: Content) -> some View {
+        Button(action: action) {
+            content
+        }
+        .buttonStyle(DelaysTouchesButtonStyle(disabled: $disabled, duration: duration, touchDownDate: $touchDownDate))
+        .disabled(disabled)
+    }
+}
+
+fileprivate struct DelaysTouchesButtonStyle: ButtonStyle {
+    @Binding var disabled: Bool
+    var duration: TimeInterval
+    @Binding var touchDownDate: Date?
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .onChange(of: configuration.isPressed, perform: handleIsPressed)
+    }
+
+    private func handleIsPressed(isPressed: Bool) {
+        if isPressed {
+            let date = Date()
+            touchDownDate = date
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + max(duration, 0)) {
+                if date == touchDownDate {
+                    disabled = true
+                    
+                    DispatchQueue.main.async {
+                        disabled = false
+                    }
+                }
+            }
+        } else {
+                    touchDownDate = nil
+                    disabled = false
+                }
+            }
+        }
