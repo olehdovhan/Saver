@@ -23,6 +23,7 @@ struct CardsPlace: View {
     @Binding var dragging: Bool
     
     
+    
     var body: some View {
         GeometryReader { geo in
             VStack{
@@ -80,11 +81,11 @@ struct CardsPlace: View {
                                                     .foregroundColor(.black)
                                                     .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                                                     .frame(width: 75)
-                                                    .frame(height: 30)
-                                                    .lineLimit(2)
+                                                    .frame(height: 10)
+                                                    .lineLimit(1)
                                             }
                                             //                                      TODO: - Зроби zIndex динамічним і змінюй його в момент драгу
-                                            .delaysTouches(for: 0.5) { }
+                                            .delaysTouches(for: 0.5) {  }
                                             .draggable(zIndex: $firstZ,
                                                        isAlertShow: $expenseViewShow,
                                                        purchaseType: $purchaseType,
@@ -99,39 +100,59 @@ struct CardsPlace: View {
                                         .zIndex(Double(cashSources.count - index))
                                     }
                                     .frame(height: UIScreen.main.bounds.height * 1.5)
+//                                    .background(.yellow)
                                 }
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                Button {
-                                    addCashSourceViewShow = true
-                                } label: {
-                                    VStack {
-                                        Image("iconPlus")
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                            .myShadow(radiusShadow: 5)
+                                if cashSources.count < 6 {
+                                    Button {
+                                        addCashSourceViewShow = true
+                                    } label: {
+                                        VStack {
+                                            Spacer().frame(height: 35)
+                                            Image("iconPlus")
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                                .myShadow(radiusShadow: 5)
+                                            Spacer().frame(height: 15)
+                                        }
                                     }
+                                    .zIndex(1)
                                 }
-                                .zIndex(1)
+                                
+//                                VStack {
+//                                    Spacer().frame(height: 35)
+//                                RoundedRectangle(cornerRadius: 15).fill(.white)
+//                                    .frame(width: 50, height: 50)
+//                                    .myShadow(radiusShadow: 5)
+//                                    .overlay {
+//                                        Text("\(cashSources.count)")
+//                                    }
+//                                    Spacer().frame(height: 15)
+//                                }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 Spacer()
                                 Spacer().frame(width: 5)
                                     .onAppear(){
-                                        print(UIScreen.main.bounds.height * 0.44)
+                                        print("cashSource: \(cashSources.count)" )
                                     }
                             }
+                            
                         }
+                       
                         
                      
                     }
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                 }
-//                .offset(y: UIScreen.main.bounds.height/4)
-                .offset(y:  -UIScreen.main.bounds.height * 0.72)
+                .offset(y:  -UIScreen.main.bounds.height * 0.73)
                 Spacer()
             }
         }

@@ -26,7 +26,8 @@ struct PurchaseCategoriesView: View{
             ScrollView {
                 Spacer()
                     .frame(height: 5)
-                LazyVGrid(columns: columns, spacing: 10) {
+                LazyVGrid(columns: columns, alignment: .center, spacing: 15) {
+                    
                     
                     ForEach(purchaseCategories, id: \.self) { item in
                         Button {
@@ -71,7 +72,7 @@ struct PurchaseCategoriesView: View{
                                     .foregroundColor(.black)
                                     .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                                     .lineLimit(1)
-                                    .frame(width: 80)
+                                    .frame(width: 80, height: 15)
                             }
                         }
                         .overlay(
@@ -88,11 +89,13 @@ struct PurchaseCategoriesView: View{
                     Button {
                         addPurchaseCategoryShow = true
                     } label: {
-                        VStack {
+                        VStack(spacing: 0) {
                             Image("iconPlus")
                                 .resizable()
                                 .frame(width: 50, height: 50)
                                 .myShadow(radiusShadow: 5)
+                            Spacer()
+                                .frame(width: 50, height: 20)
                         }
                     }
                 }

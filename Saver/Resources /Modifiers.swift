@@ -102,6 +102,9 @@ struct DragGestureCustom: ViewModifier {
                         currentOffsetY = 0
                     }
                 }
+                
+                currentOffsetX = 0
+                currentOffsetY = 0
           }
     }
     

@@ -38,6 +38,13 @@ struct MainScreen: View {
                 Color.myGreen.frame(height: 30)
                 Color.white
             }
+            .zIndex(-3)
+            
+//            Color.red
+//                .padding(.top, 250)
+//                .frame(width: UIScreen.main.bounds.width)
+//                .zIndex(0)
+            
             VStack(alignment: .center, spacing: 15) {
                 
                 BalanceView().zIndex(4)
@@ -49,14 +56,14 @@ struct MainScreen: View {
                            purchaseType: $expenseType,
                            cashSource: $cashSource,
                            cashSources: $cashSources,
-                           dragging: $dragging).zIndex(dragging ? 3 : 0)
+                           dragging: $dragging).zIndex(dragging ? 3 : -2)
                 .onChange(of: addCashSourceViewShow) { newValue in
                     if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
                 }
-                .frame(height: 100)
+                .frame(height: 90)
 //                .background(.red.opacity(0.3))
                     
-                StatisticsPlace().zIndex(0)
+                StatisticsPlace().zIndex(3)
                 
                 
                 
@@ -64,10 +71,12 @@ struct MainScreen: View {
                                startPoint: .leading,
                                endPoint: .trailing)
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
+                    .zIndex(2)
                 
                 PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
                                        addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
                                        purchaseDetailViewShow: $purchaseDetailViewShow)
+                .zIndex(2)
                 .onChange(of: addPurchaseCategoryViewShow) { newValue in
                     if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
                 }
@@ -109,6 +118,7 @@ struct MainScreen: View {
         }
         .onAppear() {
             cashSource = UserDefaultsManager.shared.userModel?.cashSources[0].name ?? ""
+//            print("cashSources: \(String(describing: UserDefaultsManager.shared.userModel?.cashSources))")
             if let sources = UserDefaultsManager.shared.userModel?.cashSources {
                 cashSources = sources
             }
