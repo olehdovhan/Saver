@@ -99,8 +99,10 @@ struct CardsPlace: View {
                                         }
                                         .zIndex(Double(cashSources.count - index))
                                     }
+                                    
                                     .frame(height: UIScreen.main.bounds.height * 1.5)
 //                                    .background(.yellow)
+                                    
                                 }
                                 
                                 if cashSources.count < 6 {

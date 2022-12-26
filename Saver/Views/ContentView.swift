@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
 
     
-    @State var selectionTab = 3
+    @State var selectionTab = 1
 
     var body: some View {
         CustomTabView(selection: $selectionTab) {
@@ -52,6 +52,8 @@ struct ContentView: View {
 
 
         }
+//        .offset(y: -30)
+//        .edgesIgnoringSafeArea(.bottom)
   
 }
 }
