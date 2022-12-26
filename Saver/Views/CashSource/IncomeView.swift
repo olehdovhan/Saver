@@ -164,6 +164,7 @@ struct IncomeView: View {
                    height: 500,
                    alignment: .top)
         }
+        .offset(y: -50)
     
     }
 }

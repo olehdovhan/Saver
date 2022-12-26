@@ -13,7 +13,7 @@ struct PurchaseCategoriesView: View{
     @Binding var addPurchaseCategoryShow: Bool
     
     @Binding var purchaseDetailViewShow :Bool
-    @State var selectedCategory: PurchaseCategory?
+    @Binding var selectedCategory: PurchaseCategory?
     
     let columns = [ GridItem(.flexible()),
                     GridItem(.flexible()),
@@ -102,12 +102,7 @@ struct PurchaseCategoriesView: View{
                 Spacer()
                     .frame(height: 50)
             }
-            
-            if purchaseDetailViewShow, selectedCategory != nil {
-                PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
-                                           purchaseCategories: $purchaseCategories,
-                                           category: selectedCategory!)
-            }
+
         }
     }
 }

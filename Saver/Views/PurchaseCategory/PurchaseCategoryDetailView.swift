@@ -34,21 +34,21 @@ struct PurchaseCategoryDetailView: View {
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 22))
-                        .frame(width: UIScreen.main.bounds.width/2)
+                        .frame(width: UIScreen.main.bounds.width/2.2)
                     
                     ZStack{
                         Image(category.iconName)
                             .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.gray)
-                            .scaleEffect(2)
+                            .frame(width: 50, height: 50)
                         
                         Image(systemName: "\(category.iconName)")
                             .resizable()
-                            .frame(width: 40, height: 40)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30, height: 30)
                             .foregroundColor(.gray)
                     }
-                    .frame(width: 40, height: 40)
+                    .cornerRadius(15)
+                    .myShadow(radiusShadow: 5)
                     
                 }
                 Spacer()

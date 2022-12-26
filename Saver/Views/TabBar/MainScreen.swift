@@ -25,6 +25,7 @@ struct MainScreen: View {
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
     @State var dragging = false
+    @State var selectedCategory: PurchaseCategory?
     
     var body: some View {
         ZStack {
@@ -75,7 +76,8 @@ struct MainScreen: View {
                 
                 PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
                                        addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
-                                       purchaseDetailViewShow: $purchaseDetailViewShow)
+                                       purchaseDetailViewShow: $purchaseDetailViewShow,
+                                       selectedCategory: $selectedCategory)
                 .zIndex(2)
                 .onChange(of: addPurchaseCategoryViewShow) { newValue in
                     if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
@@ -114,6 +116,12 @@ struct MainScreen: View {
             if addPurchaseCategoryViewShow {
                 AddPurchaseCategoryView(closeSelf: $addPurchaseCategoryViewShow,
                                         editing: $editing)
+            }
+            
+            if purchaseDetailViewShow, selectedCategory != nil {
+                PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
+                                           purchaseCategories: $purchaseCategories,
+                                           category: selectedCategory!)
             }
         }
         .onAppear() {
