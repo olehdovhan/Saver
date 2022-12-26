@@ -31,8 +31,8 @@ struct CardsPlace: View {
                     HStack() {
                         
                         ScrollView(.horizontal, showsIndicators: false){
-                            HStack(spacing: 30){
-                                Spacer().frame(width: 15)
+                            HStack(spacing: 20){
+                                Spacer().frame(width: 5)
                                 
                                 
                                 ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
@@ -52,14 +52,27 @@ struct CardsPlace: View {
                                                     .lineLimit(2)
                                                 
                                                 switch source.iconName {
-                                                case "iconBankCard", "iconWallet":          Image(source.iconName)
+                                                case "iconBankCard", "iconWallet":
+                                                    Image(source.iconName)
                                                         .resizable()
                                                         .frame(width: 50, height: 50)
+                                                        .aspectRatio(contentMode: .fill)
                                                         .myShadow(radiusShadow: 5)
-                                                default:          Image(systemName: source.iconName)
-                                                        .resizable()
-                                                        .frame(width: 50, height: 50)
-                                                        .myShadow(radiusShadow: 5)
+                                                default:
+                                                    ZStack{
+                                                        Color.myGreen
+                                                            .frame(width: 50, height: 50)
+                                                        
+                                                        Image(systemName: source.iconName)
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .frame(width: 30, height: 30)
+                                                            .foregroundColor(.white)
+                                                            
+                                                    }
+                                                    .cornerRadius(15)
+                                                    .myShadow(radiusShadow: 5)
+                                                    
                                                 }
                                                 
                                                 
@@ -71,7 +84,7 @@ struct CardsPlace: View {
                                                     .lineLimit(2)
                                             }
                                             //                                      TODO: - Зроби zIndex динамічним і змінюй його в момент драгу
-                                            .delaysTouches(for: 1) { }
+                                            .delaysTouches(for: 0.5) { }
                                             .draggable(zIndex: $firstZ,
                                                        isAlertShow: $expenseViewShow,
                                                        purchaseType: $purchaseType,
@@ -85,7 +98,7 @@ struct CardsPlace: View {
                                         }
                                         .zIndex(Double(cashSources.count - index))
                                     }
-                                    .frame(height: UIScreen.main.bounds.height)
+                                    .frame(height: UIScreen.main.bounds.height * 1.5)
                                 }
                                 
                                 
@@ -106,7 +119,7 @@ struct CardsPlace: View {
                                 }
                                 .zIndex(1)
                                 Spacer()
-                                Spacer().frame(width: 30)
+                                Spacer().frame(width: 5)
                                     .onAppear(){
                                         print(UIScreen.main.bounds.height * 0.44)
                                     }
@@ -118,7 +131,7 @@ struct CardsPlace: View {
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                 }
 //                .offset(y: UIScreen.main.bounds.height/4)
-                .offset(y:  -UIScreen.main.bounds.height * 0.44)
+                .offset(y:  -UIScreen.main.bounds.height * 0.72)
                 Spacer()
             }
         }

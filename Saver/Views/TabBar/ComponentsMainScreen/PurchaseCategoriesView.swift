@@ -24,7 +24,10 @@ struct PurchaseCategoriesView: View{
         
         ZStack {
             ScrollView {
+                Spacer()
+                    .frame(height: 5)
                 LazyVGrid(columns: columns, spacing: 10) {
+                    
                     ForEach(purchaseCategories, id: \.self) { item in
                         Button {
                             print(item.name)
@@ -49,16 +52,26 @@ struct PurchaseCategoriesView: View{
                                         .myShadow(radiusShadow: 5)
                                     
                                 default:
-                                    Image(systemName: item.iconName)
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .myShadow(radiusShadow: 5)
+                                    ZStack{
+                                        Color.white
+                                            .frame(width: 50, height: 50)
+                                        
+                                        Image(systemName: item.iconName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(.gray)
+                                    }
+                                    .cornerRadius(15)
+                                    .myShadow(radiusShadow: 5)
                                 }
                                 
                                 
                                 Text(item.name)
                                     .foregroundColor(.black)
                                     .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                                    .lineLimit(1)
+                                    .frame(width: 80)
                             }
                         }
                         .overlay(
@@ -83,6 +96,8 @@ struct PurchaseCategoriesView: View{
                         }
                     }
                 }
+                Spacer()
+                    .frame(height: 50)
             }
             
             if purchaseDetailViewShow, selectedCategory != nil {

@@ -17,6 +17,7 @@ struct CircleTextView: View {
         return ZStack {
             
             Text(text)
+                .fontWeight(.bold)
                 .padding()
                 .background(GeometryReader { proxy in Color.clear.onAppear() { radius = max(proxy.size.width, proxy.size.height) } }.hidden())
             

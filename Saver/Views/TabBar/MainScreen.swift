@@ -54,6 +54,7 @@ struct MainScreen: View {
                     if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
                 }
                 .frame(height: 100)
+//                .background(.red.opacity(0.3))
                     
                 StatisticsPlace().zIndex(0)
                 
@@ -71,7 +72,7 @@ struct MainScreen: View {
                     if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
                 }
 
-                Spacer(minLength: 200)
+                Spacer()
             }
             .blur(radius: expenseViewShow ? 5 : 0 )
             .blur(radius: incomeViewShow ? 5 : 0 )

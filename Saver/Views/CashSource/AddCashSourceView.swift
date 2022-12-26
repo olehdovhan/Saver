@@ -14,16 +14,16 @@ struct AddCashSourceView: View {
     @State var cashSourceName = ""
     @State var currentMoneyAmount = ""
     @State var editing: FocusState<Bool>.Binding
-  
+    
     @State var showIconsCashSource = false
     @State var selectedCashIconName = ""
     
     var fieldsEmpty: Bool {
-      if selectedCashIconName != "",
-               cashSourceName != "",
-            currentMoneyAmount != "" {
-          return false
-      } else { return true }
+        if selectedCashIconName != "",
+           cashSourceName != "",
+           currentMoneyAmount != "" {
+            return false
+        } else { return true }
     }
     
     var body: some View {
@@ -47,11 +47,11 @@ struct AddCashSourceView: View {
                     Button {
                         closeSelf = false
                     }
-                     label: {
-                        Image("btnClose")
-                    }
-                     .frame( alignment: .trailing)
-                     .padding(.trailing, 16)
+                label: {
+                    Image("btnClose")
+                }
+                .frame( alignment: .trailing)
+                .padding(.trailing, 16)
                 }
                 .frame(width: 300, alignment: .top)
                 .padding(.top, 24)
@@ -61,13 +61,13 @@ struct AddCashSourceView: View {
                     Spacer()
                     Spacer()
                     Spacer()
-    
+                    
                     TextField("enter name",text: $cashSourceName)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
-                                                    .padding(.leading, -10)
-                                                    .padding(.trailing, -10) )
+                            .stroke( Color.myGreen, lineWidth: 1)
+                            .padding(.leading, -10)
+                            .padding(.trailing, -10) )
                 }
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
@@ -80,17 +80,17 @@ struct AddCashSourceView: View {
                     TextField("enter amount",text: $currentMoneyAmount)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
-                                                    .padding(.leading, -10)
-                                                    .padding(.trailing, -10)
+                            .stroke( Color.myGreen, lineWidth: 1)
+                            .padding(.leading, -10)
+                            .padding(.trailing, -10)
                         )
                         .keyboardType(.numberPad)
                         .lineLimit(nil)
                         .onReceive(Just(currentMoneyAmount)) { newValue in
                             let filtered = newValue.filter { "0123456789 ".contains($0) }
-                              if filtered != newValue {
-                                  self.currentMoneyAmount = filtered
-                              }
+                            if filtered != newValue {
+                                self.currentMoneyAmount = filtered
+                            }
                         }
                 }
                 .padding(.leading,  30)
@@ -98,23 +98,36 @@ struct AddCashSourceView: View {
                 
                 // Icon - with
                 Button {
-                   showIconsCashSource = true 
+                    showIconsCashSource = true
                 } label: {
                     if selectedCashIconName == "" {
                         CircleTextView(text: "ICON")
-                            .foregroundColor(.cyan)
+                            .foregroundColor(.myGreen)
+                            .myShadow(radiusShadow: 5)
                     } else {
                         
                         switch selectedCashIconName {
-                        case "iconBankCard", "iconWallet":          Image(selectedCashIconName)
-                                                                    .resizable()
-                                                                    .frame(width: 65, height: 65)
-                        default:         Image(systemName: selectedCashIconName)
+                        case "iconBankCard", "iconWallet":
+                            Image(selectedCashIconName)
                                 .resizable()
-                                .frame(width: 65, height: 65)
+                                .frame(width: 50, height: 50)
+                                .myShadow(radiusShadow: 5)
+                        default:
+                            ZStack{
+                                Color.myGreen
+                                    .frame(width: 50, height: 50)
+                                
+                                Image(systemName: selectedCashIconName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                            }
+                            .cornerRadius(15)
+                            .myShadow(radiusShadow: 5)
                         }
                         
-                     
+                        
                     }
                 }
                 
@@ -135,10 +148,11 @@ struct AddCashSourceView: View {
             }
             .frame(width: 300,
                    height: 360)
+            .blur(radius: showIconsCashSource ? 5 : 0)
             
             if showIconsCashSource {
                 AddIconsView(closeSelf: $showIconsCashSource, type: .cashSource) { iconName in
-                selectedCashIconName = iconName
+                    selectedCashIconName = iconName
                 }
             }
         }

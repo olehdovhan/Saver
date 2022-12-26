@@ -66,7 +66,7 @@ struct AddPurchaseCategoryView: View {
                     TextField("enter name",text: $cashSourceName)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
+                                                    .stroke( Color.myGreen, lineWidth: 1)
                                                     .padding(.leading, -10)
                                                     .padding(.trailing, -10) )
                 }
@@ -81,7 +81,7 @@ struct AddPurchaseCategoryView: View {
                     TextField("sum to spend per month", text: $currentMoneyAmount)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
+                                                    .stroke( Color.myGreen, lineWidth: 1)
                                                     .padding(.leading, -10)
                                                     .padding(.trailing, -10)
                         )
@@ -103,7 +103,7 @@ struct AddPurchaseCategoryView: View {
                 } label: {
                     if selectedCashIconName == "" {
                         CircleTextView(text: "ICON")
-                            .foregroundColor(.cyan)
+                            .foregroundColor(.myGreen)
                     } else {
                         switch selectedCashIconName {
                         case "iconClothing",
@@ -114,10 +114,21 @@ struct AddPurchaseCategoryView: View {
                              "iconRestaurant",
                              "iconTransport":          Image(selectedCashIconName)
                                                         .resizable()
-                                                        .frame(width: 65, height: 65)
-                        default:         Image(systemName: selectedCashIconName)
-                                         .resizable()
-                                         .frame(width: 65, height: 65)
+                                                        .frame(width: 50, height: 50)
+                                                        .myShadow(radiusShadow: 5)
+                        default:
+                            ZStack{
+                                Color.white
+                                    .frame(width: 50, height: 50)
+                                
+                                Image(systemName: selectedCashIconName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.gray)
+                            }
+                            .cornerRadius(15)
+                            .myShadow(radiusShadow: 5)
                         }
                     }
                 }
@@ -140,6 +151,7 @@ struct AddPurchaseCategoryView: View {
             }
             .frame(width: 300,
                    height: 360)
+            .blur(radius: showIconsCashSource ? 5 : 0 )
             
             if showIconsCashSource {
                 AddIconsView(closeSelf: $showIconsCashSource,
