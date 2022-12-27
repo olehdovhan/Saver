@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Color {
     static let myGreen = Color(hex: "#90DE58")
-    static let myBlue = Color(hex: "#90DE58")
+    static let myBlue = Color(hex: "#5CCCCC")
     static let myRed = Color(hex: "#FF2230")
     static let myGrayDark = Color(hex: "595959")
     static let myGradeBlue = Color(hex: "#5CCCCC")

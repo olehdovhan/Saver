@@ -52,8 +52,9 @@ struct ContentView: View {
 
 
         }
-//        .offset(y: -30)
-//        .edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+        UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")
+            }
   
 }
 }

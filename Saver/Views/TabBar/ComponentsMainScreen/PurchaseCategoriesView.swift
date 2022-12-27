@@ -25,7 +25,7 @@ struct PurchaseCategoriesView: View{
         ZStack {
             ScrollView {
                 Spacer()
-                    .frame(height: 5)
+                    .frame(height: 15)
                 LazyVGrid(columns: columns, alignment: .center, spacing: 15) {
                     
                     
@@ -99,10 +99,10 @@ struct PurchaseCategoriesView: View{
                         }
                     }
                 }
-                Spacer()
-                    .frame(height: 50)
+//                Spacer()
+//                    .frame(height: 70)
             }
-
+            .padding(.bottom, 70)
         }
     }
 }

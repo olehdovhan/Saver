@@ -46,9 +46,10 @@ struct MainScreen: View {
 //                .frame(width: UIScreen.main.bounds.width)
 //                .zIndex(0)
             
-            VStack(alignment: .center, spacing: 15) {
+            VStack(alignment: .center, spacing: 0) {
                 
                 BalanceView().zIndex(4)
+                Spacer() .frame(height: 15)
                 
                 
                 CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
@@ -63,6 +64,8 @@ struct MainScreen: View {
                 }
                 .frame(height: 90)
 //                .background(.red.opacity(0.3))
+                
+                Spacer() .frame(height: 15)
                     
                 StatisticsPlace().zIndex(3)
                 
