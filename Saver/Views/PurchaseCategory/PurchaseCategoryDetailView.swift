@@ -22,7 +22,7 @@ struct PurchaseCategoryDetailView: View {
                 .frame(width: UIScreen.main.bounds.width/1.2,
                        height: UIScreen.main.bounds.height/1.5)
                 .cornerRadius(25)
-                .shadow(radius: 25)
+                .myShadow(radiusShadow: 5)
             
         VStack(spacing: 20) {
             
@@ -37,18 +37,25 @@ struct PurchaseCategoryDetailView: View {
                         .frame(width: UIScreen.main.bounds.width/2.2)
                     
                     ZStack{
+                        
+                        
+                        ZStack{
+                            Color.white
+                                .frame(width: 50, height: 50)
+                            
+                            Image(systemName: "\(category.iconName)")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.gray)
+                        }
+                        .cornerRadius(15)
+                        .myShadow(radiusShadow: 5)
+                        
                         Image(category.iconName)
                             .resizable()
                             .frame(width: 50, height: 50)
-                        
-                        Image(systemName: "\(category.iconName)")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.gray)
                     }
-                    .cornerRadius(15)
-                    .myShadow(radiusShadow: 5)
                     
                 }
                 Spacer()

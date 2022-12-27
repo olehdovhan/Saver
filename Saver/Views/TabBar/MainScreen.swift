@@ -89,6 +89,7 @@ struct MainScreen: View {
             .blur(radius: incomeViewShow ? 5 : 0 )
             .blur(radius: addCashSourceViewShow ? 5 : 0 )
             .blur(radius: addPurchaseCategoryViewShow ? 5 : 0 )
+            .blur(radius: purchaseDetailViewShow ? 5 : 0 )
          
             if expenseViewShow,
                let cashes = UserDefaultsManager.shared.userModel?.cashSources,

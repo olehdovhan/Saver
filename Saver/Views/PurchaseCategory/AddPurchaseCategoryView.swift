@@ -115,6 +115,7 @@ struct AddPurchaseCategoryView: View {
                              "iconTransport":          Image(selectedCashIconName)
                                                         .resizable()
                                                         .frame(width: 50, height: 50)
+                                                        .myShadow(radiusShadow: 5)
                         default:
                             ZStack{
                                 Color.white
