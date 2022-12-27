@@ -41,6 +41,7 @@ struct AddCashSourceView: View {
             VStack {
                 HStack {
                     Text("Add new money source")
+                        .foregroundColor(.black)
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
                     Spacer()
@@ -58,11 +59,16 @@ struct AddCashSourceView: View {
                 
                 HStack {
                     Text("Name")
+                        .foregroundColor(.black)
                     Spacer()
                     Spacer()
                     Spacer()
                     
-                    TextField("enter name",text: $cashSourceName)
+                    TextField("",text: $cashSourceName)
+                        .placeholder(when: cashSourceName.isEmpty) {
+                                Text("enter name").foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .stroke( Color.myGreen, lineWidth: 1)
@@ -74,10 +80,15 @@ struct AddCashSourceView: View {
                 
                 HStack {
                     Text("Money amount")
+                        .foregroundColor(.black)
                     Spacer()
                     Spacer()
                     Spacer()
-                    TextField("enter amount",text: $currentMoneyAmount)
+                    TextField("", text: $currentMoneyAmount)
+                        .placeholder(when: currentMoneyAmount.isEmpty) {
+                                Text("sum to spend per month").foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .stroke( Color.myGreen, lineWidth: 1)

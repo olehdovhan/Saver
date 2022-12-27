@@ -43,6 +43,7 @@ struct ExpenseView: View {
             VStack {
                 HStack {
                     Text("Expense")
+                        .foregroundColor(.black)
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
                     Spacer()
@@ -58,18 +59,22 @@ struct ExpenseView: View {
                 .frame(width: 300, alignment: .top)
                 .padding(.top, 24)
             
-                TextField("Expense", value: $expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                    
+                TextField("", value: $expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                    .placeholder(when: expense != 0.0) {
+                            Text("Expense").foregroundColor(.gray)
+                    }
+                    .foregroundColor(.black)
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
                     .keyboardType(.decimalPad)
                     .focused(editing)
                     .background(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(editing.wrappedValue ? Color.red : Color.gray, lineWidth: 3)
+                            .stroke(editing.wrappedValue ? Color.red : Color.myGreen, lineWidth: 1)
                     ).padding()
                 HStack {
                     Text("From")
+                        .foregroundColor(.black)
                     Spacer()
                         Picker("", selection: $cashSource) {
                             ForEach(cashSources ,id: \.self) {
@@ -78,7 +83,7 @@ struct ExpenseView: View {
                         }
                         .colorMultiply(.black)
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -20)
                             .padding(.trailing, -20)
                         )
@@ -88,6 +93,7 @@ struct ExpenseView: View {
                 
                 HStack {
                     Text("To")
+                        .foregroundColor(.black)
                     Spacer()
                     Picker("", selection: $purchaseCategoryName) {
                         Text("").tag("")
@@ -99,7 +105,7 @@ struct ExpenseView: View {
                     .colorMultiply(.black)
                     
                     .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke( .gray, lineWidth: 3)
+                        .stroke( Color.myGreen, lineWidth: 1)
                         .padding(.leading, -20)
                         .padding(.trailing, -20)
                     )
@@ -110,6 +116,7 @@ struct ExpenseView: View {
                 
                 HStack {
                     Text("Date")
+                        .foregroundColor(.black)
                   
                     Spacer()
                     Image("calendar")
@@ -118,7 +125,7 @@ struct ExpenseView: View {
                         .labelsHidden()
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                              .stroke( .gray, lineWidth: 3)
+                                              .stroke( Color.myGreen, lineWidth: 1)
                         )
                         .id(expenseDate)
                 }
@@ -128,11 +135,12 @@ struct ExpenseView: View {
                 
                 HStack {
                     Text("Time")
+                        .foregroundColor(.black)
                     Spacer()
                     DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                         )
                 }
                 .padding(.leading,  30)
@@ -140,14 +148,19 @@ struct ExpenseView: View {
                 
                 HStack {
                     Text("Comment")
+                        .foregroundColor(.black)
                     Spacer()
                     Spacer()
                     Spacer()
     
-                    TextField("  Comment",text: $comment)
+                    TextField("",text: $comment)
+                        .placeholder(when: comment.isEmpty) {
+                                Text("Comment").foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )
