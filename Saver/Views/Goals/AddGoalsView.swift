@@ -64,7 +64,11 @@ struct AddGoalsView: View {
                     
                     Spacer()
     
-                    TextField("enter goal name",text: $goalName)
+                    TextField("", text: $goalName)
+                        .placeholder(when: goalName.isEmpty) {
+                            Text("enter goal name").foregroundColor(.gray)
+                    }
+                        .foregroundColor(.myGrayDark)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( Color.myGreen, lineWidth: 1)
@@ -83,6 +87,10 @@ struct AddGoalsView: View {
                         .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("enter total price",text: $totalPrice)
+                        .placeholder(when: totalPrice.isEmpty) {
+                            Text("enter total price").foregroundColor(.gray)
+                    }
+                        .foregroundColor(.myGrayDark)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( Color.myGreen, lineWidth: 1)
@@ -109,6 +117,10 @@ struct AddGoalsView: View {
                         .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("invest in goal per month",text: $monthPayment)
+                        .placeholder(when: monthPayment.isEmpty) {
+                            Text("invest in goal per month").foregroundColor(.gray)
+                    }
+                        .foregroundColor(.myGrayDark)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( Color.myGreen, lineWidth: 1)
