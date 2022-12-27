@@ -94,6 +94,7 @@ struct AddDebtView: View {
                     
                     Spacer()
                     Image("calendar")
+                        .foregroundColor(.myGreen)
                     
                     DatePicker("", selection: $startDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                         .labelsHidden()
@@ -116,7 +117,7 @@ struct AddDebtView: View {
                     TextField("enter debt name",text: $debtName)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 1)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10) )
                     
@@ -135,7 +136,7 @@ struct AddDebtView: View {
                     TextField("enter amount",text: $totalAmount)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 1)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )
@@ -162,7 +163,7 @@ struct AddDebtView: View {
                     TextField("enter total monthes for return",text: $totalMonthesForReturn)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 1)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )
