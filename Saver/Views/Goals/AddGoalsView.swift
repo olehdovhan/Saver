@@ -27,21 +27,22 @@ struct AddGoalsView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: 0xC4C4C4, alpha: 0.7)
+            Color(hex: "C4C4C4").opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: 300,
-                       height: 360,
-                       alignment: .top)
+                .frame(width: UIScreen.main.bounds.width/1.2,
+                       height: UIScreen.main.bounds.height/2)
                 .cornerRadius(25)
                 .shadow(radius: 25)
             
             VStack {
                 HStack {
                     Text("Add new goal")
-                        .frame(alignment: .leading)
-                        .padding(.leading, 34)
+                        .textCase(.uppercase)
+                        .foregroundColor(.myGreen)
+                        .font(.custom("Lato-ExtraBold", size: 22))
+                    
                     Spacer()
                     Button {
                         closeSelf = false
@@ -49,37 +50,42 @@ struct AddGoalsView: View {
                      label: {
                         Image("btnClose")
                     }
-                     .frame( alignment: .trailing)
-                     .padding(.trailing, 16)
+                    
                 }
-                .frame(width: 300, alignment: .top)
+                .padding(.horizontal, 20)
                 .padding(.top, 24)
+                .padding(.bottom, 15)
                 
                 HStack {
                     Text("Name")
-                    Spacer()
-                    Spacer()
+                        .foregroundColor(.myGrayDark)
+                        .font(.custom("Lato-Medium", size: 16))
+                        .multilineTextAlignment(.leading)
+                    
                     Spacer()
     
                     TextField("enter goal name",text: $goalName)
-                        .frame(height: 50, alignment: .trailing)
+                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
+                                                    .stroke( .gray, lineWidth: 1)
                                                     .padding(.leading, -10)
                                                     .padding(.trailing, -10) )
+                    
                 }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 15)
                 
                 HStack {
                     Text("Total Price")
-                    Spacer()
-                    Spacer()
+                        .lineLimit(2)
+                        .foregroundColor(.myGrayDark)
+                        .font(.custom("Lato-Medium", size: 16))
+                        .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("enter total price",text: $totalPrice)
-                        .frame(height: 50, alignment: .trailing)
+                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
+                                                    .stroke( .gray, lineWidth: 1)
                                                     .padding(.leading, -10)
                                                     .padding(.trailing, -10)
                         )
@@ -92,17 +98,20 @@ struct AddGoalsView: View {
                               }
                         }
                 }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
+                .padding(.horizontal, 20)
             
                 
                 HStack {
                     Text("Going to invest per month")
+                        .lineLimit(3)
+                        .foregroundColor(.myGrayDark)
+                        .font(.custom("Lato-Medium", size: 16))
+                        .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("invest in goal per month",text: $monthPayment)
-                        .frame(height: 50, alignment: .trailing)
+                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( .gray, lineWidth: 3)
+                                                    .stroke( .gray, lineWidth: 1)
                                                     .padding(.leading, -10)
                                                     .padding(.trailing, -10)
                         )
@@ -116,6 +125,7 @@ struct AddGoalsView: View {
                         }
                     
                 }
+                .padding(.horizontal, 20)
                 
                 Spacer()
                 ImageButton(image: "btnDoneInactive",
@@ -137,8 +147,8 @@ struct AddGoalsView: View {
                 }
                 Spacer()
             }
-            .frame(width: 300,
-                   height: 360)
+            .frame(width: UIScreen.main.bounds.width/1.2,
+                   height: UIScreen.main.bounds.height/2)
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
     }

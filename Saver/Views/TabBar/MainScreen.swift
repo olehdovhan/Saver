@@ -14,6 +14,7 @@ struct MainScreen: View {
     @State var incomeViewShow = false
     @State var addCashSourceViewShow = false
     @State var addPurchaseCategoryViewShow = false
+    @State var purchaseDetailViewShow = false
     @State var cashSource: String = ""
     @State var expenseType: String = "" {
         willSet {
@@ -27,6 +28,7 @@ struct MainScreen: View {
         ZStack {
             Color.white
             VStack(alignment: .center, spacing: 0) {
+                
                 BalanceView().zIndex(4)
                     CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
                                incomeViewShow: $incomeViewShow,
@@ -45,13 +47,18 @@ struct MainScreen: View {
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
                 
                 PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
-                                       addPurchaseCategoryShow: $addPurchaseCategoryViewShow)
+                                       addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
+                                       purchaseDetailViewShow: $purchaseDetailViewShow)
                 .onChange(of: addPurchaseCategoryViewShow) { newValue in
                     if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
                 }
 
                 Spacer(minLength: 200)
             }
+            .blur(radius: expenseViewShow ? 5 : 0 )
+            .blur(radius: incomeViewShow ? 5 : 0 )
+            .blur(radius: addCashSourceViewShow ? 5 : 0 )
+            .blur(radius: addPurchaseCategoryViewShow ? 5 : 0 )
          
             if expenseViewShow,
                let cashes = UserDefaultsManager.shared.userModel?.cashSources,

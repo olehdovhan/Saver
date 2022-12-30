@@ -12,7 +12,7 @@ struct PurchaseCategoriesView: View{
     @Binding var purchaseCategories: [PurchaseCategory]
     @Binding var addPurchaseCategoryShow: Bool
     
-    @State var purchaseDetailViewShow = false
+    @Binding var purchaseDetailViewShow :Bool
     @State var selectedCategory: PurchaseCategory?
     
     let columns = [ GridItem(.flexible()),

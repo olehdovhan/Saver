@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
 
     
-    @State var selectionTab = 0
+    @State var selectionTab = 3
 
     var body: some View {
         CustomTabView(selection: $selectionTab) {
@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
                 .opacity(selectionTab == 1 ? 1 : 0)
 
-            Calendar()
+            CalendarView()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon2")
                 }

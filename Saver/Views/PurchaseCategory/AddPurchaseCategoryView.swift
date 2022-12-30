@@ -29,7 +29,7 @@ struct AddPurchaseCategoryView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: 0xC4C4C4, alpha: 0.7)
+            Color(hex: "C4C4C4").opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white

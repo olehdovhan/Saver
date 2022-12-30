@@ -20,9 +20,23 @@
 		0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7527B294F08980092651C /* DetailGoalView.swift */; };
 		0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7527E294F08B90092651C /* AddDebtView.swift */; };
 		0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE75280294F08CC0092651C /* DetailDebtView.swift */; };
+		665A99B9294F4FD500C4F364 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */; };
+		665A99BA294F4FD500C4F364 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */; };
+		665A99BB294F4FD500C4F364 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */; };
+		665A99BC294F4FD500C4F364 /* Lato-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B7294F4FD500C4F364 /* Lato-ExtraBold.ttf */; };
+		665A99BD294F4FD500C4F364 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B8294F4FD500C4F364 /* Lato-Bold.ttf */; };
+		665A99C3294F4FE400C4F364 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99BE294F4FE300C4F364 /* NotoSans-Regular.ttf */; };
+		665A99C4294F4FE400C4F364 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99BF294F4FE300C4F364 /* NotoSans-Bold.ttf */; };
+		665A99C5294F4FE400C4F364 /* NotoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99C0294F4FE300C4F364 /* NotoSans-ExtraBold.ttf */; };
+		665A99C6294F4FE400C4F364 /* NotoSansDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99C1294F4FE300C4F364 /* NotoSansDisplay-Medium.ttf */; };
+		665A99C7294F4FE400C4F364 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99C2294F4FE400C4F364 /* NotoSans-SemiBold.ttf */; };
+		66AA4071295125A5002A2359 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA4070295125A5002A2359 /* CalendarView.swift */; };
+		66AA4073295125CE002A2359 /* CustomDatePicker3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA4072295125CE002A2359 /* CustomDatePicker3.swift */; };
+		66AA407529512654002A2359 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA407429512654002A2359 /* Transaction.swift */; };
+		66AA407729512692002A2359 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA407629512692002A2359 /* Task.swift */; };
+		66AA4079295126F3002A2359 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA4078295126F3002A2359 /* DateValue.swift */; };
 		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
-		B41618B828B1380C002629F7 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B728B1380C002629F7 /* Calendar.swift */; };
 		B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */; };
 		B41618BC28B139A6002629F7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* Menu.swift */; };
 		B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */; };
@@ -63,9 +77,24 @@
 		0CE7527B294F08980092651C /* DetailGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalView.swift; sourceTree = "<group>"; };
 		0CE7527E294F08B90092651C /* AddDebtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtView.swift; sourceTree = "<group>"; };
 		0CE75280294F08CC0092651C /* DetailDebtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDebtView.swift; sourceTree = "<group>"; };
+		665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
+		665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
+		665A99B7294F4FD500C4F364 /* Lato-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-ExtraBold.ttf"; sourceTree = "<group>"; };
+		665A99B8294F4FD500C4F364 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		665A99BE294F4FE300C4F364 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		665A99BF294F4FE300C4F364 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		665A99C0294F4FE300C4F364 /* NotoSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		665A99C1294F4FE300C4F364 /* NotoSansDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		665A99C2294F4FE400C4F364 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		665A99C8294F531200C4F364 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66AA4070295125A5002A2359 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		66AA4072295125CE002A2359 /* CustomDatePicker3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker3.swift; sourceTree = "<group>"; };
+		66AA407429512654002A2359 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		66AA407629512692002A2359 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		66AA4078295126F3002A2359 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
-		B41618B728B1380C002629F7 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsDebtsView.swift; sourceTree = "<group>"; };
 		B41618BB28B139A6002629F7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceOfPie.swift; sourceTree = "<group>"; };
@@ -166,6 +195,51 @@
 			path = CashSource;
 			sourceTree = "<group>";
 		};
+		665A99B1294F4E2500C4F364 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				665A99B3294F4E4000C4F364 /* Noto */,
+				665A99B2294F4E3500C4F364 /* Lato */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		665A99B2294F4E3500C4F364 /* Lato */ = {
+			isa = PBXGroup;
+			children = (
+				665A99B8294F4FD500C4F364 /* Lato-Bold.ttf */,
+				665A99B7294F4FD500C4F364 /* Lato-ExtraBold.ttf */,
+				665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */,
+				665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */,
+				665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */,
+			);
+			path = Lato;
+			sourceTree = "<group>";
+		};
+		665A99B3294F4E4000C4F364 /* Noto */ = {
+			isa = PBXGroup;
+			children = (
+				665A99BF294F4FE300C4F364 /* NotoSans-Bold.ttf */,
+				665A99C0294F4FE300C4F364 /* NotoSans-ExtraBold.ttf */,
+				665A99BE294F4FE300C4F364 /* NotoSans-Regular.ttf */,
+				665A99C2294F4FE400C4F364 /* NotoSans-SemiBold.ttf */,
+				665A99C1294F4FE300C4F364 /* NotoSansDisplay-Medium.ttf */,
+			);
+			path = Noto;
+			sourceTree = "<group>";
+		};
+		66AA406F29512557002A2359 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				66AA4070295125A5002A2359 /* CalendarView.swift */,
+				66AA4072295125CE002A2359 /* CustomDatePicker3.swift */,
+				66AA407429512654002A2359 /* Transaction.swift */,
+				66AA407629512692002A2359 /* Task.swift */,
+				66AA4078295126F3002A2359 /* DateValue.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		B41618B228B135CE002629F7 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +248,7 @@
 				B4A9AAA028B27E37001230BF /* ComponentsMainScreen */,
 				B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */,
 				B419BB5E28C0CB43002F58EC /* ComponentsExp */,
-				B41618B728B1380C002629F7 /* Calendar.swift */,
+				66AA406F29512557002A2359 /* Calendar */,
 				B4FA432728C88A1A00FA19DB /* ComponentsCalendar */,
 				B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */,
 				B41618BB28B139A6002629F7 /* Menu.swift */,
@@ -263,6 +337,7 @@
 		FAB594E528BB3F61002D3916 /* Resources  */ = {
 			isa = PBXGroup;
 			children = (
+				665A99B1294F4E2500C4F364 /* Fonts */,
 				0C6A1B1A29489ED7006E7C13 /* Extensions */,
 				0C6A1B152948891F006E7C13 /* Views */,
 				FABB4BC628B124420070F300 /* Persistence.swift */,
@@ -290,6 +365,7 @@
 		FABB4BBC28B124410070F300 /* Saver */ = {
 			isa = PBXGroup;
 			children = (
+				665A99C8294F531200C4F364 /* Info.plist */,
 				0C67F3B2293C95C5002384D4 /* UserDefaultsManager  */,
 				FAB0DF0728C8C588006D78B9 /* UICustomObjects */,
 				FA9D14D128BC9D3800EEFA12 /* Models */,
@@ -373,8 +449,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665A99C6294F4FE400C4F364 /* NotoSansDisplay-Medium.ttf in Resources */,
+				665A99BD294F4FD500C4F364 /* Lato-Bold.ttf in Resources */,
+				665A99C7294F4FE400C4F364 /* NotoSans-SemiBold.ttf in Resources */,
+				665A99BC294F4FD500C4F364 /* Lato-ExtraBold.ttf in Resources */,
+				665A99BB294F4FD500C4F364 /* Lato-Semibold.ttf in Resources */,
+				665A99C5294F4FE400C4F364 /* NotoSans-ExtraBold.ttf in Resources */,
 				FABB4BC528B124420070F300 /* Preview Assets.xcassets in Resources */,
+				665A99C3294F4FE400C4F364 /* NotoSans-Regular.ttf in Resources */,
+				665A99B9294F4FD500C4F364 /* Lato-Medium.ttf in Resources */,
+				665A99C4294F4FE400C4F364 /* NotoSans-Bold.ttf in Resources */,
 				FABB4BC228B124420070F300 /* Assets.xcassets in Resources */,
+				665A99BA294F4FD500C4F364 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,12 +477,14 @@
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
 				0C979297294E3774000D80A2 /* PurchaseCategoryDetailView.swift in Sources */,
 				B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */,
+				66AA407729512692002A2359 /* Task.swift in Sources */,
 				0C6A1B1929488B37006E7C13 /* AddIconsView.swift in Sources */,
 				FAB594E328BB3F1A002D3916 /* Test.swift in Sources */,
 				0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */,
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
 				0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */,
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
+				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,
 				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
@@ -409,15 +497,17 @@
 				B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */,
 				0C6A1B1C29489F13006E7C13 /* UIApplication+Extension.swift in Sources */,
 				0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */,
-				B41618B828B1380C002629F7 /* Calendar.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
+				66AA4073295125CE002A2359 /* CustomDatePicker3.swift in Sources */,
 				0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
 				0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */,
+				66AA4079295126F3002A2359 /* DateValue.swift in Sources */,
 				FA7B94BB28C61AA200772845 /* ExpenseView.swift in Sources */,
 				0CE7527A294F08880092651C /* AddGoalsView.swift in Sources */,
+				66AA407529512654002A2359 /* Transaction.swift in Sources */,
 				B41618B428B1361C002629F7 /* MainScreen.swift in Sources */,
 				0C67F3B4293C961D002384D4 /* UserDefaultsManager.swift in Sources */,
 				FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */,
@@ -554,6 +644,7 @@
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Saver/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -583,6 +674,7 @@
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Saver/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

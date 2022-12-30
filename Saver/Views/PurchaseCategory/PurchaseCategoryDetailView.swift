@@ -15,52 +15,134 @@ struct PurchaseCategoryDetailView: View {
     var body: some View {
         
         ZStack {
-            Color(hex: 0xC4C4C4, alpha: 0.7)
+            Color(hex: "C4C4C4").opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: 300,
-                       height: 500,
-                       alignment: .top)
+                .frame(width: UIScreen.main.bounds.width/1.2,
+                       height: UIScreen.main.bounds.height/1.5)
                 .cornerRadius(25)
                 .shadow(radius: 25)
             
-        VStack {
-            HStack {
-                Image(category.iconName)
-                    .resizable()
-                    .frame(width: 90, height: 90)
-                Button {
-                    closeSelf = false
-                } label: {
-                    Image("btnClose")
-                        .resizable()
-                        .frame(width: 45, height: 45)
-                }
-            }
-            HStack {
-                Text(category.name)
-                  
-             }
-           
+        VStack(spacing: 20) {
             
-            HStack {
-                Text("Budget month plan")
-              switch category.planSpentPerMonth {
-                case nil: Text("You have not added spend plan for month yet")
-              default: Text(String(category.planSpentPerMonth!))
+            HStack(alignment: .top, spacing: 10){
+                
+                VStack(){
+                    Text(category.name)
+                        .lineLimit(1)
+                        .textCase(.uppercase)
+                        .foregroundColor(.myGreen)
+                        .font(.custom("Lato-ExtraBold", size: 22))
+                        .frame(width: UIScreen.main.bounds.width/2)
+                    
+                    ZStack{
+                        Image(category.iconName)
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.gray)
+                            .scaleEffect(2)
+                        
+                        Image(systemName: "\(category.iconName)")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(width: 40, height: 40)
+                    
                 }
+                Spacer()
+                
+                HStack(alignment: .center, spacing: 10){
+                    Button(role: .destructive) {
+                        deletePurchaseCategory()
+                    } label: {
+                        ZStack{
+                            Circle().fill(.red).frame(width: 35)
+                            Image(systemName: "trash")
+                                .resizable()
+                                .frame(width: 15, height: 20)
+                                .foregroundColor(.white)
+                        }
+                    }
+
+                    Button {
+                        closeSelf = false
+                    } label: {
+                        Image("btnClose")
+                            .resizable()
+                            .frame(width: 45, height: 45)
+                    }
+                }
+                .padding(.trailing, 20)
+                
             }
+            .padding(.top, 20)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
             
-            HStack {
-                Text("Spending this Month")
+            
+            VStack(spacing: 10){
+                Text("Budget month plan:")
+                    .foregroundColor(.myGrayDark)
+                    .font(.custom("Lato-Bold", size: 16))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .textCase(.uppercase)
+                
+                switch category.planSpentPerMonth {
+                  case nil:
+                    Text("You have not added spend plan for month yet")
+                        .foregroundColor(.myGrayDark)
+                        .font(.custom("Lato-Regular", size: 16))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .padding(.horizontal, 20)
+                default:
+                    Text(String(category.planSpentPerMonth!))
+                        .foregroundColor(.myGrayDark)
+                        .font(.custom("Lato-Regular", size: 16))
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(2)
+                  }
+            }
+            .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+            .background(
+                RoundedRectangle(cornerRadius: 15).fill(.white)
+                    .myShadow(radiusShadow: 5)
+            )
+            
+            
+            VStack(spacing: 10){
+                Text("Spending this Month:")
+                    .foregroundColor(.myGrayDark)
+                    .font(.custom("Lato-Bold", size: 16))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .textCase(.uppercase)
+                
                 // TODO: make btn on tap open view with expenses for this category
                 
                 Text("0.0$")
+                    .foregroundColor(.myGrayDark)
+                    .font(.custom("Lato-Regular", size: 16))
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                
                 // TODO: fill from UD fact expenses
             }
-            Button("delete", role: .destructive) { deletePurchaseCategory() }
+            .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+            .background(
+                RoundedRectangle(cornerRadius: 15).fill(.white)
+                    .myShadow(radiusShadow: 5)
+            )
+            
+      
+            
+            Spacer()
         }
+        .frame(width: UIScreen.main.bounds.width/1.2,
+               height: UIScreen.main.bounds.height/1.5)
       }
    }
     
