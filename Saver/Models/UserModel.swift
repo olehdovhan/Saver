@@ -127,8 +127,8 @@ struct ExpenseModel: Codable {
     var amount: Double
     var comment: String
     var expenseDate: Date
-    var cashSource: CashSource
-    var spentCategory: PurchaseCategory
+    var cashSource: String
+    var spentCategory: String
 }
 
 struct DebtModel: Codable, Hashable {
@@ -139,7 +139,7 @@ struct DebtModel: Codable, Hashable {
     var totalMonthesForReturn: Int
     var returnedAmount: Int
     //TODO: in app notifications every month: Did you save money for this goal? - depends on answer - add changes to collectedPrice
-    var monthlyDebtPayment: Int {Int( Double(totalAmount) / Double(totalMonthesForReturn)) }
+    var monthlyDebtPayment: Int {Int ( Double(totalAmount) / Double(totalMonthesForReturn)) }
     
 }
 

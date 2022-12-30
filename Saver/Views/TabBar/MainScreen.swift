@@ -61,7 +61,7 @@ struct MainScreen: View {
             .blur(radius: addPurchaseCategoryViewShow ? 5 : 0 )
          
             if expenseViewShow,
-               let cashes = UserDefaultsManager.shared.userModel?.cashSources,
+             let cashes = UserDefaultsManager.shared.userModel?.cashSources,
              let cashSources = cashes.map { $0.name} {
                 ExpenseView(closeSelf: $expenseViewShow,
                             cashSource: cashSource,

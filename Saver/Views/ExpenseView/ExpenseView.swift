@@ -158,8 +158,22 @@ struct ExpenseView: View {
         
                 Spacer()
                 ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: enteredExpense) {
-                    print("tap rap snap")
-                    print(enteredExpense)
+                  let expense = ExpenseModel(amount: expense,
+                                             comment: comment,
+                                             expenseDate: Date(),
+                                             cashSource: cashSource,
+                                             spentCategory: purchaseCategoryName)
+                    if var user = UserDefaultsManager.shared.userModel {
+                        if user.currentMonthSpendings == nil {
+                            var spendings = [ExpenseModel]()
+                            spendings.append(expense)
+                            user.currentMonthSpendings = spendings
+                        } else  {
+                            user.currentMonthSpendings?.append(expense)
+                        }
+                        UserDefaultsManager.shared.userModel = user
+                    }
+                    print(UserDefaultsManager.shared.userModel?.currentMonthSpendings)
                 }
                 Spacer()
             }
