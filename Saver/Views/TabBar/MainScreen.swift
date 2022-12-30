@@ -82,9 +82,12 @@ struct MainScreen: View {
             }
         }
         .onAppear() {
-            cashSource = UserDefaultsManager.shared.userModel?.cashSources[0].name ?? ""
+   
             if let sources = UserDefaultsManager.shared.userModel?.cashSources {
                 cashSources = sources
+                if sources.count != 0 {
+                    cashSource = sources[0].name ?? ""
+                }
             }
             if let categories = UserDefaultsManager.shared.userModel?.purchaseCategories {
                 purchaseCategories = categories
