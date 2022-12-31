@@ -113,8 +113,6 @@ struct AddCashSourceView: View {
                                 .resizable()
                                 .frame(width: 65, height: 65)
                         }
-                        
-                     
                     }
                 }
                 
@@ -128,7 +126,6 @@ struct AddCashSourceView: View {
                         UserDefaultsManager.shared.userModel? = copyUser
                         print("AAAA\(newCashSource)")
                     }
-                    
                     closeSelf = false
                 }
                 Spacer()

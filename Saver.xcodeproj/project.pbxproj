@@ -56,7 +56,7 @@
 		FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */; };
 		FAB594E328BB3F1A002D3916 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB594E228BB3F1A002D3916 /* Test.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
-		FABB4BC028B124410070F300 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* ContentView.swift */; };
+		FABB4BC028B124410070F300 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* TabBarView.swift */; };
 		FABB4BC228B124420070F300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC128B124420070F300 /* Assets.xcassets */; };
 		FABB4BC528B124420070F300 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC428B124420070F300 /* Preview Assets.xcassets */; };
 		FABB4BC728B124420070F300 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC628B124420070F300 /* Persistence.swift */; };
@@ -115,7 +115,7 @@
 		FAB594E228BB3F1A002D3916 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
-		FABB4BBF28B124410070F300 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FABB4BBF28B124410070F300 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		FABB4BC128B124420070F300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FABB4BC428B124420070F300 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FABB4BC628B124420070F300 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 				0CE7527D294F08A20092651C /* Debts */,
 				0CE75276294F082F0092651C /* Goals */,
 				FA7B94B928C61A3600772845 /* ExpenseView */,
-				FABB4BBF28B124410070F300 /* ContentView.swift */,
+				FABB4BBF28B124410070F300 /* TabBarView.swift */,
 				FAB594E228BB3F1A002D3916 /* Test.swift */,
 				B41618B228B135CE002629F7 /* TabBar */,
 				B458555828B1AB7F0047C81E /* CustomView */,
@@ -486,7 +486,7 @@
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
 				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,
-				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
+				FABB4BC028B124410070F300 /* TabBarView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,

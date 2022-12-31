@@ -9,7 +9,7 @@ import SwiftUI
 struct ExpenseView: View {
     
     @Binding var closeSelf: Bool
-    @State  var cashSource: String
+    @State   var cashSource: String
     @Binding var purchaseCategoryName: String
     @State private var expense = 0.0
     @State private var comment = ""
@@ -125,7 +125,6 @@ struct ExpenseView: View {
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
                 
-                
                 HStack {
                     Text("Time")
                     Spacer()
@@ -173,7 +172,7 @@ struct ExpenseView: View {
                         }
                         UserDefaultsManager.shared.userModel = user
                     }
-                    print(UserDefaultsManager.shared.userModel?.currentMonthSpendings)
+                    closeSelf = false
                 }
                 Spacer()
             }
@@ -183,9 +182,9 @@ struct ExpenseView: View {
         }
         .onAppear() {
             print(cashSource)
-            print( purchaseCategoryName)
+            print(purchaseCategoryName)
             if let purchCats = UserDefaultsManager.shared.userModel?.purchaseCategories {
-                purchaseCategories = purchCats.map { $0.name}
+                purchaseCategories = purchCats.map { $0.name }
             }
         }
     }

@@ -14,30 +14,63 @@ struct PieceOfPie{
     let amount: CGFloat
     var value: CGFloat
     var name: String
-    
 }
-//
-////ObservableObject - протокол використовується з класами
-class PieceOfPieContainer: ObservableObject{
-    //Спостерігаємий об'єкт.  @Published - оболочка(обгортка) для об'єкта, що б він став спостерігаємим
-    @Published var chartData = [
-        PieceOfPie(color: .blue, percent: 0, amount: 2350, value: 0, name: "Products"),
-        PieceOfPie(color: .green, percent: 0, amount: 3550, value: 0, name: "Transport"),
-        PieceOfPie(color: .yellow, percent: 0, amount: 3150, value: 0, name: "Clouthing"),
-        PieceOfPie(color: .orange, percent: 0, amount: 3150, value: 0, name: "Restaurant"),
-        PieceOfPie(color: .cyan, percent: 0, amount: 2350, value: 0, name: "Products"),
-        PieceOfPie(color: .pink, percent: 0, amount: 5550, value: 0, name: "Transport"),
-        PieceOfPie(color: .gray, percent: 0, amount: 7150, value: 0, name: "Clouthing"),
-        PieceOfPie(color: .red, percent: 0, amount: 1150, value: 0, name: "Restaurant"),
-        PieceOfPie(color: .yellow, percent: 0, amount: 3450, value: 0, name: "Clouthing"),
-        PieceOfPie(color: .orange, percent: 0, amount: 3850, value: 0, name: "Restaurant"),
-        PieceOfPie(color: .cyan, percent: 0, amount: 1000, value: 0, name: "Products"),
-        PieceOfPie(color: .pink, percent: 0, amount: 750, value: 0, name: "Transport"),
-    ]
+
+class PieceOfPieContainer: ObservableObject {
     
-    //var
+    @Published var chartData: [PieceOfPie] = []
     
-    //медо, що визначає значення кожної властивості value і передає їх в масив
+    private var chartLimitedColors: [Color] = [.red,
+                                               .orange,
+                                               .yellow,
+                                               .green,
+                                               .blue.opacity(50),
+                                               .blue,
+                                               .purple,
+                                               .gray,
+                                               .pink,
+                                               .brown]
+    
+    init () {
+        guard let allPurchaseCategories = getAllExpenses() else { return }
+        let expensesDict = createExpenseDict(from: allPurchaseCategories)
+        
+        for (index, category) in allPurchaseCategories.enumerated() {
+            let piece = PieceOfPie(color: chartLimitedColors[index],
+                                   percent: 0,
+                                   amount: CGFloat(expensesDict[category] ?? 0.0),
+                                   value: 0,
+                                   name: category)
+            chartData.append(piece)
+        }
+    }
+    
+    func getAllExpenses() -> Set<String>? {
+        if UserDefaultsManager.shared.userModel?.currentMonthSpendings?.count != 0 ,
+           let expenses = UserDefaultsManager.shared.userModel?.currentMonthSpendings {
+            var categoriesSet: Set<String> = []
+            for expense in expenses {
+                categoriesSet.insert(expense.spentCategory)
+            }
+            return categoriesSet
+        }
+        return nil
+    }
+    
+    func createExpenseDict(from categories: Set<String> ) -> [String: Double] {
+        var dict: [String: Double] = [:]
+        for category in categories {
+            var sum: Double = 0.0
+            let filtered = UserDefaultsManager.shared.userModel!.currentMonthSpendings!.filter { $0.spentCategory == category }
+            
+            for item in filtered {
+                sum += item.amount
+            }
+              dict[category] = sum
+        }
+        return dict
+    }
+    
     func calcOfPath(){
         var totalAmount: CGFloat = 0
         var value: CGFloat = 0
@@ -52,57 +85,35 @@ class PieceOfPieContainer: ObservableObject{
             value += chartData[category].percent
             chartData[category].value = value
         }
-
     }
 }
 
-
-
-
-//
 struct PieChart: View {
-    // @ObservedObject - оболочка для зберігання екземпляра спостерігаємого об'єкта
+    
     @ObservedObject var chartDataObject = PieceOfPieContainer()
-    @State  private var indexOfTappedSlice = -1
+    @State private var indexOfTappedSlice = -1
     @State private var percentTapped = "UAH"
     
     var body: some View {
         
-        VStack{
+        VStack {
             chartsCircleView
                 .frame(width: 100, height: 200)
-            //запуск анімації коли вид з'явиться на екрані
                 .onAppear() {
                     chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
                     self.chartDataObject.calcOfPath()
                 }
-            
             chartListView
                 .padding(8)
                 .frame(width: 300, alignment: .leading)
-                
-        
         }
     }
 }
-//
-struct PieChart_Previews: PreviewProvider {
-    static var previews: some View {
-        PieChart()
-    }
-}
-//
-//
-//
+
+
 extension PieChart{
     
-    //змінна яка поврне нашу діаграму
-    
-    
-    private var chartsCircleView: some View{
-        
-        //створюємо коло з розділенням на елементи
- 
+    private var chartsCircleView: some View {
         ZStack{
             ForEach(0..<chartDataObject.chartData.count) { index in
                 Circle()
@@ -121,10 +132,6 @@ extension PieChart{
                 .stroke(.white, lineWidth: 50)
                 .frame(width: 50, height: 50, alignment: .center)
             
-            VStack{
-                
-            }
-            
             Text(percentTapped)
                 .foregroundColor(.black)
                 .fontWeight(Font.Weight.light)
@@ -137,41 +144,33 @@ extension PieChart{
                     .offset(y: 15)
             }
         }
-        
     }
-    //список
+    
     private var chartListView: some View {
         
-       
         ScrollView(.vertical, showsIndicators: true){
-          
-            VStack(alignment: HorizontalAlignment.leading){
-        
-        ForEach(0..<chartDataObject.chartData.count) { index in
-            HStack{
-                RoundedRectangle(cornerRadius: index == indexOfTappedSlice ? 0 : 10)
-                    .fill(chartDataObject.chartData[index].color)
-                    .frame(width: 20, height: 20)
-                    .animation(.spring())
-                    
-                
-                Text(String(format: "%.2f",
-                            Double(chartDataObject.chartData[index].percent)) + "%" + " \(chartDataObject.chartData[index].name)")
-                    .font(indexOfTappedSlice == index ? Font.headline : Font.subheadline)
-            }
             
-            .onTapGesture{
+            VStack(alignment: HorizontalAlignment.leading){
                 
-                indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
-                percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
+                ForEach(0..<chartDataObject.chartData.count) { index in
+                    HStack{
+                        RoundedRectangle(cornerRadius: index == indexOfTappedSlice ? 0 : 10)
+                            .fill(chartDataObject.chartData[index].color)
+                            .frame(width: 20, height: 20)
+                            .animation(.spring())
+                        
+                        Text(String(format: "%.2f",
+                                    Double(chartDataObject.chartData[index].percent)) + "%" + " \(chartDataObject.chartData[index].name)")
+                        .font(indexOfTappedSlice == index ? Font.headline : Font.subheadline)
+                    }
+                    
+                    .onTapGesture {
+                        indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
+                        percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
+                    }
+                }
             }
         }
-        }
-        }
-        
         .padding(.bottom, 300)
-        
-    
     }
 }
-

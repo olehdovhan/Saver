@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ExpensesCircularDiagram: View {
+    
     var body: some View {
         ZStack{
-//            Color.blue.ignoresSafeArea(edges: .top)
             VStack{
                 HStack{
                     Text("Expenses")
@@ -32,17 +32,15 @@ struct ExpensesCircularDiagram: View {
                 .padding(.trailing, 27)
                 
                 PieChart()
-//                ContentView150()
+//                    .onChange(of: selectedTab) { newValue in
+//                        print("diagram")
+//                      //  updated.toggle()
+//                    }
                 
                 Spacer()
             }
         
         }
-    }
-}
-
-struct IncomeAndExpenses_Previews: PreviewProvider {
-    static var previews: some View {
-        ExpensesCircularDiagram()
+        
     }
 }
