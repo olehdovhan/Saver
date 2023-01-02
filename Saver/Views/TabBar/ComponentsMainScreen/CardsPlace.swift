@@ -9,11 +9,7 @@ import SwiftUI
 
 struct CardsPlace: View {
     
-    
     @State var firstZ: Double = 3
-    @State var secondZ: Double = 2
-    @State var thirdZ: Double = 1
-    
     @Binding var addCashSourceViewShow: Bool
     @Binding var incomeViewShow: Bool
     @Binding var expenseViewShow: Bool
@@ -21,8 +17,6 @@ struct CardsPlace: View {
     @Binding var cashSource: String
     @Binding var cashSources: [CashSource]
     @Binding var dragging: Bool
-    
-    
     
     var body: some View {
         GeometryReader { geo in
@@ -101,7 +95,6 @@ struct CardsPlace: View {
                                     }
                                     
                                     .frame(height: UIScreen.main.bounds.height * 1.5)
-//                                    .background(.yellow)
                                     
                                 }
                                 
@@ -120,26 +113,7 @@ struct CardsPlace: View {
                                     }
                                     .zIndex(1)
                                 }
-                                
-//                                VStack {
-//                                    Spacer().frame(height: 35)
-//                                RoundedRectangle(cornerRadius: 15).fill(.white)
-//                                    .frame(width: 50, height: 50)
-//                                    .myShadow(radiusShadow: 5)
-//                                    .overlay {
-//                                        Text("\(cashSources.count)")
-//                                    }
-//                                    Spacer().frame(height: 15)
-//                                }
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
+                     
                                 Spacer()
                                 Spacer().frame(width: 5)
                                     .onAppear(){
@@ -148,9 +122,7 @@ struct CardsPlace: View {
                             }
                             
                         }
-                       
-                        
-                     
+           
                     }
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                 }

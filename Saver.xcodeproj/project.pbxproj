@@ -20,6 +20,9 @@
 		0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7527B294F08980092651C /* DetailGoalView.swift */; };
 		0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7527E294F08B90092651C /* AddDebtView.swift */; };
 		0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE75280294F08CC0092651C /* DetailDebtView.swift */; };
+		66130992295DD73300275F16 /* AdaptivePagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66130991295DD73300275F16 /* AdaptivePagingScrollView.swift */; };
+		66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66130994295F2D1300275F16 /* CashSourcesData.swift */; };
+		66130997295F579700275F16 /* CashSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66130996295F579700275F16 /* CashSourceView.swift */; };
 		665A99B9294F4FD500C4F364 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */; };
 		665A99BA294F4FD500C4F364 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */; };
 		665A99BB294F4FD500C4F364 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */; };
@@ -77,6 +80,9 @@
 		0CE7527B294F08980092651C /* DetailGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalView.swift; sourceTree = "<group>"; };
 		0CE7527E294F08B90092651C /* AddDebtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtView.swift; sourceTree = "<group>"; };
 		0CE75280294F08CC0092651C /* DetailDebtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDebtView.swift; sourceTree = "<group>"; };
+		66130991295DD73300275F16 /* AdaptivePagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptivePagingScrollView.swift; sourceTree = "<group>"; };
+		66130994295F2D1300275F16 /* CashSourcesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSourcesData.swift; sourceTree = "<group>"; };
+		66130996295F579700275F16 /* CashSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSourceView.swift; sourceTree = "<group>"; };
 		665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
 		665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
@@ -195,6 +201,16 @@
 			path = CashSource;
 			sourceTree = "<group>";
 		};
+		66130993295DD7B100275F16 /* CashSources */ = {
+			isa = PBXGroup;
+			children = (
+				66130991295DD73300275F16 /* AdaptivePagingScrollView.swift */,
+				66130994295F2D1300275F16 /* CashSourcesData.swift */,
+				66130996295F579700275F16 /* CashSourceView.swift */,
+			);
+			path = CashSources;
+			sourceTree = "<group>";
+		};
 		665A99B1294F4E2500C4F364 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +293,7 @@
 			children = (
 				B4A9AA9A28B2708C001230BF /* BalanceView.swift */,
 				B4A9AA9C28B2770A001230BF /* CardsPlace.swift */,
+				66130993295DD7B100275F16 /* CashSources */,
 				B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */,
 				B4A9AAA128B27EAB001230BF /* PurchaseCategoriesView.swift */,
 			);
@@ -473,6 +490,7 @@
 			files = (
 				B4A9AAA228B27EAB001230BF /* PurchaseCategoriesView.swift in Sources */,
 				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
+				66130997295F579700275F16 /* CashSourceView.swift in Sources */,
 				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
 				0C979297294E3774000D80A2 /* PurchaseCategoryDetailView.swift in Sources */,
@@ -484,10 +502,12 @@
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
 				0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */,
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
+				66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */,
 				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,
 				FABB4BC028B124410070F300 /* ContentView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* ExtensionColor.swift in Sources */,
+				66130992295DD73300275F16 /* AdaptivePagingScrollView.swift in Sources */,
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */,

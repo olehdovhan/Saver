@@ -24,8 +24,15 @@ struct MainScreen: View {
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
-    @State var dragging = false
+//    @State var dragging = false
     @State var selectedCategory: PurchaseCategory?
+    
+    @State var cashSourcesData = CashSourcesData()
+    @State private var scrollEffectValue: Double = 13
+    @State private var activePageIndex: Int = 0
+    @State var dragging = true
+    let itemWidth: CGFloat = 100
+    let itemPadding: CGFloat = 20
     
     var body: some View {
         ZStack {
@@ -51,18 +58,77 @@ struct MainScreen: View {
                 BalanceView().zIndex(4)
                 Spacer() .frame(height: 15)
                 
-                
-                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
-                           incomeViewShow: $incomeViewShow,
-                           expenseViewShow: $expenseViewShow,
-                           purchaseType: $expenseType,
-                           cashSource: $cashSource,
-                           cashSources: $cashSources,
-                           dragging: $dragging).zIndex(dragging ? 3 : -2)
+                    //Новий скрол
+                GeometryReader { geometry in
+                    AdaptivePagingScrollView(addCashSourceViewShow: $addCashSourceViewShow,
+                                             incomeViewShow: $incomeViewShow,
+                                             expenseViewShow: $expenseViewShow,
+                                             purchaseType: $expenseType,
+                                             cashSource: $cashSource,
+                                             cashSources: $cashSources,
+                                             currentPageIndex: self.$activePageIndex,
+                                             dragging: self.$dragging,
+                                             itemsAmount:    cashSources.count - 1,
+                                             itemWidth: self.itemWidth,
+                                             itemPadding: self.itemPadding,
+                                             pageWidth: geometry.size.width) {
+                        ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
+                            GeometryReader{ screen in
+                                CashSourceView(dragging: $dragging,
+                                               cashSourceItem: source,
+                                               index: index,
+                                               incomeViewShow: $incomeViewShow,
+                                               cashSource: $cashSource,
+                                               cashSourcesCount: cashSources.count,
+                                               expenseViewShow: $expenseViewShow,
+                                                purchaseType: $expenseType
+                                )
+                                
+                            }
+                            .frame(width: self.itemWidth, height: 70)
+                        }
+                        
+                        
+                        
+                    }
+                                             
+                                             .background(Color.black.opacity(0.1))
+                    
+                    //Референсний новий скрол
+//                    AdaptivePagingScrollView(currentPageIndex: self.$activePageIndex,
+//                                             dragging: self.$dragging,
+//                                             itemsAmount: self.onboardData.cards.count - 1,
+//                                             itemWidth: self.itemWidth,
+//                                             itemPadding: self.itemPadding,
+//                                             pageWidth: geometry.size.width) {
+//                        ForEach(onboardData.cards) { card in
+//                            GeometryReader { screen in
+//                                OnbardingCardView(dragging: $dragging, card: card)
+//                            }
+//                            .frame(width: self.itemWidth, height: 100)
+//
+//                        }
+//                    }
+//                                             .frame(height: 150)
+//                                             .background(Color.red)
+                }
                 .onChange(of: addCashSourceViewShow) { newValue in
                     if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
-                }
-                .frame(height: 90)
+                                }
+                .frame(height: 100)
+                
+                //Старий скрол
+//                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
+//                           incomeViewShow: $incomeViewShow,
+//                           expenseViewShow: $expenseViewShow,
+//                           purchaseType: $expenseType,
+//                           cashSource: $cashSource,
+//                           cashSources: $cashSources,
+//                           dragging: $dragging).zIndex(dragging ? 3 : -2)
+//                .onChange(of: addCashSourceViewShow) { newValue in
+//                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
+//                }
+//                .frame(height: 90)
 //                .background(.red.opacity(0.3))
                 
                 Spacer() .frame(height: 15)

@@ -83,14 +83,7 @@ struct DragGestureCustom: ViewModifier {
                     let yRange = startYRange...finishYRange
                     
                     if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
-//                        print(item.key.rawValue)
-                        
-//                        switch item.key {
-//                        case .products: purchaseType = "Products"
-//                        case .transport: purchaseType = "Transport"
-//                        case .clouthing: purchaseType = "Clothing"
-//                        case .restaurant: purchaseType = "Restaurant"
-//                        }
+
                         purchaseType = item.key
                         cashSource = cashType
                         isAlertShow.toggle()
