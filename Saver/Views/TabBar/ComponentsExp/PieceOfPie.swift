@@ -90,19 +90,24 @@ class PieceOfPieContainer: ObservableObject {
 
 struct PieChart: View {
     
-    @ObservedObject var chartDataObject = PieceOfPieContainer()
+    @State var chartDataObject = PieceOfPieContainer()
     @State private var indexOfTappedSlice = -1
     @State private var percentTapped = "UAH"
+    @Binding var selectedTab: Int
     
     var body: some View {
         
         VStack {
             chartsCircleView
                 .frame(width: 100, height: 200)
-                .onAppear() {
+                .onChange(of: selectedTab, perform: { newValue in
+                    chartDataObject = PieceOfPieContainer()
                     chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
                     self.chartDataObject.calcOfPath()
-                }
+                })
+//                .onAppear() {
+//                  
+//                }
             chartListView
                 .padding(8)
                 .frame(width: 300, alignment: .leading)
@@ -125,7 +130,7 @@ extension PieChart{
                     .onTapGesture{
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
                         percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
-                    }
+                }
             }
             
             Circle()

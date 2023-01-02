@@ -21,7 +21,7 @@ struct TabBarView: View {
                 }
                 .opacity(selectedTab == 0 ? 1 : 0)
        
-            ExpensesCircularDiagram()
+            ExpensesCircularDiagram(selectedTab: $selectedTab)
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon1")
                 }

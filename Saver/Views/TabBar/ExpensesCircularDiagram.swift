@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ExpensesCircularDiagram: View {
     
+    @Binding var selectedTab: Int
+    
     var body: some View {
         ZStack{
             VStack{
@@ -31,7 +33,7 @@ struct ExpensesCircularDiagram: View {
                 }
                 .padding(.trailing, 27)
                 
-                PieChart()
+                PieChart(selectedTab: $selectedTab)
 //                    .onChange(of: selectedTab) { newValue in
 //                        print("diagram")
 //                      //  updated.toggle()
