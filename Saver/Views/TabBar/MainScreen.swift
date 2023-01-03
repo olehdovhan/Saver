@@ -34,7 +34,7 @@ struct MainScreen: View {
     @State var draggingItem = false
     @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = 100
-    let itemPadding: CGFloat = 20
+    let itemPadding: CGFloat = 10
     
     var body: some View {
         ZStack {
@@ -59,6 +59,9 @@ struct MainScreen: View {
                 
                 BalanceView().zIndex(4)
                 Spacer() .frame(height: 15)
+                    .onAppear(){
+                        print(UIScreen.main.bounds.width)
+                    }
                 
                     //Новий скрол
                 GeometryReader { geometry in
@@ -124,7 +127,7 @@ struct MainScreen: View {
                             .fill(
                                 .ellipticalGradient(colors: [.white, .clear])
                             )
-                            .frame(width: itemPadding * 2)
+                            .frame(width: itemPadding * 3)
                             .frame(height: 140)
                             .offset(x: -itemPadding)
 
@@ -134,11 +137,13 @@ struct MainScreen: View {
                             .fill(
                                 .ellipticalGradient(colors: [.white, .clear])
                             )
-                            .frame(width: itemPadding * 2)
+                            .frame(width: itemPadding * 3)
                             .frame(height: 140)
                             .offset(x: itemPadding)
                             }
                 )
+                
+                
                 
 //                Старий скрол
 //                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
@@ -147,7 +152,7 @@ struct MainScreen: View {
 //                           purchaseType: $expenseType,
 //                           cashSource: $cashSource,
 //                           cashSources: $cashSources,
-//                           dragging: $dragging).zIndex(dragging ? 3 : -2)
+//                           draggingItem: $draggingItem).zIndex(draggingItem ? 3 : -2)
 //                .onChange(of: addCashSourceViewShow) { newValue in
 //                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
 //                }
@@ -157,6 +162,7 @@ struct MainScreen: View {
                 Spacer() .frame(height: 15)
                     
                 StatisticsPlace().zIndex(3)
+//                    .background(.red)
                 
                 
                 

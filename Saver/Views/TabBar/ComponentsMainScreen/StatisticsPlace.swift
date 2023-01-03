@@ -11,11 +11,9 @@ struct StatisticsPlace: View{
     var body: some View{
         
         ZStack{
-//            Color.orange.opacity(0.2)
-            //Statistics
-            HStack(alignment: .top){
+            HStack(alignment: .top, spacing: 0){
                 
-                Spacer(minLength: 30)
+                Rectangle().frame(width: 20, height: 10).foregroundColor(.white)
                 
                 Button {
                     print("Monthly budget")
@@ -91,7 +89,7 @@ struct StatisticsPlace: View{
                
                 
                 
-                Spacer(minLength: 30)
+                Rectangle().frame(width: 25, height: 10).foregroundColor(.white)
             }
             .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
            

@@ -66,9 +66,6 @@ struct CashSourceView: View {
                                             .frame(width: 75)
                                             .frame(height: 10)
                                             .lineLimit(1)
-//                                            .background(Capsule().fill(.white))
-                    
-                    
                 }
                 .zIndex(Double(cashSourcesCount - index))
             }
@@ -80,7 +77,7 @@ struct CashSourceView: View {
                                                  center: .center,
                                                  startRadius: 20,
                                                  endRadius: 30)).scaleEffect(2))
-        .delaysTouches(for: 0.5) {  }
+        .delaysTouches(for: 0.2) {  }
         .draggable(zIndex: $firstZ,
                    isAlertShow: $expenseViewShow,
                    purchaseType: $purchaseType,

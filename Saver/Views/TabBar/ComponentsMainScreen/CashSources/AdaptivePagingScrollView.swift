@@ -109,10 +109,30 @@ struct AdaptivePagingScrollView: View {
         ZStack{
             GeometryReader { viewGeometry in
                 
-                HStack(alignment: .center, spacing: itemSpacing) {
+                HStack(alignment: .top, spacing: itemSpacing) {
                     ForEach(items.indices, id: \.self) { itemIndex in
                         items[itemIndex].frame(width: itemWidth)
                     }
+                    
+                    
+                        Button {
+                            if cashSources.count < 6 {
+                                addCashSourceViewShow = true
+                            } else {
+                                //show alert
+                            }
+                        } label: {
+                            VStack {
+                                Spacer().frame(height: 35)
+                                Image("iconPlus")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .myShadow(radiusShadow: 5)
+                                Spacer().frame(height: 15)
+                            }
+                        }
+                        .zIndex(1)
+                    
                 }
             }
             .onAppear {
@@ -157,13 +177,7 @@ struct AdaptivePagingScrollView: View {
             )
        
         }
-//        HStack{
-//            Ellipse()
-//                            .fill(.orange)
-//                            .frame(width: leadingOffset*2)
-//                            .offset(x: -leadingOffset)
-//            Spacer().zIndex(-10)
-//        }
+
     }
 }
 
