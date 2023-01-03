@@ -108,7 +108,6 @@ struct SpendingsCalendarView: View {
                         return viewModel.isSameDay(date1: task.taskDate,
                                                    date2: viewModel.selectedDate)
                     }){
-                        
                         ForEach(task.tasks) { task in
                             HStack(spacing: 0){
                                 HStack{
