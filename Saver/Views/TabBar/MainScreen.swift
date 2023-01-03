@@ -30,7 +30,9 @@ struct MainScreen: View {
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
     @State private var activePageIndex: Int = 0
-    @State var dragging = true
+    @State var draggingScroll = true
+    @State var draggingItem = false
+    @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = 100
     let itemPadding: CGFloat = 20
     
@@ -67,23 +69,22 @@ struct MainScreen: View {
                                              cashSource: $cashSource,
                                              cashSources: $cashSources,
                                              currentPageIndex: self.$activePageIndex,
-                                             dragging: self.$dragging,
+                                             draggingScroll: self.$draggingScroll,
                                              itemsAmount:    cashSources.count - 1,
                                              itemWidth: self.itemWidth,
                                              itemPadding: self.itemPadding,
                                              pageWidth: geometry.size.width) {
                         ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                             GeometryReader{ screen in
-                                CashSourceView(dragging: $dragging,
+                                CashSourceView(draggingItem: $draggingItem,
                                                cashSourceItem: source,
                                                index: index,
                                                incomeViewShow: $incomeViewShow,
                                                cashSource: $cashSource,
                                                cashSourcesCount: cashSources.count,
                                                expenseViewShow: $expenseViewShow,
-                                                purchaseType: $expenseType
+                                               purchaseType: $expenseType
                                 )
-                                
                             }
                             .frame(width: self.itemWidth, height: 70)
                         }
@@ -92,7 +93,7 @@ struct MainScreen: View {
                         
                     }
                                              
-                                             .background(Color.black.opacity(0.1))
+//                                             .background(Color.black.opacity(0.1))
                     
                     //Референсний новий скрол
 //                    AdaptivePagingScrollView(currentPageIndex: self.$activePageIndex,
@@ -112,12 +113,34 @@ struct MainScreen: View {
 //                                             .frame(height: 150)
 //                                             .background(Color.red)
                 }
+                .zIndex(draggingItem ? 10 : -2)
                 .onChange(of: addCashSourceViewShow) { newValue in
                     if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
                                 }
                 .frame(height: 100)
+                .overlay(
+                    HStack{
+                        Ellipse()
+                            .fill(
+                                .ellipticalGradient(colors: [.white, .clear])
+                            )
+                            .frame(width: itemPadding * 2)
+                            .frame(height: 140)
+                            .offset(x: -itemPadding)
+
+                        Spacer().zIndex(-10)
+                        
+                        Ellipse()
+                            .fill(
+                                .ellipticalGradient(colors: [.white, .clear])
+                            )
+                            .frame(width: itemPadding * 2)
+                            .frame(height: 140)
+                            .offset(x: itemPadding)
+                            }
+                )
                 
-                //Старий скрол
+//                Старий скрол
 //                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
 //                           incomeViewShow: $incomeViewShow,
 //                           expenseViewShow: $expenseViewShow,

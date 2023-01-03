@@ -39,14 +39,14 @@ extension View {
                    purchaseType: Binding<String>,
                    cashType: String ,
                    cashSource: Binding<String>,
-                   dragging: Binding<Bool>) -> some View {
-        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource, dragging: dragging))
+                   draggingItem: Binding<Bool>) -> some View {
+        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource, draggingItem: draggingItem))
     }
 }
 
 struct DragGestureCustom: ViewModifier {
     
-    @State var isDragging = false
+    @State var isDraggingItem = false
     @State var currentOffsetX: CGFloat = 0
     @State var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
@@ -54,23 +54,23 @@ struct DragGestureCustom: ViewModifier {
     @Binding var purchaseType: String
     @State var cashType: String
     @Binding var cashSource: String
-    @Binding var dragging: Bool
+    @Binding var draggingItem: Bool
    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
-                dragging = true
+                draggingItem = true
                 withAnimation {
                     zIndex = 5
                     currentOffsetX = value.translation.width
                     currentOffsetY = value.translation.height
-                    isDragging.toggle()
+                    isDraggingItem.toggle()
                 }
                 print(value.location.y)
                
             })
             .onEnded { gesture in
-                dragging = false
+                draggingItem = false
                 var locs = PurchaseLocation.standard.locations
                 
                 for item in locs {
@@ -95,7 +95,7 @@ struct DragGestureCustom: ViewModifier {
                     print("moped")
                     withAnimation(.spring()) {
                         zIndex = 1
-                        isDragging.toggle()
+                        isDraggingItem.toggle()
                         currentOffsetX = 0
                         currentOffsetY = 0
                     }
@@ -103,7 +103,7 @@ struct DragGestureCustom: ViewModifier {
                 } else {
                     withAnimation(.spring()) {
                         zIndex = 1
-                        isDragging.toggle()
+                        isDraggingItem.toggle()
                         currentOffsetX = 0
                         currentOffsetY = 0
                     }

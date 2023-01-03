@@ -16,7 +16,7 @@ struct CardsPlace: View {
     @Binding var purchaseType: String
     @Binding var cashSource: String
     @Binding var cashSources: [CashSource]
-    @Binding var dragging: Bool
+    @Binding var draggingItem: Bool
     
     var body: some View {
         GeometryReader { geo in
@@ -85,7 +85,7 @@ struct CardsPlace: View {
                                                        purchaseType: $purchaseType,
                                                        cashType: source.name,
                                                        cashSource: $cashSource,
-                                                       dragging: $dragging)
+                                                       draggingItem: $draggingItem)
                                             
                                             
                                             

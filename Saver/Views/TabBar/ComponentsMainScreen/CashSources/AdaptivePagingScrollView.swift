@@ -16,7 +16,7 @@ struct AdaptivePagingScrollView: View {
     private let itemsAmount: Int
     private let contentWidth: CGFloat
 
-    private let leadingOffset: CGFloat
+    
     private let scrollDampingFactor: CGFloat = 0.66
 
     @Binding var currentPageIndex: Int
@@ -28,10 +28,13 @@ struct AdaptivePagingScrollView: View {
     @Binding var purchaseType: String
     @Binding var cashSource: String
     @Binding var cashSources: [CashSource]
-    @Binding var dragging: Bool
+    @Binding var draggingScroll: Bool
+    private let leadingOffset: CGFloat
 
     @State private var currentScrollOffset: CGFloat = 0
     @State private var gestureDragOffset: CGFloat = 0
+//    @Binding var leadingOffsetScroll: CGFloat
+    
 
     private func countOffset(for pageIndex: Int) -> CGFloat {
 
@@ -68,12 +71,11 @@ struct AdaptivePagingScrollView: View {
         expenseViewShow: Binding<Bool>,
         purchaseType: Binding<String>,
         cashSource: Binding<String>,
-        //Як замість items: [AnyView] використати дані з cashSources: [CashSource], який наповнюється в Main?
         cashSources: Binding<Array<CashSource>>,
         
         
         currentPageIndex: Binding<Int>,
-        dragging: Binding<Bool>,
+        draggingScroll: Binding<Bool>,
         itemsAmount: Int,
         itemWidth: CGFloat,
         itemPadding: CGFloat,
@@ -91,7 +93,7 @@ struct AdaptivePagingScrollView: View {
         self._cashSources = cashSources
             
         self._currentPageIndex = currentPageIndex
-        self._dragging = dragging
+        self._draggingScroll = draggingScroll
         self.itemsAmount = itemsAmount
         self.itemSpacing = itemPadding
         self.itemWidth = itemWidth
@@ -100,54 +102,68 @@ struct AdaptivePagingScrollView: View {
 
         let itemRemain = (pageWidth-itemWidth-2*itemPadding)/2
         self.leadingOffset =   itemPadding
+//            self._leadingOffsetScroll = leadingOffsetScroll
     }
 
     var body: some View {
-        GeometryReader { viewGeometry in
-            HStack(alignment: .center, spacing: itemSpacing) {
-                ForEach(items.indices, id: \.self) { itemIndex in
-                    items[itemIndex].frame(width: itemWidth)
+        ZStack{
+            GeometryReader { viewGeometry in
+                
+                HStack(alignment: .center, spacing: itemSpacing) {
+                    ForEach(items.indices, id: \.self) { itemIndex in
+                        items[itemIndex].frame(width: itemWidth)
+                    }
                 }
             }
+            .onAppear {
+                currentScrollOffset = countOffset(for: currentPageIndex)
+//                leadingOffsetScroll = leadingOffset
+//                print("leadingOffsetScroll: \(leadingOffsetScroll)")
+            }
+            .background(Color.black.opacity(0.00001)) // hack - this allows gesture recognizing even when background is transparent
+            .frame(width: contentWidth)
+            .offset(x: self.currentScrollOffset, y: 0)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 1, coordinateSpace: .local)
+                    .onChanged { value in
+                        if draggingScroll == false {
+                            gestureDragOffset = value.translation.width
+                            currentScrollOffset = countCurrentScrollOffset()
+                        }
+                    }
+                    .onEnded { value in
+                        let cleanOffset = (value.predictedEndTranslation.width - gestureDragOffset)
+                        let velocityDiff = cleanOffset * scrollDampingFactor
+                        
+                        var newPageIndex = countPageIndex(for: currentScrollOffset + velocityDiff)
+                        
+                        let currentItemOffset = CGFloat(currentPageIndex) * (itemWidth + itemPadding)
+                        
+                        if currentScrollOffset < -(currentItemOffset),
+                           newPageIndex == currentPageIndex {
+                            newPageIndex += 1
+                        }
+                        
+                        gestureDragOffset = 0
+                        
+                        withAnimation(.interpolatingSpring(mass: 0.1,
+                                                           stiffness: 20,
+                                                           damping: 1.5,
+                                                           initialVelocity: 0)) {
+                            self.currentPageIndex = newPageIndex
+                            self.currentScrollOffset = self.countCurrentScrollOffset()
+                        }
+                    }
+            )
+       
         }
-        .onAppear {
-            currentScrollOffset = countOffset(for: currentPageIndex)
-        }
-        .background(Color.black.opacity(0.00001)) // hack - this allows gesture recognizing even when background is transparent
-        .frame(width: contentWidth)
-        .offset(x: self.currentScrollOffset, y: 0)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 1, coordinateSpace: .local)
-                .onChanged { value in
-                    if dragging == false {
-                        gestureDragOffset = value.translation.width
-                        currentScrollOffset = countCurrentScrollOffset()
-                    }
-                }
-                .onEnded { value in
-                    let cleanOffset = (value.predictedEndTranslation.width - gestureDragOffset)
-                    let velocityDiff = cleanOffset * scrollDampingFactor
-
-                    var newPageIndex = countPageIndex(for: currentScrollOffset + velocityDiff)
-
-                    let currentItemOffset = CGFloat(currentPageIndex) * (itemWidth + itemPadding)
-
-                    if currentScrollOffset < -(currentItemOffset),
-                       newPageIndex == currentPageIndex {
-                        newPageIndex += 1
-                    }
-
-                    gestureDragOffset = 0
-
-                    withAnimation(.interpolatingSpring(mass: 0.1,
-                                                       stiffness: 20,
-                                                       damping: 1.5,
-                                                       initialVelocity: 0)) {
-                        self.currentPageIndex = newPageIndex
-                        self.currentScrollOffset = self.countCurrentScrollOffset()
-                    }
-                }
-        )
+//        HStack{
+//            Ellipse()
+//                            .fill(.orange)
+//                            .frame(width: leadingOffset*2)
+//                            .offset(x: -leadingOffset)
+//            Spacer().zIndex(-10)
+//        }
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CashSourceView: View {
     @State var firstZ: Double = 3
-    @Binding var dragging : Bool
+    @Binding var draggingItem : Bool
     var cashSourceItem: CashSource
     var index: Int
     @Binding var incomeViewShow: Bool
@@ -35,6 +35,7 @@ struct CashSourceView: View {
                         .frame(width: 75)
                         .frame(height: 30)
                         .lineLimit(2)
+//                        .background(Capsule().fill(.white))
                     
                     switch cashSourceItem.iconName {
                     case "iconBankCard", "iconWallet":
@@ -65,6 +66,7 @@ struct CashSourceView: View {
                                             .frame(width: 75)
                                             .frame(height: 10)
                                             .lineLimit(1)
+//                                            .background(Capsule().fill(.white))
                     
                     
                 }
@@ -73,13 +75,18 @@ struct CashSourceView: View {
             .frame(width: 75)
             
         }
+        
+        .background(Circle().fill(RadialGradient(colors: [.white, .clear],
+                                                 center: .center,
+                                                 startRadius: 20,
+                                                 endRadius: 30)).scaleEffect(2))
         .delaysTouches(for: 0.5) {  }
         .draggable(zIndex: $firstZ,
                    isAlertShow: $expenseViewShow,
                    purchaseType: $purchaseType,
                    cashType: cashSourceItem.name,
                    cashSource: $cashSource,
-                   dragging: $dragging)
+                   draggingItem: $draggingItem)
         
     }
 }
