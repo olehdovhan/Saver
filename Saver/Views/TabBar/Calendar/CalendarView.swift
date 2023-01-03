@@ -11,10 +11,9 @@ struct CalendarView: View {
     
     var body: some View {
         ZStack{
-//            Color.red.ignoresSafeArea(edges: .top)
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 20) {
-                    CustomDatePicker3()
+                    SpendingsCalendarView()
                 }
             }
         }

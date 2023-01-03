@@ -11,9 +11,7 @@ import SwiftUI
 
 //Task Model and Sample Tasks...
 
-
-//Array of Task
-struct Task: Identifiable{
+struct Task: Identifiable {
     var id = UUID().uuidString
     var title: String
     var time: Date = Date()
@@ -21,7 +19,7 @@ struct Task: Identifiable{
 }
 
 //Total Task Meta View
-struct TaskMetaData: Identifiable{
+struct TaskMetaData: Identifiable {
     var id = UUID().uuidString
     var tasks: [Task]
     var taskDate: Date
@@ -34,35 +32,30 @@ func getSampleDate(offset: Int) -> Date {
     let date = calendar.date(byAdding: .day, value: offset, to: Date())
     return date ?? Date()
 }
-
-//Sample Tasks... //
-//цей масив визначає наповненість блоку трансакцій (детальні витрати), offset: 0 - сьогоднішній день
     
-var tasks: [TaskMetaData] = [
+//var tasks: [TaskMetaData] = [
+//TaskMetaData(tasks: [
+//    Task(title: "To the bank card", valueUSD: "+300.00"),
+//    Task(title: "To the bank card", valueUSD: "+154.89"),
+//    Task(title: "Product", valueUSD: "-900.00")
+//], taskDate: getSampleDate(offset: 0)),
 //
-TaskMetaData(tasks: [
-    Task(title: "To the bank card", valueUSD: "+300.00"),
-    Task(title: "To the bank card", valueUSD: "+154.89"),
-    Task(title: "Product", valueUSD: "-900.00")
-], taskDate: getSampleDate(offset: 0)),
-
-TaskMetaData(tasks: [
-    Task(title: "Product", valueUSD: "+200.00")
-], taskDate: getSampleDate(offset: -2)),
-
-TaskMetaData(tasks: [
-    Task(title: "Product", valueUSD: "+700.00")
-], taskDate: getSampleDate(offset: 15)),
+//TaskMetaData(tasks: [
+//    Task(title: "Product", valueUSD: "+200.00")
+//], taskDate: getSampleDate(offset: -2)),
 //
-TaskMetaData(tasks: [
-    Task(title: "To the bank card", valueUSD: "-1200.00")
-], taskDate: getSampleDate(offset: 0)),
-//
-TaskMetaData(tasks: [
-    Task(title: "To the bank card", valueUSD: "100.00")
-], taskDate: getSampleDate(offset: +18))
-
-]
+//TaskMetaData(tasks: [
+//    Task(title: "Product", valueUSD: "+700.00")
+//], taskDate: getSampleDate(offset: 15)),
+////
+//TaskMetaData(tasks: [
+//    Task(title: "To the bank card", valueUSD: "-1200.00")
+//], taskDate: getSampleDate(offset: 0)),
+////
+//TaskMetaData(tasks: [
+//    Task(title: "To the bank card", valueUSD: "100.00")
+//], taskDate: getSampleDate(offset: +18))
+//]
 
 
 

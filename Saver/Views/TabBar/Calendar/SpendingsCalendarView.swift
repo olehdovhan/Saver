@@ -6,129 +6,37 @@
 //
 
 import SwiftUI
-import UIKit
 
-struct CustomDatePicker3: View {
+struct SpendingsCalendarView: View {
     
-    @State var selectedDate: Date = Date()
-    @State var currentMonth: Int = 0
-    
-    @State var monthOffset: CGSize = .zero
-    @State var dayOffset: CGSize = .zero
-    
-    let lengthDay = UIScreen.main.bounds.width / 8
-    
-    var futureMonthDate: Date {
-        var dateComponent = DateComponents()
-        dateComponent.month = +1
-        return calendar.date(byAdding: dateComponent, to: selectedDate)!
-    }
-    
-    var pastMonthDate: Date {
-        var dateComponent = DateComponents()
-        dateComponent.month = -1
-        return calendar.date(byAdding: dateComponent, to: selectedDate)!
-    }
-    
-    var futureDayDate: Date {
-        var dateComponent = DateComponents()
-        dateComponent.day = +1
-        return calendar.date(byAdding: dateComponent, to: selectedDate)!
-    }
-    
-    var pastDayDate: Date {
-        var dateComponent = DateComponents()
-        dateComponent.day = -1
-        return calendar.date(byAdding: dateComponent, to: selectedDate)!
-    }
-    
-    var dayOfWeakFormat : DateFormatter
-    {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EE"
-        return formatter
-    }
-    
-    var  timeFormat24: DateFormatter{
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }
-    
-    var sun: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 01))!)
-    }
-    var mon: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 02))!)
-    }
-    var tue: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 03))!)
-    }
-    var wed: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 04))!)
-    }
-    var thu: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 05))!)
-    }
-    var fri: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 06))!)
-    }
-    var sat: String{
-        dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 07))!)
-    }
-    
-    var selectedDayOfWeak: String{
-        let selectedDayOfWeak = dayOfWeakFormat.string(from: selectedDate)
-        return selectedDayOfWeak
-    }
-    
-    var offsetDayOfWeek: CGSize{
-        var offsetDay = CGSize()
-        
-        switch selectedDayOfWeak {
-        case mon: offsetDay.width = lengthDay * 1
-        case tue: offsetDay.width = lengthDay * 2
-        case wed: offsetDay.width = lengthDay * 3
-        case thu: offsetDay.width = lengthDay * 4
-        case fri: offsetDay.width = lengthDay * 5
-        case sat: offsetDay.width = lengthDay * 6
-        default: offsetDay.width = 0
-        }
-        
-        return offsetDay
-    }
-    
+    @ObservedObject private var viewModel = SpendingsCalendarViewModel()
     
     var body: some View {
         VStack(spacing: 10){
-
             HStack(spacing: 0) {
                 Button {
                     withAnimation {
-                        currentMonth -= 1
+                        viewModel.currentMonth -= 1
                     }
                 } label: {
-                    Text(pastMonthDate, format: Date.FormatStyle().month(.abbreviated))
+                    Text(viewModel.pastMonthDate, format: Date.FormatStyle().month(.abbreviated))
                         .font(.custom("NotoSans-Regular", size: 14, relativeTo: .body))
                 }
                 Spacer()
-                
-                
-                Text(selectedDate, format: Date.FormatStyle().month(.abbreviated))
+                Text(viewModel.selectedDate, format: Date.FormatStyle().month(.abbreviated))
                     .font(.custom("NotoSans-Bold", size: 18, relativeTo: .body))
-                
                 Spacer()
                 Button {
                     withAnimation {
-                        currentMonth += 1
+                        viewModel.currentMonth += 1
                     }
                 } label: {
-                    Text(futureMonthDate, format: Date.FormatStyle().month(.abbreviated))
+                    Text(viewModel.futureMonthDate, format: Date.FormatStyle().month(.abbreviated))
                         .font(.custom("NotoSans-Regular", size: 14, relativeTo: .body))
                 }
             }
             
-            ZStack{
+            ZStack {
                 RoundedRectangle(cornerRadius: 50)
                     .fill(Color(hex: "EDECEC"))
                     .frame(height: 5)
@@ -136,14 +44,11 @@ struct CustomDatePicker3: View {
                 RoundedRectangle(cornerRadius: 50)
                     .fill(LinearGradient(colors: [Color(hex: "#90DE58"), Color(hex: "#5CCCCC")], startPoint: .leading, endPoint: .trailing))
                     .frame(width: UIScreen.main.bounds.width / 5, height: 5)
-                    .offset(x: monthOffset.width)
+                    .offset(x: viewModel.monthOffset.width)
             }
-//            .padding(.horizontal, 30)
-            
-            // Days of Weak...
-            let dayOfWeakArray: [String] = [sun, mon,tue, wed, thu, fri, sat]
+            // Days of Week...
             HStack(spacing: 0) {
-                ForEach(dayOfWeakArray, id: \.self) { day in
+                ForEach(viewModel.dayOfWeakArray, id: \.self) { day in
                     Text(day)
                         .font(.callout)
                         .fontWeight(.semibold)
@@ -151,33 +56,36 @@ struct CustomDatePicker3: View {
                         .foregroundColor(.gray)
                 }
             }
-
             //Dates
             // Lazy Grid...
             let columns = Array(repeating: GridItem(.flexible(), spacing: 5, alignment: .center), count: 7 )
             
             LazyVGrid(columns: columns, spacing: 5) {
-                ForEach(extractDate()) {value in
+                ForEach(viewModel.extractDate()) {value in
                     cardView(value: value)
                         .background {
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(isSameDay(date1: value.date, date2: selectedDate) ? .green : .gray.opacity(0.3), lineWidth: isSameDay(date1: value.date, date2: selectedDate) ? 2 : 1)
+                                .stroke(viewModel.isSameDay(date1: value.date,
+                                                  date2: viewModel.selectedDate) ? .green : .gray.opacity(0.3),
+                                        lineWidth: viewModel.isSameDay(date1: value.date,
+                                                             date2: viewModel.selectedDate) ? 2 : 1)
                         }
                         .onTapGesture {
                             print("value = \(value)")
                             print("selectedDate = \(value.date)")
-                            selectedDate = value.date
+                            viewModel.selectedDate = value.date
                             let kkk = transactions[2].date
-                            let check = isSameDay(date1: kkk , date2: selectedDate)
+                            let check = viewModel.isSameDay(date1: kkk ,
+                                                            date2: viewModel.selectedDate)
                             print(check)
                         }
                 }
             }
-            .offset(x: monthOffset.width)
+            .offset(x: viewModel.monthOffset.width)
             .gesture(monthDragGesture)
             
             VStack(spacing: 7) {
-                Text(selectedDate, format: Date.FormatStyle().month(.abbreviated).day())
+                Text(viewModel.selectedDate, format: Date.FormatStyle().month(.abbreviated).day())
                     .font(.custom("NotoSans-SemiBold", size: 18, relativeTo: .body))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -190,27 +98,26 @@ struct CustomDatePicker3: View {
                         
                         RoundedRectangle(cornerRadius: 50)
                             .fill(LinearGradient(colors: [Color(hex: "#90DE58"), Color(hex: "#5CCCCC")], startPoint: .leading, endPoint: .trailing))
-                            .frame(width: lengthDay, height: 5)
-                            .offset(x: offsetDayOfWeek.width)
+                            .frame(width: viewModel.lengthDay, height: 5)
+                            .offset(x: viewModel.offsetDayOfWeek.width)
                         Spacer()
                     }
                 }
                 VStack(spacing: 12){
-                    if let task  = tasks.first(where: { task in
-                        return isSameDay(date1: task.taskDate, date2: selectedDate)
+                    if let task = viewModel.tasks.first(where: { task in
+                        return viewModel.isSameDay(date1: task.taskDate,
+                                                   date2: viewModel.selectedDate)
                     }){
                         
-                        //Список трансакцій, коли вони є
                         ForEach(task.tasks) { task in
                             HStack(spacing: 0){
                                 HStack{
                                     let timeTask12 = task.time.addingTimeInterval(CGFloat.random(in: 0...5000))
                                 
-                                    Text(timeFormat24.string(from: timeTask12))
+                                    Text(viewModel.timeFormat24.string(from: timeTask12))
                                         .foregroundColor(Color(hex: "A9A9A9"))
                                     .multilineTextAlignment(.leading)
                                     .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
-    //
                                     Spacer()
                                 }
                                 .frame(width: UIScreen.main.bounds.width/7)
@@ -224,7 +131,6 @@ struct CustomDatePicker3: View {
                                     )
                                     .multilineTextAlignment(.leading)
                                     .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                                    
                                     Spacer()
                                 }
                                 .frame(width: UIScreen.main.bounds.width/4)
@@ -243,41 +149,33 @@ struct CustomDatePicker3: View {
                                 }
                                 Spacer()
                             }
-                            
                         }
-                       
                     }
                     else {
-                        //Коли трансакцій нема
                          Text("No Transaction Found")
                             .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                     }
                 }
                 .padding(.top, 22)
-                .offset(x: dayOffset.width)
+                .offset(x: viewModel.dayOffset.width)
                 .gesture(dayDragGesture)
-                
             }
-            
-            
             .padding(.top, 10)
         }
         .padding(.horizontal, 30)
-        .onChange(of: currentMonth) { newValue in
-            //updating Month...
+        .onChange(of: viewModel.currentMonth) { newValue in
             withAnimation {
-                selectedDate = getCurrentMonth()
+                viewModel.selectedDate = viewModel.getCurrentMonth()
             }
         }
-        
-
     }
+    
     var monthDragGesture: some Gesture{
         DragGesture(minimumDistance: 10, coordinateSpace: .local)
             .onChanged({ value in
                 withAnimation(Animation.linear(duration: 0.5)) {
                     if abs(value.translation.width) < UIScreen.main.bounds.width / 3 {
-                        self.monthOffset = value.translation
+                        self.viewModel.monthOffset = value.translation
                     }
                 }
             })
@@ -285,15 +183,15 @@ struct CustomDatePicker3: View {
                 if value.translation.width > 0 {
                     if value.translation.width > 100{
                         print("future")
-                        self.currentMonth += 1
+                        self.viewModel.currentMonth += 1
                     }
                 } else if value.translation.width < 0 {
                     if value.translation.width < 100 {
-                        self.currentMonth -= 1
+                        self.viewModel.currentMonth -= 1
                     }
                 }
                 withAnimation(Animation.interactiveSpring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.7)) {
-                    self.monthOffset = .zero
+                    self.viewModel.monthOffset = .zero
                 }
             })
     }
@@ -303,35 +201,33 @@ struct CustomDatePicker3: View {
             .onChanged({ value in
                 withAnimation(Animation.linear(duration: 0.5)) {
                     if abs(value.translation.width) < UIScreen.main.bounds.width / 3 {
-                        self.dayOffset = value.translation
+                        self.viewModel.dayOffset = value.translation
                     }
                 }
             })
             .onEnded({ value in
                 if value.translation.width > 0 {
                     if value.translation.width > 100{
-                        self.selectedDate = futureDayDate
+                        self.viewModel.selectedDate = viewModel.futureDayDate
                     }
                 } else if value.translation.width < 0 {
                     if value.translation.width < 100 {
-                        self.selectedDate = pastDayDate
+                        self.viewModel.selectedDate = viewModel.pastDayDate
                     }
                 }
                 withAnimation(Animation.interactiveSpring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.7)) {
-                    self.dayOffset = .zero
+                    self.viewModel.dayOffset = .zero
                 }
             })
     }
     
-    //віконце для відображення кожного дня в календпрю місяця з відміткою про нявність витрат та доходів
     @ViewBuilder
     func cardView(value: DateValue) -> some View {
 
         VStack{
-            if value.day != -1 { // -1 day створювався для відображення пустих віконців (днів інших місяців)
+            if value.day != -1 {
                 ZStack{
                     VStack{
-                        
                         HStack{
                             Spacer()
                                 .frame(width: 5)
@@ -342,13 +238,12 @@ struct CustomDatePicker3: View {
                         }
                         Spacer()
                     }
-                    
                     HStack{
                         Spacer()
                         VStack{
                             Spacer()
                             let transactionSelectedDay: [TransactionModel] = transactions.filter({
-                                isSameDay(date1: $0.date, date2: selectedDate)
+                                viewModel.isSameDay(date1: $0.date, date2: viewModel.selectedDate)
                             })
                             
                             let typeExp = transactionSelectedDay.filter({$0.transactionType == .expense})
@@ -374,81 +269,7 @@ struct CustomDatePicker3: View {
         }
         .padding(.vertical, 0)
         .frame(height: 60, alignment: .top)
-        
-        
-        
-        
     }
-    //checking dates...
-    func isSameDay(date1: Date, date2: Date) -> Bool{
-        let isSameDay = calendar.isDate(date1, inSameDayAs: date2)
-        return isSameDay
-    }
-    
-    //extracting Year AndMonth for display...
-    func extraData()->[String]{
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY MMMM"
-        let date = formatter.string(from: selectedDate)
-        return date.components(separatedBy: " ")
-        
-        
-    }
-
-    
-    
-   
-    
-    func getCurrentMonth()->Date {
-        
-        guard
-            let currentMonth = calendar.date(byAdding: .month,
-                                             value: self.currentMonth,
-                                             to: Date())
-        else {return Date()}
-        
-        return currentMonth
-    }
-    
-  
-    
-    
-    func extractDate() -> [DateValue]  {
-        //Getting Current Month Date...
-        let currentMonth = getCurrentMonth()
-        
-        
-
-        var days = currentMonth.getAllDates().compactMap { date ->  DateValue in
-            //getting day...
-            let day = calendar.component(.day, from: date)
-            return DateValue(day: day, date: date)
-        }
-        
-        //adding offset days to get exact week day...
-        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
-        
-        
-        for _ in 1..<firstWeekday {
-            days.insert(DateValue(day: -1, date: Date()), at: 0)
-        }
-        return days
-        
-    }
-    
-    func timeConversion24(time12: String) -> String {
-        let dateAsString = time12
-        let df = DateFormatter()
-        df.dateFormat = "hh:mm:ssa"
-
-        let date = df.date(from: dateAsString)
-        df.dateFormat = "HH:mm"
-
-        let time24 = df.string(from: date!)
-        print(time24)
-        return time24
-    }
-    
 }
 
 struct CustomDatePicker3_Previews: PreviewProvider {
@@ -457,23 +278,3 @@ struct CustomDatePicker3_Previews: PreviewProvider {
     }
 }
 
-//Extending Date to get Current Month Dates..
-extension Date {
-//для початку місяця з 1 дня
-func getAllDates() -> [Date] {
-   
-    //getting start Date...
-    let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!
-    
-    let range = calendar.range(of: .day, in: .month, for: startDate)!
-//        range.removeLast()
-    
-    //getting date
-    
-    return range.compactMap{ day -> Date in
-        
-        return calendar.date(byAdding: .day, value: day - 1, to: startDate)!
-    }
-    
-}
-}
