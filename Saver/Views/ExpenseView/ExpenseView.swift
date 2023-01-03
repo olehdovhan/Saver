@@ -11,21 +11,14 @@ struct ExpenseView: View {
     @Binding var closeSelf: Bool
     @State   var cashSource: String
     @Binding var purchaseCategoryName: String
-    @State private var expense = 0.0
-    @State private var comment = ""
-    @State private var isDone = false
-    @State private var expenseDate = Date.now
+   
     
     @State var purchaseCategories: [String] = []
     @State var editing: FocusState<Bool>.Binding
     
-    private var enteredExpense: Bool {
-        switch expense {
-        case let x where x > 0.0:  return false
-        default:                   return true
-        }
-    }
+
     
+    @ObservedObject private var viewModel = ExpenseViewModel()
     @State var cashSources: [String]
       
     var body: some View {
@@ -58,7 +51,7 @@ struct ExpenseView: View {
                 .frame(width: 300, alignment: .top)
                 .padding(.top, 24)
             
-                TextField("Expense", value: $expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                TextField("Expense", value: $viewModel.expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                     
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
@@ -114,13 +107,13 @@ struct ExpenseView: View {
                     Spacer()
                     Image("calendar")
                  
-                    DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
+                    DatePicker("", selection: $viewModel.expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                         .labelsHidden()
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                               .stroke( .gray, lineWidth: 3)
                         )
-                        .id(expenseDate)
+                        .id(viewModel.expenseDate)
                 }
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
@@ -128,7 +121,7 @@ struct ExpenseView: View {
                 HStack {
                     Text("Time")
                     Spacer()
-                    DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
+                    DatePicker("", selection: $viewModel.expenseDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .stroke( .gray, lineWidth: 3)
@@ -143,7 +136,7 @@ struct ExpenseView: View {
                     Spacer()
                     Spacer()
     
-                    TextField("  Comment",text: $comment)
+                    TextField("  Comment",text: $viewModel.comment)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .stroke( .gray, lineWidth: 3)
@@ -156,22 +149,9 @@ struct ExpenseView: View {
                 .padding(.trailing, 35)
         
                 Spacer()
-                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: enteredExpense) {
-                  let expense = ExpenseModel(amount: expense,
-                                             comment: comment,
-                                             expenseDate: Date(),
-                                             cashSource: cashSource,
-                                             spentCategory: purchaseCategoryName)
-                    if var user = UserDefaultsManager.shared.userModel {
-                        if user.currentMonthSpendings == nil {
-                            var spendings = [ExpenseModel]()
-                            spendings.append(expense)
-                            user.currentMonthSpendings = spendings
-                        } else  {
-                            user.currentMonthSpendings?.append(expense)
-                        }
-                        UserDefaultsManager.shared.userModel = user
-                    }
+                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: viewModel.enteredExpense) {
+                    viewModel.addAndCalculateExpens(from: cashSource,
+                                                    to: purchaseCategoryName)
                     closeSelf = false
                 }
                 Spacer()

@@ -34,10 +34,6 @@ struct ExpensesCircularDiagram: View {
                 .padding(.trailing, 27)
                 
                 PieChart(selectedTab: $selectedTab)
-//                    .onChange(of: selectedTab) { newValue in
-//                        print("diagram")
-//                      //  updated.toggle()
-//                    }
                 
                 Spacer()
             }

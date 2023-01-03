@@ -157,6 +157,10 @@ struct CashSource: Codable, Hashable {
     var name: String
     var amount: Double
     var iconName: String
+    
+    mutating func substractAmount(_ number: Double) {
+        amount -= number
+    }
 }
 
 struct PurchaseCategory: Codable, Hashable {
