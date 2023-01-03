@@ -16,11 +16,7 @@ struct MainScreen: View {
     @State var addPurchaseCategoryViewShow = false
     @State var purchaseDetailViewShow = false
     @State var cashSource: String = ""
-    @State var expenseType: String = "" {
-        willSet {
-            print(newValue)
-        }
-    }
+    @State var expenseType: String = ""
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
@@ -88,8 +84,15 @@ struct MainScreen: View {
                                         editing: $editing)
             }
         }
+        .onChange(of: expenseViewShow, perform: { newValue in
+            if let sources = UserDefaultsManager.shared.userModel?.cashSources {
+                cashSources = sources
+                if sources.count != 0 {
+                    cashSource = sources[0].name ?? ""
+                }
+            }
+        })
         .onAppear() {
-   
             if let sources = UserDefaultsManager.shared.userModel?.cashSources {
                 cashSources = sources
                 if sources.count != 0 {

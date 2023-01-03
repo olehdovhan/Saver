@@ -48,8 +48,6 @@ class ExpenseViewModel: ObservableObject {
             if let index = cashSourceSubstractIndex {
                 user.cashSources[index].substractAmount(expense)
             }
-            
-            
             UserDefaultsManager.shared.userModel = user
         }
     }
