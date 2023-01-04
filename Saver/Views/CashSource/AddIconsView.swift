@@ -53,7 +53,7 @@ struct AddIconsView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(Color.cyan)
+                .fill(Color.white)
                 .frame(width: 260, height: 260)
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 10) {
@@ -65,19 +65,31 @@ struct AddIconsView: View {
                         } label: {
                             
                             switch item {
-                            case "iconBankCard", "iconWallet" ,"iconProducts",
+                            case "iconBankCard",
+                                "iconWallet" ,
+                                "iconProducts",
                                 "iconTransport",
                                 "iconClothing",
                                 "iconRestaurant",
                                 "iconHousehold",
                                 "iconEntertainment",
-                                "iconHealth" :          Image(item)
-                                                                            .resizable()
-                                                                            .frame(width: 60, height: 60)
-                            default:          Image(systemName: item)
-                                                    .resizable()
-                                                    .frame(width: 60, height: 60)
-                                                    .foregroundColor(.white)
+                                "iconHealth" :
+                                Image(item)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                            default:
+                                ZStack{
+                                    Color.myGreen
+                                        .frame(width: 50, height: 50)
+                                    
+                                    Image(systemName: item)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.white)
+                                }
+                                .cornerRadius(15)
+//                                .myShadow(radiusShadow: 5)
                             }
                         }
                     }
@@ -85,6 +97,7 @@ struct AddIconsView: View {
             }
             .frame(width: 220, height: 220)
         }
+        .myShadow(radiusShadow: 5)
         .onAppear() {
             switch type {
             case .cashSource: data = ["iconBankCard",

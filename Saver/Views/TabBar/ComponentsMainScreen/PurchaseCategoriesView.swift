@@ -13,7 +13,7 @@ struct PurchaseCategoriesView: View{
     @Binding var addPurchaseCategoryShow: Bool
     
     @Binding var purchaseDetailViewShow :Bool
-    @State var selectedCategory: PurchaseCategory?
+    @Binding var selectedCategory: PurchaseCategory?
     
     let columns = [ GridItem(.flexible()),
                     GridItem(.flexible()),
@@ -24,7 +24,11 @@ struct PurchaseCategoriesView: View{
         
         ZStack {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 10) {
+                Spacer()
+                    .frame(height: 15)
+                LazyVGrid(columns: columns, alignment: .center, spacing: 15) {
+                    
+                    
                     ForEach(purchaseCategories, id: \.self) { item in
                         Button {
                             print(item.name)
@@ -49,16 +53,26 @@ struct PurchaseCategoriesView: View{
                                         .myShadow(radiusShadow: 5)
                                     
                                 default:
-                                    Image(systemName: item.iconName)
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .myShadow(radiusShadow: 5)
+                                    ZStack{
+                                        Color.white
+                                            .frame(width: 50, height: 50)
+                                        
+                                        Image(systemName: item.iconName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(.gray)
+                                    }
+                                    .cornerRadius(15)
+                                    .myShadow(radiusShadow: 5)
                                 }
                                 
                                 
                                 Text(item.name)
                                     .foregroundColor(.black)
                                     .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                                    .lineLimit(1)
+                                    .frame(width: 80, height: 15)
                             }
                         }
                         .overlay(
@@ -75,21 +89,20 @@ struct PurchaseCategoriesView: View{
                     Button {
                         addPurchaseCategoryShow = true
                     } label: {
-                        VStack {
+                        VStack(spacing: 0) {
                             Image("iconPlus")
                                 .resizable()
                                 .frame(width: 50, height: 50)
                                 .myShadow(radiusShadow: 5)
+                            Spacer()
+                                .frame(width: 50, height: 20)
                         }
                     }
                 }
+//                Spacer()
+//                    .frame(height: 70)
             }
-            
-            if purchaseDetailViewShow, selectedCategory != nil {
-                PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
-                                           purchaseCategories: $purchaseCategories,
-                                           category: selectedCategory!)
-            }
+            .padding(.bottom, 70)
         }
     }
 }

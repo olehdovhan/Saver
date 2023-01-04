@@ -23,3 +23,26 @@ extension UIApplication: UIGestureRecognizerDelegate {
         return true // set to false if you don't want to detect tap during other gestures
     }
 }
+
+
+
+extension UIApplication {
+    /**
+     Get status bar view
+     */
+    var statusBarUIView: UIView? {
+        let tag = 13101996
+        if let statusBar = self.windows.first?.viewWithTag(tag) {
+            self.windows.first?.bringSubviewToFront(statusBar)
+            return statusBar
+        } else {
+            let statusBarView = UIView(frame: UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame ?? .zero)
+            statusBarView.tag = tag
+            
+            self.windows.first?.addSubview(statusBarView)
+            return statusBarView
+        }
+    }
+}
+
+

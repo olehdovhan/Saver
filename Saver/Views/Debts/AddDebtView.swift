@@ -94,6 +94,7 @@ struct AddDebtView: View {
                     
                     Spacer()
                     Image("calendar")
+                        .foregroundColor(.myGreen)
                     
                     DatePicker("", selection: $startDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                         .labelsHidden()
@@ -113,10 +114,14 @@ struct AddDebtView: View {
                     
                     Spacer()
                     
-                    TextField("enter debt name",text: $debtName)
+                    TextField("",text: $debtName)
+                        .placeholder(when: debtName.isEmpty) {
+                                Text("enter debt name").foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 1)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10) )
                     
@@ -132,10 +137,14 @@ struct AddDebtView: View {
                         .font(.custom("Lato-Medium", size: 16))
                         .multilineTextAlignment(.leading)
                     Spacer()
-                    TextField("enter amount",text: $totalAmount)
+                    TextField("",text: $totalAmount)
+                        .placeholder(when: totalAmount.isEmpty) {
+                                Text("enter amount").foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 1)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )
@@ -159,10 +168,14 @@ struct AddDebtView: View {
                         .font(.custom("Lato-Medium", size: 16))
                         .multilineTextAlignment(.leading)
                     Spacer()
-                    TextField("enter total monthes for return",text: $totalMonthesForReturn)
+                    TextField("",text: $totalMonthesForReturn)
+                        .foregroundColor(.black)
+                        .placeholder(when: totalMonthesForReturn.isEmpty) {
+                            Text("enter total monthes for return").foregroundColor(.gray)
+                    }
                         .frame(width: UIScreen.main.bounds.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 1)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )

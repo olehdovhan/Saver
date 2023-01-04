@@ -153,7 +153,8 @@ enum DebtEnum: String, Codable, Equatable, CaseIterable, Identifiable {
 }
 
 
-struct CashSource: Codable, Hashable {
+struct CashSource: Codable, Hashable, Identifiable, Equatable {
+    var id = UUID()
     var name: String
     var amount: Double
     var iconName: String
@@ -168,3 +169,4 @@ struct PurchaseCategory: Codable, Hashable {
     var iconName: String
     var planSpentPerMonth: Double?
 }
+

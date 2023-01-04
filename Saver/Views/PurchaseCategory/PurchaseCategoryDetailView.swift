@@ -22,7 +22,7 @@ struct PurchaseCategoryDetailView: View {
                 .frame(width: UIScreen.main.bounds.width/1.2,
                        height: UIScreen.main.bounds.height/1.5)
                 .cornerRadius(25)
-                .shadow(radius: 25)
+                .myShadow(radiusShadow: 5)
             
         VStack(spacing: 20) {
             
@@ -34,21 +34,28 @@ struct PurchaseCategoryDetailView: View {
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 22))
-                        .frame(width: UIScreen.main.bounds.width/2)
+                        .frame(width: UIScreen.main.bounds.width/2.2)
                     
                     ZStack{
+                        
+                        
+                        ZStack{
+                            Color.white
+                                .frame(width: 50, height: 50)
+                            
+                            Image(systemName: "\(category.iconName)")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.gray)
+                        }
+                        .cornerRadius(15)
+                        .myShadow(radiusShadow: 5)
+                        
                         Image(category.iconName)
                             .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.gray)
-                            .scaleEffect(2)
-                        
-                        Image(systemName: "\(category.iconName)")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.gray)
+                            .frame(width: 50, height: 50)
                     }
-                    .frame(width: 40, height: 40)
                     
                 }
                 Spacer()

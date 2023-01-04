@@ -9,9 +9,10 @@ import SwiftUI
 import CoreData
 
 struct TabBarView: View {
-
-    @State var selectedTab = 3
-
+    
+    @State var selectedTab = 0
+    
+    
     var body: some View {
         CustomTabView(selection: $selectedTab) {
             
@@ -20,30 +21,33 @@ struct TabBarView: View {
                     TabItem(text: "", icon: "tabIcon0")
                 }
                 .opacity(selectedTab == 0 ? 1 : 0)
-       
+            
             ExpensesCircularDiagram(selectedTab: $selectedTab)
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon1")
                 }
                 .opacity(selectedTab == 1 ? 1 : 0)
-
+            
             CalendarView()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon2")
                 }
                 .opacity(selectedTab == 2 ? 1 : 0)
-
+            
             SavingsGoalsDebtsView()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon3")
                 }
                 .opacity(selectedTab == 3 ? 1 : 0)
-
+            
             Menu()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon4")
                 }
                 .opacity(selectedTab == 4 ? 1 : 0)
+        }
+        .onAppear {
+            UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")
         }
     }
 }

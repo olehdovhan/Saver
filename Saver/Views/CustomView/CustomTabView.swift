@@ -53,7 +53,7 @@ struct CustomTabView<Content: View>: View{
                 tabsView
             }
             
-            .frame(width: UIScreen.main.bounds.width, height: 120, alignment: .top)
+            .frame(width: UIScreen.main.bounds.width, height: 140, alignment: .top)
             .padding(.vertical, 5)
             .background(Color.white.ignoresSafeArea(edges: .bottom))
             .cornerRadius(20)

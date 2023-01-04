@@ -43,7 +43,11 @@ struct SavingsGoalsDebtsView: View {
     
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea(edges: .top)
+            
+            Color.white.ignoresSafeArea()
+        
+            
+            
             ScrollView {
                 VStack(spacing: 0) {
                     //Block Saving
@@ -363,6 +367,7 @@ struct SavingsGoalsDebtsView: View {
                 }
             }
         }
+//        .edgesIgnoringSafeArea(.top)
         .onAppear {
             if let currentUser = UserDefaultsManager.shared.userModel {
                 user = currentUser
@@ -374,6 +379,7 @@ struct SavingsGoalsDebtsView: View {
             }
 
         }
+        
     }
 }
 

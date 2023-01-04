@@ -14,10 +14,10 @@ struct BalanceView: View {
     var body: some View {
         ZStack{
         LinearGradient(colors: [.myGreen, .myBlue],
-                       startPoint: .topLeading,
-                       endPoint: .bottomTrailing )
+                       startPoint: .top,
+                       endPoint: .bottom )
         
-            .frame(width: UIScreen.main.bounds.width, height: 150, alignment: .top)
+            .frame(width: UIScreen.main.bounds.width, height: 120, alignment: .top)
             .cornerRadius(30)
 
         HStack(alignment: .center){

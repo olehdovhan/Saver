@@ -10,7 +10,7 @@ import SwiftUI
 struct Menu: View {
     var body: some View {
         ZStack{
-            Color.orange.ignoresSafeArea(edges: .top)
+            Color.orange
         Text("Menu")
         }
     }

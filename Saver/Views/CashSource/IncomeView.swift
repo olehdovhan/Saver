@@ -40,6 +40,7 @@ struct IncomeView: View {
             VStack {
                 HStack {
                     Text("Income")
+                        .foregroundColor(.black)
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
                     Spacer()
@@ -56,18 +57,23 @@ struct IncomeView: View {
                 .padding(.top, 24)
             
                 TextField("Expense", value: $income, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                    
+                    .placeholder(when: income != 0.0) {
+                            Text("Expense").foregroundColor(.gray)
+                    }
+                
+                    .foregroundColor(.black)
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
                     .keyboardType(.decimalPad)
                     .focused(editing)
                     .background(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(editing.wrappedValue ? Color.red : Color.gray, lineWidth: 3)
+                            .stroke(editing.wrappedValue ? Color.red : Color.myGreen, lineWidth: 1)
                     ).padding()
                 
                 HStack {
                     Text("To")
+                        .foregroundColor(.black)
                     Spacer()
                     if let cashSources = UserDefaultsManager.shared.userModel?.cashSources {
                         Picker("", selection: $cashSource) {
@@ -79,7 +85,7 @@ struct IncomeView: View {
                         .colorMultiply(.black)
                         
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -20)
                             .padding(.trailing, -20)
                         )
@@ -91,14 +97,14 @@ struct IncomeView: View {
                 
                 HStack {
                     Text("Date")
-                  
+                        .foregroundColor(.black)
                     Spacer()
                     Image("calendar")
                  
                     DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                         .labelsHidden()
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                         )
                         .id(expenseDate)
                        // .foregroundColor(.red)
@@ -108,12 +114,13 @@ struct IncomeView: View {
   
                 HStack {
                     Text("Time")
+                        .foregroundColor(.black)
                     Spacer()
                     
                     DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                         .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                         )
                 }
                 .padding(.leading,  30)
@@ -121,14 +128,19 @@ struct IncomeView: View {
                 
                 HStack {
                     Text("Comment")
+                        .foregroundColor(.black)
                     Spacer()
                     Spacer()
                     Spacer()
     
-                    TextField("  Comment",text: $comment)
+                    TextField("Comment",text: $comment)
+                        .placeholder(when: comment.isEmpty) {
+                                Text("Comment").foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
                         .frame(height: 50, alignment: .trailing)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( .gray, lineWidth: 3)
+                            .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )
@@ -144,6 +156,7 @@ struct IncomeView: View {
                 }
                 Spacer()
                 Button("delete",role: .destructive) {
+                    
                     if var user = UserDefaultsManager.shared.userModel {
                         var sources = user.cashSources
                         for (index,source) in sources.enumerated() {
@@ -164,5 +177,7 @@ struct IncomeView: View {
                    height: 500,
                    alignment: .top)
         }
+        .offset(y: -50)
+    
     }
 }

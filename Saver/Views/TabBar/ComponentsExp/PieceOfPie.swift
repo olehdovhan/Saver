@@ -32,8 +32,10 @@ class PieceOfPieContainer: ObservableObject {
                                                .brown]
     
     init () {
-        guard let allPurchaseCategories = getAllExpenses() else { return }
+        guard let allPurchaseCategoriesSet = getAllExpenses() else { return }
+        let allPurchaseCategories = Array(allPurchaseCategoriesSet)
         let expensesDict = createExpenseDict(from: allPurchaseCategories)
+        print("III\(allPurchaseCategories.count)")
         
         for (index, category) in allPurchaseCategories.enumerated() {
             let piece = PieceOfPie(color: chartLimitedColors[index],
@@ -57,7 +59,7 @@ class PieceOfPieContainer: ObservableObject {
         return nil
     }
     
-    func createExpenseDict(from categories: Set<String> ) -> [String: Double] {
+    func createExpenseDict(from categories: [String] ) -> [String: Double] {
         var dict: [String: Double] = [:]
         for category in categories {
             var sum: Double = 0.0
@@ -75,13 +77,12 @@ class PieceOfPieContainer: ObservableObject {
         var totalAmount: CGFloat = 0
         var value: CGFloat = 0
         
-        for category in 0..<chartData.count{
+        for category in 0..<chartData.count {
             totalAmount += chartData[category].amount
         }
         
         for category in 0..<chartData.count{
             chartData[category].percent = (chartData[category].amount * 100) / totalAmount
-            
             value += chartData[category].percent
             chartData[category].value = value
         }
@@ -105,9 +106,11 @@ struct PieChart: View {
                     chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
                     self.chartDataObject.calcOfPath()
                 })
-//                .onAppear() {
-//                  
-//                }
+                .onAppear() {
+                    chartDataObject = PieceOfPieContainer()
+                    chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
+                    self.chartDataObject.calcOfPath()
+                }
             chartListView
                 .padding(8)
                 .frame(width: 300, alignment: .leading)
