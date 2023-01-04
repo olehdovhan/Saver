@@ -97,7 +97,6 @@ struct PieChart: View {
     @Binding var selectedTab: Int
     
     var body: some View {
-        
         VStack {
             chartsCircleView
                 .frame(width: 100, height: 200)
@@ -119,9 +118,9 @@ struct PieChart: View {
 }
 
 
-extension PieChart{
+extension PieChart {
     
-    private var chartsCircleView: some View {
+        private var chartsCircleView: some View {
         ZStack{
             ForEach(0..<chartDataObject.chartData.count) { index in
                 Circle()
@@ -157,9 +156,7 @@ extension PieChart{
     private var chartListView: some View {
         
         ScrollView(.vertical, showsIndicators: true){
-            
             VStack(alignment: HorizontalAlignment.leading){
-                
                 ForEach(0..<chartDataObject.chartData.count) { index in
                     HStack{
                         RoundedRectangle(cornerRadius: index == indexOfTappedSlice ? 0 : 10)
