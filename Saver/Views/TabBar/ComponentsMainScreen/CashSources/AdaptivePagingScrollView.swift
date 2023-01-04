@@ -33,7 +33,6 @@ struct AdaptivePagingScrollView: View {
 
     @State private var currentScrollOffset: CGFloat = 0
     @State private var gestureDragOffset: CGFloat = 0
-//    @Binding var leadingOffsetScroll: CGFloat
     
 
     private func countOffset(for pageIndex: Int) -> CGFloat {
