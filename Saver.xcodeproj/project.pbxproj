@@ -36,6 +36,7 @@
 		665A99C5294F4FE400C4F364 /* NotoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99C0294F4FE300C4F364 /* NotoSans-ExtraBold.ttf */; };
 		665A99C6294F4FE400C4F364 /* NotoSansDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99C1294F4FE300C4F364 /* NotoSansDisplay-Medium.ttf */; };
 		665A99C7294F4FE400C4F364 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99C2294F4FE400C4F364 /* NotoSans-SemiBold.ttf */; };
+		668969C629659EF70059869C /* LimitCashSourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668969C529659EF70059869C /* LimitCashSourcesView.swift */; };
 		66AA4071295125A5002A2359 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA4070295125A5002A2359 /* CalendarView.swift */; };
 		66AA4073295125CE002A2359 /* SpendingsCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA4072295125CE002A2359 /* SpendingsCalendarView.swift */; };
 		66AA407529512654002A2359 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA407429512654002A2359 /* Transaction.swift */; };
@@ -100,6 +101,7 @@
 		665A99C1294F4FE300C4F364 /* NotoSansDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		665A99C2294F4FE400C4F364 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		665A99C8294F531200C4F364 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		668969C529659EF70059869C /* LimitCashSourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitCashSourcesView.swift; sourceTree = "<group>"; };
 		66AA4070295125A5002A2359 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		66AA4072295125CE002A2359 /* SpendingsCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsCalendarView.swift; sourceTree = "<group>"; };
 		66AA407429512654002A2359 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				66130991295DD73300275F16 /* AdaptivePagingScrollView.swift */,
 				66130994295F2D1300275F16 /* CashSourcesData.swift */,
 				66130996295F579700275F16 /* CashSourceView.swift */,
+				668969C529659EF70059869C /* LimitCashSourcesView.swift */,
 			);
 			path = CashSources;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,
 				66130992295DD73300275F16 /* AdaptivePagingScrollView.swift in Sources */,
+				668969C629659EF70059869C /* LimitCashSourcesView.swift in Sources */,
 				FABB4BC028B124410070F300 /* TabBarView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* Color+Extension.swift in Sources */,
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,

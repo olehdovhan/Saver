@@ -14,6 +14,7 @@ struct MainScreen: View {
     @State var addCashSourceViewShow = false
     @State var addPurchaseCategoryViewShow = false
     @State var purchaseDetailViewShow = false
+    @State var limitCashSourcesViewShow = false
     @State var cashSource: String = ""
     @State var expenseType: String = ""
     @FocusState var editing: Bool
@@ -71,7 +72,8 @@ struct MainScreen: View {
                                              itemsAmount:    cashSources.count - 1,
                                              itemWidth: self.itemWidth,
                                              itemPadding: self.itemPadding,
-                                             pageWidth: geometry.size.width) {
+                                             pageWidth: geometry.size.width,
+                                             limitCashSourcesViewShow: $limitCashSourcesViewShow) {
                         ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                             GeometryReader{ screen in
                                 CashSourceView(draggingItem: $draggingItem,
@@ -216,6 +218,10 @@ struct MainScreen: View {
                 PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
                                            purchaseCategories: $purchaseCategories,
                                            category: selectedCategory!)
+            }
+            
+            if limitCashSourcesViewShow{
+                LimitCashSourcesView(closeSelf: $limitCashSourcesViewShow)
             }
         }
         .onChange(of: expenseViewShow, perform: { newValue in
