@@ -29,6 +29,7 @@ struct AdaptivePagingScrollView: View {
     @Binding var cashSource: String
     @Binding var cashSources: [CashSource]
     @Binding var draggingScroll: Bool
+    @Binding var limitCashSourcesViewShow: Bool
     private let leadingOffset: CGFloat
 
     @State private var currentScrollOffset: CGFloat = 0
@@ -79,6 +80,7 @@ struct AdaptivePagingScrollView: View {
         itemWidth: CGFloat,
         itemPadding: CGFloat,
         pageWidth: CGFloat,
+        limitCashSourcesViewShow: Binding<Bool>,
         @ViewBuilder content: () -> A) {
 
         let views = content()
@@ -101,6 +103,7 @@ struct AdaptivePagingScrollView: View {
 
         let itemRemain = (pageWidth-itemWidth-2*itemPadding)/2
         self.leadingOffset =   itemPadding
+            self._limitCashSourcesViewShow = limitCashSourcesViewShow
 //            self._leadingOffsetScroll = leadingOffsetScroll
     }
 
@@ -118,16 +121,16 @@ struct AdaptivePagingScrollView: View {
                             if cashSources.count < 6 {
                                 addCashSourceViewShow = true
                             } else {
-                                //show alert
+                                limitCashSourcesViewShow = true
                             }
                         } label: {
                             VStack {
-                                Spacer().frame(height: 35)
+                                Spacer().frame(width: 75, height: 35)
                                 Image("iconPlus")
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .myShadow(radiusShadow: 5)
-                                Spacer().frame(height: 15)
+                                Spacer().frame(width: 75, height: 15)
                             }
                         }
                         .zIndex(1)
