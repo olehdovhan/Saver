@@ -129,7 +129,7 @@ extension PieChart {
                     .stroke(chartDataObject.chartData[index].color, lineWidth: 100)
                     .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
                   //  .animation(.spring())
-                    .onTapGesture{
+                    .onTapGesture {
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
                         percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
                 }
