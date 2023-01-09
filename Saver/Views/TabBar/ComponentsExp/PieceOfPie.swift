@@ -24,7 +24,7 @@ class PieceOfPieContainer: ObservableObject {
                                                .orange,
                                                .yellow,
                                                .green,
-                                               .blue.opacity(50),
+                                               .blue.opacity(0.5),
                                                .blue,
                                                .purple,
                                                .gray,
@@ -122,13 +122,13 @@ extension PieChart {
     
         private var chartsCircleView: some View {
         ZStack{
-            ForEach(0..<chartDataObject.chartData.count) { index in
+            ForEach(0..<chartDataObject.chartData.count, id: \.self) { index in
                 Circle()
                     .trim(from: index == 0 ? 0.0 : chartDataObject.chartData[index - 1].value/100,
                           to: chartDataObject.chartData[index].value/100)
                     .stroke(chartDataObject.chartData[index].color, lineWidth: 100)
                     .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
-                    .animation(.spring())
+                  //  .animation(.spring())
                     .onTapGesture{
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
                         percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
@@ -157,12 +157,12 @@ extension PieChart {
         
         ScrollView(.vertical, showsIndicators: true){
             VStack(alignment: HorizontalAlignment.leading){
-                ForEach(0..<chartDataObject.chartData.count) { index in
+                ForEach(0..<chartDataObject.chartData.count, id: \.self) { index in
                     HStack{
                         RoundedRectangle(cornerRadius: index == indexOfTappedSlice ? 0 : 10)
                             .fill(chartDataObject.chartData[index].color)
                             .frame(width: 20, height: 20)
-                            .animation(.spring())
+                          //  .animation(.spring())
                         
                         Text(String(format: "%.2f",
                                     Double(chartDataObject.chartData[index].percent)) + "%" + " \(chartDataObject.chartData[index].name)")
