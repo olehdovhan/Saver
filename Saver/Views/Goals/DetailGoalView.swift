@@ -105,12 +105,12 @@ struct DetailGoalView: View {
     func deleteGoal() {
         if var user = UserDefaultsManager.shared.userModel {
             var previousGoals = user.goals
-            for (index,source) in previousGoals.enumerated() {
-                if source.name == goal.name {
-                    previousGoals.remove(at: index)
-                }
-            }
-            user.goals = previousGoals
+//            for (index,source) in previousGoals.enumerated() {
+//                if source.name == goal.name {
+//                    previousGoals.remove(at: index)
+//                }
+//            }
+//            user.goals = previousGoals
             UserDefaultsManager.shared.userModel = user
             if let gols = UserDefaultsManager.shared.userModel?.goals { goals = gols }
             closeSelf = false

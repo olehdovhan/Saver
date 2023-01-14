@@ -11,6 +11,7 @@ struct UserModel: Codable {
     // TODO: add cashFlow( general) - Income - expense ( monthly budget) + cashFlow(full) Income - (expense + goals + debts)
     var avatarSystemName: String
     var name: String
+    var email: String
     var registrationDate: Date
     
     // CashSources
@@ -22,14 +23,14 @@ struct UserModel: Codable {
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
     var previousMonthesSpendings: [ExpenseModel]?
-    var totalDebtsPaymentPerMonth: Int {
-        var sum = Int()
-        for debt in debts {
-            sum += debt.monthlyDebtPayment
-        }
-        return sum
-    }
-    var debts: [DebtModel]
+//    var totalDebtsPaymentPerMonth: Int {
+//        var sum = Int()
+//        for debt in debts {
+//            sum += debt.monthlyDebtPayment
+//        }
+//        return sum
+//    }
+    var debts: [DebtModel]?
     
     //Budget
     var planBudget: Budget?
@@ -64,28 +65,28 @@ struct UserModel: Codable {
     }
     
     // make it computed from
-    var freeDays: Double? {
-        // 30.44 average days count in month in regular and leap years
-        if averageBudget != nil,
-           averageGoalsBudget != nil {
-            let oneDayCost = Double(averageBudget! + averageGoalsBudget!) / 30.44 // add averageGoalsMoney
-            return saver / oneDayCost
-        } else { return nil }
-    }
+//    var freeDays: Double? {
+//        // 30.44 average days count in month in regular and leap years
+//        if averageBudget != nil,
+//           averageGoalsBudget != nil {
+//            let oneDayCost = Double(averageBudget! + averageGoalsBudget!) / 30.44 // add averageGoalsMoney
+//            return saver / oneDayCost
+//        } else { return nil }
+//    }
     // savings
     
     // TODO: Add mandatory monthly payment in your saver, add your goal it deadline / While adding money to saver show percentage of month income or last income - with prompt which percent is good, enough or less
-    var saver: Double
+    var saver: Double?
     
-    var totalGoalsPaymentPerMonth: Int {
-        var sum = Int()
-        for goal in goals {
-            sum += goal.collectingSumPerMonth
-        }
-        return sum
-    }
+//    var totalGoalsPaymentPerMonth: Int {
+//        var sum = Int()
+//        for goal in goals {
+//            sum += goal.collectingSumPerMonth
+//        }
+//        return sum
+//    }
     
-    var goals: [Goal]
+    var goals: [Goal]?
     
     // write logic depends on this func will execute every month on the first day
     func renewThisMonthBudgetAndAverage() {}

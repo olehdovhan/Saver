@@ -15,7 +15,6 @@ struct TabBarView: View {
     
     var body: some View {
         CustomTabView(selection: $selectedTab) {
-            
             MainScreen()
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon0")
@@ -34,17 +33,17 @@ struct TabBarView: View {
                 }
                 .opacity(selectedTab == 2 ? 1 : 0)
             
-            SavingsGoalsDebtsView()
-                .myTabItem {
-                    TabItem(text: "", icon: "tabIcon3")
-                }
-                .opacity(selectedTab == 3 ? 1 : 0)
-            
-            Menu()
-                .myTabItem {
-                    TabItem(text: "", icon: "tabIcon4")
-                }
-                .opacity(selectedTab == 4 ? 1 : 0)
+//            SavingsGoalsDebtsView()
+//                .myTabItem {
+//                    TabItem(text: "", icon: "tabIcon3")
+//                }
+//                .opacity(selectedTab == 3 ? 1 : 0)
+//
+//            Menu()
+//                .myTabItem {
+//                    TabItem(text: "", icon: "tabIcon4")
+//                }
+//                .opacity(selectedTab == 4 ? 1 : 0)
         }
         .onAppear {
             UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")

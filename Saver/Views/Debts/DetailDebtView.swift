@@ -123,11 +123,11 @@ struct DetailDebtView: View {
         func deleteDebt() {
             if var user = UserDefaultsManager.shared.userModel {
                 var previousDebts = user.debts
-                for (index,source) in previousDebts.enumerated() {
-                    if source.name == debt.name {
-                        previousDebts.remove(at: index)
-                    }
-                }
+//                for (index,source) in previousDebts.enumerated() {
+//                    if source.name == debt.name {
+//                        previousDebts.remove(at: index)
+//                    }
+//                }
                 user.debts = previousDebts
                 UserDefaultsManager.shared.userModel = user
                 if let dbts = UserDefaultsManager.shared.userModel?.debts { debts = dbts }

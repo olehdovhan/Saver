@@ -19,6 +19,8 @@
 		0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E2026291A40EE00F6932B /* UserModel.swift */; };
 		0C979294294E1833000D80A2 /* AddPurchaseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */; };
 		0C979297294E3774000D80A2 /* PurchaseCategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */; };
+		0CA0037F2972C00A00E9DF89 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0037E2972C00A00E9DF89 /* AuthView.swift */; };
+		0CA003822972CE1A00E9DF89 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003812972CE1A00E9DF89 /* View+Extension.swift */; };
 		0CE7527A294F08880092651C /* AddGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE75279294F08880092651C /* AddGoalsView.swift */; };
 		0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7527B294F08980092651C /* DetailGoalView.swift */; };
 		0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7527E294F08B90092651C /* AddDebtView.swift */; };
@@ -83,6 +85,9 @@
 		0C8E2026291A40EE00F6932B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseCategoryView.swift; sourceTree = "<group>"; };
 		0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategoryDetailView.swift; sourceTree = "<group>"; };
+		0CA0037E2972C00A00E9DF89 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		0CA003802972C04D00E9DF89 /* Saver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Saver.entitlements; sourceTree = "<group>"; };
+		0CA003812972CE1A00E9DF89 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		0CE75279294F08880092651C /* AddGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalsView.swift; sourceTree = "<group>"; };
 		0CE7527B294F08980092651C /* DetailGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalView.swift; sourceTree = "<group>"; };
 		0CE7527E294F08B90092651C /* AddDebtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtView.swift; sourceTree = "<group>"; };
@@ -169,8 +174,17 @@
 				B4A9AA9528B26114001230BF /* Color+Extension.swift */,
 				0C6A1B1B29489F13006E7C13 /* UIApplication+Extension.swift */,
 				0C4343BB296418D300B511E8 /* Date+Extension.swift */,
+				0CA003812972CE1A00E9DF89 /* View+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0CA0037D2972BAD800E9DF89 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0037E2972C00A00E9DF89 /* AuthView.swift */,
+			);
+			name = Auth;
 			sourceTree = "<group>";
 		};
 		0CE75276294F082F0092651C /* Goals */ = {
@@ -394,11 +408,13 @@
 		FABB4BBC28B124410070F300 /* Saver */ = {
 			isa = PBXGroup;
 			children = (
+				0CA003802972C04D00E9DF89 /* Saver.entitlements */,
 				665A99C8294F531200C4F364 /* Info.plist */,
+				FABB4BBD28B124410070F300 /* SaverApp.swift */,
+				0CA0037D2972BAD800E9DF89 /* Auth */,
 				0C67F3B2293C95C5002384D4 /* UserDefaultsManager  */,
 				FAB0DF0728C8C588006D78B9 /* UICustomObjects */,
 				FA9D14D128BC9D3800EEFA12 /* Models */,
-				FABB4BBD28B124410070F300 /* SaverApp.swift */,
 				FAB594E428BB3F50002D3916 /* Views */,
 				FAB594E528BB3F61002D3916 /* Resources  */,
 				FABB4BC128B124420070F300 /* Assets.xcassets */,
@@ -516,6 +532,7 @@
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
 				0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */,
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
+				0CA0037F2972C00A00E9DF89 /* AuthView.swift in Sources */,
 				66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */,
 				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,
@@ -536,6 +553,7 @@
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
 				66AA4073295125CE002A2359 /* SpendingsCalendarView.swift in Sources */,
 				0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */,
+				0CA003822972CE1A00E9DF89 /* View+Extension.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
 				0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */,
@@ -674,6 +692,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
@@ -686,6 +705,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -705,6 +725,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
@@ -717,6 +738,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

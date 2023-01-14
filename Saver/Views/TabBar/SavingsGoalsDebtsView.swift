@@ -87,12 +87,12 @@ struct SavingsGoalsDebtsView: View {
                                 LinearGradient(gradient: Gradient(colors: [.myGradeLilac, .myGradeBlue]),
                                                startPoint: .topLeading,
                                                endPoint: .bottomTrailing)
-                                .mask(
-                                    Text("\(Int(user?.freeDays ?? 0.0))")
-                                        .font(.custom("Lato-Medium", size: 65))
-                                )
-                                .frame(maxHeight: 61)
-                                .padding(.bottom, 15)
+//                                .mask(
+//                                    Text("\(Int(user?.freeDays ?? 0.0))")
+//                                        .font(.custom("Lato-Medium", size: 65))
+//                                )
+//                                .frame(maxHeight: 61)
+//                                .padding(.bottom, 15)
 
                                 Text("Days of\nfreedom")
                                     .lineLimit(2)
@@ -370,9 +370,9 @@ struct SavingsGoalsDebtsView: View {
 //        .edgesIgnoringSafeArea(.top)
         .onAppear {
             if let currentUser = UserDefaultsManager.shared.userModel {
-                user = currentUser
-                goals = currentUser.goals
-                debts = currentUser.debts
+//                user = currentUser
+//                goals = currentUser.goals
+//                debts = currentUser.debts
                 withAnimation(Animation.easeInOut(duration: 3)) {
                     startAnim = true
                 }

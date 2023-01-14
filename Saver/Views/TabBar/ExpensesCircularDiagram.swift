@@ -12,9 +12,9 @@ struct ExpensesCircularDiagram: View {
     @Binding var selectedTab: Int
     
     var body: some View {
-        ZStack{
-            VStack{
-                HStack{
+        ZStack {
+            VStack {
+                HStack {
                     Text("Expenses")
                         .foregroundColor(.black)
                         .font(.custom("NotoSans-Regular", size: 16, relativeTo: .body))
@@ -22,7 +22,7 @@ struct ExpensesCircularDiagram: View {
                 }
                 .padding(.leading, 28)
                 
-                HStack{
+                HStack {
                     Spacer()
                     Image("iconPercent")
                         .resizable()
@@ -37,8 +37,6 @@ struct ExpensesCircularDiagram: View {
                 
                 Spacer()
             }
-        
         }
-        
     }
 }

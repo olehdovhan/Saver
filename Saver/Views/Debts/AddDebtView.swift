@@ -202,14 +202,14 @@ struct AddDebtView: View {
                                             totalMonthesForReturn: Int(totalMonthesForReturn) ?? 0,
                                             returnedAmount: 0)
                 
-                    if var copyUser = UserDefaultsManager.shared.userModel {
-                        copyUser.debts.append(newDebt)
-                        UserDefaultsManager.shared.userModel? = copyUser
-                        
-                        if let newDebt = UserDefaultsManager.shared.userModel?.debts {
-                            debts = newDebt
-                        }
-                    }
+//                    if var copyUser = UserDefaultsManager.shared.userModel {
+//                        copyUser.debts.append(newDebt)
+//                        UserDefaultsManager.shared.userModel? = copyUser
+//                        
+//                        if let newDebt = UserDefaultsManager.shared.userModel?.debts {
+//                            debts = newDebt
+//                        }
+//                    }
                     closeSelf = false
                 }
                 Spacer()

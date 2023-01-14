@@ -31,10 +31,11 @@ struct BalanceView: View {
                     .resizable()
                     .frame(width: 50, height: 50)
                     .foregroundColor(.white)
-                
-                Text("Oleh")
-                    .foregroundColor(.white)
-                    .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                if let user = UserDefaultsManager.shared.userModel {
+                    Text("\(user.email) /n \(user.name)")
+                        .foregroundColor(.white)
+                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                }
             }
             Spacer()
             VStack{

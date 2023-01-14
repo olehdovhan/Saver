@@ -147,14 +147,14 @@ struct AddGoalsView: View {
                                      totalPrice: Int(totalPrice) ?? 0,
                                      collectedPrice: 0,
                                      collectingSumPerMonth: Int(monthPayment) ?? 0)
-                    if var copyUser = UserDefaultsManager.shared.userModel {
-                        copyUser.goals.append(newGoal)
-                        UserDefaultsManager.shared.userModel? = copyUser
-                        
-                        if let newGoals = UserDefaultsManager.shared.userModel?.goals {
-                            goals = newGoals
-                        }
-                    }
+//                    if var copyUser = UserDefaultsManager.shared.userModel {
+//                        copyUser.goals.append(newGoal)
+//                        UserDefaultsManager.shared.userModel? = copyUser
+//                        
+//                        if let newGoals = UserDefaultsManager.shared.userModel?.goals {
+//                            goals = newGoals
+//                        }
+//                    }
                     closeSelf = false
                 }
                 Spacer()
