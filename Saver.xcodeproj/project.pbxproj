@@ -26,6 +26,14 @@
 		66130992295DD73300275F16 /* AdaptivePagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66130991295DD73300275F16 /* AdaptivePagingScrollView.swift */; };
 		66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66130994295F2D1300275F16 /* CashSourcesData.swift */; };
 		66130997295F579700275F16 /* CashSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66130996295F579700275F16 /* CashSourceView.swift */; };
+		66548D4F2972C057003D2AA0 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D4E2972C057003D2AA0 /* RegistrationView.swift */; };
+		66548D512972C077003D2AA0 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D502972C077003D2AA0 /* RegistrationViewModel.swift */; };
+		66548D532972CA58003D2AA0 /* RegistrationTFState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D522972CA58003D2AA0 /* RegistrationTFState.swift */; };
+		66548D552972CAF7003D2AA0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D542972CAF7003D2AA0 /* String+Extension.swift */; };
+		66548D572972CD0B003D2AA0 /* AuthTextfieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D562972CD0B003D2AA0 /* AuthTextfieldModifier.swift */; };
+		66548D592972DEE1003D2AA0 /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D582972DEE1003D2AA0 /* TextField+Extension.swift */; };
+		66548D5D29731779003D2AA0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D5C29731779003D2AA0 /* LoginView.swift */; };
+		66548D5F2973178C003D2AA0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66548D5E2973178C003D2AA0 /* LoginViewModel.swift */; };
 		665A99B9294F4FD500C4F364 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */; };
 		665A99BA294F4FD500C4F364 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */; };
 		665A99BB294F4FD500C4F364 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */; };
@@ -42,6 +50,14 @@
 		66AA407529512654002A2359 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA407429512654002A2359 /* Transaction.swift */; };
 		66AA407729512692002A2359 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA407629512692002A2359 /* Task.swift */; };
 		66AA4079295126F3002A2359 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA4078295126F3002A2359 /* DateValue.swift */; };
+		66C1B51F29732130008E1BAE /* RestAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B51E29732130008E1BAE /* RestAuth.swift */; };
+		66C1B5222973224D008E1BAE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 66C1B5212973224D008E1BAE /* Alamofire */; };
+		66C1B526297322E5008E1BAE /* RestCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B525297322E5008E1BAE /* RestCalls.swift */; };
+		66C1B529297323A7008E1BAE /* RestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B528297323A7008E1BAE /* RestMethod.swift */; };
+		66C1B52B297323E4008E1BAE /* RestSuffix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B52A297323E4008E1BAE /* RestSuffix.swift */; };
+		66C1B531297377B4008E1BAE /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */; };
+		66C1B533297377CB008E1BAE /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */; };
+		66C1B53529755255008E1BAE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B53429755255008E1BAE /* Constant.swift */; };
 		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
 		B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */; };
@@ -90,6 +106,14 @@
 		66130991295DD73300275F16 /* AdaptivePagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptivePagingScrollView.swift; sourceTree = "<group>"; };
 		66130994295F2D1300275F16 /* CashSourcesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSourcesData.swift; sourceTree = "<group>"; };
 		66130996295F579700275F16 /* CashSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSourceView.swift; sourceTree = "<group>"; };
+		66548D4E2972C057003D2AA0 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		66548D502972C077003D2AA0 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		66548D522972CA58003D2AA0 /* RegistrationTFState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTFState.swift; sourceTree = "<group>"; };
+		66548D542972CAF7003D2AA0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		66548D562972CD0B003D2AA0 /* AuthTextfieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextfieldModifier.swift; sourceTree = "<group>"; };
+		66548D582972DEE1003D2AA0 /* TextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
+		66548D5C29731779003D2AA0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		66548D5E2973178C003D2AA0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		665A99B4294F4FD500C4F364 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
 		665A99B5294F4FD500C4F364 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		665A99B6294F4FD500C4F364 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
@@ -107,6 +131,13 @@
 		66AA407429512654002A2359 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		66AA407629512692002A2359 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		66AA4078295126F3002A2359 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		66C1B51E29732130008E1BAE /* RestAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAuth.swift; sourceTree = "<group>"; };
+		66C1B525297322E5008E1BAE /* RestCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestCalls.swift; sourceTree = "<group>"; };
+		66C1B528297323A7008E1BAE /* RestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestMethod.swift; path = Saver/REST/Constant/RestMethod.swift; sourceTree = SOURCE_ROOT; };
+		66C1B52A297323E4008E1BAE /* RestSuffix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestSuffix.swift; sourceTree = "<group>"; };
+		66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		66C1B53429755255008E1BAE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsDebtsView.swift; sourceTree = "<group>"; };
@@ -141,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C1B5222973224D008E1BAE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +253,29 @@
 			path = CashSources;
 			sourceTree = "<group>";
 		};
+		66548D4D2972C00C003D2AA0 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				66548D4E2972C057003D2AA0 /* RegistrationView.swift */,
+				66548D502972C077003D2AA0 /* RegistrationViewModel.swift */,
+				66548D522972CA58003D2AA0 /* RegistrationTFState.swift */,
+				66548D542972CAF7003D2AA0 /* String+Extension.swift */,
+				66548D562972CD0B003D2AA0 /* AuthTextfieldModifier.swift */,
+				66548D582972DEE1003D2AA0 /* TextField+Extension.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		66548D5A2973174A003D2AA0 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				66548D5C29731779003D2AA0 /* LoginView.swift */,
+				66548D5E2973178C003D2AA0 /* LoginViewModel.swift */,
+				66C1B51E29732130008E1BAE /* RestAuth.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		665A99B1294F4E2500C4F364 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +320,49 @@
 				66AA4078295126F3002A2359 /* DateValue.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		66C1B5232973229A008E1BAE /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				66C1B52C29732432008E1BAE /* Constant */,
+				66C1B52729732360008E1BAE /* Suffix */,
+				66C1B524297322B3008E1BAE /* Calls */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
+		66C1B524297322B3008E1BAE /* Calls */ = {
+			isa = PBXGroup;
+			children = (
+				66C1B525297322E5008E1BAE /* RestCalls.swift */,
+			);
+			path = Calls;
+			sourceTree = "<group>";
+		};
+		66C1B52729732360008E1BAE /* Suffix */ = {
+			isa = PBXGroup;
+			children = (
+				66C1B52A297323E4008E1BAE /* RestSuffix.swift */,
+			);
+			path = Suffix;
+			sourceTree = "<group>";
+		};
+		66C1B52C29732432008E1BAE /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				66C1B528297323A7008E1BAE /* RestMethod.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		66C1B52F2973778A008E1BAE /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */,
+				66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */,
+			);
+			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
 		B41618B228B135CE002629F7 /* TabBar */ = {
@@ -350,6 +448,9 @@
 		FAB594E428BB3F50002D3916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				66C1B52F2973778A008E1BAE /* ForgotPassword */,
+				66548D5A2973174A003D2AA0 /* Login */,
+				66548D4D2972C00C003D2AA0 /* Registration */,
 				0CE75283294F22CF0092651C /* CashSource */,
 				0CE75282294F22A20092651C /* PurchaseCategory */,
 				0CE7527D294F08A20092651C /* Debts */,
@@ -371,6 +472,7 @@
 				0C6A1B152948891F006E7C13 /* Views */,
 				FABB4BC628B124420070F300 /* Persistence.swift */,
 				B4A9AA9828B269D1001230BF /* Modifiers.swift */,
+				66C1B53429755255008E1BAE /* Constant.swift */,
 			);
 			path = "Resources ";
 			sourceTree = "<group>";
@@ -394,6 +496,7 @@
 		FABB4BBC28B124410070F300 /* Saver */ = {
 			isa = PBXGroup;
 			children = (
+				66C1B5232973229A008E1BAE /* REST */,
 				665A99C8294F531200C4F364 /* Info.plist */,
 				0C67F3B2293C95C5002384D4 /* UserDefaultsManager  */,
 				FAB0DF0728C8C588006D78B9 /* UICustomObjects */,
@@ -433,6 +536,7 @@
 			);
 			name = Saver;
 			packageProductDependencies = (
+				66C1B5212973224D008E1BAE /* Alamofire */,
 			);
 			productName = Saver;
 			productReference = FABB4BBA28B124410070F300 /* Saver.app */;
@@ -463,6 +567,7 @@
 			);
 			mainGroup = FABB4BB128B124410070F300;
 			packageReferences = (
+				66C1B5202973224D008E1BAE /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = FABB4BBB28B124410070F300 /* Products */;
 			projectDirPath = "";
@@ -500,28 +605,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C1B531297377B4008E1BAE /* ForgotPasswordView.swift in Sources */,
 				B4A9AAA228B27EAB001230BF /* PurchaseCategoriesView.swift in Sources */,
+				66548D512972C077003D2AA0 /* RegistrationViewModel.swift in Sources */,
 				0C4343BC296418D300B511E8 /* Date+Extension.swift in Sources */,
 				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
+				66548D592972DEE1003D2AA0 /* TextField+Extension.swift in Sources */,
 				66130997295F579700275F16 /* CashSourceView.swift in Sources */,
 				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
+				66C1B51F29732130008E1BAE /* RestAuth.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
 				0C4343BA2963687D00B511E8 /* ExpenseViewModel.swift in Sources */,
+				66C1B529297323A7008E1BAE /* RestMethod.swift in Sources */,
 				0C979297294E3774000D80A2 /* PurchaseCategoryDetailView.swift in Sources */,
 				B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */,
 				66AA407729512692002A2359 /* Task.swift in Sources */,
 				0C6A1B1929488B37006E7C13 /* AddIconsView.swift in Sources */,
 				FAB594E328BB3F1A002D3916 /* Test.swift in Sources */,
 				0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */,
+				66548D532972CA58003D2AA0 /* RegistrationTFState.swift in Sources */,
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
+				66548D5F2973178C003D2AA0 /* LoginViewModel.swift in Sources */,
 				0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */,
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
 				66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */,
+				66C1B533297377CB008E1BAE /* ForgotPasswordViewModel.swift in Sources */,
 				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,
+				66548D5D29731779003D2AA0 /* LoginView.swift in Sources */,
+				66C1B526297322E5008E1BAE /* RestCalls.swift in Sources */,
 				66130992295DD73300275F16 /* AdaptivePagingScrollView.swift in Sources */,
 				668969C629659EF70059869C /* LimitCashSourcesView.swift in Sources */,
+				66548D552972CAF7003D2AA0 /* String+Extension.swift in Sources */,
 				FABB4BC028B124410070F300 /* TabBarView.swift in Sources */,
+				66C1B52B297323E4008E1BAE /* RestSuffix.swift in Sources */,
 				B4A9AA9628B26114001230BF /* Color+Extension.swift in Sources */,
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
@@ -531,6 +648,7 @@
 				0C979294294E1833000D80A2 /* AddPurchaseCategoryView.swift in Sources */,
 				B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */,
 				0C6A1B1C29489F13006E7C13 /* UIApplication+Extension.swift in Sources */,
+				66548D572972CD0B003D2AA0 /* AuthTextfieldModifier.swift in Sources */,
 				0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
@@ -538,7 +656,9 @@
 				0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
 				FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */,
+				66C1B53529755255008E1BAE /* Constant.swift in Sources */,
 				0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */,
+				66548D4F2972C057003D2AA0 /* RegistrationView.swift in Sources */,
 				0C4343BE2964195A00B511E8 /* SpendingsCalendarViewModel.swift in Sources */,
 				66AA4079295126F3002A2359 /* DateValue.swift in Sources */,
 				FA7B94BB28C61AA200772845 /* ExpenseView.swift in Sources */,
@@ -753,6 +873,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		66C1B5202973224D008E1BAE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		66C1B5212973224D008E1BAE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66C1B5202973224D008E1BAE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FABB4BC828B124420070F300 /* Saver.xcdatamodeld */ = {

@@ -179,3 +179,27 @@ fileprivate struct DelaysTouchesButtonStyle: ButtonStyle {
                 }
             }
         }
+
+
+let screenSize = UIScreen.main.bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
+
+extension View {
+    
+    public var screenW: CGFloat {
+        return UIScreen.main.bounds.size.width
+    }
+    
+    public var screenH: CGFloat {
+        return UIScreen.main.bounds.size.height
+    }
+    
+    func wRatio(_ cW: CGFloat) -> CGFloat {
+        let wScreen = 390.0
+        let value = wScreen / cW
+        let ratio = screenW / value
+        return ratio
+    }
+    
+}

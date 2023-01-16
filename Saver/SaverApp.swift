@@ -17,7 +17,10 @@ struct SaverApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabBarView()
+            NavigationView{
+                RegistrationView()
+                //            TabBarView()
+            }
         }.onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
             case .background: print("App State: Background")
