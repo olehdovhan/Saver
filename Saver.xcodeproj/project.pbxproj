@@ -58,6 +58,7 @@
 		66C1B531297377B4008E1BAE /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */; };
 		66C1B533297377CB008E1BAE /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */; };
 		66C1B53529755255008E1BAE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B53429755255008E1BAE /* Constant.swift */; };
+		66C1B53B2975BFE0008E1BAE /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B53A2975BFE0008E1BAE /* Onboarding.swift */; };
 		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
 		B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */; };
@@ -138,6 +139,7 @@
 		66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		66C1B53429755255008E1BAE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		66C1B53A2975BFE0008E1BAE /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsDebtsView.swift; sourceTree = "<group>"; };
@@ -365,6 +367,14 @@
 			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
+		66C1B5392975BFC6008E1BAE /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				66C1B53A2975BFE0008E1BAE /* Onboarding.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		B41618B228B135CE002629F7 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +458,7 @@
 		FAB594E428BB3F50002D3916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				66C1B5392975BFC6008E1BAE /* Onboarding */,
 				66C1B52F2973778A008E1BAE /* ForgotPassword */,
 				66548D5A2973174A003D2AA0 /* Login */,
 				66548D4D2972C00C003D2AA0 /* Registration */,
@@ -652,6 +663,7 @@
 				0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
+				66C1B53B2975BFE0008E1BAE /* Onboarding.swift in Sources */,
 				66AA4073295125CE002A2359 /* SpendingsCalendarView.swift in Sources */,
 				0C8E2027291A40EE00F6932B /* UserModel.swift in Sources */,
 				B4A9AA9F28B27878001230BF /* StatisticsPlace.swift in Sources */,
