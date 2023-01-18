@@ -32,7 +32,7 @@ struct BalanceView: View {
                     .frame(width: 50, height: 50)
                     .foregroundColor(.white)
                 if let user = UserDefaultsManager.shared.userModel {
-                    Text("\(user.email) /n \(user.name)")
+                    Text("\(user.name)")
                         .foregroundColor(.white)
                         .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                 }

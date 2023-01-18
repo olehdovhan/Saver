@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+
+
+
 struct UserModel: Codable {
     // TODO: add cashFlow( general) - Income - expense ( monthly budget) + cashFlow(full) Income - (expense + goals + debts)
-    var avatarSystemName: String
+    var avatarImgName: String
     var name: String
     var email: String
     var registrationDate: Date

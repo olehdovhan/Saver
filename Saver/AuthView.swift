@@ -18,7 +18,6 @@ struct AuthView: View {
             AuthButton {
                 willMoveToNextScreen = true
             }
-         
                 .frame(width: 250, height: 50)
         }
                 .navigate(to: TabBarView(), when: $willMoveToNextScreen)
