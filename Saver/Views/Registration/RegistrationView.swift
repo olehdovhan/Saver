@@ -22,7 +22,7 @@ struct RegistrationView: View {
                     
                 }
                 Rectangle()
-//                    .fill(Color.white)
+                    .fill(Color.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 //                    .onTapGesture {
 //                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
