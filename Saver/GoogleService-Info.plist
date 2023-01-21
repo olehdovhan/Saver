@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1087133858730-97q50urgs1oa7ejkucovc3d6nct17s4g.apps.googleusercontent.com</string>
+	<string>399211891487-s1n4sear33h8913h731i0dh697umq292.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1087133858730-97q50urgs1oa7ejkucovc3d6nct17s4g</string>
+	<string>com.googleusercontent.apps.399211891487-s1n4sear33h8913h731i0dh697umq292</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAWkS4xG_taRwnVYpCN9zVVmIgKAeB8R8o</string>
+	<string>AIzaSyANt4dlzpZT8hLLcLXSLc3XuAP-q-d-H7o</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1087133858730</string>
+	<string>399211891487</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.olehdovhan.app.Saver</string>
 	<key>PROJECT_ID</key>
-	<string>fir-sample-2e4eb</string>
+	<string>saver-2d11d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fir-sample-2e4eb.appspot.com</string>
+	<string>saver-2d11d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1087133858730:ios:5a250c29239958a7cb89d3</string>
+	<string>1:399211891487:ios:5dd73d9ba9018dd35fbe2a</string>
 </dict>
 </plist>

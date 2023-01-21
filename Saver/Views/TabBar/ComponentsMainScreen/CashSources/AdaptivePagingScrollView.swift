@@ -16,7 +16,6 @@ struct AdaptivePagingScrollView: View {
     private let itemsAmount: Int
     private let contentWidth: CGFloat
 
-    
     private let scrollDampingFactor: CGFloat = 0.66
 
     @Binding var currentPageIndex: Int
@@ -34,7 +33,6 @@ struct AdaptivePagingScrollView: View {
 
     @State private var currentScrollOffset: CGFloat = 0
     @State private var gestureDragOffset: CGFloat = 0
-    
 
     private func countOffset(for pageIndex: Int) -> CGFloat {
 
@@ -53,7 +51,6 @@ struct AdaptivePagingScrollView: View {
         if max(index, 0) > itemsAmount {
             index = itemsAmount
         }
-
         return min(max(index, 0), itemsAmount - 1)
     }
 
@@ -94,14 +91,16 @@ struct AdaptivePagingScrollView: View {
         self._cashSources = cashSources
             
         self._currentPageIndex = currentPageIndex
+          
         self._draggingScroll = draggingScroll
         self.itemsAmount = itemsAmount
         self.itemSpacing = itemPadding
+      
         self.itemWidth = itemWidth
         self.itemPadding = itemPadding
         self.contentWidth = (itemWidth+itemPadding)*CGFloat(itemsAmount)
 
-        let itemRemain = (pageWidth-itemWidth-2*itemPadding)/2
+      //  let itemRemain = (pageWidth-itemWidth-2*itemPadding)/2
         self.leadingOffset =   itemPadding
             self._limitCashSourcesViewShow = limitCashSourcesViewShow
 //            self._leadingOffsetScroll = leadingOffsetScroll
@@ -125,12 +124,12 @@ struct AdaptivePagingScrollView: View {
                             }
                         } label: {
                             VStack {
-                                Spacer().frame(width: 75, height: 35)
+                                Spacer().frame(width: UIScreen.main.bounds.width * 0.1744, height: 35)
                                 Image("iconPlus")
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .myShadow(radiusShadow: 5)
-                                Spacer().frame(width: 75, height: 15)
+                                Spacer().frame(width:  UIScreen.main.bounds.width * 0.1744, height: 15)
                             }
                         }
                         .zIndex(1)
@@ -138,9 +137,14 @@ struct AdaptivePagingScrollView: View {
                 }
             }
             .onAppear {
-                currentScrollOffset = countOffset(for: currentPageIndex)
-//                leadingOffsetScroll = leadingOffset
-//                print("leadingOffsetScroll: \(leadingOffsetScroll)")
+                currentScrollOffset =  countOffset(for: currentPageIndex)
+                print("III  itemSpacing \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
+                print("III  contentWidth \(contentWidth) coef \(contentWidth/UIScreen.main.bounds.width)")
+                print("III  itemPadding \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
+                print("III  leadingOffset \(leadingOffset) coef \(leadingOffset/UIScreen.main.bounds.width)")
+                  
+                print("III  currentScrollOffset \(currentScrollOffset) coef \(currentScrollOffset/UIScreen.main.bounds.width)")
+                print("III  gestureDragOffset \(gestureDragOffset) coef \(gestureDragOffset/UIScreen.main.bounds.width)")
             }
             .background(Color.black.opacity(0.00001)) // hack - this allows gesture recognizing even when background is transparent
             .frame(width: contentWidth)

@@ -29,8 +29,8 @@ struct MainScreen: View {
     @State var draggingScroll = true
     @State var draggingItem = false
     @State var leadingOffsetScroll: CGFloat = 0
-    let itemWidth: CGFloat = 100
-    let itemPadding: CGFloat = 10
+    let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
+    let itemPadding: CGFloat = 6// UIScreen.main.bounds.width * 0.02558
     
     var body: some View {
         ZStack {
@@ -88,9 +88,6 @@ struct MainScreen: View {
                             }
                             .frame(width: self.itemWidth, height: 70)
                         }
-                        
-                        
-                        
                     }
                                              
 //                                             .background(Color.black.opacity(0.1))
