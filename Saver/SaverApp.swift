@@ -19,8 +19,8 @@ struct SaverApp: App {
         WindowGroup {
             NavigationView{
 //                OnboardingView()
-                RegistrationView()
-                //            TabBarView()
+            //    RegistrationView()
+                  TabBarView()
             }
         }.onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
