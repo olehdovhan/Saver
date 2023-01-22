@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardsPlace: View {
     
-    @State var firstZ: Double = 3
+    @State private var firstZ: Double = 3
     @Binding var addCashSourceViewShow: Bool
     @Binding var incomeViewShow: Bool
     @Binding var expenseViewShow: Bool
@@ -94,7 +94,7 @@ struct CardsPlace: View {
                                         .zIndex(Double(cashSources.count - index))
                                     }
                                     
-                                    .frame(height: UIScreen.main.bounds.height * 1.5)
+                                    .frame(height: Screen.height * 1.5)
                                     
                                 }
                                 
@@ -126,7 +126,7 @@ struct CardsPlace: View {
                     }
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                 }
-                .offset(y:  -UIScreen.main.bounds.height * 0.73)
+                .offset(y:  -Screen.height * 0.73)
                 Spacer()
             }
         }

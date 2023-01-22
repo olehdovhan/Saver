@@ -10,10 +10,6 @@ import Foundation
 class ForgotPasswordViewModel: ObservableObject {
     
     @Published var incorrectEmail = true
-    @Published var progress = false
-    @Published var errorMessage = ""
-    @Published var showErrorMessage = false
-    
     @Published var createAccountOnceTapped = false
     @Published var email = ""
     @Published var emailIsEditing =          false
@@ -21,24 +17,11 @@ class ForgotPasswordViewModel: ObservableObject {
     
     func resetEmail(email: String, completion: @escaping ()->()) {
         incorrectEmail = email.textFieldValidatorEmail()
-        
-//        if email.textFieldValidatorEmail() {
-//            progress = true
-//            let mutation = PasswordForgotRequestMutation(email: email.lowercased())
-//            let _ = Network.shared.mutation(model: PasswordForgotRequestModel.self, mutation) {[weak self] model in
-//                self?.progress = false
-//                completion()
-//            } failureHandler: { [weak self] error, message  in
-//                self?.progress = false
-//                self?.showErrorMessage = true
-//                self?.errorMessage = message ?? error.localizedDescription
-//            }
-//        }
     }
     
 }
 
-
+// MARK: - ValidateInputProtocol
 extension ForgotPasswordViewModel: ValidateInputProtocol {
     func passwordIsCorrect() -> RegistrationTFState {
         return .validated

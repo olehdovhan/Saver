@@ -24,6 +24,7 @@ struct TabItemModifier: ViewModifier{
 
 }
 
+// MARK: - CustomTabItem
 extension View{
     func myTabItem(_ label: () -> TabItem) -> some View{
         modifier(TabItemModifier(tabBarItem: label()))
@@ -53,7 +54,7 @@ struct CustomTabView<Content: View>: View{
                 tabsView
             }
             
-            .frame(width: UIScreen.main.bounds.width, height: 140, alignment: .top)
+            .frame(width: Screen.width, height: 140, alignment: .top)
             .padding(.vertical, 5)
             .background(Color.white.ignoresSafeArea(edges: .bottom))
             .cornerRadius(20)

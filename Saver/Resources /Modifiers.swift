@@ -16,23 +16,30 @@ struct ShadowCustom : ViewModifier{
 }
 
 
-
+// MARK: - PlaceholderModifier
 extension View {
     
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .leading,
         @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
+            
+            ZStack(alignment: alignment) {
+                placeholder().opacity(shouldShow ? 1 : 0)
+                self
+            }
         }
-    }
+}
+// MARK: - ShadowModifier
+extension View {
     
     func myShadow(radiusShadow: Int) -> some View {
         modifier(ShadowCustom(radiusShadow: radiusShadow))
     }
+}
+
+// MARK: - DraggableModifier
+extension View {
     
     func draggable(zIndex: Binding<Double>,
                    isAlertShow: Binding<Bool>,
@@ -46,9 +53,9 @@ extension View {
 
 struct DragGestureCustom: ViewModifier {
     
-    @State var isDraggingItem = false
-    @State var currentOffsetX: CGFloat = 0
-    @State var currentOffsetY: CGFloat = 0
+    @State private var isDraggingItem = false
+    @State private var currentOffsetX: CGFloat = 0
+    @State private var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
     @Binding var isAlertShow: Bool
     @Binding var purchaseType: String
@@ -126,7 +133,7 @@ struct DragGestureCustom: ViewModifier {
 
 
 
-
+// MARK: - DelaysTouches
 extension View {
     func delaysTouches(for duration: TimeInterval = 0.25, onTap action: @escaping () -> Void = {}) -> some View {
         modifier(DelaysTouches(duration: duration, action: action))
@@ -180,10 +187,13 @@ fileprivate struct DelaysTouchesButtonStyle: ButtonStyle {
             }
         }
 
+enum Screen {
+    static let fullSize = UIScreen.main.bounds.size
+    static let width = UIScreen.main.bounds.size.width
+    static let height = UIScreen.main.bounds.size.height
+}
 
-let screenSize = UIScreen.main.bounds
-let screenWidth = screenSize.width
-let screenHeight = screenSize.height
+
 
 extension View {
     

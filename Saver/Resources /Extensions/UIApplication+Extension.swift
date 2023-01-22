@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - AddTapGestureRecognizer
 extension UIApplication {
     func addTapGestureRecognizer() {
         guard let window = windows.first else { return }
@@ -18,18 +19,15 @@ extension UIApplication {
     }
 }
 
+// MARK: - UIGestureRecognizerDelegate
 extension UIApplication: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true // set to false if you don't want to detect tap during other gestures
     }
 }
 
-
-
+// MARK: - StatusBarUIView
 extension UIApplication {
-    /**
-     Get status bar view
-     */
     var statusBarUIView: UIView? {
         let tag = 13101996
         if let statusBar = self.windows.first?.viewWithTag(tag) {

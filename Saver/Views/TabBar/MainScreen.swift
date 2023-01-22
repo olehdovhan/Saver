@@ -9,28 +9,26 @@ import SwiftUI
 
 struct MainScreen: View {
     
-    @State var expenseViewShow = false
-    @State var incomeViewShow = false
-    @State var addCashSourceViewShow = false
-    @State var addPurchaseCategoryViewShow = false
-    @State var purchaseDetailViewShow = false
-    @State var limitCashSourcesViewShow = false
-    @State var cashSource: String = ""
-    @State var expenseType: String = ""
-    @FocusState var editing: Bool
-    @State var cashSources: [CashSource] = []
-    @State var purchaseCategories: [PurchaseCategory] = []
-//    @State var dragging = false
+    @State private var expenseViewShow = false
+    @State private var incomeViewShow = false
+    @State private var addCashSourceViewShow = false
+    @State private var addPurchaseCategoryViewShow = false
+    @State private var purchaseDetailViewShow = false
+    @State private var limitCashSourcesViewShow = false
+    @State private var cashSource: String = ""
+    @State private var expenseType: String = ""
+    @FocusState private var editing: Bool
+    @State private var cashSources: [CashSource] = []
+    @State private var purchaseCategories: [PurchaseCategory] = []
     @State var selectedCategory: PurchaseCategory?
-    
-    @State var cashSourcesData = CashSourcesData()
+    @State private var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
     @State private var activePageIndex: Int = 0
-    @State var draggingScroll = true
-    @State var draggingItem = false
-    @State var leadingOffsetScroll: CGFloat = 0
-    let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
-    let itemPadding: CGFloat = 6// UIScreen.main.bounds.width * 0.02558
+    @State private var draggingScroll = true
+    @State private var draggingItem = false
+    @State private var leadingOffsetScroll: CGFloat = 0
+    private let itemWidth: CGFloat = Screen.width * 0.2325
+    private let itemPadding: CGFloat = 6
     
     var body: some View {
         ZStack {
@@ -48,7 +46,7 @@ struct MainScreen: View {
             
 //            Color.red
 //                .padding(.top, 250)
-//                .frame(width: UIScreen.main.bounds.width)
+//                .frame(width: Screen.width)
 //                .zIndex(0)
             
             VStack(alignment: .center, spacing: 0) {
@@ -56,7 +54,7 @@ struct MainScreen: View {
                 BalanceView().zIndex(4)
                 Spacer() .frame(height: 15)
                     .onAppear(){
-                        print(UIScreen.main.bounds.width)
+                        print(Screen.width)
                     }
                 
                     //Новий скрол
@@ -163,7 +161,7 @@ struct MainScreen: View {
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,
                                endPoint: .trailing)
-                    .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
+                    .frame(width: Screen.width, height: 3, alignment: .top)
                     .zIndex(2)
                 
                 PurchaseCategoriesView(purchaseCategories: $purchaseCategories,

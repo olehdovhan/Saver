@@ -9,23 +9,23 @@ import SwiftUI
 
 struct SavingsGoalsDebtsView: View {
     
-    @State var addGoalsViewShow = false
-    @State var addDebtViewShow = false
+    @State private var addGoalsViewShow = false
+    @State private var addDebtViewShow = false
     
-    @State var detailGoalsViewShow = false
-    @State var detailDebtsViewShow = false
+    @State private var detailGoalsViewShow = false
+    @State private var detailDebtsViewShow = false
     
     @State var user: UserModel?
     @State var goals: [Goal] = []
     @State var selectedGoal: Goal?
     @State var debts: [DebtModel] = []
     @State var selectedDebt: DebtModel?
-    @FocusState var editing: Bool
+    @FocusState private var editing: Bool
     
-    @State var showAlert = false
-    @State var startAnim = false
+    @State private var showAlert = false
+    @State private var startAnim = false
     
-    var plus: String{
+    private var plus: String{
         var symbol = ""
         if let saver = user?.saver {
             symbol = saver >= 0 ? "+" : "-"
@@ -33,13 +33,13 @@ struct SavingsGoalsDebtsView: View {
         return symbol
     }
     
-    var dateFormatter: DateFormatter {
+    private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter
     }
     
-    var squareSide = UIScreen.main.bounds.width/2.5
+    private var squareSide = Screen.width/2.5
     
     var body: some View {
         ZStack {
@@ -159,7 +159,7 @@ struct SavingsGoalsDebtsView: View {
                                                                   startPoint: .leading,
                                                                   endPoint: .trailing))
                                     .scaleEffect(x: startAnim ? 0 : percentGoal,  anchor: .leading)
-                                    .background(Capsule().foregroundColor(.myGrayCapsule))
+                                    .background(Capsule().foregroundColor(.myGrayLight))
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
@@ -299,7 +299,7 @@ struct SavingsGoalsDebtsView: View {
                                                                   startPoint: .leading,
                                                                   endPoint: .trailing))
                                     .scaleEffect(x: startAnim ? percentDebt : 0,  anchor: .leading)
-                                    .background(Capsule().foregroundColor(.myGrayCapsule))
+                                    .background(Capsule().foregroundColor(.myGrayLight))
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
@@ -349,10 +349,10 @@ struct SavingsGoalsDebtsView: View {
             }
 
             if detailGoalsViewShow {
-                if let goal = selectedGoal {
+                if let selectedGoal {
                     DetailGoalView(closeSelf: $detailGoalsViewShow,
                                    goals: $goals,
-                                   goal: goal)
+                                   goal: selectedGoal)
                     .onDisappear(){
                         detailGoalsViewShow = false
                     }
@@ -360,10 +360,10 @@ struct SavingsGoalsDebtsView: View {
             }
 
             if detailDebtsViewShow{
-                if let debt = selectedDebt{
+                if let selectedDebt{
                     DetailDebtView(closeSelf: $detailDebtsViewShow,
                                    debts: $debts,
-                                   debt: debt)
+                                   debt: selectedDebt)
                 }
             }
         }
@@ -382,10 +382,3 @@ struct SavingsGoalsDebtsView: View {
         
     }
 }
-
-
-//struct SavingsGoalsDebtsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SavingsGoalsDebtsView()
-//    }
-//}

@@ -4,7 +4,7 @@
 //
 //  Created by Пришляк Дмитро on 01.09.2022.
 //
-import Foundation
+
 import SwiftUI
 
 struct PieceOfPie{
@@ -47,7 +47,7 @@ class PieceOfPieContainer: ObservableObject {
         }
     }
     
-    func getAllExpenses() -> Set<String>? {
+    private func getAllExpenses() -> Set<String>? {
         if UserDefaultsManager.shared.userModel?.currentMonthSpendings?.count != 0 ,
            let expenses = UserDefaultsManager.shared.userModel?.currentMonthSpendings {
             var categoriesSet: Set<String> = []
@@ -59,7 +59,7 @@ class PieceOfPieContainer: ObservableObject {
         return nil
     }
     
-    func createExpenseDict(from categories: [String] ) -> [String: Double] {
+    private func createExpenseDict(from categories: [String] ) -> [String: Double] {
         var dict: [String: Double] = [:]
         for category in categories {
             var sum: Double = 0.0
@@ -90,7 +90,6 @@ class PieceOfPieContainer: ObservableObject {
 }
 
 struct PieChart: View {
-    
     @State var chartDataObject = PieceOfPieContainer()
     @State private var indexOfTappedSlice = -1
     @State private var percentTapped = "UAH"
@@ -117,7 +116,7 @@ struct PieChart: View {
     }
 }
 
-
+// MARK: - CircleViewOfPieChart
 extension PieChart {
     
         private var chartsCircleView: some View {

@@ -39,7 +39,7 @@ struct UserModel: Codable {
     var planBudget: Budget?
     var thisMonthBudget: Budget?
     var previousMonthesBudgets: [Budget]?
-    var averageBudget: Int? {
+    private var averageBudget: Int? {
         if previousMonthesBudgets?.count != 0 {
             var total = Int()
             guard previousMonthesBudgets != nil else { return nil}
@@ -55,7 +55,7 @@ struct UserModel: Codable {
     var thisMonthGoalsBudget: Budget?
     var previousMonthesGoalsBudgets: [Budget]?
         
-    var averageGoalsBudget: Int? {
+    private var averageGoalsBudget: Int? {
         var total = Int()
         if previousMonthesGoalsBudgets?.count != 0 {
             for budget in previousMonthesBudgets! {
@@ -106,11 +106,11 @@ struct Goal: Codable, Hashable {
         return Int(Double(totalPrice) / Double(collectingSumPerMonth))
     }
     
-    var restMonthesPerGoal: Int {
+    private var restMonthesPerGoal: Int {
         totalMonthesPerGoal - monthesSaveForGoal
     }
     //TODO: in app notifications every month: Did you save money for this goal? - depends on answer - add changes to collectedPrice
-    var monthesSaveForGoal = 0
+     var monthesSaveForGoal = 0
 }
 
 struct Budget: Codable {
@@ -150,9 +150,7 @@ struct DebtModel: Codable, Hashable {
 // описати PercentageDividerCounterToGoalInMonthes
 enum DebtEnum: String, Codable, Equatable, CaseIterable, Identifiable {
     case gave, took
-    
-    
-    
+
     var id: DebtEnum { self }
 }
 

@@ -15,12 +15,12 @@ struct PurchaseCategoryDetailView: View {
     var body: some View {
         
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/1.5)
+                .frame(width: Screen.width/1.2,
+                       height: Screen.height/1.5)
                 .cornerRadius(25)
                 .myShadow(radiusShadow: 5)
             
@@ -34,7 +34,7 @@ struct PurchaseCategoryDetailView: View {
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 22))
-                        .frame(width: UIScreen.main.bounds.width/2.2)
+                        .frame(width: Screen.width/2.2)
                     
                     ZStack{
                         
@@ -113,7 +113,7 @@ struct PurchaseCategoryDetailView: View {
                         .lineLimit(2)
                   }
             }
-            .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+            .frame(width: Screen.width/1.5, height: Screen.height/5.5)
             .background(
                 RoundedRectangle(cornerRadius: 15).fill(.white)
                     .myShadow(radiusShadow: 5)
@@ -138,7 +138,7 @@ struct PurchaseCategoryDetailView: View {
                 
                 // TODO: fill from UD fact expenses
             }
-            .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+            .frame(width: Screen.width/1.5, height: Screen.height/5.5)
             .background(
                 RoundedRectangle(cornerRadius: 15).fill(.white)
                     .myShadow(radiusShadow: 5)
@@ -148,8 +148,8 @@ struct PurchaseCategoryDetailView: View {
             
             Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width/1.2,
-               height: UIScreen.main.bounds.height/1.5)
+        .frame(width: Screen.width/1.2,
+               height: Screen.height/1.5)
       }
    }
     

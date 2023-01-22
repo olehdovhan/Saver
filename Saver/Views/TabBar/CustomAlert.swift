@@ -10,7 +10,6 @@ import SwiftUI
 struct CustomAlert: View {
     @Binding var isAlertShow: Bool
     var body: some View {
-        
         VStack(alignment: .center, spacing: 20) {
             Text("Documents were copied")
                 .foregroundColor(.white)
@@ -35,10 +34,3 @@ struct CustomAlert: View {
         .shadow(radius: 15)
     }
 }
-
-//struct CustomAlert_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CustomAlert(isAlertShow: isAlertShow)
-//    }
-//}
-

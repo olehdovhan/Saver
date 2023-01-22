@@ -54,14 +54,18 @@ struct LoginView: View {
                     //                Spacer()
                     
                     HStack(spacing: wRatio(50)){
-                        SocialButton(image: "icoGoogle",
-                                     widthImg: 20,
-                                     heightImg: 20){
+                        SocialButtonView(
+                            image: "icoGoogle",
+                            widthImg: 20,
+                            heightImg: 20
+                        ){
                             print("F")
                         }
-                        SocialButton(image: "icoFacebook",
-                                     widthImg: 10,
-                                     heightImg: 20){
+                        SocialButtonView(
+                            image: "icoFacebook",
+                            widthImg: 10,
+                            heightImg: 20
+                        ){
                             print("F")
                         }
                         

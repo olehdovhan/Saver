@@ -5,7 +5,6 @@
 //  Created by Pryshliak Dmytro on 15.01.2023.
 //
 
-import Foundation
 import SwiftUI
 
 struct ForgotPasswordView: View{
@@ -18,15 +17,23 @@ struct ForgotPasswordView: View{
             ZStack {
                 GeometryReader { reader in
                     Color.myGreen
-                        .frame(height: reader.safeAreaInsets.top, alignment: .top)
+                        .frame(
+                            height: reader.safeAreaInsets.top,
+                            alignment: .top)
                         .ignoresSafeArea()
                     
                 }
                 Rectangle()
                     .fill(Color.white)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(
+                        maxWidth: .infinity,
+                           maxHeight: .infinity)
                     .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        UIApplication.shared.sendAction(
+                            #selector(UIResponder.resignFirstResponder),
+                            to: nil,
+                            from: nil,
+                            for: nil)
                     }
                 
                 VStack(spacing: 0){
@@ -41,13 +48,13 @@ struct ForgotPasswordView: View{
                     Text("Restore acces")
                         .lineLimit(1)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 18))
+                        .font(FontType.latoRegular.font(size: 18))
                         .padding(.bottom, wRatio(30))
                     
                     Text("Enter the email address specified during registration")
                         .lineLimit(2)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 14))
+                        .font(FontType.latoRegular.font(size: 14))
                         .padding(.bottom, wRatio(30))
                     
                     fieldsView
@@ -64,34 +71,25 @@ struct ForgotPasswordView: View{
                                                startPoint: .leading,
                                                endPoint: .trailing)
                             )
-                            .frame(width: wRatio(250), height: 50)
+                            .frame(
+                                width: wRatio(250),
+                                height: 50)
                             
                             Text("Proceed!")
                                 .lineLimit(1)
                                 .foregroundColor(.white)
-                                .font(.custom("Lato-ExtraBold", size: 26))
+                                .font(FontType.latoExtraBold.font(size: 26))
                         }
                         
                     }
                     .padding(.bottom, wRatio(30))
                     
                     Spacer()
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
                 }
             }
             .navigationBarBackButtonHidden(true)
-          
-        
+           
     }
     
     private var fieldsView: some View {
@@ -104,7 +102,9 @@ struct ForgotPasswordView: View{
                 }
               })
             .frame(width: wRatio(250))
-            .authTextField(isEditing: viewModel.emailIsEditing, vState: viewModel.correctEmail)
+            .authTextField(
+                isEditing: viewModel.emailIsEditing,
+                vState: viewModel.correctEmail)
             .autocapitalization(.none)
             .keyboardType(.emailAddress)
             
@@ -115,7 +115,5 @@ struct ForgotPasswordView: View{
                 .opacity(viewModel.correctEmail == .validated ? 0.0 : 1.0)
         }
     }
-    
-    
 }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - GetAllDates
 extension Date {
 func getAllDates() -> [Date] {
     

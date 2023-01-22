@@ -23,7 +23,7 @@ struct ExpenseView: View {
       
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white

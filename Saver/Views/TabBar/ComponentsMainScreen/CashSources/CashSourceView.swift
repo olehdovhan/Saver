@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct CashSourceView: View {
-    @State var firstZ: Double = 3
+    @State private var firstZ: Double = 3
     @Binding var draggingItem : Bool
     var cashSourceItem: CashSource
     var index: Int
     @Binding var incomeViewShow: Bool
     @Binding var cashSource: String
-      var cashSourcesCount: Int
+    var cashSourcesCount: Int
     @Binding var expenseViewShow: Bool
     @Binding var purchaseType: String
 
-    
-    
     var body: some View {
         ZStack{
             

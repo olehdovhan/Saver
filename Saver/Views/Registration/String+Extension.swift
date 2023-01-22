@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - TextFieldValidatorEmail
 extension StringProtocol {
     func textFieldValidatorEmail() -> Bool {
         if self.count > 100 {

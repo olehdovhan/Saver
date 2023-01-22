@@ -38,6 +38,7 @@ class AppleAuthorizationVC: UIViewController {
 
 }
 
+// MARK: - ASAuthorizationControllerDelegate
 extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -71,7 +72,9 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
                                                   PurchaseCategory(name: "Health", iconName: "iconHealth")])
                    
-                   if let closure = closure { closure() }
+                   if let closure {
+                       closure()
+                   }
                }
            }
         default: break
@@ -79,6 +82,7 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
     }
 }
 
+// MARK: - ASAuthorizationControllerPresentationContextProviding
 extension AppleAuthorizationVC: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!

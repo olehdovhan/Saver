@@ -12,12 +12,12 @@ struct AddGoalsView: View {
     
     @Binding var closeSelf: Bool
     @Binding var goals: [Goal]
-    @State var goalName = ""
-    @State var totalPrice = ""
+    @State private var goalName = ""
+    @State private var totalPrice = ""
     @State var monthPayment = ""
     @State var editing: FocusState<Bool>.Binding
     
-    var fieldsEmpty: Bool {
+    private var fieldsEmpty: Bool {
       if monthPayment != "",
                goalName != "",
             totalPrice != "" {
@@ -27,12 +27,12 @@ struct AddGoalsView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/2)
+                .frame(width: Screen.width/1.2,
+                       height: Screen.height/2)
                 .cornerRadius(25)
                 .shadow(radius: 25)
             
@@ -69,7 +69,7 @@ struct AddGoalsView: View {
                             Text("enter goal name").foregroundColor(.gray)
                     }
                         .foregroundColor(.myGrayDark)
-                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
+                        .frame(width: Screen.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( Color.myGreen, lineWidth: 1)
                                                     .padding(.leading, -10)
@@ -91,7 +91,7 @@ struct AddGoalsView: View {
                             Text("enter total price").foregroundColor(.gray)
                     }
                         .foregroundColor(.myGrayDark)
-                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
+                        .frame(width: Screen.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( Color.myGreen, lineWidth: 1)
                                                     .padding(.leading, -10)
@@ -121,7 +121,7 @@ struct AddGoalsView: View {
                             Text("invest in goal per month").foregroundColor(.gray)
                     }
                         .foregroundColor(.myGrayDark)
-                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
+                        .frame(width: Screen.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                                                     .stroke( Color.myGreen, lineWidth: 1)
                                                     .padding(.leading, -10)
@@ -159,8 +159,8 @@ struct AddGoalsView: View {
                 }
                 Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width/1.2,
-                   height: UIScreen.main.bounds.height/2)
+            .frame(width: Screen.width/1.2,
+                   height: Screen.height/2)
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
     }

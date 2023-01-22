@@ -13,7 +13,7 @@ struct StatisticsPlace: View{
         ZStack{
             HStack(alignment: .top, spacing: 0){
                 
-                Rectangle().frame(width: UIScreen.main.bounds.width * 0.05115, height: 10).foregroundColor(.white)
+                Rectangle().frame(width: Screen.width * 0.05115, height: 10).foregroundColor(.white)
                 
                 Button {
                     print("Monthly budget")
@@ -89,7 +89,7 @@ struct StatisticsPlace: View{
                
                 
                 
-                Rectangle().frame(width: UIScreen.main.bounds.width * 0.05115, height: 10).foregroundColor(.white)
+                Rectangle().frame(width: Screen.width * 0.05115, height: 10).foregroundColor(.white)
             }
             .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
            

@@ -7,9 +7,6 @@
 
 import Foundation
 
-import Foundation
-
-
 enum RegistrationTFState: Equatable {
     case validated
     case empty

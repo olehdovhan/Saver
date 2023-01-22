@@ -11,14 +11,14 @@ import Combine
 struct AddPurchaseCategoryView: View {
     
     @Binding var closeSelf: Bool
-    @State var cashSourceName = ""
-    @State var currentMoneyAmount = ""
+    @State private var cashSourceName = ""
+    @State private var currentMoneyAmount = ""
     @State var editing: FocusState<Bool>.Binding
   
-    @State var showIconsCashSource = false
-    @State var selectedCashIconName = ""
+    @State private var showIconsCashSource = false
+    @State private var selectedCashIconName = ""
     
-    var fieldsEmpty: Bool {
+    private var fieldsEmpty: Bool {
       if selectedCashIconName != "",
                cashSourceName != "",
             currentMoneyAmount != "" {
@@ -29,7 +29,7 @@ struct AddPurchaseCategoryView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white

@@ -36,6 +36,7 @@ class UserDefaultsManager {
     private init () { }
 }
 
+// MARK: - NSCopying
 extension UserDefaultsManager: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         return self

@@ -9,14 +9,13 @@ import SwiftUI
 import Combine
 
 struct AddDebtView: View {
-    
     @Binding var closeSelf: Bool
     @Binding var debts: [DebtModel]
-    @State var whose = DebtEnum.took
-    @State var debtName = ""
-    @State var startDate = Date.now
-    @State var totalAmount = ""
-    @State var totalMonthesForReturn = ""
+    @State private var whose = DebtEnum.took
+    @State private var debtName = ""
+    @State private var startDate = Date.now
+    @State private var totalAmount = ""
+    @State private var totalMonthesForReturn = ""
     @State var editing: FocusState<Bool>.Binding
     
     var fieldsEmpty: Bool {
@@ -29,12 +28,12 @@ struct AddDebtView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/1.3)
+                .frame(width: Screen.width/1.2,
+                       height: Screen.height/1.3)
                 .cornerRadius(25)
                 .shadow(radius: 25)
                 .offset(y: -40)
@@ -77,7 +76,7 @@ struct AddDebtView: View {
                                 .tag(value)
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.width/2.5, height: 30)
+                    .frame(width: Screen.width/2.5, height: 30)
                     
                     
                 }
@@ -98,7 +97,7 @@ struct AddDebtView: View {
                     
                     DatePicker("", selection: $startDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                         .labelsHidden()
-                        .frame(width: UIScreen.main.bounds.width/2.5, height: 30)
+                        .frame(width: Screen.width/2.5, height: 30)
                         .id(startDate)
                 }
                 .padding(.horizontal, 20)
@@ -119,7 +118,7 @@ struct AddDebtView: View {
                                 Text("enter debt name").foregroundColor(.gray)
                         }
                         .foregroundColor(.black)
-                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
+                        .frame(width: Screen.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
@@ -142,7 +141,7 @@ struct AddDebtView: View {
                                 Text("enter amount").foregroundColor(.gray)
                         }
                         .foregroundColor(.black)
-                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
+                        .frame(width: Screen.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
@@ -173,7 +172,7 @@ struct AddDebtView: View {
                         .placeholder(when: totalMonthesForReturn.isEmpty) {
                             Text("enter total monthes for return").foregroundColor(.gray)
                     }
-                        .frame(width: UIScreen.main.bounds.width/2, height: 50)
+                        .frame(width: Screen.width/2, height: 50)
                         .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .stroke( Color.myGreen, lineWidth: 1)
                             .padding(.leading, -10)
@@ -214,8 +213,8 @@ struct AddDebtView: View {
                 }
                 Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width/1.2,
-                   height: UIScreen.main.bounds.height/1.3)
+            .frame(width: Screen.width/1.2,
+                   height: Screen.height/1.3)
             .offset(y: -40)
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)

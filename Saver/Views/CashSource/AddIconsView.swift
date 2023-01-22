@@ -13,20 +13,20 @@ enum AddIconsType {
 
 struct AddIconsView: View {
     
-   @Binding var closeSelf: Bool
+    @Binding var closeSelf: Bool
     
     var type: AddIconsType
     
     var closure: (String) -> ()
     
-   @State var data: [String] = []
+    @State private var data: [String] = []
     
-    var sortedDate: [String] {
+    private var sortedDate: [String] {
         
         switch type {
         case .cashSource:
             if let existedIcons = UserDefaultsManager.shared.userModel?.cashSources.map {$0.iconName} {
-              var dataCopy = data
+                var dataCopy = data
                 for exist in existedIcons {
                     if let existedItem = dataCopy.firstIndex(of: exist) {
                         dataCopy.remove(at: existedItem)
@@ -34,10 +34,10 @@ struct AddIconsView: View {
                 }
                 return dataCopy
             } else { return data }
-
+            
         case .purchaseCategory:
             if let existedIcons = UserDefaultsManager.shared.userModel?.purchaseCategories.map {$0.iconName} {
-              var dataCopy = data
+                var dataCopy = data
                 for exist in existedIcons {
                     if let existedItem = dataCopy.firstIndex(of: exist) {
                         dataCopy.remove(at: existedItem)
@@ -47,9 +47,9 @@ struct AddIconsView: View {
             } else { return data }
         }
     }
-
-    let columns = [ GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()) ]
-
+    
+    private let columns = [ GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()) ]
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
@@ -89,7 +89,7 @@ struct AddIconsView: View {
                                         .foregroundColor(.white)
                                 }
                                 .cornerRadius(15)
-//                                .myShadow(radiusShadow: 5)
+                                //                                .myShadow(radiusShadow: 5)
                             }
                         }
                     }

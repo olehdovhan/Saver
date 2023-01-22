@@ -15,12 +15,12 @@ struct DetailGoalView: View {
     var body: some View {
         
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/1.5)
+                .frame(width: Screen.width/1.2,
+                       height: Screen.height/1.5)
                 .cornerRadius(25)
                 .shadow(radius: 25)
             
@@ -33,7 +33,7 @@ struct DetailGoalView: View {
                     .textCase(.uppercase)
                     .foregroundColor(.myGreen)
                     .font(.custom("Lato-ExtraBold", size: 22))
-                    .frame(width: UIScreen.main.bounds.width/2)
+                    .frame(width: Screen.width/2)
                     .padding(.top, 20)
                 
                 Spacer()
@@ -68,7 +68,7 @@ struct DetailGoalView: View {
                     .padding(20)
                     .foregroundColor(.myGrayDark)
                     .font(.custom("Lato-Regular", size: 20))
-                    .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/4.5)
+                    .frame(width: Screen.width/1.5, height: Screen.height/4.5)
                     .background(
                         RoundedRectangle(cornerRadius: 15).fill(.white)
                             .myShadow(radiusShadow: 5)
@@ -78,7 +78,7 @@ struct DetailGoalView: View {
                     .padding(20)
                     .foregroundColor(.myGrayDark)
                     .font(.custom("Lato-Regular", size: 20))
-                    .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/4.5)
+                    .frame(width: Screen.width/1.5, height: Screen.height/4.5)
                     .background(
                         RoundedRectangle(cornerRadius: 15).fill(.white)
                             .myShadow(radiusShadow: 5)
@@ -87,7 +87,7 @@ struct DetailGoalView: View {
             }
             .padding(.horizontal, 20)
             
-            .frame(height: UIScreen.main.bounds.height/2)
+            .frame(height: Screen.height/2)
 
                 
             
@@ -97,8 +97,8 @@ struct DetailGoalView: View {
             Spacer()
             
         }
-        .frame(width: UIScreen.main.bounds.width/1.2,
-               height: UIScreen.main.bounds.height/1.5)
+        .frame(width: Screen.width/1.2,
+               height: Screen.height/1.5)
       }
    }
     

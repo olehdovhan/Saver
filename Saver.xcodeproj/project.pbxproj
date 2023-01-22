@@ -67,10 +67,11 @@
 		66C1B533297377CB008E1BAE /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */; };
 		66C1B53529755255008E1BAE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B53429755255008E1BAE /* Constant.swift */; };
 		66C1B53B2975BFE0008E1BAE /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1B53A2975BFE0008E1BAE /* Onboarding.swift */; };
+		66FA9CCA297C072D00C8ACAD /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA9CC9297C072D00C8ACAD /* Font.swift */; };
+		66FA9CCC297C15AF00C8ACAD /* SocialButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA9CCB297C15AF00C8ACAD /* SocialButtonView.swift */; };
 		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
 		B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */; };
-		B41618BC28B139A6002629F7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* Menu.swift */; };
 		B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */; };
 		B458555728B1AB660047C81E /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B458555628B1AB660047C81E /* CustomTabView.swift */; };
 		B4A9AA9628B26114001230BF /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9528B26114001230BF /* Color+Extension.swift */; };
@@ -86,7 +87,6 @@
 		FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */; };
 		FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */; };
 		FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */; };
-		FAB594E328BB3F1A002D3916 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB594E228BB3F1A002D3916 /* Test.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
 		FABB4BC028B124410070F300 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* TabBarView.swift */; };
 		FABB4BC228B124420070F300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC128B124420070F300 /* Assets.xcassets */; };
@@ -146,15 +146,15 @@
 		66AA407429512654002A2359 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		66AA407629512692002A2359 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		66AA4078295126F3002A2359 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
-		66C1B51E29732130008E1BAE /* RestAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAuth.swift; sourceTree = "<group>"; };
 		66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		66C1B53429755255008E1BAE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		66C1B53A2975BFE0008E1BAE /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		66FA9CC9297C072D00C8ACAD /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		66FA9CCB297C15AF00C8ACAD /* SocialButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButtonView.swift; sourceTree = "<group>"; };
 		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsDebtsView.swift; sourceTree = "<group>"; };
-		B41618BB28B139A6002629F7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceOfPie.swift; sourceTree = "<group>"; };
 		B458555628B1AB660047C81E /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		B4A9AA9528B26114001230BF /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
@@ -170,7 +170,6 @@
 		FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategory.swift; sourceTree = "<group>"; };
 		FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLocation.swift; sourceTree = "<group>"; };
 		FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
-		FAB594E228BB3F1A002D3916 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
 		FABB4BBF28B124410070F300 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -293,6 +292,7 @@
 				66548D542972CAF7003D2AA0 /* String+Extension.swift */,
 				66548D562972CD0B003D2AA0 /* AuthTextfieldModifier.swift */,
 				66548D582972DEE1003D2AA0 /* TextField+Extension.swift */,
+				66FA9CCB297C15AF00C8ACAD /* SocialButtonView.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -302,7 +302,6 @@
 			children = (
 				66548D5C29731779003D2AA0 /* LoginView.swift */,
 				66548D5E2973178C003D2AA0 /* LoginViewModel.swift */,
-				66C1B51E29732130008E1BAE /* RestAuth.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -312,6 +311,7 @@
 			children = (
 				665A99B3294F4E4000C4F364 /* Noto */,
 				665A99B2294F4E3500C4F364 /* Lato */,
+				66FA9CC9297C072D00C8ACAD /* Font.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -381,7 +381,6 @@
 				66AA406F29512557002A2359 /* Calendar */,
 				B4FA432728C88A1A00FA19DB /* ComponentsCalendar */,
 				B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */,
-				B41618BB28B139A6002629F7 /* Menu.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -463,7 +462,6 @@
 				0CE75276294F082F0092651C /* Goals */,
 				FA7B94B928C61A3600772845 /* ExpenseView */,
 				FABB4BBF28B124410070F300 /* TabBarView.swift */,
-				FAB594E228BB3F1A002D3916 /* Test.swift */,
 				B41618B228B135CE002629F7 /* TabBar */,
 				B458555828B1AB7F0047C81E /* CustomView */,
 			);
@@ -625,7 +623,6 @@
 				B4A9AAA228B27EAB001230BF /* PurchaseCategoriesView.swift in Sources */,
 				66548D512972C077003D2AA0 /* RegistrationViewModel.swift in Sources */,
 				0C4343BC296418D300B511E8 /* Date+Extension.swift in Sources */,
-				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
 				66548D592972DEE1003D2AA0 /* TextField+Extension.swift in Sources */,
 				66130997295F579700275F16 /* CashSourceView.swift in Sources */,
 				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
@@ -635,7 +632,6 @@
 				B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */,
 				66AA407729512692002A2359 /* Task.swift in Sources */,
 				0C6A1B1929488B37006E7C13 /* AddIconsView.swift in Sources */,
-				FAB594E328BB3F1A002D3916 /* Test.swift in Sources */,
 				0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */,
 				66548D532972CA58003D2AA0 /* RegistrationTFState.swift in Sources */,
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
@@ -654,6 +650,7 @@
 				66548D552972CAF7003D2AA0 /* String+Extension.swift in Sources */,
 				FABB4BC028B124410070F300 /* TabBarView.swift in Sources */,
 				B4A9AA9628B26114001230BF /* Color+Extension.swift in Sources */,
+				66FA9CCC297C15AF00C8ACAD /* SocialButtonView.swift in Sources */,
 				FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */,
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */,
@@ -677,6 +674,7 @@
 				0CE7527F294F08B90092651C /* AddDebtView.swift in Sources */,
 				66548D4F2972C057003D2AA0 /* RegistrationView.swift in Sources */,
 				0C4343BE2964195A00B511E8 /* SpendingsCalendarViewModel.swift in Sources */,
+				66FA9CCA297C072D00C8ACAD /* Font.swift in Sources */,
 				66AA4079295126F3002A2359 /* DateValue.swift in Sources */,
 				FA7B94BB28C61AA200772845 /* ExpenseView.swift in Sources */,
 				0CE7527A294F08880092651C /* AddGoalsView.swift in Sources */,

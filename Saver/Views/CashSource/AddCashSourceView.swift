@@ -11,12 +11,12 @@ import Combine
 struct AddCashSourceView: View {
     
     @Binding var closeSelf: Bool
-    @State var cashSourceName = ""
-    @State var currentMoneyAmount = ""
+    @State private var cashSourceName = ""
+    @State private var currentMoneyAmount = ""
     @State var editing: FocusState<Bool>.Binding
     
-    @State var showIconsCashSource = false
-    @State var selectedCashIconName = ""
+    @State private var showIconsCashSource = false
+    @State private var selectedCashIconName = ""
     
     var fieldsEmpty: Bool {
         if selectedCashIconName != "",
@@ -28,13 +28,14 @@ struct AddCashSourceView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.7)
+            Color.myGrayLight.opacity(0.7)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: 300,
-                       height: 360,
-                       alignment: .top)
+                .frame(
+                    width: 300,
+                    height: 360,
+                    alignment: .top)
                 .cornerRadius(25)
                 .shadow(radius: 25)
             
@@ -44,36 +45,42 @@ struct AddCashSourceView: View {
                         .foregroundColor(.black)
                         .frame(alignment: .leading)
                         .padding(.leading, 34)
+                    
                     Spacer()
-                    Button {
+                    
+                    Button{
                         closeSelf = false
                     }
                 label: {
                     Image("btnClose")
                 }
-                .frame( alignment: .trailing)
+                .frame(alignment: .trailing)
                 .padding(.trailing, 16)
                 }
-                .frame(width: 300, alignment: .top)
+                .frame(width: 300,
+                       alignment: .top)
                 .padding(.top, 24)
                 
                 HStack {
                     Text("Name")
                         .foregroundColor(.black)
-                    Spacer()
-                    Spacer()
+                    
                     Spacer()
                     
                     TextField("",text: $cashSourceName)
                         .placeholder(when: cashSourceName.isEmpty) {
-                                Text("enter name").foregroundColor(.gray)
+                            Text("enter name")
+                                .foregroundColor(.gray)
                         }
                         .foregroundColor(.black)
-                        .frame(height: 50, alignment: .trailing)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                            .padding(.leading, -10)
-                            .padding(.trailing, -10) )
+                        .frame(height: 50,
+                               alignment: .trailing)
+                        .overlay(RoundedRectangle(cornerRadius: 20,
+                                                  style: .continuous)
+                            .stroke(Color.myGreen,
+                                    lineWidth: 1)
+                                .padding(.leading, -10)
+                                .padding(.trailing, -10))
                 }
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
@@ -81,17 +88,24 @@ struct AddCashSourceView: View {
                 HStack {
                     Text("Money amount")
                         .foregroundColor(.black)
+                    
                     Spacer()
-                    Spacer()
-                    Spacer()
+                    
                     TextField("", text: $currentMoneyAmount)
                         .placeholder(when: currentMoneyAmount.isEmpty) {
-                                Text("sum to spend per month").foregroundColor(.gray)
+                            Text("sum to spend per month")
+                                .foregroundColor(.gray)
                         }
                         .foregroundColor(.black)
-                        .frame(height: 50, alignment: .trailing)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
+                        .frame(height: 50,
+                               alignment: .trailing)
+                        .overlay(
+                            RoundedRectangle(
+                                cornerRadius: 20,
+                                style: .continuous)
+                            .stroke(
+                                Color.myGreen,
+                                lineWidth: 1)
                             .padding(.leading, -10)
                             .padding(.trailing, -10)
                         )
@@ -121,17 +135,23 @@ struct AddCashSourceView: View {
                         case "iconBankCard", "iconWallet":
                             Image(selectedCashIconName)
                                 .resizable()
-                                .frame(width: 50, height: 50)
+                                .frame(
+                                    width: 50,
+                                    height: 50)
                                 .myShadow(radiusShadow: 5)
                         default:
                             ZStack{
                                 Color.myGreen
-                                    .frame(width: 50, height: 50)
+                                    .frame(
+                                        width: 50,
+                                        height: 50)
                                 
                                 Image(systemName: selectedCashIconName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30, height: 30)
+                                    .frame(
+                                        width: 30,
+                                        height: 30)
                                     .foregroundColor(.white)
                             }
                             .cornerRadius(15)
@@ -144,7 +164,11 @@ struct AddCashSourceView: View {
                 ImageButton(image: "btnDoneInactive",
                             pressedImage: "btnDone",
                             disabled: fieldsEmpty) {
-                    let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
+                    let newCashSource = CashSource(
+                        name: cashSourceName,
+                        amount: Double(currentMoneyAmount) ?? 0.0,
+                        iconName: selectedCashIconName)
+                    
                     if var copyUser = UserDefaultsManager.shared.userModel {
                         copyUser.cashSources.append(newCashSource)
                         UserDefaultsManager.shared.userModel? = copyUser
@@ -154,14 +178,17 @@ struct AddCashSourceView: View {
                 }
                 Spacer()
             }
-            .frame(width: 300,
-                   height: 360)
+            .frame(
+                width: 300,
+                height: 360)
             .blur(radius: showIconsCashSource ? 5 : 0)
             
             if showIconsCashSource {
-                AddIconsView(closeSelf: $showIconsCashSource, type: .cashSource) { iconName in
-                    selectedCashIconName = iconName
-                }
+                AddIconsView(
+                    closeSelf: $showIconsCashSource,
+                    type: .cashSource) { iconName in
+                        selectedCashIconName = iconName
+                    }
             }
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)

@@ -12,12 +12,12 @@ struct LimitCashSourcesView: View {
     var body: some View {
         
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
+            Color.myGrayLight.opacity(0.3)
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/1.5)
+                .frame(width: Screen.width/1.2,
+                       height: Screen.height/1.5)
                 .cornerRadius(25)
                 .myShadow(radiusShadow: 5)
             
@@ -31,7 +31,7 @@ struct LimitCashSourcesView: View {
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 22))
-                        .frame(width: UIScreen.main.bounds.width/2.2)
+                        .frame(width: Screen.width/2.2)
                     
                     Spacer()
                     
@@ -66,7 +66,7 @@ struct LimitCashSourcesView: View {
                         .lineLimit(4)
                         .padding(.horizontal, 20)
                 }
-                .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+                .frame(width: Screen.width/1.5, height: Screen.height/5.5)
                 .background(
                     RoundedRectangle(cornerRadius: 15).fill(.white)
                         .myShadow(radiusShadow: 5)
@@ -74,8 +74,8 @@ struct LimitCashSourcesView: View {
                 
                 Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width/1.2,
-                   height: UIScreen.main.bounds.height/1.5)
+            .frame(width: Screen.width/1.2,
+                   height: Screen.height/1.5)
             
 
         }

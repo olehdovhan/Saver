@@ -9,7 +9,7 @@ import Foundation
 
 class CashSourcesData: ObservableObject {
     
-    var cashSources: [CashSource] {
+    private var cashSources: [CashSource] {
         if let sources = UserDefaultsManager.shared.userModel?.cashSources {
             
             return sources
@@ -18,14 +18,8 @@ class CashSourcesData: ObservableObject {
         }
     }
     
-    var primary: CashSource {
+    private var primary: CashSource {
         cashSources.first!
     }
-    
-//    init(){
-//
-//    }
-    
-    
     
 }

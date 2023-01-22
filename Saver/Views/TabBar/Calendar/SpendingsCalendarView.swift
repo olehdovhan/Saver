@@ -38,12 +38,12 @@ struct SpendingsCalendarView: View {
             
             ZStack {
                 RoundedRectangle(cornerRadius: 50)
-                    .fill(Color(hex: "EDECEC"))
+                    .fill(Color.myGrayLight)
                     .frame(height: 5)
                 
                 RoundedRectangle(cornerRadius: 50)
-                    .fill(LinearGradient(colors: [Color(hex: "#90DE58"), Color(hex: "#5CCCCC")], startPoint: .leading, endPoint: .trailing))
-                    .frame(width: UIScreen.main.bounds.width / 5, height: 5)
+                    .fill(LinearGradient(colors: [.myGradeGreen, .myGradeBlue], startPoint: .leading, endPoint: .trailing))
+                    .frame(width: Screen.width / 5, height: 5)
                     .offset(x: viewModel.monthOffset.width)
             }
             // Days of Week...
@@ -91,13 +91,13 @@ struct SpendingsCalendarView: View {
                 
                 ZStack{
                     RoundedRectangle(cornerRadius: 50)
-                        .fill(Color(hex: "EDECEC"))
+                        .fill(Color.myGrayLight)
                         .frame(height: 5)
                     
                     HStack{
                         
                         RoundedRectangle(cornerRadius: 50)
-                            .fill(LinearGradient(colors: [Color(hex: "#90DE58"), Color(hex: "#5CCCCC")], startPoint: .leading, endPoint: .trailing))
+                            .fill(LinearGradient(colors: [.myGradeGreen, .myGradeBlue], startPoint: .leading, endPoint: .trailing))
                             .frame(width: viewModel.lengthDay, height: 5)
                             .offset(x: viewModel.offsetDayOfWeek.width)
                         Spacer()
@@ -114,12 +114,12 @@ struct SpendingsCalendarView: View {
                                     let timeTask12 = task.time.addingTimeInterval(CGFloat.random(in: 0...5000))
                                 
                                     Text(viewModel.timeFormat24.string(from: timeTask12))
-                                        .foregroundColor(Color(hex: "A9A9A9"))
+                                        .foregroundColor(.myGrayDark)
                                     .multilineTextAlignment(.leading)
                                     .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
                                     Spacer()
                                 }
-                                .frame(width: UIScreen.main.bounds.width/7)
+                                .frame(width: Screen.width/7)
                                 
                                 Spacer().frame(width: 5)
                                 
@@ -132,7 +132,7 @@ struct SpendingsCalendarView: View {
                                     .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                                     Spacer()
                                 }
-                                .frame(width: UIScreen.main.bounds.width/4)
+                                .frame(width: Screen.width/4)
                                 
                                 Spacer().frame(width: 5)
                                 
@@ -173,7 +173,7 @@ struct SpendingsCalendarView: View {
         DragGesture(minimumDistance: 10, coordinateSpace: .local)
             .onChanged({ value in
                 withAnimation(Animation.linear(duration: 0.5)) {
-                    if abs(value.translation.width) < UIScreen.main.bounds.width / 3 {
+                    if abs(value.translation.width) < Screen.width / 3 {
                         self.viewModel.monthOffset = value.translation
                     }
                 }
@@ -199,7 +199,7 @@ struct SpendingsCalendarView: View {
         DragGesture(minimumDistance: 10, coordinateSpace: .local)
             .onChanged({ value in
                 withAnimation(Animation.linear(duration: 0.5)) {
-                    if abs(value.translation.width) < UIScreen.main.bounds.width / 3 {
+                    if abs(value.translation.width) < Screen.width / 3 {
                         self.viewModel.dayOffset = value.translation
                     }
                 }

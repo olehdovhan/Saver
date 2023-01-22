@@ -20,7 +20,7 @@ struct AdaptivePagingScrollView: View {
 
     @Binding var currentPageIndex: Int
     
-    @State var firstZ: Double = 3
+    @State private var firstZ: Double = 3
     @Binding var addCashSourceViewShow: Bool
     @Binding var incomeViewShow: Bool
     @Binding var expenseViewShow: Bool
@@ -124,12 +124,12 @@ struct AdaptivePagingScrollView: View {
                             }
                         } label: {
                             VStack {
-                                Spacer().frame(width: UIScreen.main.bounds.width * 0.1744, height: 35)
+                                Spacer().frame(width: Screen.width * 0.1744, height: 35)
                                 Image("iconPlus")
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .myShadow(radiusShadow: 5)
-                                Spacer().frame(width:  UIScreen.main.bounds.width * 0.1744, height: 15)
+                                Spacer().frame(width:  Screen.width * 0.1744, height: 15)
                             }
                         }
                         .zIndex(1)
@@ -138,13 +138,13 @@ struct AdaptivePagingScrollView: View {
             }
             .onAppear {
                 currentScrollOffset =  countOffset(for: currentPageIndex)
-                print("III  itemSpacing \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
-                print("III  contentWidth \(contentWidth) coef \(contentWidth/UIScreen.main.bounds.width)")
-                print("III  itemPadding \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
-                print("III  leadingOffset \(leadingOffset) coef \(leadingOffset/UIScreen.main.bounds.width)")
+                print("III  itemSpacing \(itemPadding) coef \(itemPadding/Screen.width)")
+                print("III  contentWidth \(contentWidth) coef \(contentWidth/Screen.width)")
+                print("III  itemPadding \(itemPadding) coef \(itemPadding/Screen.width)")
+                print("III  leadingOffset \(leadingOffset) coef \(leadingOffset/Screen.width)")
                   
-                print("III  currentScrollOffset \(currentScrollOffset) coef \(currentScrollOffset/UIScreen.main.bounds.width)")
-                print("III  gestureDragOffset \(gestureDragOffset) coef \(gestureDragOffset/UIScreen.main.bounds.width)")
+                print("III  currentScrollOffset \(currentScrollOffset) coef \(currentScrollOffset/Screen.width)")
+                print("III  gestureDragOffset \(gestureDragOffset) coef \(gestureDragOffset/Screen.width)")
             }
             .background(Color.black.opacity(0.00001)) // hack - this allows gesture recognizing even when background is transparent
             .frame(width: contentWidth)

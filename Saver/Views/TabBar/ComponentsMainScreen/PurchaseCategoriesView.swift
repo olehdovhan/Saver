@@ -15,7 +15,7 @@ struct PurchaseCategoriesView: View{
     @Binding var purchaseDetailViewShow :Bool
     @Binding var selectedCategory: PurchaseCategory?
     
-    let columns = [ GridItem(.flexible()),
+    private let columns = [ GridItem(.flexible()),
                     GridItem(.flexible()),
                     GridItem(.flexible()),
                     GridItem(.flexible())]

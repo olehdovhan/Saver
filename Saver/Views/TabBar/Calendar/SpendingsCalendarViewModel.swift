@@ -16,7 +16,7 @@ class SpendingsCalendarViewModel: ObservableObject {
     
     var tasks: [TaskMetaData] = []
     
-    let lengthDay = UIScreen.main.bounds.width / 8
+    let lengthDay = Screen.width / 8
     
     var futureMonthDate: Date {
         var dateComponent = DateComponents()
@@ -42,43 +42,43 @@ class SpendingsCalendarViewModel: ObservableObject {
         return calendar.date(byAdding: dateComponent, to: selectedDate)!
     }
     
-    var dayOfWeakFormat : DateFormatter
+    private var dayOfWeakFormat : DateFormatter
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "EE"
         return formatter
     }
     
-    var  timeFormat24: DateFormatter{
+    var timeFormat24: DateFormatter{
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter
     }
     
-    var sun: String{
+    private var sun: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 01))!)
     }
-    var mon: String{
+    private var mon: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 02))!)
     }
-    var tue: String{
+    private var tue: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 03))!)
     }
-    var wed: String{
+    private var wed: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 04))!)
     }
-    var thu: String{
+    private var thu: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 05))!)
     }
-    var fri: String{
+    private var fri: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 06))!)
     }
-    var sat: String{
+    private var sat: String{
         dayOfWeakFormat.string(from: calendar.date(from: DateComponents(year: 2022, month: 05, day: 07))!)
     }
     
     var dayOfWeakArray: [String] { [sun, mon,tue, wed, thu, fri, sat] }
-    var selectedDayOfWeak: String {
+    private var selectedDayOfWeak: String {
         let selectedDayOfWeak = dayOfWeakFormat.string(from: selectedDate)
         return selectedDayOfWeak
     }
@@ -115,32 +115,10 @@ class SpendingsCalendarViewModel: ObservableObject {
                 tasks.append(tsk)
             }
         }
-//        tasks = [
-////            TaskMetaData(tasks: [
-////                Task(title: "To the bank card", valueUSD: "+300.00"),
-////                Task(title: "To the bank card", valueUSD: "+154.89"),
-////                Task(title: "Product", valueUSD: "-900.00")
-////            ], taskDate: getSampleDate(offset: 0)),
-//
-//            TaskMetaData(tasks: [
-//                Task(title: "Product", valueUSD: "+200.00")
-//            ], taskDate: getSampleDate(offset: -2)),
-//
-//            TaskMetaData(tasks: [
-//                Task(title: "Product", valueUSD: "+700.00")
-//            ], taskDate: getSampleDate(offset: 15)),
-//            //
-//            TaskMetaData(tasks: [
-//                Task(title: "To the bank card", valueUSD: "-1200.00")
-//            ], taskDate: getSampleDate(offset: 0)),
-//            //
-//            TaskMetaData(tasks: [
-//                Task(title: "To the bank card", valueUSD: "100.00")
-//            ], taskDate: getSampleDate(offset: +18))
-//            ]
+        
     }
     //sample Date for Testing...
-    func getSampleDate(offset: Int) -> Date {
+    private func getSampleDate(offset: Int) -> Date {
         let calendar = Calendar.current
         let date = calendar.date(byAdding: .day, value: offset, to: Date())
         return date ?? Date()
@@ -153,7 +131,7 @@ class SpendingsCalendarViewModel: ObservableObject {
     }
     
     //extracting Year AndMonth for display...
-    func extraData()->[String]{
+    private func extraData()->[String]{
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY MMMM"
         let date = formatter.string(from: selectedDate)
@@ -187,7 +165,7 @@ class SpendingsCalendarViewModel: ObservableObject {
         return days
     }
     
-    func timeConversion24(time12: String) -> String {
+    private func timeConversion24(time12: String) -> String {
         let dateAsString = time12
         let df = DateFormatter()
         df.dateFormat = "hh:mm:ssa"

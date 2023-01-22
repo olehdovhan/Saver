@@ -5,19 +5,19 @@
 //  Created by Пришляк Дмитро on 21.08.2022.
 //
 
-import Foundation
 import SwiftUI
 
-
+// MARK: - ColorModifier
 extension Color {
     static let myGreen = Color(hex: "#90DE58")
     static let myBlue = Color(hex: "#5CCCCC")
     static let myRed = Color(hex: "#FF2230")
-    static let myGrayDark = Color(hex: "595959")
+    static let myGrayDark = Color(hex: "#595959")
+    static let myGrayLight = Color(hex: "#C4C4C4")
     static let myGradeBlue = Color(hex: "#5CCCCC")
     static let myGradeGreen = Color(hex: "#4CD964")
     static let myGradeLilac = Color(hex: "#E6399B")
-    static let myGrayCapsule = Color(hex: "#D9D9D9")
+    
     
     
     init(hex: String) {
@@ -44,22 +44,4 @@ extension Color {
             opacity: Double(a) / 255
         )
     }
-}
-
-extension UIColor {
-   convenience init(red: Int, green: Int, blue: Int) {
-       assert(red >= 0 && red <= 255, "Invalid red component")
-       assert(green >= 0 && green <= 255, "Invalid green component")
-       assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
-       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-   }
-
-   convenience init(rgb: Int) {
-       self.init(
-           red: (rgb >> 16) & 0xFF,
-           green: (rgb >> 8) & 0xFF,
-           blue: rgb & 0xFF
-       )
-   }
 }

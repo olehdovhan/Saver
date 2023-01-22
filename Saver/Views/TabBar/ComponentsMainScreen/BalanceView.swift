@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BalanceView: View {
     
-    @State var isDragging = false
+    @State private var isDragging = false
     
     var body: some View {
         ZStack{
@@ -17,7 +17,7 @@ struct BalanceView: View {
                        startPoint: .top,
                        endPoint: .bottom )
         
-            .frame(width: UIScreen.main.bounds.width, height: 120, alignment: .top)
+            .frame(width: Screen.width, height: 120, alignment: .top)
             .cornerRadius(30)
 
         HStack(alignment: .center){

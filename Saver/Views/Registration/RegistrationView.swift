@@ -11,7 +11,10 @@ import AVKit
 
 struct RegistrationView: View {
     @StateObject private var viewModel = RegistrationViewModel()
-    let validCharsPass = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
+    private let validCharsPass = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
+    private let privacyPolicyHypertext = """
+    With conditions [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized
+    """
     
     var body: some View {
             ZStack {
@@ -19,14 +22,14 @@ struct RegistrationView: View {
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
                         .ignoresSafeArea()
-                    
                 }
+                
                 Rectangle()
                     .fill(Color.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    .onTapGesture {
-//                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//                    }
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
                 
                 VStack(spacing: 0){
                     Spacer(minLength: 50)
@@ -34,13 +37,12 @@ struct RegistrationView: View {
                     Text("Regisration")
                         .lineLimit(1)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 30))
-                    //
+                        .font(FontType.latoExtraBold.font(size: 30))
+                    
                     Spacer()
                     
                     fieldsView
                     
-                    //                privacyPolicy
                     HStack(spacing: 0){
                         Button {
                             viewModel.privacyTermsAccepted.toggle()
@@ -54,41 +56,41 @@ struct RegistrationView: View {
                         }
                         .overlay(
                             RoundedRectangle(cornerRadius: 3)
-                                .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myRed, lineWidth: 2)
-                        )
+                                .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myRed, lineWidth: 2))
+                        
                         Spacer()
                             .frame(width: 10)
                         
                         Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
-                            .font(.custom("Lato-Regular", size: 13))
+                            .font(FontType.latoRegular.font(size: 13))
                     }
                     .frame(width: wRatio(250))
                     .padding(.top, wRatio(30))
                     
-                    
                     Text("or")
-                        .font(.custom("NotoSans-Regular", size: 20))
+                        .font(FontType.notoSRegular.font(size: 20))
                         .padding(.top, wRatio(30))
                         .foregroundColor(.myGrayDark)
                     
-                    //                Spacer()
-                    
                     HStack(spacing: wRatio(50)){
-                        SocialButton(image: "icoGoogle" ,
-                                     widthImg: 20,
-                                     heightImg: 20){
+                        SocialButtonView(
+                            image: "icoGoogle" ,
+                            widthImg: 20,
+                            heightImg: 20
+                        ){
                             print("F")
                         }
-                        SocialButton(image: "icoFacebook",
-                                     widthImg: 10,
-                                     heightImg: 20){
+
+                        SocialButtonView(
+                            image: "icoFacebook",
+                            widthImg: 10,
+                            heightImg: 20
+                        ){
                             print("F")
                         }
                     }
                     .padding(.top, wRatio(30))
                     .padding(.bottom, wRatio(30))
-                    
-                    
                     
                     NavigationLink {
                         LoginView()
@@ -96,7 +98,7 @@ struct RegistrationView: View {
                         Text("Already have account?")
                             .lineLimit(1)
                             .foregroundColor(.myGreen)
-                            .font(.custom("Lato-Regular", size: 16))
+                            .font(FontType.latoRegular.font(size: 16))
                             .padding(.bottom, wRatio(28))
                     }
                     
@@ -107,36 +109,26 @@ struct RegistrationView: View {
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 10).fill(
-                                LinearGradient(colors: [.myGreen, .myBlue],
-                                               startPoint: .leading,
-                                               endPoint: .trailing)
+                                LinearGradient(
+                                    colors: [.myGreen, .myBlue],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
                             )
                             .frame(width: wRatio(250), height: 50)
                             
                             Text("Go!")
                                 .lineLimit(1)
                                 .foregroundColor(.white)
-                                .font(.custom("Lato-ExtraBold", size: 26))
+                                .font(FontType.latoExtraBold.font(size: 26))
                         }
-                        
-                        
                     }
-                    
-                    
-                    
                     
                     Spacer()
                 }
                 
-                
-                
             }
             .navigationBarHidden(true)
-        
-
-        
-        
-        
     }
     
     private var fieldsView: some View {
@@ -153,7 +145,7 @@ struct RegistrationView: View {
             
           // Hidden
             Text(viewModel.correctEmail.message)
-                .font(.custom("Lato-ExtraBold", size: 11))
+                .font(FontType.latoExtraBold.font(size: 11))
                 .foregroundColor(.red)
                 .opacity(viewModel.correctEmail == .validated ? 0.0 : 1.0)
             
@@ -166,8 +158,9 @@ struct RegistrationView: View {
                 
                 .secure(true)
                 .frame(width: wRatio(250))
-                .authTextField(isEditing: viewModel.passwordIsEditing,
-                               vState: viewModel.correctPassword)
+                .authTextField(
+                    isEditing: viewModel.passwordIsEditing,
+                    vState: viewModel.correctPassword)
                 .onReceive(Just(viewModel.password), perform: { value in
                                     let filtered = value.filter { validCharsPass.contains($0) }
                                     if filtered != value {
@@ -177,10 +170,9 @@ struct RegistrationView: View {
 
             // Hidden
               Text(viewModel.correctPassword.message)
-            
-                .font(.custom("Lato-ExtraBold", size: 11))
-                  .foregroundColor(.red)
-                  .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
+                .font(FontType.latoExtraBold.font(size: 11))
+                .foregroundColor(.red)
+                .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
             
             TextField("Repeat password", text: $viewModel.repeatPassword, onEditingChanged: { changed in
                 viewModel.repeatPasswordIsEditing = changed
@@ -200,19 +192,13 @@ struct RegistrationView: View {
             
             // Hidden
               Text(viewModel.correctPassword.message)
-                .font(.custom("Lato-ExtraBold", size: 11))
-                  .foregroundColor(.red)
-                  .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
-            
-            
-            
-            
-            
-            
+                .font(FontType.latoExtraBold.font(size: 11))
+                .foregroundColor(.red)
+                .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
         }
     }
     
-    var privacyPolicy: some View{
+    private var privacyPolicy: some View{
         HStack{
             Button {
                 viewModel.privacyTermsAccepted.toggle()
@@ -225,20 +211,16 @@ struct RegistrationView: View {
             }
             .overlay(
                       RoundedRectangle(cornerRadius: 3)
-                        .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myGreen, lineWidth: 2)
-              )
+                        .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myGreen, lineWidth: 2))
             Spacer()
                 .frame(width: 10)
             
-            Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
-                .font(.custom("Lato-Regular", size: 13))
+            Text(privacyPolicyHypertext)
+                .font(FontType.latoRegular.font(size: 13))
         }
         .frame(width: wRatio(250))
         
-        
-        
     }
-
 }
 
 struct RegistrationView_Previews: PreviewProvider {
@@ -248,26 +230,5 @@ struct RegistrationView_Previews: PreviewProvider {
 }
 
 
-struct SocialButton: View{
-    let image: String
-    let widthImg: CGFloat
-    let heightImg: CGFloat
-    let closure: () -> ()
-    
-    var body: some View{
-        Button {
-            closure()
-        } label: {
-            ZStack{
-                Circle().fill(Color.white).frame(width: 50, height: 50).shadow(radius: 10)
-                Image(image)
-                    .resizable()
-                    .frame(width: widthImg, height: heightImg)
-                
-            }
-            
-            
-        }
-    }
-}
+
 

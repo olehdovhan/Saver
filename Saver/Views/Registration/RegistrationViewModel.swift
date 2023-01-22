@@ -14,13 +14,9 @@ class RegistrationViewModel: ObservableObject {
     @Published var correctEmail: RegistrationTFState = .validated
     @Published var correctPassword: RegistrationTFState = .validated
     @Published var validatedPrivacy: RegistrationTFState = .validated
-    
-    
     @Published var email = ""
-    
     @Published var password = ""
     @Published var repeatPassword = ""
-    
     @Published var privacyTermsAccepted =    false
     @Published var emailIsEditing =          false
     @Published var passwordIsEditing =       false
@@ -29,7 +25,6 @@ class RegistrationViewModel: ObservableObject {
     
     func registerUser() {
         //registration logic
-        //...
         
     }
     
@@ -40,8 +35,7 @@ protocol ValidateInputProtocol {
     func inputValidated() -> Bool
 }
 
-
-
+// MARK: - ValidateInputProtocol
 extension RegistrationViewModel: ValidateInputProtocol {
     
     func passwordIsCorrect() -> RegistrationTFState {
@@ -49,8 +43,6 @@ extension RegistrationViewModel: ValidateInputProtocol {
     }
     
     func inputValidated() -> Bool {
-        
-       
         
         switch email.count {
         case let x where x > 1:
@@ -62,8 +54,6 @@ extension RegistrationViewModel: ValidateInputProtocol {
         default: correctEmail = .empty
         }
      
-   
-        
         switch password {
         case let x where x == repeatPassword && x.count >= 8: correctPassword = .validated
         case let x where x.count < 8:                         correctPassword = .lessThanSymbols(count: 8)
@@ -76,13 +66,9 @@ extension RegistrationViewModel: ValidateInputProtocol {
         case false: validatedPrivacy = .empty
         }
         
-       
         let validated = correctEmail == .validated &&
         correctPassword == .validated && validatedPrivacy == .validated
         return validated
     }
-    
-    
-    
-    
+
 }

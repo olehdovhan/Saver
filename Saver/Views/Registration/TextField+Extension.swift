@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - SecureTextField
 extension TextField {
     
     public func secure(_ secure: Bool = true) -> TextField {
