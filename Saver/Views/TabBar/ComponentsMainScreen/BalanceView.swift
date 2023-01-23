@@ -10,6 +10,7 @@ import SwiftUI
 struct BalanceView: View {
     
     @State var isDragging = false
+    @Binding var showQuitAlert: Bool
     
     var body: some View {
         ZStack{
@@ -26,11 +27,16 @@ struct BalanceView: View {
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.white)
-                    
-                Image("avatar")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.white)
+                Button {
+                    showQuitAlert = true
+                 
+                } label: {
+                    Image("avatar")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(.white)
+                }
+               
                 if let user = UserDefaultsManager.shared.userModel {
                     Text("\(user.name)")
                         .foregroundColor(.white)

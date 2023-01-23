@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import Firebase
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -22,17 +23,35 @@ struct SaverApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @State var userState = UserState.registeredUnauthorized
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                RegistrationView()
+                switch userState {
+                case .registeredAuthorized:
+                    TabBarView()
+                case .registeredUnauthorized:
+                    LoginView()
+                case .unRegistered:
+                    RegistrationView()
+                }
             }
-//            if UserDefaultsManager.shared.userModel == nil {
-//                AuthView()
-//            } else {
-//                TabBarView()
-//            }
+            .onAppear() {
+                Auth.auth().addStateDidChangeListener { (auth, user) in
+                    if user != nil {
+                        userState = .registeredAuthorized
+                    } else {
+                        userState = .registeredUnauthorized
+                    }
+                }
+            }
         }
     }
 }
+
+enum UserState {
+    case registeredAuthorized, registeredUnauthorized, unRegistered
+}
+
   

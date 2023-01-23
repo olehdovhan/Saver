@@ -124,7 +124,7 @@ struct RegistrationView: View {
                     Spacer()
                 }
             }
-            .navigationBarHidden(true)
+            //.navigationBarHidden(true)
         
     }
     

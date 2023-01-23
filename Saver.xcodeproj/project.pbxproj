@@ -13,6 +13,7 @@
 		0C4343BA2963687D00B511E8 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4343B92963687D00B511E8 /* ExpenseViewModel.swift */; };
 		0C4343BC296418D300B511E8 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4343BB296418D300B511E8 /* Date+Extension.swift */; };
 		0C4343BE2964195A00B511E8 /* SpendingsCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4343BD2964195A00B511E8 /* SpendingsCalendarViewModel.swift */; };
+		0C4C60CC297EA30E00D040DC /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C60CB297EA30E00D040DC /* MainScreenViewModel.swift */; };
 		0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C62D5D02944F295006EA95F /* AddCashSourceView.swift */; };
 		0C67F3B4293C961D002384D4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C67F3B3293C961D002384D4 /* UserDefaultsManager.swift */; };
 		0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A1B1629488943006E7C13 /* CircleTextView.swift */; };
@@ -102,6 +103,7 @@
 		0C4343B92963687D00B511E8 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		0C4343BB296418D300B511E8 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		0C4343BD2964195A00B511E8 /* SpendingsCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsCalendarViewModel.swift; sourceTree = "<group>"; };
+		0C4C60CB297EA30E00D040DC /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		0C62D5D02944F295006EA95F /* AddCashSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCashSourceView.swift; sourceTree = "<group>"; };
 		0C67F3B3293C961D002384D4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		0C6A1B1629488943006E7C13 /* CircleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTextView.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				B41618B328B1361C002629F7 /* MainScreen.swift */,
+				0C4C60CB297EA30E00D040DC /* MainScreenViewModel.swift */,
 				B4E94DC228BDD93B0054B16F /* CustomAlert.swift */,
 				B4A9AAA028B27E37001230BF /* ComponentsMainScreen */,
 				B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */,
@@ -642,6 +645,7 @@
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
 				0CA0037F2972C00A00E9DF89 /* AuthView.swift in Sources */,
 				66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */,
+				0C4C60CC297EA30E00D040DC /* MainScreenViewModel.swift in Sources */,
 				66C1B533297377CB008E1BAE /* ForgotPasswordViewModel.swift in Sources */,
 				66AA4071295125A5002A2359 /* CalendarView.swift in Sources */,
 				0C62D5D12944F295006EA95F /* AddCashSourceView.swift in Sources */,

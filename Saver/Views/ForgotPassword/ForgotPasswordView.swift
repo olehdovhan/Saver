@@ -8,8 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct ForgotPasswordView: View{
+struct ForgotPasswordView: View {
+    
     @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject private var viewModel = ForgotPasswordViewModel()
     
     @State private var email = ""
@@ -89,7 +91,7 @@ struct ForgotPasswordView: View{
                     
                 }
             }
-            .navigationBarBackButtonHidden(true)
+//            .navigationBarBackButtonHidden(true)
           
         
     }

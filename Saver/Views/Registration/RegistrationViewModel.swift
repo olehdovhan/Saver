@@ -30,14 +30,16 @@ class RegistrationViewModel: ObservableObject {
     func registerUser() {
         print(email)
         print(password)
-        willMoveToTabBar = true
-//        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
-//            if error == nil {
-//                if user != nil {
-//                    self?.willMoveToLogin = true
-//                }
-//            }
-//        }
+//        willMoveToTabBar = true
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+            if error == nil {
+                if user != nil {
+                    self?.willMoveToTabBar = true
+                }
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
     }
 }
 

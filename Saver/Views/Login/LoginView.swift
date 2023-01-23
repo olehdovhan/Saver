@@ -69,7 +69,15 @@ struct LoginView: View {
                     .padding(.top, wRatio(30))
                     .padding(.bottom, wRatio(30))
                     
-                    
+                    NavigationLink {
+                        RegistrationView()
+                    } label: {
+                        Text("Create an account")
+                            .lineLimit(1)
+                            .foregroundColor(.myGreen)
+                            .font(.custom("Lato-Regular", size: 16))
+                            .padding(.bottom, wRatio(28))
+                    }
                     
                     Button{
                         viewModel.login(login: email, password: password)
@@ -101,6 +109,7 @@ struct LoginView: View {
                             .padding(.bottom, wRatio(28))
                     }
                     
+                
                     
                     Spacer()
                 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainScreen: View {
     
+    @State var showQuitAlert = false
     @State var expenseViewShow = false
     @State var incomeViewShow = false
     @State var addCashSourceViewShow = false
@@ -31,6 +32,9 @@ struct MainScreen: View {
     @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
     let itemPadding: CGFloat = 6// UIScreen.main.bounds.width * 0.02558
+    var viewModel = MainScreenViewModel()
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
@@ -40,26 +44,20 @@ struct MainScreen: View {
                                    .ignoresSafeArea()
                            }
             
-            VStack{
+            VStack {
                 Color.myGreen.frame(height: 30)
                 Color.white
             }
             .zIndex(-3)
-            
-//            Color.red
-//                .padding(.top, 250)
-//                .frame(width: UIScreen.main.bounds.width)
-//                .zIndex(0)
-            
+  
             VStack(alignment: .center, spacing: 0) {
                 
-                BalanceView().zIndex(4)
+                BalanceView(showQuitAlert: $showQuitAlert).zIndex(4)
                 Spacer() .frame(height: 15)
                     .onAppear(){
                         print(UIScreen.main.bounds.width)
                     }
-                
-                    //Новий скрол
+       
                 GeometryReader { geometry in
                     AdaptivePagingScrollView(addCashSourceViewShow: $addCashSourceViewShow,
                                              incomeViewShow: $incomeViewShow,
@@ -240,7 +238,12 @@ struct MainScreen: View {
                 purchaseCategories = categories
             }
         }
-//        .ignoresSafeArea(.all)
+        .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
+            Button("No", role: .cancel) { }
+            Button("Yes", role: .destructive) {
+                viewModel.signOut()
+            }
+        }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
