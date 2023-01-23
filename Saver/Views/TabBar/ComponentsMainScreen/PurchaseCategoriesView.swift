@@ -70,7 +70,7 @@ struct PurchaseCategoriesView: View{
                                 
                                 Text(item.name)
                                     .foregroundColor(.black)
-                                    .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                                    .font(FontType.latoRegular.font(size: 12))
                                     .lineLimit(1)
                                     .frame(width: 80, height: 15)
                             }

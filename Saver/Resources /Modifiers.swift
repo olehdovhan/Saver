@@ -15,7 +15,6 @@ struct ShadowCustom : ViewModifier{
     }
 }
 
-
 // MARK: - PlaceholderModifier
 extension View {
     
@@ -41,12 +40,14 @@ extension View {
 // MARK: - DraggableModifier
 extension View {
     
-    func draggable(zIndex: Binding<Double>,
-                   isAlertShow: Binding<Bool>,
-                   purchaseType: Binding<String>,
-                   cashType: String ,
-                   cashSource: Binding<String>,
-                   draggingItem: Binding<Bool>) -> some View {
+    func draggable(
+        zIndex: Binding<Double>,
+        isAlertShow: Binding<Bool>,
+        purchaseType: Binding<String>,
+        cashType: String ,
+        cashSource: Binding<String>,
+        draggingItem: Binding<Bool>
+    ) -> some View {
         modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource, draggingItem: draggingItem))
     }
 }
@@ -62,7 +63,7 @@ struct DragGestureCustom: ViewModifier {
     @State var cashType: String
     @Binding var cashSource: String
     @Binding var draggingItem: Bool
-   
+    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
@@ -74,7 +75,7 @@ struct DragGestureCustom: ViewModifier {
                     isDraggingItem.toggle()
                 }
                 print(value.location.y)
-               
+                
             })
             .onEnded { gesture in
                 draggingItem = false
@@ -90,23 +91,24 @@ struct DragGestureCustom: ViewModifier {
                     let yRange = startYRange...finishYRange
                     
                     if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
-
+                        
                         purchaseType = item.key
                         cashSource = cashType
                         isAlertShow.toggle()
                     }
                 }
+                
+                if abs(gesture.location.x) > 49 &&
+                    abs(gesture.location.x) < 95 &&
+                    abs(gesture.location.y) > 419 &&
+                    abs(gesture.location.y) < 470 {
                     
-                if abs(gesture.location.x) > 49 && abs(gesture.location.x) < 95 && abs(gesture.location.y) > 419 && abs(gesture.location.y) < 470 {
-                 
-                    print("moped")
                     withAnimation(.spring()) {
                         zIndex = 1
                         isDraggingItem.toggle()
                         currentOffsetX = 0
                         currentOffsetY = 0
                     }
-                            
                 } else {
                     withAnimation(.spring()) {
                         zIndex = 1
@@ -118,24 +120,23 @@ struct DragGestureCustom: ViewModifier {
                 
                 currentOffsetX = 0
                 currentOffsetY = 0
-          }
+            }
     }
     
     func body(content: Content) -> some View {
-              content
+        content
             .offset(x: currentOffsetX)
             .offset(y: currentOffsetY)
             .gesture(drag)
     }
 }
 
-
-
-
-
 // MARK: - DelaysTouches
 extension View {
-    func delaysTouches(for duration: TimeInterval = 0.25, onTap action: @escaping () -> Void = {}) -> some View {
+    func delaysTouches(
+        for duration: TimeInterval = 0.25,
+        onTap action: @escaping () -> Void = {}
+    ) -> some View {
         modifier(DelaysTouches(duration: duration, action: action))
     }
 }
@@ -143,10 +144,10 @@ extension View {
 fileprivate struct DelaysTouches: ViewModifier {
     @State private var disabled = false
     @State private var touchDownDate: Date? = nil
-
+    
     var duration: TimeInterval
     var action: () -> Void
-
+    
     func body(content: Content) -> some View {
         Button(action: action) {
             content
@@ -160,12 +161,12 @@ fileprivate struct DelaysTouchesButtonStyle: ButtonStyle {
     @Binding var disabled: Bool
     var duration: TimeInterval
     @Binding var touchDownDate: Date?
-
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .onChange(of: configuration.isPressed, perform: handleIsPressed)
     }
-
+    
     private func handleIsPressed(isPressed: Bool) {
         if isPressed {
             let date = Date()
@@ -181,19 +182,17 @@ fileprivate struct DelaysTouchesButtonStyle: ButtonStyle {
                 }
             }
         } else {
-                    touchDownDate = nil
-                    disabled = false
-                }
-            }
+            touchDownDate = nil
+            disabled = false
         }
+    }
+}
 
 enum Screen {
     static let fullSize = UIScreen.main.bounds.size
     static let width = UIScreen.main.bounds.size.width
     static let height = UIScreen.main.bounds.size.height
 }
-
-
 
 extension View {
     

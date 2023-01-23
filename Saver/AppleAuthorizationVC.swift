@@ -9,16 +9,16 @@ import AuthenticationServices
 import UIKit
 
 class AppleAuthorizationVC: UIViewController {
-
+    
     private let signInButton = ASAuthorizationAppleIDButton()
-    var closure: (() -> ())?
+    var closure: (() -> (Void))?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         signInButton.frame = view.layer.frame
@@ -35,48 +35,55 @@ class AppleAuthorizationVC: UIViewController {
         controller.presentationContextProvider = self
         controller.performRequests()
     }
-
+    
 }
 
 // MARK: - ASAuthorizationControllerDelegate
 extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithError error: Error
+    ) {
         print("failed")
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         switch authorization.credential {
         case let credentials as ASAuthorizationAppleIDCredential:
-           if let firstName = credentials.fullName?.givenName,
-            let secondName = credentials.fullName?.familyName,
-              let email = credentials.email {
-               // TODO: - create USER in UD and then in REALM
-               if UserDefaultsManager.shared.userModel == nil {
-                   UserDefaultsManager.shared.userModel =
-                   UserModel(avatarImgName: "person.circle",
-                             name: firstName + " " + secondName,
-                             email: email,
-                             registrationDate: Date(),
-                             cashSources: [CashSource(name: "Bank card",
-                                                      amount: 0.0,
-                                                      iconName: "iconBankCard"),
-                                           CashSource(name: "Wallet",
-                                                      amount: 0.0,
-                                                      iconName: "iconWallet")],
-                             purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                  PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                  PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                  PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                  PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                  PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                  PurchaseCategory(name: "Health", iconName: "iconHealth")])
-                   
-                   if let closure {
-                       closure()
-                   }
-               }
-           }
+            if let firstName = credentials.fullName?.givenName,
+               let secondName = credentials.fullName?.familyName,
+               let email = credentials.email {
+                // TODO: - create USER in UD and then in REALM
+                if UserDefaultsManager.shared.userModel == nil {
+                    UserDefaultsManager.shared.userModel =
+                    UserModel(
+                        avatarImgName: "person.circle",
+                        name: firstName + " " + secondName,
+                        email: email,
+                        registrationDate: Date(),
+                        cashSources: [CashSource(name: "Bank card",
+                                                 amount: 0.0,
+                                                 iconName: "iconBankCard"),
+                                      CashSource(name: "Wallet",
+                                                 amount: 0.0,
+                                                 iconName: "iconWallet")],
+                        purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+                                             PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                             PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                             PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                             PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                             PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                             PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                    
+                    if let closure {
+                        closure()
+                    }
+                }
+            }
         default: break
         }
     }

@@ -32,7 +32,7 @@ struct DetailDebtView: View {
                         .lineLimit(2)
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
+                        .font(FontType.latoExtraBold.font(size: 22))
                         .frame(width: Screen.width/2)
                         .padding(.top, 20)
                     
@@ -70,7 +70,7 @@ struct DetailDebtView: View {
                         Text("You shold make payment  \(debt.monthlyDebtPayment)$ per month to close this debt in \(debt.totalMonthesForReturn)")
                             .padding(20)
                             .foregroundColor(.myGrayDark)
-                            .font(.custom("Lato-Regular", size: 20))
+                            .font(FontType.latoRegular.font(size: 20))
                             .frame(width: Screen.width/1.5, height: Screen.height/4.5)
                             .background(
                                 RoundedRectangle(cornerRadius: 15).fill(.white)
@@ -82,7 +82,7 @@ struct DetailDebtView: View {
                         Text("You have to get paid \(debt.monthlyDebtPayment)$ per month to close this debt in \(debt.totalMonthesForReturn)")
                             .padding(20)
                             .foregroundColor(.myGrayDark)
-                            .font(.custom("Lato-Regular", size: 20))
+                            .font(FontType.latoRegular.font(size: 20))
                             .frame(width: Screen.width/1.5, height: Screen.height/4.5)
                             .background(
                                 RoundedRectangle(cornerRadius: 15).fill(.white)
@@ -93,7 +93,7 @@ struct DetailDebtView: View {
 //                    Text("Recently you make \(debt.) payments and you collected \(debt.)$.")
 //                        .padding(20)
 //                        .foregroundColor(.myGrayDark)
-//                        .font(.custom("Lato-Regular", size: 20))
+//                        .font(FontType.latoRegular.font(size: 20))
 //                        .frame(width: Screen.width/1.5, height: Screen.height/4.5)
 //                        .background(
 //                            RoundedRectangle(cornerRadius: 15).fill(.white)
@@ -135,5 +135,4 @@ struct DetailDebtView: View {
             }
         }
 }
-
 

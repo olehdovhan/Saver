@@ -15,4 +15,3 @@ import SwiftUI
 //    case restaurant
 //}
 
-

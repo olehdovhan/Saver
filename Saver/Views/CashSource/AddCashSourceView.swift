@@ -23,7 +23,9 @@ struct AddCashSourceView: View {
            cashSourceName != "",
            currentMoneyAmount != "" {
             return false
-        } else { return true }
+        } else {
+            return true
+        }
     }
     
     var body: some View {
@@ -65,7 +67,7 @@ struct AddCashSourceView: View {
                     Text("Name")
                         .foregroundColor(.black)
                     
-                    Spacer()
+                    Spacer(minLength: 30)
                     
                     TextField("",text: $cashSourceName)
                         .placeholder(when: cashSourceName.isEmpty) {
@@ -89,7 +91,7 @@ struct AddCashSourceView: View {
                     Text("Money amount")
                         .foregroundColor(.black)
                     
-                    Spacer()
+                    Spacer(minLength: 30)
                     
                     TextField("", text: $currentMoneyAmount)
                         .placeholder(when: currentMoneyAmount.isEmpty) {

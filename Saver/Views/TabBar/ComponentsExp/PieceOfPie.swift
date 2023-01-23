@@ -48,7 +48,7 @@ class PieceOfPieContainer: ObservableObject {
     }
     
     private func getAllExpenses() -> Set<String>? {
-        if UserDefaultsManager.shared.userModel?.currentMonthSpendings?.count != 0 ,
+        if UserDefaultsManager.shared.userModel?.currentMonthSpendings?.count != 0,
            let expenses = UserDefaultsManager.shared.userModel?.currentMonthSpendings {
             var categoriesSet: Set<String> = []
             for expense in expenses {

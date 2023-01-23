@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class ExpenseViewModel: ObservableObject {
     
     @Published var expense = 0.0
@@ -22,7 +21,10 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
-    func addAndCalculateExpens(from cashSource: String, to spentCategory: String) {
+    func addAndCalculateExpens(
+        from cashSource: String,
+        to spentCategory: String
+    ) {
         let expenseModel = ExpenseModel(amount: expense,
                                    comment: comment,
                                  expenseDate: Date(),

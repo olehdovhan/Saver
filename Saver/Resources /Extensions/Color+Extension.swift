@@ -18,8 +18,6 @@ extension Color {
     static let myGradeGreen = Color(hex: "#4CD964")
     static let myGradeLilac = Color(hex: "#E6399B")
     
-    
-    
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0

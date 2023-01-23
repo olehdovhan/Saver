@@ -33,7 +33,7 @@ struct PurchaseCategoryDetailView: View {
                         .lineLimit(1)
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
+                        .font(FontType.latoExtraBold.font(size: 22))
                         .frame(width: Screen.width/2.2)
                     
                     ZStack{
@@ -92,7 +92,7 @@ struct PurchaseCategoryDetailView: View {
             VStack(spacing: 10){
                 Text("Budget month plan:")
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Bold", size: 16))
+                    .font(FontType.latoBold.font(size: 16))
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .textCase(.uppercase)
@@ -101,14 +101,14 @@ struct PurchaseCategoryDetailView: View {
                   case nil:
                     Text("You have not added spend plan for month yet")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 16))
+                        .font(FontType.latoRegular.font(size: 16))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .padding(.horizontal, 20)
                 default:
                     Text(String(category.planSpentPerMonth!))
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 16))
+                        .font(FontType.latoRegular.font(size: 16))
                         .multilineTextAlignment(.leading)
                         .lineLimit(2)
                   }
@@ -123,7 +123,7 @@ struct PurchaseCategoryDetailView: View {
             VStack(spacing: 10){
                 Text("Spending this Month:")
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Bold", size: 16))
+                    .font(FontType.latoBold.font(size: 16))
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .textCase(.uppercase)
@@ -132,7 +132,7 @@ struct PurchaseCategoryDetailView: View {
                 
                 Text("0.0$")
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Regular", size: 16))
+                    .font(FontType.latoRegular.font(size: 16))
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                 
@@ -170,5 +170,4 @@ struct PurchaseCategoryDetailView: View {
         }
     }
 }
-
 

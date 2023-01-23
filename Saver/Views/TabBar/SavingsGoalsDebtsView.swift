@@ -55,7 +55,7 @@ struct SavingsGoalsDebtsView: View {
                         Text("Saving")
                             .textCase(.uppercase)
                             .foregroundColor(.myGreen)
-                            .font(.custom("Lato-ExtraBold", size: 22))
+                            .font(FontType.latoExtraBold.font(size: 22))
                         Spacer()
                     }
                     .padding(.horizontal, 26)
@@ -67,7 +67,7 @@ struct SavingsGoalsDebtsView: View {
                         } label: {
                             VStack(spacing: 9){
                                 Text("\(plus)\(String(format: "%.3f", user?.saver ?? 0.0))$")
-                                    .font(.custom("Lato-Medium", size: 25))
+                                    .font(FontType.latoMedium.font(size: 25))
                                     .foregroundColor(.black)
                             }
                             .frame(width: squareSide,
@@ -89,7 +89,7 @@ struct SavingsGoalsDebtsView: View {
                                                endPoint: .bottomTrailing)
 //                                .mask(
 //                                    Text("\(Int(user?.freeDays ?? 0.0))")
-//                                        .font(.custom("Lato-Medium", size: 65))
+//                                        .font(FontType.latoMedium.font(size: 65))
 //                                )
 //                                .frame(maxHeight: 61)
 //                                .padding(.bottom, 15)
@@ -97,7 +97,7 @@ struct SavingsGoalsDebtsView: View {
                                 Text("Days of\nfreedom")
                                     .lineLimit(2)
                                     .foregroundColor(.myGrayDark)
-                                    .font(.custom("Lato-Regular", size: 20))
+                                    .font(FontType.latoRegular.font(size: 20))
                             }
                             .frame(width: squareSide,
                                    height: squareSide)
@@ -115,7 +115,7 @@ struct SavingsGoalsDebtsView: View {
                         Text("Goals")
                             .textCase(.uppercase)
                             .foregroundColor(.myGreen)
-                            .font(.custom("Lato-ExtraBold", size: 22))
+                            .font(FontType.latoExtraBold.font(size: 22))
                         Spacer()
                     }
                     .padding(.horizontal, 26)
@@ -133,20 +133,18 @@ struct SavingsGoalsDebtsView: View {
                                         Text("\(goal.name)")
                                             .textCase(.uppercase)
                                             .foregroundColor(.black)
-                                            .font(.custom("Lato-Medium", size: 15))
+                                            .font(FontType.latoMedium.font(size: 15))
                                             .lineLimit(1)
                                         Spacer()
                                     }
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
 
-
-
                                     HStack(alignment: .bottom){
                                         Spacer()
                                         Text("collected \(goal.collectedPrice)$ out of \(goal.totalPrice)$")
                                             .foregroundColor(.myGrayDark)
-                                            .font(.custom("Lato-Regular", size: 12))
+                                            .font(FontType.latoRegular.font(size: 12))
                                             .lineLimit(1)
                                     }
                                     .padding(.leading, 17)
@@ -196,7 +194,7 @@ struct SavingsGoalsDebtsView: View {
                         Text("Debts")
                             .textCase(.uppercase)
                             .foregroundColor(.myGreen)
-                            .font(.custom("Lato-ExtraBold", size: 22))
+                            .font(FontType.latoExtraBold.font(size: 22))
                         Spacer()
                     }
                     .padding(.horizontal, 26)
@@ -218,7 +216,7 @@ struct SavingsGoalsDebtsView: View {
                                             Text("\(debt.name)")
                                                 .textCase(.uppercase)
                                                 .foregroundColor(.orange)
-                                                .font(.custom("Lato-Medium", size: 15))
+                                                .font(FontType.latoMedium.font(size: 15))
                                                 .lineLimit(1)
                                         }
 
@@ -226,7 +224,7 @@ struct SavingsGoalsDebtsView: View {
                                             Text("\(debt.name)")
                                                 .textCase(.uppercase)
                                                 .foregroundColor(.red)
-                                                .font(.custom("Lato-Medium", size: 15))
+                                                .font(FontType.latoMedium.font(size: 15))
                                                 .lineLimit(1)
                                         }
 
@@ -234,8 +232,6 @@ struct SavingsGoalsDebtsView: View {
                                     }
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-
-
 
                                     HStack(alignment: .bottom){
 
@@ -243,7 +239,7 @@ struct SavingsGoalsDebtsView: View {
                                             Text("Gave \(dateFormatter.string(from: debt.startDate))")
                                                 .textCase(.uppercase)
                                                 .foregroundColor(.orange)
-                                                .font(.custom("Lato-Medium", size: 15))
+                                                .font(FontType.latoMedium.font(size: 15))
                                                 .lineLimit(1)
                                         }
 
@@ -251,7 +247,7 @@ struct SavingsGoalsDebtsView: View {
                                             Text("Took \(dateFormatter.string(from: debt.startDate)) ")
                                                 .textCase(.uppercase)
                                                 .foregroundColor(.red)
-                                                .font(.custom("Lato-Medium", size: 15))
+                                                .font(FontType.latoMedium.font(size: 15))
                                                 .lineLimit(1)
                                         }
 
@@ -260,12 +256,11 @@ struct SavingsGoalsDebtsView: View {
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
 
-
                                     HStack(){
                                         Spacer()
                                         Text("returned \(Int(debt.returnedAmount))$ of \(Int(debt.totalAmount))$")
                                             .foregroundColor(.myGrayDark)
-                                            .font(.custom("Lato-Regular", size: 12))
+                                            .font(FontType.latoRegular.font(size: 12))
                                             .lineLimit(1)
                                     }
                                     .padding(.leading, 17)
@@ -276,16 +271,15 @@ struct SavingsGoalsDebtsView: View {
                                         Spacer()
 
                                         if debt.whose == .gave {
-
                                             Text("Return \(Int(debt.monthlyDebtPayment))$ per month")
                                                 .foregroundColor(.myGrayDark)
-                                                .font(.custom("Lato-Regular", size: 12))
+                                                .font(FontType.latoRegular.font(size: 12))
                                                 .lineLimit(1)
                                         }
                                         else if debt.whose == .took {
                                             Text("Receive \(Int(debt.monthlyDebtPayment))$ per month")
                                                 .foregroundColor(.myGrayDark)
-                                                .font(.custom("Lato-Regular", size: 12))
+                                                .font(FontType.latoRegular.font(size: 12))
                                                 .lineLimit(1)
                                         }
                                     }
@@ -303,8 +297,6 @@ struct SavingsGoalsDebtsView: View {
                                     .frame(height: 5)
                                     .padding(.leading, 17)
                                     .padding(.trailing, 18)
-
-
 
                                 }
                                 .padding(.vertical, 20)

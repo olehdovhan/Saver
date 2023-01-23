@@ -25,26 +25,3 @@ struct TaskMetaData: Identifiable {
     var taskDate: Date
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

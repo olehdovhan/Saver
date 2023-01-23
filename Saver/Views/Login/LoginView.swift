@@ -39,7 +39,7 @@ struct LoginView: View {
                     Text("Login")
                         .lineLimit(1)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 30))
+                        .font(FontType.latoExtraBold.font(size: 30))
                     //
                     Spacer()
                     
@@ -47,7 +47,7 @@ struct LoginView: View {
                     fieldsView
                     
                     Text("or")
-                        .font(.custom("NotoSans-Regular", size: 20))
+                        .font(FontType.notoSRegular.font(size: 20))
                         .padding(.top, wRatio(30))
                         .foregroundColor(.myGrayDark)
                     
@@ -89,7 +89,7 @@ struct LoginView: View {
                             Text("Go!")
                                 .lineLimit(1)
                                 .foregroundColor(.white)
-                                .font(.custom("Lato-ExtraBold", size: 26))
+                                .font(FontType.latoExtraBold.font(size: 22))
                         }
                         
                     }
@@ -101,7 +101,7 @@ struct LoginView: View {
                         Text("Forgot password?")
                             .lineLimit(1)
                             .foregroundColor(.myGreen)
-                            .font(.custom("Lato-Regular", size: 16))
+                            .font(FontType.latoRegular.font(size: 16))
                             .padding(.bottom, wRatio(28))
                     }
                     
@@ -125,7 +125,7 @@ struct LoginView: View {
                 .frame(width: wRatio(250))
             
             Text("Incorrect format")
-                .font(.custom("Lato-ExtraBold", size: 11))
+                .font(FontType.latoExtraBold.font(size: 11))
                 .foregroundColor(.red)
                 .padding(.bottom, 5)
                 .opacity(viewModel.incorrectEmail ? 0.0 : 1.0)
@@ -136,12 +136,12 @@ struct LoginView: View {
                         viewModel.passwordIsEditing = changed
                       })
                      .secure(true)
-//                     .frame(width: wRatio(250))
+                     .frame(width: wRatio(250))
                 } else {
                     TextField("Password", text: $password, onEditingChanged: { changed in
                         viewModel.passwordIsEditing = changed
                       })
-//                    .frame(width: wRatio(250))
+                    .frame(width: wRatio(250))
                       
                 }
                 Spacer()
@@ -156,7 +156,7 @@ struct LoginView: View {
             .frame(width: wRatio(250))
             
             Text("Password")
-                .font(.custom("Lato-ExtraBold", size: 11))
+                .font(FontType.latoExtraBold.font(size: 11))
                 .foregroundColor(.red)
                 .opacity(viewModel.incorrectPassword ? 0.0 : 1.0)
         }

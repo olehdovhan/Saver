@@ -91,7 +91,7 @@ struct OnboardView: View{
     let description: String
     let buttonText: String
     @Binding var calculatedHeight: CGFloat
-    let buttonAction: () -> ()
+    let buttonAction: () -> (Void)
     @State var animationFirst = false
     @State var animationSecond = false
     let springAnimation = Animation.spring(
@@ -206,12 +206,12 @@ struct OnboardView: View{
     }
 }
 
-
 struct ViewHeightKey: PreferenceKey {
     static var defaultValue: CGFloat { 0 }
     static func reduce(
         value: inout Value,
-        nextValue: () -> Value) {
+        nextValue: () -> Value
+    ) {
         value = value + nextValue()
     }
 }

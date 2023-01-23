@@ -41,13 +41,14 @@ struct CardsPlace: View {
                                             VStack(spacing: 5) {
                                                 Text(source.name)
                                                     .foregroundColor(.black)
-                                                    .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                                                    .font(FontType.latoRegular.font(size: 12))
                                                     .frame(width: 75)
                                                     .frame(height: 30)
                                                     .lineLimit(2)
                                                 
                                                 switch source.iconName {
-                                                case "iconBankCard", "iconWallet":
+                                                case "iconBankCard",
+                                                    "iconWallet":
                                                     Image(source.iconName)
                                                         .resizable()
                                                         .frame(width: 50, height: 50)
@@ -73,7 +74,7 @@ struct CardsPlace: View {
                                                 
                                                 Text(String(source.amount))
                                                     .foregroundColor(.black)
-                                                    .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                                                    .font(FontType.latoRegular.font(size: 12))
                                                     .frame(width: 75)
                                                     .frame(height: 10)
                                                     .lineLimit(1)
@@ -132,6 +133,4 @@ struct CardsPlace: View {
         }
     }
 }
-
-
 

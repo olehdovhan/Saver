@@ -10,7 +10,7 @@ import SwiftUI
 struct SocialButtonView: View{
     let image: String
     let widthImg: CGFloat, heightImg: CGFloat
-    let closure: () -> ()
+    let closure: () -> (Void)
     
     var body: some View{
         Button {

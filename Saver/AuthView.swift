@@ -30,4 +30,3 @@ struct AuthView_Previews: PreviewProvider {
     }
 }
 
-

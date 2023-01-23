@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct ImageButtonStyle: ButtonStyle {
     var image: String
     var pressedImage: String
@@ -24,7 +23,6 @@ struct ImageButton: View {
     var pressedImage: String
     var disabled: Bool
     var action: () -> Void
-    
     
     var body: some View {
         Button(action: self.action) { }

@@ -229,6 +229,3 @@ struct RegistrationView_Previews: PreviewProvider {
     }
 }
 
-
-
-

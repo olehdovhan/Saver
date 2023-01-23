@@ -20,11 +20,11 @@ struct SpendingsCalendarView: View {
                     }
                 } label: {
                     Text(viewModel.pastMonthDate, format: Date.FormatStyle().month(.abbreviated))
-                        .font(.custom("NotoSans-Regular", size: 14, relativeTo: .body))
+                        .font(FontType.notoSRegular.font(size: 14))
                 }
                 Spacer()
                 Text(viewModel.selectedDate, format: Date.FormatStyle().month(.abbreviated))
-                    .font(.custom("NotoSans-Bold", size: 18, relativeTo: .body))
+                    .font(FontType.notoSRegular.font(size: 18))
                 Spacer()
                 Button {
                     withAnimation {
@@ -32,7 +32,7 @@ struct SpendingsCalendarView: View {
                     }
                 } label: {
                     Text(viewModel.futureMonthDate, format: Date.FormatStyle().month(.abbreviated))
-                        .font(.custom("NotoSans-Regular", size: 14, relativeTo: .body))
+                        .font(FontType.notoSRegular.font(size: 14))
                 }
             }
             
@@ -86,7 +86,7 @@ struct SpendingsCalendarView: View {
             
             VStack(spacing: 7) {
                 Text(viewModel.selectedDate, format: Date.FormatStyle().month(.abbreviated).day())
-                    .font(.custom("NotoSans-SemiBold", size: 18, relativeTo: .body))
+                    .font(FontType.notoSSemiBold.font(size: 18))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 ZStack{
@@ -116,7 +116,7 @@ struct SpendingsCalendarView: View {
                                     Text(viewModel.timeFormat24.string(from: timeTask12))
                                         .foregroundColor(.myGrayDark)
                                     .multilineTextAlignment(.leading)
-                                    .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
+                                    .font(FontType.latoRegular.font(size: 16))
                                     Spacer()
                                 }
                                 .frame(width: Screen.width/7)
@@ -129,7 +129,7 @@ struct SpendingsCalendarView: View {
                                         (Float(task.valueUSD) ?? 0) < 0.0 ?  Color.myRed :  Color.myGreen
                                     )
                                     .multilineTextAlignment(.leading)
-                                    .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                    .font(FontType.latoSemibold.font(size: 16))
                                     Spacer()
                                 }
                                 .frame(width: Screen.width/4)
@@ -143,7 +143,7 @@ struct SpendingsCalendarView: View {
                                     )
                                     .multilineTextAlignment(.leading)
                                     .lineLimit(1)
-                                    .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                    .font(FontType.latoSemibold.font(size: 16))
                                     Spacer()
                                 }
                                 Spacer()
@@ -152,7 +152,7 @@ struct SpendingsCalendarView: View {
                     }
                     else {
                          Text("No Transaction Found")
-                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                            .font(FontType.latoSemibold.font(size: 16))
                     }
                 }
                 .padding(.top, 22)
@@ -222,7 +222,6 @@ struct SpendingsCalendarView: View {
     
     @ViewBuilder
     func cardView(value: DateValue) -> some View {
-
         VStack{
             if value.day != -1 {
                 ZStack{
@@ -231,7 +230,7 @@ struct SpendingsCalendarView: View {
                             Spacer()
                                 .frame(width: 5)
                             Text("\(value.day)")
-                                .font(.custom("Lato-Medium", size: 15, relativeTo: .body))
+                                .font(FontType.latoMedium.font(size: 15))
                                 .foregroundColor(.black)
                             Spacer()
                         }

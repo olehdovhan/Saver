@@ -28,7 +28,7 @@ struct StatisticsPlace: View{
                         Text("Monthly budget")
                             .frame(width: 50)
                             .foregroundColor(.black)
-                            .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                            .font(FontType.latoRegular.font(size: 12))
                     }
                 }
                 Spacer()
@@ -47,7 +47,7 @@ struct StatisticsPlace: View{
                         
                         Text("Goals")
                             .foregroundColor(.black)
-                            .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                            .font(FontType.latoRegular.font(size: 12))
                     }
                 }
                 
@@ -65,7 +65,7 @@ struct StatisticsPlace: View{
                         
                         Text("Saving")
                             .foregroundColor(.black)
-                            .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                            .font(FontType.latoRegular.font(size: 12))
                     }
                 }
                
@@ -83,7 +83,7 @@ struct StatisticsPlace: View{
                         
                         Text("Debt")
                             .foregroundColor(.black)
-                            .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                            .font(FontType.latoRegular.font(size: 12))
                     }
                 }
                

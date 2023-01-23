@@ -110,7 +110,7 @@ struct ForgotPasswordView: View{
             
           // Hidden
             Text(viewModel.correctEmail.message)
-                .font(.custom("Lato-ExtraBold", size: 11))
+                .font(FontType.latoExtraBold.font(size: 11))
                 .foregroundColor(.red)
                 .opacity(viewModel.correctEmail == .validated ? 0.0 : 1.0)
         }

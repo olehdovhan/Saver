@@ -29,14 +29,15 @@ struct CashSourceView: View {
                 VStack(spacing: 5) {
                     Text(cashSourceItem.name)
                         .foregroundColor(.black)
-                        .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                        .font(FontType.latoRegular.font(size: 12))
                         .frame(width: 75)
                         .frame(height: 30)
                         .lineLimit(2)
 //                        .background(Capsule().fill(.white))
                     
                     switch cashSourceItem.iconName {
-                    case "iconBankCard", "iconWallet":
+                    case "iconBankCard",
+                        "iconWallet":
                         Image(cashSourceItem.iconName)
                             .resizable()
                             .frame(width: 50, height: 50)
@@ -60,7 +61,7 @@ struct CashSourceView: View {
                     }
                     Text(String(cashSourceItem.amount))
                                             .foregroundColor(.black)
-                                            .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
+                                            .font(FontType.latoRegular.font(size: 12))
                                             .frame(width: 75)
                                             .frame(height: 10)
                                             .lineLimit(1)

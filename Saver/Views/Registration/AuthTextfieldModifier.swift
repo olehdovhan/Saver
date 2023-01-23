@@ -17,7 +17,7 @@ struct AuthTextFieldModifier: ViewModifier {
     
     func body(content: Content) -> some View {
             content
-            .font(.custom("Lato-Regular", size: 20))
+            .font(FontType.latoRegular.font(size: 20))
             .multilineTextAlignment(.center)
             .padding(13)
             .frame(height: 40)

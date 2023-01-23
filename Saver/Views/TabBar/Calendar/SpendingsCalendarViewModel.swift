@@ -125,7 +125,10 @@ class SpendingsCalendarViewModel: ObservableObject {
     }
     
     //checking dates...
-    func isSameDay(date1: Date, date2: Date) -> Bool{
+    func isSameDay(
+        date1: Date,
+        date2: Date
+    ) -> Bool{
         let isSameDay = calendar.isDate(date1, inSameDayAs: date2)
         return isSameDay
     }

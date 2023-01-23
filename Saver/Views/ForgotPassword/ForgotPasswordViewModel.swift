@@ -15,7 +15,10 @@ class ForgotPasswordViewModel: ObservableObject {
     @Published var emailIsEditing =          false
     @Published var correctEmail: RegistrationTFState = .validated
     
-    func resetEmail(email: String, completion: @escaping ()->()) {
+    func resetEmail(
+        email: String,
+        completion: @escaping () -> (Void)
+    ) {
         incorrectEmail = email.textFieldValidatorEmail()
     }
     
@@ -44,7 +47,4 @@ extension ForgotPasswordViewModel: ValidateInputProtocol {
     }
     
 }
-
-
-
 

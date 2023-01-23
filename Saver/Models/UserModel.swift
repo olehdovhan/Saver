@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-
-
 struct UserModel: Codable {
     // TODO: add cashFlow( general) - Income - expense ( monthly budget) + cashFlow(full) Income - (expense + goals + debts)
     var avatarImgName: String
@@ -47,7 +44,12 @@ struct UserModel: Codable {
                 total += budget.totalMonth
             }
             return total / previousMonthesBudgets!.count
-        } else if planBudget != nil { return planBudget!.totalMonth } else { return nil }
+        } else if planBudget != nil {
+            return planBudget!.totalMonth
+            
+        } else {
+            return nil
+        }
     }
     
     // GoalsBudget
@@ -64,7 +66,10 @@ struct UserModel: Codable {
             return total / previousMonthesGoalsBudgets!.count
         } else if planGoalsBudget != nil {
             return planGoalsBudget!.totalMonth
-        } else { return nil }
+        } else {
+            return nil
+            
+        }
     }
     
     // make it computed from
@@ -153,7 +158,6 @@ enum DebtEnum: String, Codable, Equatable, CaseIterable, Identifiable {
 
     var id: DebtEnum { self }
 }
-
 
 struct CashSource: Codable, Hashable, Identifiable, Equatable {
     var id = UUID()

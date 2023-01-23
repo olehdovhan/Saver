@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class UserDefaultsManager {
     
     var userModel: UserModel? {
@@ -42,6 +41,3 @@ extension UserDefaultsManager: NSCopying {
         return self
     }
 }
-
-
-

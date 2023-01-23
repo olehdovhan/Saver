@@ -9,7 +9,10 @@ import SwiftUI
 
 struct TabItemPreferenceKey: PreferenceKey{
     static var defaultValue: [TabItem] = []
-    static func reduce(value: inout [TabItem], nextValue: () -> [TabItem]) {
+    static func reduce(
+        value: inout [TabItem],
+        nextValue: () -> [TabItem]
+    ) {
         value += nextValue()
     }
 }
@@ -41,7 +44,7 @@ struct CustomTabView<Content: View>: View{
     @Binding var selection: Int
     @State private var tabs: [TabItem] = [
         .init(text: "Home", icon: "tabIcon0"),
-        .init(text: "Star", icon: "tabIcon1")
+//        .init(text: "Star", icon: "tabIcon1")
     ]
     @Namespace  private var tabBarItem
     

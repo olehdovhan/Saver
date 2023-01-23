@@ -17,7 +17,7 @@ struct ExpensesCircularDiagram: View {
                 HStack {
                     Text("Expenses")
                         .foregroundColor(.black)
-                        .font(.custom("NotoSans-Regular", size: 16, relativeTo: .body))
+                        .font(FontType.notoSRegular.font(size: 16))
                     Spacer()
                 }
                 .padding(.leading, 28)

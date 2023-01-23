@@ -34,18 +34,18 @@ struct BalanceView: View {
                 if let user = UserDefaultsManager.shared.userModel {
                     Text("\(user.name)")
                         .foregroundColor(.white)
-                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                        .font(FontType.latoSemibold.font(size: 16))
                 }
             }
             Spacer()
             VStack{
                 Text("Balance")
                     .foregroundColor(.white)
-                    .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                    .font(FontType.latoSemibold.font(size: 16))
                 
                 Text("+45.000")
                     .foregroundColor(.white)
-                    .font(.custom("Lato-Bold", size: 16, relativeTo: .body))
+                    .font(FontType.latoBold.font(size: 16))
             }
             
             Spacer()
@@ -53,11 +53,11 @@ struct BalanceView: View {
             VStack{
                 Text("Expence")
                     .foregroundColor(.white)
-                    .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                    .font(FontType.latoSemibold.font(size: 16))
                 
                 Text("15.250")
                     .foregroundColor(.white)
-                    .font(.custom("Lato-Bold", size: 16, relativeTo: .body))
+                    .font(FontType.latoBold.font(size: 16))
             }
         }
         .padding(.leading, 30)

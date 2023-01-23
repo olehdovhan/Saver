@@ -23,9 +23,11 @@ struct AddPurchaseCategoryView: View {
                cashSourceName != "",
             currentMoneyAmount != "" {
           return false
-      } else { return true }
+      } else {
+          return true
+          
+      }
     }
-    
     
     var body: some View {
         ZStack {
@@ -33,7 +35,8 @@ struct AddPurchaseCategoryView: View {
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: 300,
+                .frame(
+                    width: 300,
                        height: 360,
                        alignment: .top)
                 .cornerRadius(25)
@@ -55,15 +58,15 @@ struct AddPurchaseCategoryView: View {
                      .frame( alignment: .trailing)
                      .padding(.trailing, 16)
                 }
-                .frame(width: 300, alignment: .top)
+                .frame(
+                    width: 300,
+                    alignment: .top)
                 .padding(.top, 24)
                 
                 HStack {
                     Text("Name")
                         .foregroundColor(.black)
-                    Spacer()
-                    Spacer()
-                    Spacer()
+                    Spacer(minLength: 30)
     
                     TextField("",text: $cashSourceName)
                         .placeholder(when: cashSourceName.isEmpty) {
@@ -71,10 +74,12 @@ struct AddPurchaseCategoryView: View {
                         }
                         .frame(height: 50, alignment: .trailing)
                         .foregroundColor(.black)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( Color.myGreen, lineWidth: 1)
+                        .overlay(RoundedRectangle(cornerRadius: 20,
+                                                   style: .continuous)
+                                                    .stroke( Color.myGreen,
+                                                             lineWidth: 1)
                                                     .padding(.leading, -10)
-                                                    .padding(.trailing, -10) )
+                                                    .padding(.trailing, -10))
                 }
                 .padding(.leading,  30)
                 .padding(.trailing, 35)
@@ -82,9 +87,9 @@ struct AddPurchaseCategoryView: View {
                 HStack {
                     Text("Plannning to spend ")
                         .foregroundColor(.black)
-                    Spacer()
-                    Spacer()
-                    Spacer()
+                    
+                    Spacer(minLength: 30)
+                    
                     TextField("", text: $currentMoneyAmount)
                         .placeholder(when: currentMoneyAmount.isEmpty) {
                                 Text("sum to spend per month").foregroundColor(.gray)
@@ -92,10 +97,14 @@ struct AddPurchaseCategoryView: View {
                         
                         .foregroundColor(.black)
                         .frame(height: 50, alignment: .trailing)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                                    .stroke( Color.myGreen, lineWidth: 1)
-                                                    .padding(.leading, -10)
-                                                    .padding(.trailing, -10)
+                        .overlay(RoundedRectangle(
+                            cornerRadius: 20,
+                            style: .continuous)
+                            .stroke(
+                                Color.myGreen,
+                                lineWidth: 1)
+                                .padding(.leading, -10)
+                                .padding(.trailing, -10)
                         )
                         .keyboardType(.numberPad)
                         .lineLimit(nil)
@@ -124,19 +133,26 @@ struct AddPurchaseCategoryView: View {
                              "iconHousehold",
                              "iconProducts",
                              "iconRestaurant",
-                             "iconTransport":          Image(selectedCashIconName)
-                                                        .resizable()
-                                                        .frame(width: 50, height: 50)
-                                                        .myShadow(radiusShadow: 5)
+                             "iconTransport":
+                            Image(selectedCashIconName)
+                                .resizable()
+                                .frame(
+                                    width: 50,
+                                    height: 50)
+                                .myShadow(radiusShadow: 5)
                         default:
                             ZStack{
                                 Color.white
-                                    .frame(width: 50, height: 50)
+                                    .frame(
+                                        width: 50,
+                                        height: 50)
                                 
                                 Image(systemName: selectedCashIconName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30, height: 30)
+                                    .frame(
+                                        width: 30,
+                                        height: 30)
                                     .foregroundColor(.gray)
                             }
                             .cornerRadius(15)
@@ -146,12 +162,14 @@ struct AddPurchaseCategoryView: View {
                 }
                 
                 Spacer()
+                
                 ImageButton(image: "btnDoneInactive",
                             pressedImage: "btnDone",
                             disabled: fieldsEmpty) {
-                    let newPurchaseCategory = PurchaseCategory(name: cashSourceName,
-                                                         iconName: selectedCashIconName,
-                                                         planSpentPerMonth: Double(currentMoneyAmount) ?? 0.0)
+                    let newPurchaseCategory = PurchaseCategory(
+                        name: cashSourceName,
+                        iconName: selectedCashIconName,
+                        planSpentPerMonth: Double(currentMoneyAmount) ?? 0.0)
                     if var copyUser = UserDefaultsManager.shared.userModel {
                         copyUser.purchaseCategories.append(newPurchaseCategory)
                         UserDefaultsManager.shared.userModel? = copyUser
@@ -159,15 +177,18 @@ struct AddPurchaseCategoryView: View {
                     }
                     closeSelf = false
                 }
+                
                 Spacer()
+                
             }
             .frame(width: 300,
                    height: 360)
             .blur(radius: showIconsCashSource ? 5 : 0 )
             
             if showIconsCashSource {
-                AddIconsView(closeSelf: $showIconsCashSource,
-                             type: .purchaseCategory) { iconName in
+                AddIconsView(
+                    closeSelf: $showIconsCashSource,
+                    type: .purchaseCategory) { iconName in
                 selectedCashIconName = iconName
                 }
             }

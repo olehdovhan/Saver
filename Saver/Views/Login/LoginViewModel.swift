@@ -18,8 +18,10 @@ class LoginViewModel: ObservableObject {
     @Published var loginIsEditing = false
     @Published var passwordIsEditing = false
     
-    func login(login: String, password: String) {
-        
+    func login(
+        login: String,
+        password: String
+    ) {
         incorrectEmail = login.textFieldValidatorEmail()
         incorrectPassword = password.count > 0
         

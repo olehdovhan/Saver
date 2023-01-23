@@ -30,7 +30,7 @@ struct LimitCashSourcesView: View {
                         .lineLimit(1)
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
+                        .font(FontType.latoExtraBold.font(size: 22))
                         .frame(width: Screen.width/2.2)
                     
                     Spacer()
@@ -54,14 +54,14 @@ struct LimitCashSourcesView: View {
                     
                     Text("Limitation")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Bold", size: 16))
+                        .font(FontType.latoBold.font(size: 16))
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
                         .textCase(.uppercase)
                     
                     Text("You have reached the maximum number of cash resources")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 16))
+                        .font(FontType.latoRegular.font(size: 16))
                         .multilineTextAlignment(.center)
                         .lineLimit(4)
                         .padding(.horizontal, 20)

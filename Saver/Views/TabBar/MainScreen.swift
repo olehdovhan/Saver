@@ -110,7 +110,8 @@ struct MainScreen: View {
                 }
                 .zIndex(draggingItem ? 10 : -2)
                 .onChange(of: addCashSourceViewShow) { newValue in
-                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
+                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources
+                    }
                                 }
                 .frame(height: 100)
                 .overlay(
@@ -170,7 +171,8 @@ struct MainScreen: View {
                                        selectedCategory: $selectedCategory)
                 .zIndex(2)
                 .onChange(of: addPurchaseCategoryViewShow) { newValue in
-                    if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
+                    if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories
+                    }
                 }
 
                 Spacer()
@@ -184,13 +186,13 @@ struct MainScreen: View {
             if expenseViewShow,
              let cashes = UserDefaultsManager.shared.userModel?.cashSources,
              let cashSources = cashes.map { $0.name} {
-                ExpenseView(closeSelf: $expenseViewShow,
-                            cashSource: cashSource,
-                            purchaseCategoryName: $expenseType,
-                            editing: $editing,
-                            cashSources: cashSources)
-                            .zIndex(10)
-            }
+                 ExpenseView(closeSelf: $expenseViewShow,
+                             cashSource: cashSource,
+                             purchaseCategoryName: $expenseType,
+                             editing: $editing,
+                             cashSources: cashSources)
+                             .zIndex(10)
+             }
             
             if incomeViewShow {
                 IncomeView(closeSelf: $incomeViewShow,

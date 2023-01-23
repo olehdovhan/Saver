@@ -17,7 +17,7 @@ struct AddIconsView: View {
     
     var type: AddIconsType
     
-    var closure: (String) -> ()
+    var closure: (String) -> (Void)
     
     @State private var data: [String] = []
     
@@ -33,7 +33,9 @@ struct AddIconsView: View {
                     }
                 }
                 return dataCopy
-            } else { return data }
+            } else {
+                return data
+            }
             
         case .purchaseCategory:
             if let existedIcons = UserDefaultsManager.shared.userModel?.purchaseCategories.map {$0.iconName} {
@@ -44,7 +46,9 @@ struct AddIconsView: View {
                     }
                 }
                 return dataCopy
-            } else { return data }
+            } else {
+                return data
+            }
         }
     }
     
@@ -89,7 +93,6 @@ struct AddIconsView: View {
                                         .foregroundColor(.white)
                                 }
                                 .cornerRadius(15)
-                                //                                .myShadow(radiusShadow: 5)
                             }
                         }
                     }

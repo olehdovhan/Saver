@@ -23,7 +23,10 @@ struct AddDebtView: View {
            totalAmount != "",
            totalMonthesForReturn != ""{
             return false
-        } else { return true }
+        } else {
+            return true
+            
+        }
     }
     
     var body: some View {
@@ -46,7 +49,7 @@ struct AddDebtView: View {
                     Text("Add new debt")
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
+                        .font(FontType.latoExtraBold.font(size: 22))
                     
                     Spacer()
                     Button {
@@ -65,7 +68,7 @@ struct AddDebtView: View {
                     Text("Whose")
                         .lineLimit(1)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -88,7 +91,7 @@ struct AddDebtView: View {
                     Text("Start date")
                         .lineLimit(2)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -108,7 +111,7 @@ struct AddDebtView: View {
                 HStack {
                     Text("Name")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -133,7 +136,7 @@ struct AddDebtView: View {
                     Text("Amount")
                         .lineLimit(2)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("",text: $totalAmount)
@@ -164,7 +167,7 @@ struct AddDebtView: View {
                     Text("Monthes for return")
                         .lineLimit(2)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("",text: $totalMonthesForReturn)

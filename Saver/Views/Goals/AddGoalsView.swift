@@ -41,7 +41,7 @@ struct AddGoalsView: View {
                     Text("Add new goal")
                         .textCase(.uppercase)
                         .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
+                        .font(FontType.latoExtraBold.font(size: 22))
                     
                     Spacer()
                     Button {
@@ -59,7 +59,7 @@ struct AddGoalsView: View {
                 HStack {
                     Text("Name")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -83,7 +83,7 @@ struct AddGoalsView: View {
                     Text("Total Price")
                         .lineLimit(2)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("enter total price",text: $totalPrice)
@@ -113,7 +113,7 @@ struct AddGoalsView: View {
                     Text("Going to invest per month")
                         .lineLimit(3)
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Medium", size: 16))
+                        .font(FontType.latoMedium.font(size: 16))
                         .multilineTextAlignment(.leading)
                     Spacer()
                     TextField("invest in goal per month",text: $monthPayment)

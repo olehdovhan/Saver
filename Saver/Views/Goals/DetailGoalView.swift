@@ -32,7 +32,7 @@ struct DetailGoalView: View {
                     .lineLimit(2)
                     .textCase(.uppercase)
                     .foregroundColor(.myGreen)
-                    .font(.custom("Lato-ExtraBold", size: 22))
+                    .font(FontType.latoExtraBold.font(size: 22))
                     .frame(width: Screen.width/2)
                     .padding(.top, 20)
                 
@@ -67,7 +67,7 @@ struct DetailGoalView: View {
                 Text("You shold invest \(goal.collectingSumPerMonth)$ per month to achieve this goal in \(goal.totalMonthesPerGoal)")
                     .padding(20)
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Regular", size: 20))
+                    .font(FontType.latoRegular.font(size: 20))
                     .frame(width: Screen.width/1.5, height: Screen.height/4.5)
                     .background(
                         RoundedRectangle(cornerRadius: 15).fill(.white)
@@ -77,7 +77,7 @@ struct DetailGoalView: View {
                 Text("Recently you make \(goal.monthesSaveForGoal) payments and you collected \(goal.collectedPrice)$.")
                     .padding(20)
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Regular", size: 20))
+                    .font(FontType.latoRegular.font(size: 20))
                     .frame(width: Screen.width/1.5, height: Screen.height/4.5)
                     .background(
                         RoundedRectangle(cornerRadius: 15).fill(.white)

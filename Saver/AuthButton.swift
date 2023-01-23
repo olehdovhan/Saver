@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-
 struct AuthButton: UIViewControllerRepresentable {
  
-    
-    var closure: () -> ()
+    var closure: () -> (Void)
     
     func makeUIViewController(context: Context) -> AppleAuthorizationVC {
         let vc = AppleAuthorizationVC()
@@ -19,7 +17,10 @@ struct AuthButton: UIViewControllerRepresentable {
         return vc 
     }
     
-    func updateUIViewController(_ uiViewController: AppleAuthorizationVC, context: Context) {
+    func updateUIViewController(
+        _ uiViewController: AppleAuthorizationVC,
+        context: Context
+    ) {
         
     }
 }

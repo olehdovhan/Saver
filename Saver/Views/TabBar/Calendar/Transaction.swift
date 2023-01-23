@@ -21,7 +21,6 @@ enum PurchaseCategoryOld: String {
     case restaurant
 }
 
-
 enum Currency{
     case USD
     case EUR
@@ -33,7 +32,6 @@ enum TransactionType{
     case expense
 }
 
-
 struct TransactionModel: Identifiable{
     var id = UUID().uuidString
     var date: Date
@@ -44,7 +42,6 @@ struct TransactionModel: Identifiable{
     var expenseCategory: PurchaseCategoryOld?
     var comment: String
 }
-
 
 let calendar = Calendar.current
 let date = Date()
@@ -91,5 +88,4 @@ var transactions: [TransactionModel] = [
                 expenseCategory: nil,
                 comment: "nehay")
     ]
-
 

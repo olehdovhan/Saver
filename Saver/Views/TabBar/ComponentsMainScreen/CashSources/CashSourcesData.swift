@@ -11,7 +11,6 @@ class CashSourcesData: ObservableObject {
     
     private var cashSources: [CashSource] {
         if let sources = UserDefaultsManager.shared.userModel?.cashSources {
-            
             return sources
         } else {
             return [CashSource]()
