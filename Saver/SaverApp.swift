@@ -24,11 +24,14 @@ struct SaverApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if UserDefaultsManager.shared.userModel == nil {
-                AuthView()
-            } else {
-                TabBarView()
+            NavigationView {
+                RegistrationView()
             }
+//            if UserDefaultsManager.shared.userModel == nil {
+//                AuthView()
+//            } else {
+//                TabBarView()
+//            }
         }
     }
 }

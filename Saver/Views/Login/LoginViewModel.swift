@@ -5,6 +5,7 @@
 //  Created by Pryshliak Dmytro on 14.01.2023.
 //
 
+import Firebase
 import Foundation
 
 class LoginViewModel: ObservableObject {
@@ -17,6 +18,9 @@ class LoginViewModel: ObservableObject {
     
     @Published var loginIsEditing = false
     @Published var passwordIsEditing = false
+
+    @Published var willMoveToApp = false
+    
     
     func login(login: String, password: String) {
         
@@ -24,8 +28,22 @@ class LoginViewModel: ObservableObject {
         incorrectPassword = password.count > 0
         
         if login.textFieldValidatorEmail() && password.count > 0 {
-            progress = true
-            errorMessage = false
+            self.progress = true
+            self.errorMessage = false
+            Auth.auth().signIn(withEmail: login, password: password) { [weak self]  (user, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                    self?.errorMessage = true
+                    self?.progress = false
+                }
+                if user != nil {
+                    self?.willMoveToApp = true
+                    self?.progress = false
+                }
+            }
+            print(login)
+            print(password)
+            print("stop")
 //            RestAuth().login(login: login.lowercased(), password: password) { [weak self] model in
 //                self?.progress = false
 //                KeychainService.standard.newAuthToken = model

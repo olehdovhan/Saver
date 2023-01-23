@@ -10,7 +10,9 @@ import Combine
 import AVKit
 
 struct RegistrationView: View {
+    
     @StateObject private var viewModel = RegistrationViewModel()
+    
     let validCharsPass = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
     
     var body: some View {
@@ -24,9 +26,10 @@ struct RegistrationView: View {
                 Rectangle()
                     .fill(Color.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    .onTapGesture {
-//                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//                    }
+                
+                NavigationLink(isActive: $viewModel.willMoveToTabBar) {
+                    TabBarView()
+                } label: { }
                 
                 VStack(spacing: 0){
                     Spacer(minLength: 50)
@@ -40,7 +43,6 @@ struct RegistrationView: View {
                     
                     fieldsView
                     
-                    //                privacyPolicy
                     HStack(spacing: 0){
                         Button {
                             viewModel.privacyTermsAccepted.toggle()
@@ -65,14 +67,11 @@ struct RegistrationView: View {
                     .frame(width: wRatio(250))
                     .padding(.top, wRatio(30))
                     
-                    
                     Text("or")
                         .font(.custom("NotoSans-Regular", size: 20))
                         .padding(.top, wRatio(30))
                         .foregroundColor(.myGrayDark)
-                    
-                    //                Spacer()
-                    
+
                     HStack(spacing: wRatio(50)){
                         SocialButton(image: "icoGoogle" ,
                                      widthImg: 20,
@@ -87,10 +86,9 @@ struct RegistrationView: View {
                     }
                     .padding(.top, wRatio(30))
                     .padding(.bottom, wRatio(30))
-                    
-                    
-                    
-                    NavigationLink {
+               
+  
+                    NavigationLink(isActive: $viewModel.willMoveToLogin) {
                         LoginView()
                     } label: {
                         Text("Already have account?")
@@ -100,7 +98,11 @@ struct RegistrationView: View {
                             .padding(.bottom, wRatio(28))
                     }
                     
-                    Button{
+            
+                    
+                    
+                    
+                    Button {
                         viewModel.createAccountOnceTapped = true
                         let inputTFCorrect = viewModel.inputValidated()
                         if inputTFCorrect && viewModel.privacyTermsAccepted { viewModel.registerUser() }
@@ -118,24 +120,11 @@ struct RegistrationView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-ExtraBold", size: 26))
                         }
-                        
-                        
                     }
-                    
-                    
-                    
-                    
                     Spacer()
                 }
-                
-                
-                
             }
             .navigationBarHidden(true)
-        
-
-        
-        
         
     }
     

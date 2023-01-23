@@ -146,7 +146,6 @@
 		66AA407429512654002A2359 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		66AA407629512692002A2359 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		66AA4078295126F3002A2359 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
-		66C1B51E29732130008E1BAE /* RestAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAuth.swift; sourceTree = "<group>"; };
 		66C1B530297377B4008E1BAE /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		66C1B532297377CB008E1BAE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		66C1B53429755255008E1BAE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -302,7 +301,6 @@
 			children = (
 				66548D5C29731779003D2AA0 /* LoginView.swift */,
 				66548D5E2973178C003D2AA0 /* LoginViewModel.swift */,
-				66C1B51E29732130008E1BAE /* RestAuth.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";

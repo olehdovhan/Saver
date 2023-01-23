@@ -5,6 +5,7 @@
 //  Created by Pryshliak Dmytro on 14.01.2023.
 //
 
+import Firebase
 import SwiftUI
 
 class RegistrationViewModel: ObservableObject {
@@ -15,9 +16,7 @@ class RegistrationViewModel: ObservableObject {
     @Published var correctPassword: RegistrationTFState = .validated
     @Published var validatedPrivacy: RegistrationTFState = .validated
     
-    
     @Published var email = ""
-    
     @Published var password = ""
     @Published var repeatPassword = ""
     
@@ -25,22 +24,27 @@ class RegistrationViewModel: ObservableObject {
     @Published var emailIsEditing =          false
     @Published var passwordIsEditing =       false
     @Published var repeatPasswordIsEditing = false
-    
+    @Published var willMoveToLogin =         false
+    @Published var willMoveToTabBar =        false
     
     func registerUser() {
-        //registration logic
-        //...
-        
+        print(email)
+        print(password)
+        willMoveToTabBar = true
+//        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+//            if error == nil {
+//                if user != nil {
+//                    self?.willMoveToLogin = true
+//                }
+//            }
+//        }
     }
-    
 }
 
 protocol ValidateInputProtocol {
     func passwordIsCorrect() -> RegistrationTFState
     func inputValidated() -> Bool
 }
-
-
 
 extension RegistrationViewModel: ValidateInputProtocol {
     
@@ -49,8 +53,6 @@ extension RegistrationViewModel: ValidateInputProtocol {
     }
     
     func inputValidated() -> Bool {
-        
-       
         
         switch email.count {
         case let x where x > 1:
@@ -62,8 +64,6 @@ extension RegistrationViewModel: ValidateInputProtocol {
         default: correctEmail = .empty
         }
      
-   
-        
         switch password {
         case let x where x == repeatPassword && x.count >= 8: correctPassword = .validated
         case let x where x.count < 8:                         correctPassword = .lessThanSymbols(count: 8)
@@ -75,14 +75,9 @@ extension RegistrationViewModel: ValidateInputProtocol {
         case true:  validatedPrivacy = .validated
         case false: validatedPrivacy = .empty
         }
-        
        
         let validated = correctEmail == .validated &&
         correctPassword == .validated && validatedPrivacy == .validated
         return validated
     }
-    
-    
-    
-    
 }
