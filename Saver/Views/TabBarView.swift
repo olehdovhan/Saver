@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct TabBarView: View {
     
     @State var selectedTab = 0
-    
+
     var body: some View {
         CustomTabView(selection: $selectedTab) {
             MainScreen()

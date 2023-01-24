@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MainScreen: View {
     
@@ -34,16 +35,19 @@ struct MainScreen: View {
     let itemPadding: CGFloat = 6// UIScreen.main.bounds.width * 0.02558
     var viewModel = MainScreenViewModel()
     
+    @State var user: UserFirModel!
+    @State var ref: DatabaseReference!
+    @State var tasks = [TaskFirModel]()
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
             GeometryReader { reader in
-                               Color.myGreen
-                                   .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                                   .ignoresSafeArea()
+               Color.myGreen
+                   .frame(height: reader.safeAreaInsets.top, alignment: .top)
+                   .ignoresSafeArea()
                            }
-            
             VStack {
                 Color.myGreen.frame(height: 30)
                 Color.white
@@ -237,9 +241,19 @@ struct MainScreen: View {
             if let categories = UserDefaultsManager.shared.userModel?.purchaseCategories {
                 purchaseCategories = categories
             }
+            guard let currentUser = Auth.auth().currentUser else { return }
+            user = UserFirModel(user: currentUser)
+            ref = Database.database().reference(withPath: "users").child(user.uid).child("tasks")
         }
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
-            Button("No", role: .cancel) { }
+            Button("No", role: .cancel) {
+                let task = TaskFirModel(title: String(Date().millisecondsSince1970), userId: user.uid)
+                print(task.title)
+                // TODO: - use String(Date) as ref id for purchaseCategories, cashSources and spents respectively
+                let taskRef = ref.child(task.title.lowercased())
+                taskRef.setValue(task.convertToDictionary())
+            }
+            
             Button("Yes", role: .destructive) {
                 viewModel.signOut()
             }
@@ -252,5 +266,11 @@ struct MainScreen: View {
                 }
             }
         }
+    }
+}
+
+extension Date {
+    var millisecondsSince1970: Int64 {
+        Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
 }

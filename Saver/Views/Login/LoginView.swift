@@ -79,7 +79,7 @@ struct LoginView: View {
                             .padding(.bottom, wRatio(28))
                     }
                     
-                    Button{
+                    Button {
                         viewModel.login(login: email, password: password)
                     } label: {
                         ZStack{
@@ -95,7 +95,6 @@ struct LoginView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-ExtraBold", size: 26))
                         }
-                        
                     }
                     .padding(.bottom, wRatio(30))
                     
@@ -108,15 +107,10 @@ struct LoginView: View {
                             .font(.custom("Lato-Regular", size: 16))
                             .padding(.bottom, wRatio(28))
                     }
-                    
-                
-                    
                     Spacer()
                 }
-                
             }
             .navigationBarBackButtonHidden(true)
-            
         }
     
     private var fieldsView: some View {
@@ -147,7 +141,6 @@ struct LoginView: View {
                         viewModel.passwordIsEditing = changed
                       })
 //                    .frame(width: wRatio(250))
-                      
                 }
                 Spacer()
                 
@@ -166,7 +159,6 @@ struct LoginView: View {
                 .opacity(viewModel.incorrectPassword ? 0.0 : 1.0)
         }
     }
-        
 }
 
 struct LoginView_Previews: PreviewProvider {
