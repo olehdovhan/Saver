@@ -22,7 +22,7 @@ struct MainScreen: View {
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
-//  @State var dragging = false
+    //  @State var dragging = false
     @State var selectedCategory: PurchaseCategory?
     
     @State var cashSourcesData = CashSourcesData()
@@ -44,16 +44,16 @@ struct MainScreen: View {
     var body: some View {
         ZStack {
             GeometryReader { reader in
-               Color.myGreen
-                   .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                   .ignoresSafeArea()
-                           }
+                Color.myGreen
+                    .frame(height: reader.safeAreaInsets.top, alignment: .top)
+                    .ignoresSafeArea()
+            }
             VStack {
                 Color.myGreen.frame(height: 30)
                 Color.white
             }
             .zIndex(-3)
-  
+            
             VStack(alignment: .center, spacing: 0) {
                 
                 BalanceView(showQuitAlert: $showQuitAlert).zIndex(4)
@@ -61,7 +61,7 @@ struct MainScreen: View {
                     .onAppear(){
                         print(UIScreen.main.bounds.width)
                     }
-       
+                
                 GeometryReader { geometry in
                     AdaptivePagingScrollView(addCashSourceViewShow: $addCashSourceViewShow,
                                              incomeViewShow: $incomeViewShow,
@@ -91,31 +91,31 @@ struct MainScreen: View {
                             .frame(width: self.itemWidth, height: 70)
                         }
                     }
-                                             
-//                                             .background(Color.black.opacity(0.1))
+                    
+                    //                                             .background(Color.black.opacity(0.1))
                     
                     //Референсний новий скрол
-//                    AdaptivePagingScrollView(currentPageIndex: self.$activePageIndex,
-//                                             dragging: self.$dragging,
-//                                             itemsAmount: self.onboardData.cards.count - 1,
-//                                             itemWidth: self.itemWidth,
-//                                             itemPadding: self.itemPadding,
-//                                             pageWidth: geometry.size.width) {
-//                        ForEach(onboardData.cards) { card in
-//                            GeometryReader { screen in
-//                                OnbardingCardView(dragging: $dragging, card: card)
-//                            }
-//                            .frame(width: self.itemWidth, height: 100)
-//
-//                        }
-//                    }
-//                                             .frame(height: 150)
-//                                             .background(Color.red)
+                    //                    AdaptivePagingScrollView(currentPageIndex: self.$activePageIndex,
+                    //                                             dragging: self.$dragging,
+                    //                                             itemsAmount: self.onboardData.cards.count - 1,
+                    //                                             itemWidth: self.itemWidth,
+                    //                                             itemPadding: self.itemPadding,
+                    //                                             pageWidth: geometry.size.width) {
+                    //                        ForEach(onboardData.cards) { card in
+                    //                            GeometryReader { screen in
+                    //                                OnbardingCardView(dragging: $dragging, card: card)
+                    //                            }
+                    //                            .frame(width: self.itemWidth, height: 100)
+                    //
+                    //                        }
+                    //                    }
+                    //                                             .frame(height: 150)
+                    //                                             .background(Color.red)
                 }
                 .zIndex(draggingItem ? 10 : -2)
                 .onChange(of: addCashSourceViewShow) { newValue in
-                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
-                                }
+                    if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources }
+                }
                 .frame(height: 100)
                 .overlay(
                     HStack{
@@ -126,7 +126,7 @@ struct MainScreen: View {
                             .frame(width: itemPadding * 3)
                             .frame(height: 140)
                             .offset(x: -itemPadding)
-
+                        
                         Spacer().zIndex(-10)
                         
                         Ellipse()
@@ -136,37 +136,37 @@ struct MainScreen: View {
                             .frame(width: itemPadding * 3)
                             .frame(height: 140)
                             .offset(x: itemPadding)
-                            }
+                    }
                 )
                 
                 
                 
-//                Старий скрол
-//                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
-//                           incomeViewShow: $incomeViewShow,
-//                           expenseViewShow: $expenseViewShow,
-//                           purchaseType: $expenseType,
-//                           cashSource: $cashSource,
-//                           cashSources: $cashSources,
-//                           draggingItem: $draggingItem).zIndex(draggingItem ? 3 : -2)
-//                .onChange(of: addCashSourceViewShow) { newValue in
-//                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
-//                }
-//                .frame(height: 90)
-//                .background(.red.opacity(0.3))
+                //                Старий скрол
+                //                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
+                //                           incomeViewShow: $incomeViewShow,
+                //                           expenseViewShow: $expenseViewShow,
+                //                           purchaseType: $expenseType,
+                //                           cashSource: $cashSource,
+                //                           cashSources: $cashSources,
+                //                           draggingItem: $draggingItem).zIndex(draggingItem ? 3 : -2)
+                //                .onChange(of: addCashSourceViewShow) { newValue in
+                //                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
+                //                }
+                //                .frame(height: 90)
+                //                .background(.red.opacity(0.3))
                 
                 Spacer() .frame(height: 15)
-                    
+                
                 StatisticsPlace().zIndex(3)
-//                    .background(.red)
+                //                    .background(.red)
                 
                 
                 
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,
                                endPoint: .trailing)
-                    .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
-                    .zIndex(2)
+                .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
+                .zIndex(2)
                 
                 PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
                                        addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
@@ -174,9 +174,9 @@ struct MainScreen: View {
                                        selectedCategory: $selectedCategory)
                 .zIndex(2)
                 .onChange(of: addPurchaseCategoryViewShow) { newValue in
-                    if let purchCategories = UserDefaultsManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
+                    if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
                 }
-
+                
                 Spacer()
             }
             .blur(radius: expenseViewShow ? 5 : 0 )
@@ -184,26 +184,26 @@ struct MainScreen: View {
             .blur(radius: addCashSourceViewShow ? 5 : 0 )
             .blur(radius: addPurchaseCategoryViewShow ? 5 : 0 )
             .blur(radius: purchaseDetailViewShow ? 5 : 0 )
-         
+            
             if expenseViewShow,
-             let cashes = UserDefaultsManager.shared.userModel?.cashSources,
-             let cashSources = cashes.map { $0.name} {
-                ExpenseView(closeSelf: $expenseViewShow,
-                            cashSource: cashSource,
-                            purchaseCategoryName: $expenseType,
-                            editing: $editing,
-                            cashSources: cashSources)
-                            .zIndex(10)
-            }
+               let cashes = FirebaseUserManager.shared.userModel?.cashSources,
+               let cashSources = cashes.map { $0.name} {
+                   ExpenseView(closeSelf: $expenseViewShow,
+                               cashSource: cashSource,
+                               purchaseCategoryName: $expenseType,
+                               editing: $editing,
+                               cashSources: cashSources)
+                   .zIndex(10)
+               }
             
             if incomeViewShow {
                 IncomeView(closeSelf: $incomeViewShow,
                            cashSource: cashSource,
                            editing: $editing,
                            cashSources: $cashSources)
-                           .zIndex(10)
+                .zIndex(10)
             }
-             
+            
             if addCashSourceViewShow {
                 AddCashSourceView(closeSelf: $addCashSourceViewShow,
                                   editing: $editing)
@@ -224,7 +224,7 @@ struct MainScreen: View {
             }
         }
         .onChange(of: expenseViewShow, perform: { newValue in
-            if let sources = UserDefaultsManager.shared.userModel?.cashSources {
+            if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources
                 if sources.count != 0 {
                     cashSource = sources[0].name ?? ""
@@ -232,62 +232,72 @@ struct MainScreen: View {
             }
         })
         .onAppear() {
-            
-            guard let currentUser = Auth.auth().currentUser else { return }
-            user = UserFirModel(user: currentUser)
-            userRef = Database.database().reference(withPath: "users").child(user.uid).child("userDataModel")
-            
-            userRef.observe(.value) { dataSnapshot in
-              
-                guard let value = dataSnapshot.value as? [String: AnyObject] else { return }
-                if let data = value.jsonData {
-                    //cast to expected type
-                    do {
-                        UserDefaultsManager.shared.userModel =  try JSONDecoder().decode(UserModel.self, from: data)
-                        if let sources = UserDefaultsManager.shared.userModel?.cashSources {
-                            cashSources = sources
-                            if sources.count != 0 { cashSource = sources[0].name }
-                        }
-                        if let categories = UserDefaultsManager.shared.userModel?.purchaseCategories {
-                            purchaseCategories = categories
-                        }
-                    } catch {
-                        print("decodable error")
-                    }
+            FirebaseUserManager.shared.observeUser {
+                if let sources = FirebaseUserManager.shared.userModel?.cashSources {
+                    cashSources = sources
+                    if sources.count != 0 { cashSource = sources[0].name }
+                }
+                if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
+                    purchaseCategories = categories
                 }
             }
+            
+            
+            
+            //            guard let currentUser = Auth.auth().currentUser else { return }
+            //            user = UserFirModel(user: currentUser)
+            //            userRef = Database.database().reference(withPath: "users").child(user.uid).child("userDataModel")
+            //
+            //            userRef.observe(.value) { dataSnapshot in
+            //                guard let value = dataSnapshot.value as? [String: AnyObject] else { return }
+            //                if let data = value.jsonData {
+            //                    //cast to expected type
+            //                    do {
+            //                        UserDefaultsManager.shared.userModel =  try JSONDecoder().decode(UserModel.self, from: data)
+            //                        if let sources = UserDefaultsManager.shared.userModel?.cashSources {
+            //                            cashSources = sources
+            //                            if sources.count != 0 { cashSource = sources[0].name }
+            //                        }
+            //                        if let categories = UserDefaultsManager.shared.userModel?.purchaseCategories {
+            //                            purchaseCategories = categories
+            //                        }
+            //                    } catch {
+            //                        print("decodable error")
+            //                    }
+            //                }
+            //            }
         }
         .onDisappear() {
-           
+            
             userRef.removeAllObservers()
-          
+            
         }
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
                 let dataUserModel =
-                      UserModel(avatarImgName: "person.circle",
-                                name: "Oleh Dovhan",
-                                email: user.email ,
-                                registrationDate: Int(Date().millisecondsSince1970),
-                                cashSources: [CashSource(name: "Bank card",
-                                                         amount: 0.0,
-                                                         iconName: "iconBankCard"),
-                                              CashSource(name: "Wallet",
-                                                         amount: 0.0,
-                                                         iconName: "iconWallet")],
-                                purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                     PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                     PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                     PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                     PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                     PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                     PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                UserModel(avatarImgName: "person.circle",
+                          name: "Oleh Dovhan",
+                          email: user.email ,
+                          registrationDate: Int(Date().millisecondsSince1970),
+                          cashSources: [CashSource(name: "Bank card",
+                                                   amount: 0.0,
+                                                   iconName: "iconBankCard"),
+                                        CashSource(name: "Wallet",
+                                                   amount: 0.0,
+                                                   iconName: "iconWallet")],
+                          purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+                                               PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                               PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                               PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                               PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                               PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                               PurchaseCategory(name: "Health", iconName: "iconHealth")])
                 Database.database().reference(withPath: "users").child(user.uid).setValue(["userDataModel": dataUserModel.createDic()])
             }
             
             Button("Yes", role: .destructive) {
                 // remove value for reference
-               // userRef.removeValue()
+                // userRef.removeValue()
                 viewModel.signOut()
             }
         }
@@ -295,7 +305,7 @@ struct MainScreen: View {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
                 Button("Done") {
-                   editing = false
+                    editing = false
                 }
             }
         }

@@ -103,7 +103,7 @@ struct DetailGoalView: View {
    }
     
     func deleteGoal() {
-        if var user = UserDefaultsManager.shared.userModel {
+        if var user = FirebaseUserManager.shared.userModel {
             var previousGoals = user.goals
 //            for (index,source) in previousGoals.enumerated() {
 //                if source.name == goal.name {
@@ -111,8 +111,8 @@ struct DetailGoalView: View {
 //                }
 //            }
 //            user.goals = previousGoals
-            UserDefaultsManager.shared.userModel = user
-            if let gols = UserDefaultsManager.shared.userModel?.goals { goals = gols }
+            FirebaseUserManager.shared.userModel = user
+            if let gols = FirebaseUserManager.shared.userModel?.goals { goals = gols }
             closeSelf = false
         }
     }

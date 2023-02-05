@@ -51,8 +51,8 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
             let secondName = credentials.fullName?.familyName,
               let email = credentials.email {
                // TODO: - create USER in UD and then in REALM
-               if UserDefaultsManager.shared.userModel == nil {
-                   UserDefaultsManager.shared.userModel =
+               if FirebaseUserManager.shared.userModel == nil {
+                   FirebaseUserManager.shared.userModel =
                    UserModel(avatarImgName: "person.circle",
                              name: firstName + " " + secondName,
                              email: email,

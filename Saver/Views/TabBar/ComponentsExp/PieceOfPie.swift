@@ -48,8 +48,8 @@ class PieceOfPieContainer: ObservableObject {
     }
     
     func getAllExpenses() -> Set<String>? {
-        if UserDefaultsManager.shared.userModel?.currentMonthSpendings?.count != 0 ,
-           let expenses = UserDefaultsManager.shared.userModel?.currentMonthSpendings {
+        if FirebaseUserManager.shared.userModel?.currentMonthSpendings?.count != 0 ,
+           let expenses = FirebaseUserManager.shared.userModel?.currentMonthSpendings {
             var categoriesSet: Set<String> = []
             for expense in expenses {
                 categoriesSet.insert(expense.spentCategory)
@@ -63,7 +63,7 @@ class PieceOfPieContainer: ObservableObject {
         var dict: [String: Double] = [:]
         for category in categories {
             var sum: Double = 0.0
-            let filtered = UserDefaultsManager.shared.userModel!.currentMonthSpendings!.filter { $0.spentCategory == category }
+            let filtered = FirebaseUserManager.shared.userModel!.currentMonthSpendings!.filter { $0.spentCategory == category }
             
             for item in filtered {
                 sum += item.amount

@@ -176,7 +176,7 @@ struct ExpenseView: View {
         .onAppear() {
             print(cashSource)
             print(purchaseCategoryName)
-            if let purchCats = UserDefaultsManager.shared.userModel?.purchaseCategories {
+            if let purchCats = FirebaseUserManager.shared.userModel?.purchaseCategories {
                 purchaseCategories = purchCats.map { $0.name }
             }
         }

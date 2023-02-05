@@ -28,7 +28,7 @@ class ExpenseViewModel: ObservableObject {
                                  expenseDate: Date(),
                                  cashSource: cashSource,
                                  spentCategory: spentCategory)
-        if var user = UserDefaultsManager.shared.userModel {
+        if var user = FirebaseUserManager.shared.userModel {
             
             // change spendings
             if user.currentMonthSpendings == nil {
@@ -48,7 +48,7 @@ class ExpenseViewModel: ObservableObject {
             if let index = cashSourceSubstractIndex {
                 user.cashSources[index].substractAmount(expense)
             }
-            UserDefaultsManager.shared.userModel = user
+            FirebaseUserManager.shared.userModel = user
         }
     }
 }

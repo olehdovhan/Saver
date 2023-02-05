@@ -121,7 +121,7 @@ struct DetailDebtView: View {
         
         
         func deleteDebt() {
-            if var user = UserDefaultsManager.shared.userModel {
+            if var user = FirebaseUserManager.shared.userModel {
                 var previousDebts = user.debts
 //                for (index,source) in previousDebts.enumerated() {
 //                    if source.name == debt.name {
@@ -129,8 +129,8 @@ struct DetailDebtView: View {
 //                    }
 //                }
                 user.debts = previousDebts
-                UserDefaultsManager.shared.userModel = user
-                if let dbts = UserDefaultsManager.shared.userModel?.debts { debts = dbts }
+                FirebaseUserManager.shared.userModel = user
+                if let dbts = FirebaseUserManager.shared.userModel?.debts { debts = dbts }
                 closeSelf = false
             }
         }

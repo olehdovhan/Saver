@@ -369,7 +369,7 @@ struct SavingsGoalsDebtsView: View {
         }
 //        .edgesIgnoringSafeArea(.top)
         .onAppear {
-            if let currentUser = UserDefaultsManager.shared.userModel {
+            if let currentUser = FirebaseUserManager.shared.userModel {
 //                user = currentUser
 //                goals = currentUser.goals
 //                debts = currentUser.debts

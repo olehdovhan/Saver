@@ -10,7 +10,7 @@ import Foundation
 class CashSourcesData: ObservableObject {
     
     var cashSources: [CashSource] {
-        if let sources = UserDefaultsManager.shared.userModel?.cashSources {
+        if let sources = FirebaseUserManager.shared.userModel?.cashSources {
             
             return sources
         } else {

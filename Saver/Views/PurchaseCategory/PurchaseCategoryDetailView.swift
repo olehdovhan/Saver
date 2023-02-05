@@ -154,7 +154,7 @@ struct PurchaseCategoryDetailView: View {
    }
     
     func deletePurchaseCategory() {
-        if var user = UserDefaultsManager.shared.userModel {
+        if var user = FirebaseUserManager.shared.userModel {
             var purchCats = user.purchaseCategories
             for (index,source) in purchCats.enumerated() {
                 if source.name == category.name {
@@ -162,8 +162,8 @@ struct PurchaseCategoryDetailView: View {
                 }
             }
             user.purchaseCategories = purchCats
-            UserDefaultsManager.shared.userModel = user
-            if let cashes = UserDefaultsManager.shared.userModel?.purchaseCategories {
+            FirebaseUserManager.shared.userModel = user
+            if let cashes = FirebaseUserManager.shared.userModel?.purchaseCategories {
                 purchaseCategories = cashes
             }
             closeSelf = false

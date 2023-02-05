@@ -37,7 +37,7 @@ struct BalanceView: View {
                         .foregroundColor(.white)
                 }
                
-                if let user = UserDefaultsManager.shared.userModel {
+                if let user = FirebaseUserManager.shared.userModel {
                     Text("\(user.name)")
                         .foregroundColor(.white)
                         .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))

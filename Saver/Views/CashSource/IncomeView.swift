@@ -75,7 +75,7 @@ struct IncomeView: View {
                     Text("To")
                         .foregroundColor(.black)
                     Spacer()
-                    if let cashSources = UserDefaultsManager.shared.userModel?.cashSources {
+                    if let cashSources = FirebaseUserManager.shared.userModel?.cashSources {
                         Picker("", selection: $cashSource) {
                             ForEach(cashSources ,id: \.self) {
                                 Text($0.name)
@@ -157,7 +157,7 @@ struct IncomeView: View {
                 Spacer()
                 Button("delete",role: .destructive) {
                     
-                    if var user = UserDefaultsManager.shared.userModel {
+                    if var user = FirebaseUserManager.shared.userModel {
                         var sources = user.cashSources
                         for (index,source) in sources.enumerated() {
                             if source.name == cashSource {
@@ -165,8 +165,8 @@ struct IncomeView: View {
                             }
                         }
                         user.cashSources = sources
-                        UserDefaultsManager.shared.userModel = user
-                        if let cashes = UserDefaultsManager.shared.userModel?.cashSources {
+                        FirebaseUserManager.shared.userModel = user
+                        if let cashes = FirebaseUserManager.shared.userModel?.cashSources {
                             cashSources = cashes
                         }
                         closeSelf = false

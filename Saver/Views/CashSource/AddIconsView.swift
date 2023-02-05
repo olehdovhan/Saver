@@ -25,7 +25,7 @@ struct AddIconsView: View {
         
         switch type {
         case .cashSource:
-            if let existedIcons = UserDefaultsManager.shared.userModel?.cashSources.map {$0.iconName} {
+            if let existedIcons = FirebaseUserManager.shared.userModel?.cashSources.map {$0.iconName} {
               var dataCopy = data
                 for exist in existedIcons {
                     if let existedItem = dataCopy.firstIndex(of: exist) {
@@ -36,7 +36,7 @@ struct AddIconsView: View {
             } else { return data }
 
         case .purchaseCategory:
-            if let existedIcons = UserDefaultsManager.shared.userModel?.purchaseCategories.map {$0.iconName} {
+            if let existedIcons = FirebaseUserManager.shared.userModel?.purchaseCategories.map {$0.iconName} {
               var dataCopy = data
                 for exist in existedIcons {
                     if let existedItem = dataCopy.firstIndex(of: exist) {

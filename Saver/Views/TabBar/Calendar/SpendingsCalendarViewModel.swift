@@ -99,7 +99,7 @@ class SpendingsCalendarViewModel: ObservableObject {
     
     init() {
         // fill tasks
-        if let spendings = UserDefaultsManager.shared.userModel?.currentMonthSpendings {
+        if let spendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings {
             for spending in spendings {
                 let thisDaySpents = spendings.filter({isSameDay(date1: $0.expenseDate,
                                                                 date2: spending.expenseDate)})

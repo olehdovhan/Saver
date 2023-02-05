@@ -152,9 +152,9 @@ struct AddPurchaseCategoryView: View {
                     let newPurchaseCategory = PurchaseCategory(name: cashSourceName,
                                                          iconName: selectedCashIconName,
                                                          planSpentPerMonth: Double(currentMoneyAmount) ?? 0.0)
-                    if var copyUser = UserDefaultsManager.shared.userModel {
+                    if var copyUser = FirebaseUserManager.shared.userModel {
                         copyUser.purchaseCategories.append(newPurchaseCategory)
-                        UserDefaultsManager.shared.userModel? = copyUser
+                        FirebaseUserManager.shared.userModel? = copyUser
                         print("AAAA\(newPurchaseCategory)")
                     }
                     closeSelf = false

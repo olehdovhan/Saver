@@ -145,9 +145,9 @@ struct AddCashSourceView: View {
                             pressedImage: "btnDone",
                             disabled: fieldsEmpty) {
                     let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
-                    if var copyUser = UserDefaultsManager.shared.userModel {
+                    if var copyUser = FirebaseUserManager.shared.userModel {
                         copyUser.cashSources.append(newCashSource)
-                        UserDefaultsManager.shared.userModel? = copyUser
+                        FirebaseUserManager.shared.userModel? = copyUser
                         print("AAAA\(newCashSource)")
                     }
                     closeSelf = false
