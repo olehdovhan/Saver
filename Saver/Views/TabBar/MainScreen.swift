@@ -239,7 +239,7 @@ struct MainScreen: View {
             
             userRef.observe(.value) { dataSnapshot in
               
-              let value = dataSnapshot.value as! [String: AnyObject]
+                guard let value = dataSnapshot.value as? [String: AnyObject] else { return }
                 if let data = value.jsonData {
                     //cast to expected type
                     do {
@@ -258,18 +258,36 @@ struct MainScreen: View {
             }
         }
         .onDisappear() {
+           
             userRef.removeAllObservers()
+          
         }
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
-                let task = TaskFirModel(title: String(Date().millisecondsSince1970), userId: user.uid)
-//                print(task.title)
-//                // TODO: - use String(Date) as ref id for purchaseCategories, cashSources and spents respectively
-//                let taskRef = ref.child(task.title.lowercased())
-//                taskRef.setValue(task.convertToDictionary())
+                let dataUserModel =
+                      UserModel(avatarImgName: "person.circle",
+                                name: "Oleh Dovhan",
+                                email: user.email ,
+                                registrationDate: Int(Date().millisecondsSince1970),
+                                cashSources: [CashSource(name: "Bank card",
+                                                         amount: 0.0,
+                                                         iconName: "iconBankCard"),
+                                              CashSource(name: "Wallet",
+                                                         amount: 0.0,
+                                                         iconName: "iconWallet")],
+                                purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+                                                     PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                                     PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                                     PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                                     PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                                     PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                                     PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                Database.database().reference(withPath: "users").child(user.uid).setValue(["userDataModel": dataUserModel.createDic()])
             }
             
             Button("Yes", role: .destructive) {
+                // remove value for reference
+               // userRef.removeValue()
                 viewModel.signOut()
             }
         }
