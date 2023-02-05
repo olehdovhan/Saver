@@ -6,16 +6,47 @@
 //
 
 import SwiftUI
+import Firebase
 
 
 
 
 struct UserModel: Codable {
+    
+    init(snapshot: DataSnapshot) {
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        avatarImgName = snapshotValue["avatarImgName"] as! String
+        name = snapshotValue["name"] as! String
+        email = snapshotValue["email"] as! String
+        registrationDate = snapshotValue["registrationDate"] as! Int
+        cashSources = snapshotValue["cashSources"] as! [CashSource]
+        purchaseCategories = snapshotValue["purchaseCategories"] as! [PurchaseCategory]
+     // ref = snapshot.ref
+    }
+    
+    init(avatarImgName: String,
+         name: String,
+         email: String,
+         registrationDate: Int,
+         cashSources: [CashSource],
+         purchaseCategories: [PurchaseCategory]) {
+        
+        self.avatarImgName = avatarImgName
+        self.name = name
+        self.email = email
+        self.registrationDate = registrationDate
+        self.cashSources =      cashSources
+        self.purchaseCategories = purchaseCategories
+        
+    }
+    
+    
+ //   let ref: DatabaseReference?
     // TODO: add cashFlow( general) - Income - expense ( monthly budget) + cashFlow(full) Income - (expense + goals + debts)
     var avatarImgName: String
     var name: String
     var email: String
-    var registrationDate: Date
+    var registrationDate: Int
     
     // CashSources
     var cashSources: [CashSource]
@@ -93,6 +124,13 @@ struct UserModel: Codable {
     
     // write logic depends on this func will execute every month on the first day
     func renewThisMonthBudgetAndAverage() {}
+    
+    func createDic() -> [String: Any]? {
+        guard let dic = self.dictionary else {
+            return nil
+        }
+        return dic
+    }
 }
 
 struct Goal: Codable, Hashable {
@@ -173,4 +211,3 @@ struct PurchaseCategory: Codable, Hashable {
     var iconName: String
     var planSpentPerMonth: Double?
 }
-

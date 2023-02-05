@@ -56,7 +56,7 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
                    UserModel(avatarImgName: "person.circle",
                              name: firstName + " " + secondName,
                              email: email,
-                             registrationDate: Date(),
+                             registrationDate: Int(Date().millisecondsSince1970),
                              cashSources: [CashSource(name: "Bank card",
                                                       amount: 0.0,
                                                       iconName: "iconBankCard"),

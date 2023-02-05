@@ -45,6 +45,7 @@ struct TabBarView: View {
         }
         .onAppear {
             UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")
+            
         }
     }
 }

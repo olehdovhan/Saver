@@ -11,7 +11,6 @@ import SwiftUI
 class RegistrationViewModel: ObservableObject {
     
     @Published var createAccountOnceTapped = false
-    
     @Published var correctEmail: RegistrationTFState = .validated
     @Published var correctPassword: RegistrationTFState = .validated
     @Published var validatedPrivacy: RegistrationTFState = .validated
@@ -26,19 +25,40 @@ class RegistrationViewModel: ObservableObject {
     @Published var repeatPasswordIsEditing = false
     @Published var willMoveToLogin =         false
     @Published var willMoveToTabBar =        false
+    var ref: DatabaseReference!
     
     func registerUser() {
         print(email)
         print(password)
-//        willMoveToTabBar = true
+//      willMoveToTabBar = true
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
-            if error == nil {
-                if user != nil {
-                    self?.willMoveToTabBar = true
-                }
-            } else {
-                print(error?.localizedDescription)
+            
+            guard error == nil, let newUser = user?.user else {
+                print(error?.localizedDescription ?? "")
+                return
             }
+            
+            let currentUser = UserFirModel(user: newUser)
+            let userRef = self?.ref.child(currentUser.uid)
+          let dataUserModel =
+                UserModel(avatarImgName: "person.circle",
+                          name: "Oleh Dovhan",
+                          email: self?.email ?? "",
+                          registrationDate: Int(Date().millisecondsSince1970),
+                          cashSources: [CashSource(name: "Bank card",
+                                                   amount: 0.0,
+                                                   iconName: "iconBankCard"),
+                                        CashSource(name: "Wallet",
+                                                   amount: 0.0,
+                                                   iconName: "iconWallet")],
+                          purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+                                               PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                               PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                               PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                               PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                               PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                               PurchaseCategory(name: "Health", iconName: "iconHealth")])
+            userRef?.setValue(["userDataModel": dataUserModel.createDic()])
         }
     }
 }

@@ -7,7 +7,8 @@
 
 import SwiftUI
 import Combine
-import AVKit
+//import AVKit
+import Firebase
 
 struct RegistrationView: View {
     
@@ -124,6 +125,9 @@ struct RegistrationView: View {
                     Spacer()
                 }
             }
+            .onAppear() {
+                viewModel.ref = Database.database().reference(withPath: "users")
+            }
             //.navigationBarHidden(true)
         
     }
@@ -152,7 +156,6 @@ struct RegistrationView: View {
                  let _ = viewModel.inputValidated()
                 }
               })
-                
                 .secure(true)
                 .frame(width: wRatio(250))
                 .authTextField(isEditing: viewModel.passwordIsEditing,
@@ -163,11 +166,9 @@ struct RegistrationView: View {
                                         viewModel.password = filtered
                                     }
                                 })
-
             // Hidden
               Text(viewModel.correctPassword.message)
-            
-                .font(.custom("Lato-ExtraBold", size: 11))
+                  .font(.custom("Lato-ExtraBold", size: 11))
                   .foregroundColor(.red)
                   .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
             
@@ -186,18 +187,11 @@ struct RegistrationView: View {
                                         viewModel.repeatPassword = filtered
                                     }
                                 })
-            
             // Hidden
               Text(viewModel.correctPassword.message)
-                .font(.custom("Lato-ExtraBold", size: 11))
+                  .font(.custom("Lato-ExtraBold", size: 11))
                   .foregroundColor(.red)
                   .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
-            
-            
-            
-            
-            
-            
         }
     }
     
