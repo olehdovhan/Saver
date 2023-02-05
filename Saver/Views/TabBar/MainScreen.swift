@@ -256,13 +256,9 @@ struct MainScreen: View {
                     }
                 }
             }
-            
-
-            
-            
-            
-            
-         
+        }
+        .onDisappear() {
+            userRef.removeAllObservers()
         }
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
