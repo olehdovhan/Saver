@@ -35,7 +35,6 @@ class AppleAuthorizationVC: UIViewController {
         controller.presentationContextProvider = self
         controller.performRequests()
     }
-
 }
 
 extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {

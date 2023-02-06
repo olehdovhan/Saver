@@ -9,8 +9,7 @@ import SwiftUI
 
 
 struct AuthButton: UIViewControllerRepresentable {
- 
-    
+
     var closure: () -> ()
     
     func makeUIViewController(context: Context) -> AppleAuthorizationVC {

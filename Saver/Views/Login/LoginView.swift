@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    
     @ObservedObject private var viewModel = LoginViewModel()
     
     @State private var email = ""
@@ -23,8 +24,8 @@ struct LoginView: View {
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
                         .ignoresSafeArea()
-                    
                 }
+                
                 Rectangle()
                     .fill(Color.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -43,7 +44,6 @@ struct LoginView: View {
                     //
                     Spacer()
                     
-                    
                     fieldsView
                     
                     Text("or")
@@ -57,7 +57,7 @@ struct LoginView: View {
                         SocialButton(image: "icoGoogle",
                                      widthImg: 20,
                                      heightImg: 20){
-                            print("F")
+                            viewModel.signInGoogle()
                         }
                         SocialButton(image: "icoFacebook",
                                      widthImg: 10,
