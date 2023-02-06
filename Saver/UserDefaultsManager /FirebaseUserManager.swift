@@ -19,15 +19,20 @@ final class FirebaseUserManager {
     }
     
     func observeUser(completion: @escaping (() -> ()) ) {
-        userRef.observe(.value) { [weak self] dataSnapshot in
+        if let currentUser = Auth.auth().currentUser {
+            firUser = UserFirModel(user: currentUser)
+            userRef = Database.database().reference(withPath: "users").child(firUser.uid).child("userDataModel")
             
-         guard let value = dataSnapshot.value as? [String: AnyObject] else { return }
-            if let data = value.jsonData {
-                do {
-                    self?.userModel =  try JSONDecoder().decode(UserModel.self, from: data)
-                    completion()
-                } catch {
-                    print("decodable error")
+            userRef.observe(.value) { [weak self] dataSnapshot in
+                
+                guard let value = dataSnapshot.value as? [String: AnyObject] else { return }
+                if let data = value.jsonData {
+                    do {
+                        self?.userModel =  try JSONDecoder().decode(UserModel.self, from: data)
+                        completion()
+                    } catch {
+                        print("decodable error")
+                    }
                 }
             }
         }
@@ -35,10 +40,6 @@ final class FirebaseUserManager {
     
     static var shared: FirebaseUserManager = {
         let manager = FirebaseUserManager()
-        if let currentUser = Auth.auth().currentUser {
-            manager.firUser = UserFirModel(user: currentUser)
-            manager.userRef = Database.database().reference(withPath: "users").child(manager.firUser.uid).child("userDataModel")
-        }
         return manager
     }()
     

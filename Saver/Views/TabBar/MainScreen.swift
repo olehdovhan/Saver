@@ -241,36 +241,9 @@ struct MainScreen: View {
                     purchaseCategories = categories
                 }
             }
-            
-            
-            
-            //            guard let currentUser = Auth.auth().currentUser else { return }
-            //            user = UserFirModel(user: currentUser)
-            //            userRef = Database.database().reference(withPath: "users").child(user.uid).child("userDataModel")
-            //
-            //            userRef.observe(.value) { dataSnapshot in
-            //                guard let value = dataSnapshot.value as? [String: AnyObject] else { return }
-            //                if let data = value.jsonData {
-            //                    //cast to expected type
-            //                    do {
-            //                        UserDefaultsManager.shared.userModel =  try JSONDecoder().decode(UserModel.self, from: data)
-            //                        if let sources = UserDefaultsManager.shared.userModel?.cashSources {
-            //                            cashSources = sources
-            //                            if sources.count != 0 { cashSource = sources[0].name }
-            //                        }
-            //                        if let categories = UserDefaultsManager.shared.userModel?.purchaseCategories {
-            //                            purchaseCategories = categories
-            //                        }
-            //                    } catch {
-            //                        print("decodable error")
-            //                    }
-            //                }
-            //            }
         }
         .onDisappear() {
-            
-            userRef.removeAllObservers()
-            
+            FirebaseUserManager.shared.userRef.removeAllObservers()
         }
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
