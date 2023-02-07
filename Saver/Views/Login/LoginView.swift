@@ -53,18 +53,17 @@ struct LoginView: View {
                     
                     //                Spacer()
                     
-                    HStack(spacing: wRatio(50)){
+                    VStack(spacing: 20) {
                         SocialButton(image: "icoGoogle",
                                      widthImg: 20,
                                      heightImg: 20){
                             viewModel.signInGoogle()
                         }
-                        SocialButton(image: "icoFacebook",
-                                     widthImg: 10,
-                                     heightImg: 20){
-                            print("F")
-                        }
+                        .frame(width: 300, height: 50)
                         
+                        AuthButton {
+                        }
+                        .frame(width: 230, height: 50)
                     }
                     .padding(.top, wRatio(30))
                     .padding(.bottom, wRatio(30))

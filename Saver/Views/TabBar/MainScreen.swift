@@ -22,7 +22,6 @@ struct MainScreen: View {
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
     @State var purchaseCategories: [PurchaseCategory] = []
-    //  @State var dragging = false
     @State var selectedCategory: PurchaseCategory?
     
     @State var cashSourcesData = CashSourcesData()
@@ -32,7 +31,7 @@ struct MainScreen: View {
     @State var draggingItem = false
     @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
-    let itemPadding: CGFloat = 6// UIScreen.main.bounds.width * 0.02558
+    let itemPadding: CGFloat = 6
     var viewModel = MainScreenViewModel()
     
     @State var user: UserFirModel!
@@ -91,26 +90,6 @@ struct MainScreen: View {
                             .frame(width: self.itemWidth, height: 70)
                         }
                     }
-                    
-                    //                                             .background(Color.black.opacity(0.1))
-                    
-                    //Референсний новий скрол
-                    //                    AdaptivePagingScrollView(currentPageIndex: self.$activePageIndex,
-                    //                                             dragging: self.$dragging,
-                    //                                             itemsAmount: self.onboardData.cards.count - 1,
-                    //                                             itemWidth: self.itemWidth,
-                    //                                             itemPadding: self.itemPadding,
-                    //                                             pageWidth: geometry.size.width) {
-                    //                        ForEach(onboardData.cards) { card in
-                    //                            GeometryReader { screen in
-                    //                                OnbardingCardView(dragging: $dragging, card: card)
-                    //                            }
-                    //                            .frame(width: self.itemWidth, height: 100)
-                    //
-                    //                        }
-                    //                    }
-                    //                                             .frame(height: 150)
-                    //                                             .background(Color.red)
                 }
                 .zIndex(draggingItem ? 10 : -2)
                 .onChange(of: addCashSourceViewShow) { newValue in
@@ -138,23 +117,7 @@ struct MainScreen: View {
                             .offset(x: itemPadding)
                     }
                 )
-                
-                
-                
-                //                Старий скрол
-                //                CardsPlace(addCashSourceViewShow: $addCashSourceViewShow,
-                //                           incomeViewShow: $incomeViewShow,
-                //                           expenseViewShow: $expenseViewShow,
-                //                           purchaseType: $expenseType,
-                //                           cashSource: $cashSource,
-                //                           cashSources: $cashSources,
-                //                           draggingItem: $draggingItem).zIndex(draggingItem ? 3 : -2)
-                //                .onChange(of: addCashSourceViewShow) { newValue in
-                //                    if let sources = UserDefaultsManager.shared.userModel?.cashSources { cashSources = sources }
-                //                }
-                //                .frame(height: 90)
-                //                .background(.red.opacity(0.3))
-                
+
                 Spacer() .frame(height: 15)
                 
                 StatisticsPlace().zIndex(3)
@@ -269,8 +232,6 @@ struct MainScreen: View {
             }
             
             Button("Yes", role: .destructive) {
-                // remove value for reference
-                // userRef.removeValue()
                 viewModel.signOut()
             }
         }

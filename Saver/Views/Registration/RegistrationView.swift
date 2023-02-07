@@ -241,15 +241,16 @@ struct SocialButton: View{
         Button {
             closure()
         } label: {
-            ZStack{
-                Circle().fill(Color.white).frame(width: 50, height: 50).shadow(radius: 10)
-                Image(image)
-                    .resizable()
-                    .frame(width: widthImg, height: heightImg)
-                
+            HStack {
+                ZStack{
+                    Circle().fill(Color.white).frame(width: 50, height: 50).shadow(radius: 10)
+                    Image(image)
+                        .resizable()
+                        .frame(width: widthImg, height: heightImg)
+                    
+                }
+                Text("Sign in with Google")
             }
-            
-            
         }
     }
 }
