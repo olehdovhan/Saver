@@ -195,6 +195,9 @@ struct MainScreen: View {
             }
         })
         .onAppear() {
+            
+            
+            
             FirebaseUserManager.shared.observeUser {
                 if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                     cashSources = sources

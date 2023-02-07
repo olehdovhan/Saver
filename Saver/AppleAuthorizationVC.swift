@@ -88,73 +88,6 @@ class AppleAuthorizationVC: UIViewController {
 
       return hashString
     }
-    
-    private func addUserModelInRealtimeDatabase(appleIDCredential: ASAuthorizationAppleIDCredential, firUser: UserFirModel) {
-        if let email = appleIDCredential.email {
-            if let firstName = appleIDCredential.fullName?.givenName,
-               let secondName = appleIDCredential.fullName?.familyName {
-                let dataUserModel = UserModel(avatarImgName: "person.circle",
-                                              name: firstName + " " + secondName ,
-                                              email: email,
-                                              registrationDate: Int(Date().millisecondsSince1970),
-                                              cashSources: [CashSource(name: "Bank card",
-                                                                       amount: 0.0,
-                                                                       iconName: "iconBankCard"),
-                                                            CashSource(name: "Wallet",
-                                                                       amount: 0.0,
-                                                                       iconName: "iconWallet")],
-                                              purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                                   PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                                   PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                                   PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                                   PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                                   PurchaseCategory(name: "Health", iconName: "iconHealth")])
-
-                Database.database().reference(withPath: "users").child(firUser.uid).setValue(["userDataModel": dataUserModel.createDic()])
-            } else {
-                let dataUserModel = UserModel(avatarImgName: "person.circle",
-                                              name: "noName User",
-                                              email: email,
-                                              registrationDate: Int(Date().millisecondsSince1970),
-                                              cashSources: [CashSource(name: "Bank card",
-                                                                       amount: 0.0,
-                                                                       iconName: "iconBankCard"),
-                                                            CashSource(name: "Wallet",
-                                                                       amount: 0.0,
-                                                                       iconName: "iconWallet")],
-                                              purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                                   PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                                   PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                                   PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                                   PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                                   PurchaseCategory(name: "Health", iconName: "iconHealth")])
-
-                Database.database().reference(withPath: "users").child(firUser.uid).setValue(["userDataModel": dataUserModel.createDic()])
-            }
-        } else {
-      let dataUserModel = UserModel(avatarImgName: "person.circle",
-                                    name: "NoName user" ,
-                                    email: "email is absent",
-                                    registrationDate: Int(Date().millisecondsSince1970),
-                                    cashSources: [CashSource(name: "Bank card",
-                                                             amount: 0.0,
-                                                             iconName: "iconBankCard"),
-                                                  CashSource(name: "Wallet",
-                                                             amount: 0.0,
-                                                             iconName: "iconWallet")],
-                                    purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                         PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                         PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                         PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                         PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                         PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                         PurchaseCategory(name: "Health", iconName: "iconHealth")])
-
-      Database.database().reference(withPath: "users").child(firUser.uid).setValue(["userDataModel": dataUserModel.createDic()])
-        }
-    }
 }
 
 extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
@@ -185,14 +118,6 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
           Auth.auth().signIn(with: credential) { (authResult, error) in
               if let error = error {
                   print(error.localizedDescription)
-              }
-              guard let currentUser = Auth.auth().currentUser else { return }
-              let firUser = UserFirModel(user: currentUser)
-              let userRef = Database.database().reference(withPath: "users")
-              userRef.child(firUser.uid).observe(.value) { [weak self] snapshot in
-                  if !snapshot.exists() {
-                      self?.addUserModelInRealtimeDatabase(appleIDCredential: appleIDCredential, firUser: firUser)
-                  }
               }
           }
         }
