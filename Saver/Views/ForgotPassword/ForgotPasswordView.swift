@@ -5,16 +5,17 @@
 //  Created by Pryshliak Dmytro on 15.01.2023.
 //
 
-import Foundation
+
 import SwiftUI
+import Combine
 
 struct ForgotPasswordView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject private var viewModel = ForgotPasswordViewModel()
+    @State private var keyboardHeight: CGFloat = 0
     
-    @State private var email = ""
     
     var body: some View{
             ZStack {
@@ -22,6 +23,7 @@ struct ForgotPasswordView: View {
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
                         .ignoresSafeArea()
+                       
                     
                 }
                 Rectangle()
@@ -37,8 +39,10 @@ struct ForgotPasswordView: View {
                     
                     Image("logo")
                         .resizable()
-                        .frame(width: 150, height: 150)
-                        .padding(.bottom, wRatio(60))
+                        .frame(width: keyboardHeight == 0 ? wRatio(150) : wRatio(75),
+                               height: keyboardHeight == 0 ? wRatio(150) : wRatio(75))
+                        .padding(.top, keyboardHeight == 0 ? 0 : wRatio(10))
+                        .padding(.bottom, keyboardHeight == 0 ? wRatio(60) : wRatio(10))
                     
                     Text("Restore acces")
                         .lineLimit(1)
@@ -53,7 +57,7 @@ struct ForgotPasswordView: View {
                         .padding(.bottom, wRatio(30))
                     
                     fieldsView
-                        .padding(.bottom, wRatio(60))
+                        .padding(.bottom, keyboardHeight == 0 ? wRatio(60) : wRatio(20))
                     
                     Button{
                         viewModel.resetEmail(email: viewModel.email) {
@@ -66,9 +70,9 @@ struct ForgotPasswordView: View {
                                                startPoint: .leading,
                                                endPoint: .trailing)
                             )
-                            .frame(width: wRatio(250), height: 50)
+                            .frame(width: wRatio(270), height: 50)
                             
-                            Text("Proceed!")
+                            Text("Continue!")
                                 .lineLimit(1)
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-ExtraBold", size: 26))
@@ -78,20 +82,18 @@ struct ForgotPasswordView: View {
                     .padding(.bottom, wRatio(30))
                     
                     Spacer()
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                  
                 }
+                
             }
-//            .navigationBarBackButtonHidden(true)
+            .onReceive(Publishers.keyboardHeight) { value in
+                withAnimation() {
+                    self.keyboardHeight = value
+                }
+                
+                
+            }
+            .keyboardAdaptive()
           
         
     }
@@ -105,7 +107,7 @@ struct ForgotPasswordView: View {
                     let _ = viewModel.inputValidated()
                 }
               })
-            .frame(width: wRatio(250))
+            
             .authTextField(isEditing: viewModel.emailIsEditing, vState: viewModel.correctEmail)
             .autocapitalization(.none)
             .keyboardType(.emailAddress)
@@ -116,8 +118,21 @@ struct ForgotPasswordView: View {
                 .foregroundColor(.red)
                 .opacity(viewModel.correctEmail == .validated ? 0.0 : 1.0)
         }
+        .frame(width: wRatio(270))
     }
     
     
 }
 
+
+struct RegistrationView_ForgotPasswordView: PreviewProvider {
+    static var previews: some View {
+        ForgotPasswordView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
+        
+        ForgotPasswordView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
+    }
+}

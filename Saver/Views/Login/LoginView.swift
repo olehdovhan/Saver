@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
 
 struct LoginView: View {
     
@@ -33,39 +35,35 @@ struct LoginView: View {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
                 
-                VStack(spacing: 0){
+                VStack( alignment: .center){
                     
-                    Spacer(minLength: 50)
+//
+                    Spacer()
                     
                     Text("Login")
                         .lineLimit(1)
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 30))
-                    //
-                    Spacer()
-                    
+                        .padding(.bottom, 20)
                     fieldsView
                     
                     Text("or")
                         .font(.custom("NotoSans-Regular", size: 20))
-                        .padding(.top, wRatio(30))
+                        .padding(.top, wRatio(5))
                         .foregroundColor(.myGrayDark)
-                    
-                    //                Spacer()
-                    
                     VStack(spacing: 20) {
-                        SocialButton(image: "icoGoogle",
+                        AuthGoogleButton(image: "googleIco",
                                      widthImg: 20,
                                      heightImg: 20){
                             viewModel.signInGoogle()
                         }
-                        .frame(width: 300, height: 50)
+                        .frame(width: 230, height: 50)
                         
                         AuthButton {
                         }
                         .frame(width: 230, height: 50)
                     }
-                    .padding(.top, wRatio(30))
+                    .padding(.top, wRatio(5))
                     .padding(.bottom, wRatio(30))
                     
                     NavigationLink {
@@ -104,11 +102,13 @@ struct LoginView: View {
                             .lineLimit(1)
                             .foregroundColor(.myGreen)
                             .font(.custom("Lato-Regular", size: 16))
-                            .padding(.bottom, wRatio(28))
                     }
                     Spacer()
                 }
+                
+                
             }
+            .keyboardAdaptive()
             .navigationBarBackButtonHidden(true)
         }
     
@@ -134,20 +134,21 @@ struct LoginView: View {
                         viewModel.passwordIsEditing = changed
                       })
                      .secure(true)
-//                     .frame(width: wRatio(250))
                 } else {
                     TextField("Password", text: $password, onEditingChanged: { changed in
                         viewModel.passwordIsEditing = changed
                       })
-//                    .frame(width: wRatio(250))
                 }
                 Spacer()
                 
                 Button {
                     isSecure.toggle()
                 } label: {
-                    isSecure ? Image("login_show_pass_ic") : Image("login_hidden_pass_ic")
+                    Image(isSecure ? "login_show_pass_ic" : "login_hidden_pass_ic")
+                        .renderingMode(.template)
+                        .foregroundColor(.green)
                 }
+                
             }
             .authTextField(isEditing: viewModel.passwordIsEditing, vState: .validated)
             .frame(width: wRatio(250))
@@ -162,6 +163,44 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        Group{
+            LoginView()
+            
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+                .previewDisplayName("iPhone SE")
+            
+            LoginView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+                .previewDisplayName("iPhone 14 Pro")
+        }
+    }
+}
+
+
+struct AuthGoogleButton: View{
+    let image: String
+    let widthImg: CGFloat
+    let heightImg: CGFloat
+    let closure: () -> ()
+    
+    var body: some View{
+        Button {
+            closure()
+        } label: {
+            HStack {
+                ZStack{
+                    RoundedRectangle(cornerRadius: 5).fill(.white).frame(width: 20, height: 20)
+                    Image(image)
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                    
+                }
+                Text("Sign in with Google")
+                    .font(.title3)
+                    .foregroundColor(.white)
+            }
+            .frame(width: 230, height: 50)
+            .background(RoundedRectangle(cornerRadius: 7).fill(.blue))
+        }
     }
 }

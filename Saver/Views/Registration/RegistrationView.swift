@@ -14,6 +14,8 @@ struct RegistrationView: View {
     
     @StateObject private var viewModel = RegistrationViewModel()
     
+    @State private var keyboardHeight: CGFloat = 0
+    
     let validCharsPass = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
     
     var body: some View {
@@ -27,66 +29,59 @@ struct RegistrationView: View {
                 Rectangle()
                     .fill(Color.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
                 
                 NavigationLink(isActive: $viewModel.willMoveToTabBar) {
                     TabBarView()
                 } label: { }
                 
-                VStack(spacing: 0){
-                    Spacer(minLength: 50)
+                VStack( alignment: .center, spacing: 0){
+//                    Spacer(minLength: 50)
+                    Spacer()
                     
                     Text("Regisration")
                         .lineLimit(1)
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 30))
+                        .padding(.bottom, keyboardHeight == 0 ? wRatio(50) : wRatio(10))
                     //
-                    Spacer()
+//                    Spacer()
                     
                     fieldsView
                     
-                    HStack(spacing: 0){
-                        Button {
-                            viewModel.privacyTermsAccepted.toggle()
-                            if viewModel.privacyTermsAccepted {
-                                viewModel.validatedPrivacy = .validated
+    
+                    ZStack{
+                        HStack{
+                            Button {
+                                viewModel.privacyTermsAccepted.toggle()
+                                if viewModel.privacyTermsAccepted {
+                                    viewModel.validatedPrivacy = .validated
+                                }
+                            } label: {
+                                Image(viewModel.privacyTermsAccepted ? "registration_checkmark_green_full" : "registration_checkmark_green_empty")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
                             }
-                        } label: {
-                            Image(viewModel.privacyTermsAccepted ? "registration_checkmark_full" : "registration_checkmark_empty")
-                                .resizable()
-                                .frame(width: 20, height: 20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 3)
+                                    .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myRed, lineWidth: 2)
+                            )
+                            Spacer()
                         }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 3)
-                                .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myRed, lineWidth: 2)
-                        )
-                        Spacer()
-                            .frame(width: 10)
                         
-                        Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
-                            .font(.custom("Lato-Regular", size: 13))
-                    }
-                    .frame(width: wRatio(250))
-                    .padding(.top, wRatio(30))
-                    
-                    Text("or")
-                        .font(.custom("NotoSans-Regular", size: 20))
-                        .padding(.top, wRatio(30))
-                        .foregroundColor(.myGrayDark)
-
-                    HStack(spacing: wRatio(50)){
-                        SocialButton(image: "icoGoogle" ,
-                                     widthImg: 20,
-                                     heightImg: 20){
-                            print("F")
-                        }
-                        SocialButton(image: "icoFacebook",
-                                     widthImg: 10,
-                                     heightImg: 20){
-                            print("F")
+                        HStack{
+                            Spacer().frame(width: 27)
+                            Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
+                                .font(.custom("Lato-Regular", size: 13))
+                                .lineLimit(3)
+                                .multilineTextAlignment(.center)
                         }
                     }
-                    .padding(.top, wRatio(30))
-                    .padding(.bottom, wRatio(30))
+                    .frame(width: wRatio(270), height: 40)
+                    .padding(.top, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
+                    .padding(.bottom, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
                
   
                     NavigationLink(isActive: $viewModel.willMoveToLogin) {
@@ -114,7 +109,7 @@ struct RegistrationView: View {
                                                startPoint: .leading,
                                                endPoint: .trailing)
                             )
-                            .frame(width: wRatio(250), height: 50)
+                            .frame(width: wRatio(270), height: 50)
                             
                             Text("Go!")
                                 .lineLimit(1)
@@ -128,7 +123,13 @@ struct RegistrationView: View {
             .onAppear() {
                 viewModel.ref = Database.database().reference(withPath: "users")
             }
-            //.navigationBarHidden(true)
+            .onReceive(Publishers.keyboardHeight) { value in
+                withAnimation() {
+                    self.keyboardHeight = value
+                }
+                
+                
+            }
         
     }
     
@@ -140,7 +141,7 @@ struct RegistrationView: View {
                     let _ = viewModel.inputValidated()
                 }
               })
-            .frame(width: wRatio(250))
+            
             .authTextField(isEditing: viewModel.emailIsEditing, vState: viewModel.correctEmail)
                 .autocapitalization(.none)
             
@@ -157,7 +158,7 @@ struct RegistrationView: View {
                 }
               })
                 .secure(true)
-                .frame(width: wRatio(250))
+               
                 .authTextField(isEditing: viewModel.passwordIsEditing,
                                vState: viewModel.correctPassword)
                 .onReceive(Just(viewModel.password), perform: { value in
@@ -179,7 +180,7 @@ struct RegistrationView: View {
                 }
               })
                 .secure(true)
-                .frame(width: wRatio(250))
+                
                 .authTextField(isEditing: viewModel.repeatPasswordIsEditing, vState: viewModel.correctPassword)
                 .onReceive(Just(viewModel.repeatPassword), perform: { value in
                                     let filtered = value.filter { validCharsPass.contains($0) }
@@ -193,6 +194,7 @@ struct RegistrationView: View {
                   .foregroundColor(.red)
                   .opacity(viewModel.correctPassword == .validated ? 0.0 : 1.0)
         }
+        .frame(width: wRatio(270))
     }
     
     var privacyPolicy: some View{
@@ -216,7 +218,7 @@ struct RegistrationView: View {
             Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
                 .font(.custom("Lato-Regular", size: 13))
         }
-        .frame(width: wRatio(250))
+        .frame(width: wRatio(270))
         
         
         
@@ -227,31 +229,15 @@ struct RegistrationView: View {
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         RegistrationView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
+        
+        RegistrationView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
     }
 }
 
 
-struct SocialButton: View{
-    let image: String
-    let widthImg: CGFloat
-    let heightImg: CGFloat
-    let closure: () -> ()
-    
-    var body: some View{
-        Button {
-            closure()
-        } label: {
-            HStack {
-                ZStack{
-                    Circle().fill(Color.white).frame(width: 50, height: 50).shadow(radius: 10)
-                    Image(image)
-                        .resizable()
-                        .frame(width: widthImg, height: heightImg)
-                    
-                }
-                Text("Sign in with Google")
-            }
-        }
-    }
-}
+
 
