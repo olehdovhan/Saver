@@ -121,7 +121,7 @@ struct MainScreen: View {
 
                 Spacer() .frame(height: 15)
                 
-                StatisticsPlace().zIndex(3)
+//                StatisticsPlace().zIndex(3)
                 //                    .background(.red)
                 
                 

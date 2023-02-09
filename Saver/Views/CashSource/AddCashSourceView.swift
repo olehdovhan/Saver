@@ -28,134 +28,207 @@ struct AddCashSourceView: View {
     
     var body: some View {
         ZStack {
+            
+            
+            
             Color(hex: "C4C4C4").opacity(0.7)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
             
             Color.white
-                .frame(width: 300,
-                       height: 360,
+                .frame(width: wRatio(320),
+                       height: wRatio(320),
                        alignment: .top)
                 .cornerRadius(25)
                 .shadow(radius: 25)
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
             
-            VStack {
-                HStack {
-                    Text("Add new money source")
-                        .foregroundColor(.black)
-                        .frame(alignment: .leading)
-                        .padding(.leading, 34)
-                    Spacer()
-                    Button {
+            VStack(spacing: 0) {
+                
+                ZStack{
+                    HStack {
+                        VStack{
+                            Text("Add new money source")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("Lato-Bold", size: wRatio(18)))
+                                .lineLimit(2)
+                                .frame(width: wRatio(270))
+                                .multilineTextAlignment(.center)
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack(){
+                        Spacer()
+                        Button {
+                            closeSelf = false
+                        }
+                    label: {
+                        Image("btnClose")
+                            .resizable()
+                            .frame(width: wRatio(30), height: wRatio(30))
+                            .myShadow(radiusShadow: 5)
+                    }
+                    .padding(.trailing, wRatio(10))
+                    }
+                    
+                }
+                .frame(width: wRatio(320), alignment: .top)
+                .padding(.bottom, wRatio(20))
+                
+                VStack(spacing: wRatio(10)){
+                    
+                    ZStack{
+                        HStack{
+                            Text("Resource icon:")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                        }
+                        .padding(.leading,  wRatio(10))
+                        
+                        HStack{
+                            Spacer()
+                            
+                            Button {
+                                showIconsCashSource = true
+                            } label: {
+                                if selectedCashIconName == "" {
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.myGreen, lineWidth: 1)
+                                        .frame(width: wRatio(50), height: wRatio(50))
+                                        .overlay(
+                                            Text("?")
+                                                .foregroundColor(.gray)
+                                                .font(.custom("Lato-Regular", size: 20))
+                                            
+                                        )
+                                } else {
+                                    
+                                    switch selectedCashIconName {
+                                    case "iconBankCard", "iconWallet":
+                                        Image(selectedCashIconName)
+                                            .resizable()
+                                            .frame(width: wRatio(50), height: wRatio(50))
+                                            .myShadow(radiusShadow: 5)
+                                    default:
+                                        ZStack{
+                                            Color.myGreen
+                                                .frame(width: wRatio(50), height: wRatio(50))
+                                            
+                                            Image(systemName: selectedCashIconName)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: wRatio(30), height: wRatio(30))
+                                                .foregroundColor(.white)
+                                        }
+                                        .cornerRadius(15)
+                                        .myShadow(radiusShadow: 5)
+                                    }
+                                }
+                            }
+                            .padding(.trailing, wRatio(25))
+                            .offset(x: wRatio(-35))
+                            
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Name:")
+                            .foregroundColor(.myGrayDark)
+                            .font(.custom("NotoSansDisplay-Medium", size: 14))
+                        Spacer()
+                        
+                        
+                        TextField("",text: $cashSourceName)
+                            .placeholder(when: cashSourceName.isEmpty) {
+                                Text("enter name").foregroundColor(.gray)
+                            }
+                            .foregroundColor(.black)
+                            .frame(width: wRatio(120), height: wRatio(50),  alignment: .trailing)
+                            .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke( Color.myGreen, lineWidth: 1)
+                                .padding(.leading, wRatio(-10))
+                                .padding(.trailing, wRatio(-10))
+                            )
+                    }
+                    .padding(.leading,  wRatio(10))
+                    .padding(.trailing, wRatio(25))
+                    
+                    HStack {
+                        Text("Money amount:")
+                            .foregroundColor(.myGrayDark)
+                            .font(.custom("NotoSansDisplay-Medium", size: 14))
+                        Spacer()
+                        TextField("", text: $currentMoneyAmount)
+                            .placeholder(when: currentMoneyAmount.isEmpty) {
+                                Text("sum to spend per month").foregroundColor(.gray)
+                            }
+                            .foregroundColor(.black)
+                            .frame(width: wRatio(120), height: wRatio(50),  alignment: .trailing)
+                            .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke( Color.myGreen, lineWidth: 1)
+                                .padding(.leading, wRatio(-10))
+                                .padding(.trailing, wRatio(-10))
+                            )
+                            .keyboardType(.numberPad)
+                            .lineLimit(nil)
+                            .onReceive(Just(currentMoneyAmount)) { newValue in
+                                let filtered = newValue.filter { "0123456789 ".contains($0) }
+                                if filtered != newValue {
+                                    self.currentMoneyAmount = filtered
+                                }
+                            }
+                    }
+                    .padding(.leading,  wRatio(10))
+                    .padding(.trailing, wRatio(25))
+                    
+                }
+                Spacer()
+                    
+                Button{
+                    if !fieldsEmpty{
+                        let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
+                        if var copyUser = FirebaseUserManager.shared.userModel {
+                            copyUser.cashSources.append(newCashSource)
+                            FirebaseUserManager.shared.userModel? = copyUser
+                            print("AAAA\(newCashSource)")
+                        }
                         closeSelf = false
                     }
-                label: {
-                    Image("btnClose")
-                }
-                .frame( alignment: .trailing)
-                .padding(.trailing, 16)
-                }
-                .frame(width: 300, alignment: .top)
-                .padding(.top, 24)
-                
-                HStack {
-                    Text("Name")
-                        .foregroundColor(.black)
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    
-                    TextField("",text: $cashSourceName)
-                        .placeholder(when: cashSourceName.isEmpty) {
-                                Text("enter name").foregroundColor(.gray)
-                        }
-                        .foregroundColor(.black)
-                        .frame(height: 50, alignment: .trailing)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                            .padding(.leading, -10)
-                            .padding(.trailing, -10) )
-                }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
-                
-                HStack {
-                    Text("Money amount")
-                        .foregroundColor(.black)
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    TextField("", text: $currentMoneyAmount)
-                        .placeholder(when: currentMoneyAmount.isEmpty) {
-                                Text("sum to spend per month").foregroundColor(.gray)
-                        }
-                        .foregroundColor(.black)
-                        .frame(height: 50, alignment: .trailing)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                            .padding(.leading, -10)
-                            .padding(.trailing, -10)
-                        )
-                        .keyboardType(.numberPad)
-                        .lineLimit(nil)
-                        .onReceive(Just(currentMoneyAmount)) { newValue in
-                            let filtered = newValue.filter { "0123456789 ".contains($0) }
-                            if filtered != newValue {
-                                self.currentMoneyAmount = filtered
-                            }
-                        }
-                }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
-                
-                // Icon - with
-                Button {
-                    showIconsCashSource = true
                 } label: {
-                    if selectedCashIconName == "" {
-                        CircleTextView(text: "ICON")
-                            .foregroundColor(.myGreen)
-                            .myShadow(radiusShadow: 5)
-                    } else {
-                        
-                        switch selectedCashIconName {
-                        case "iconBankCard", "iconWallet":
-                            Image(selectedCashIconName)
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .myShadow(radiusShadow: 5)
-                        default:
-                            ZStack{
-                                Color.myGreen
-                                    .frame(width: 50, height: 50)
-                                
-                                Image(systemName: selectedCashIconName)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.white)
-                            }
-                            .cornerRadius(15)
-                            .myShadow(radiusShadow: 5)
-                        }
-                    }
+                    Image(fieldsEmpty ? "btnDoneInactive" : "btnDone")
+                        .resizable()
+                        .frame(width: wRatio(50), height: wRatio(50))
+                        .myShadow(radiusShadow: 5)
                 }
+                
+                
+                
                 
                 Spacer()
-                ImageButton(image: "btnDoneInactive",
-                            pressedImage: "btnDone",
-                            disabled: fieldsEmpty) {
-                    let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
-                    if var copyUser = FirebaseUserManager.shared.userModel {
-                        copyUser.cashSources.append(newCashSource)
-                        FirebaseUserManager.shared.userModel? = copyUser
-                        print("AAAA\(newCashSource)")
-                    }
-                    closeSelf = false
-                }
+//                ImageButton(image: "btnDoneInactive",
+//                            pressedImage: "btnDone",
+//                            disabled: fieldsEmpty) {
+//                    let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
+//                    if var copyUser = FirebaseUserManager.shared.userModel {
+//                        copyUser.cashSources.append(newCashSource)
+//                        FirebaseUserManager.shared.userModel? = copyUser
+//                        print("AAAA\(newCashSource)")
+//                    }
+//                    closeSelf = false
+//                }
                 Spacer()
             }
-            .frame(width: 300,
-                   height: 360)
+            .padding(.top, wRatio(10))
+            .frame(width: wRatio(320),
+                   height: wRatio(320))
             .blur(radius: showIconsCashSource ? 5 : 0)
             
             if showIconsCashSource {
@@ -165,5 +238,17 @@ struct AddCashSourceView: View {
             }
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+    }
+}
+
+struct Previews_AddCashSourceView: PreviewProvider {
+    static var previews: some View {
+        MainScreen(isShowTabBar: .constant(false), addCashSourceViewShow: true)
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
+        
+        MainScreen(isShowTabBar: .constant(false), addCashSourceViewShow: true)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
     }
 }

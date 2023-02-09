@@ -35,7 +35,7 @@ class PieceOfPieContainer: ObservableObject {
         guard let allPurchaseCategoriesSet = getAllExpenses() else { return }
         let allPurchaseCategories = Array(allPurchaseCategoriesSet)
         let expensesDict = createExpenseDict(from: allPurchaseCategories)
-        print("III\(allPurchaseCategories.count)")
+//        print("III\(allPurchaseCategories.count)")
         
         for (index, category) in allPurchaseCategories.enumerated() {
             let piece = PieceOfPie(color: chartLimitedColors[index],
