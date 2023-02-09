@@ -19,80 +19,79 @@ struct PurchaseCategoryDetailView: View {
                 .ignoresSafeArea()
             
             Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/1.5)
+                .frame(width: wRatio(320),
+                       height: wRatio(320),
+                       alignment: .top)
                 .cornerRadius(25)
-                .myShadow(radiusShadow: 5)
+                .shadow(radius: 25)
             
-        VStack(spacing: 20) {
+        VStack(spacing: 0) {
             
-            HStack(alignment: .top, spacing: 10){
-                
-                VStack(){
-                    Text(category.name)
-                        .lineLimit(1)
-                        .textCase(.uppercase)
-                        .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
-                        .frame(width: UIScreen.main.bounds.width/2.2)
-                    
+            HStack(spacing: 0){
+                ZStack{
                     ZStack{
+                        Color.white
+                            .frame(width: 30, height: 30)
                         
-                        
-                        ZStack{
-                            Color.white
-                                .frame(width: 50, height: 50)
-                            
-                            Image(systemName: "\(category.iconName)")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.gray)
-                        }
-                        .cornerRadius(15)
-                        .myShadow(radiusShadow: 5)
-                        
-                        Image(category.iconName)
+                        Image(systemName: "\(category.iconName)")
                             .resizable()
-                            .frame(width: 50, height: 50)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
                     }
+                    .cornerRadius(10)
                     
+                    Image(category.iconName)
+                        .resizable()
+                        .frame(width: 30, height: 30)
                 }
+                .myShadow(radiusShadow: 5)
+                .padding(.trailing, wRatio(10))
+                
+                Text(category.name)
+                    .foregroundColor(.myGrayDark)
+                    .font(.custom("Lato-Bold", size: wRatio(18)))
+                    .lineLimit(1)
+                
                 Spacer()
                 
-                HStack(alignment: .center, spacing: 10){
-                    Button(role: .destructive) {
-                        deletePurchaseCategory()
-                    } label: {
-                        ZStack{
-                            Circle().fill(.red).frame(width: 35)
-                            Image(systemName: "trash")
-                                .resizable()
-                                .frame(width: 15, height: 20)
-                                .foregroundColor(.white)
-                        }
-                    }
-
-                    Button {
-                        closeSelf = false
-                    } label: {
-                        Image("btnClose")
+                Button(role: .destructive) {
+                    deletePurchaseCategory()
+                } label: {
+                    ZStack{
+                        Circle()
+                            .fill(.red)
+                            .frame(width: wRatio(22))
+                            
+                        
+                        Image(systemName: "trash")
                             .resizable()
-                            .frame(width: 45, height: 45)
+                            .frame(width: wRatio(10), height: wRatio(15))
+                            .foregroundColor(.white)
                     }
+                    .myShadow(radiusShadow: 5)
+                    
                 }
-                .padding(.trailing, 20)
+                .padding(.trailing, 10)
                 
+                Button {
+                    closeSelf = false
+                } label: {
+                    Image("btnClose")
+                        .resizable()
+                        .frame(width: wRatio(30), height: wRatio(30))
+                        .myShadow(radiusShadow: 5)
+                }
             }
-            .padding(.top, 20)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.trailing, wRatio(10))
+            .padding(.leading, wRatio(30))
             
+            Spacer()
             
             VStack(spacing: 10){
                 Text("Budget month plan:")
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Bold", size: 16))
+                    .font(.custom("Lato-Bold", size: 14))
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .textCase(.uppercase)
@@ -101,29 +100,31 @@ struct PurchaseCategoryDetailView: View {
                   case nil:
                     Text("You have not added spend plan for month yet")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 16))
+                        .font(.custom("Lato-Regular", size: 14))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
-                        .padding(.horizontal, 20)
                 default:
                     Text(String(category.planSpentPerMonth!))
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 16))
+                        .font(.custom("Lato-Regular", size: 14))
                         .multilineTextAlignment(.leading)
                         .lineLimit(2)
                   }
             }
-            .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+            
+//            .padding(.)
+            .frame(width: wRatio(250), height: wRatio(80))
             .background(
                 RoundedRectangle(cornerRadius: 15).fill(.white)
                     .myShadow(radiusShadow: 5)
             )
             
+            Spacer()
             
             VStack(spacing: 10){
                 Text("Spending this Month:")
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Bold", size: 16))
+                    .font(.custom("Lato-Bold", size: 14))
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .textCase(.uppercase)
@@ -132,24 +133,23 @@ struct PurchaseCategoryDetailView: View {
                 
                 Text("0.0$")
                     .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Regular", size: 16))
+                    .font(.custom("Lato-Regular", size: 14))
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                 
                 // TODO: fill from UD fact expenses
             }
-            .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+            .frame(width: wRatio(250), height: wRatio(80))
             .background(
                 RoundedRectangle(cornerRadius: 15).fill(.white)
                     .myShadow(radiusShadow: 5)
             )
             
-      
-            
             Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width/1.2,
-               height: UIScreen.main.bounds.height/1.5)
+        .padding(.top, wRatio(10))
+        .frame(width: wRatio(320),
+               height: wRatio(320))
       }
    }
     
@@ -172,3 +172,14 @@ struct PurchaseCategoryDetailView: View {
 }
 
 
+struct Previews_PurchaseCategoryDetailView: PreviewProvider {
+    static var previews: some View {
+        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
+        
+//        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true)
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+//            .previewDisplayName("iPhone 14 Pro")
+    }
+}

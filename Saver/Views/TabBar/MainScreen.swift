@@ -193,6 +193,12 @@ struct MainScreen: View {
         .onChange(of: addPurchaseCategoryViewShow, perform: { newValue in
             isShowTabBar = !addPurchaseCategoryViewShow
         })
+        .onChange(of: purchaseDetailViewShow, perform: { newValue in
+            isShowTabBar = !purchaseDetailViewShow
+        })
+        .onChange(of: incomeViewShow, perform: { newValue in
+            isShowTabBar = !incomeViewShow
+        })
         .onChange(of: expenseViewShow, perform: { newValue in
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources

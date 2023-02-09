@@ -49,14 +49,13 @@ struct AddPurchaseCategoryView: View {
                 
                 ZStack{
                     HStack {
-                        VStack{
                             Text("Add new purchase category")
                                 .foregroundColor(.myGrayDark)
                                 .font(.custom("Lato-Bold", size: wRatio(18)))
                                 .lineLimit(2)
                                 .frame(width: wRatio(270))
                                 .multilineTextAlignment(.center)
-                        }
+                        
                         Spacer()
                     }
                     
