@@ -142,7 +142,6 @@ struct AdaptivePagingScrollView: View {
                 print("III  contentWidth \(contentWidth) coef \(contentWidth/UIScreen.main.bounds.width)")
                 print("III  itemPadding \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
                 print("III  leadingOffset \(leadingOffset) coef \(leadingOffset/UIScreen.main.bounds.width)")
-                  
                 print("III  currentScrollOffset \(currentScrollOffset) coef \(currentScrollOffset/UIScreen.main.bounds.width)")
                 print("III  gestureDragOffset \(gestureDragOffset) coef \(gestureDragOffset/UIScreen.main.bounds.width)")
             }

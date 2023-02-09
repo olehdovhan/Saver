@@ -202,4 +202,11 @@ extension View {
         return ratio
     }
     
+    func hRatio(_ cH: CGFloat) -> CGFloat {
+        let hScreen = 844.0
+        let value = hScreen / cH
+        let ratio = screenH / value
+        return ratio
+    }
+    
 }

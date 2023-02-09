@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct MainScreen: View {
+    @Binding var isShowTabBar: Bool
     
     @State var showQuitAlert = false
     @State var expenseViewShow = false
@@ -186,6 +187,12 @@ struct MainScreen: View {
                 LimitCashSourcesView(closeSelf: $limitCashSourcesViewShow)
             }
         }
+        .onChange(of: addCashSourceViewShow, perform: { newValue in
+            isShowTabBar = !addCashSourceViewShow
+        })
+        .onChange(of: addPurchaseCategoryViewShow, perform: { newValue in
+            isShowTabBar = !addPurchaseCategoryViewShow
+        })
         .onChange(of: expenseViewShow, perform: { newValue in
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources

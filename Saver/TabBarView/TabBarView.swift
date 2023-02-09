@@ -10,10 +10,11 @@ import SwiftUI
 struct TabBarView: View {
     
     @State var selectedTab = 0
+    @State var isShowTabBar = true
 
     var body: some View {
-        CustomTabView(selection: $selectedTab) {
-            MainScreen()
+        CustomTabView(selection: $selectedTab, isShow: $isShowTabBar) {
+            MainScreen(isShowTabBar: $isShowTabBar)
                 .myTabItem {
                     TabItem(text: "", icon: "tabIcon0")
                 }
@@ -43,6 +44,7 @@ struct TabBarView: View {
 //                }
 //                .opacity(selectedTab == 4 ? 1 : 0)
         }
+        .ignoresSafeArea(.all, edges: .bottom)
         .onAppear {
             UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")
             
