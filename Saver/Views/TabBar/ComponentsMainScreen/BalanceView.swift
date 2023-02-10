@@ -17,7 +17,6 @@ struct BalanceView: View {
             LinearGradient(colors: [.myGreen, .myBlue],
                            startPoint: .top,
                            endPoint: .bottom )
-            
             .frame(width: UIScreen.main.bounds.width, height: hRatio(130), alignment: .top)
             .cornerRadius(30, corners: [.bottomLeft, .bottomRight])
             

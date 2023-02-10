@@ -104,6 +104,7 @@
 		FC89D6AE29955CED004FB4A1 /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */; };
 		FC89D6AF29955CED004FB4A1 /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */; };
 		FC89D6B029955CED004FB4A1 /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */; };
+		FC89D6B22996B416004FB4A1 /* Templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6B12996B416004FB4A1 /* Templates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +198,7 @@
 		FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
 		FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
+		FC89D6B12996B416004FB4A1 /* Templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Templates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,6 +509,7 @@
 				FA7B94B928C61A3600772845 /* ExpenseView */,
 				B41618B228B135CE002629F7 /* TabBar */,
 				B458555828B1AB7F0047C81E /* CustomView */,
+				FC89D6B12996B416004FB4A1 /* Templates.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */,
 				0C0220302973484600F5D030 /* AuthButton.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
+				FC89D6B22996B416004FB4A1 /* Templates.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
 				66C1B53B2975BFE0008E1BAE /* Onboarding.swift in Sources */,
 				66AA4073295125CE002A2359 /* SpendingsCalendarView.swift in Sources */,

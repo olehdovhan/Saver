@@ -21,7 +21,7 @@ struct CashSourceView: View {
     
     
     var body: some View {
-        ZStack{
+       
             
             Button {
                 incomeViewShow = true
@@ -35,29 +35,71 @@ struct CashSourceView: View {
                         .frame(width: 75)
                         .frame(height: 30)
                         .lineLimit(2)
-//                        .background(Capsule().fill(.white))
                     
                     switch cashSourceItem.iconName {
                     case "iconBankCard", "iconWallet":
-                        Image(cashSourceItem.iconName)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .aspectRatio(contentMode: .fill)
-                            .myShadow(radiusShadow: 5)
-                    default:
                         ZStack{
-                            Color.myGreen
-                                .frame(width: 50, height: 50)
-                            
-                            Image(systemName: cashSourceItem.iconName)
+                            Image(cashSourceItem.iconName)
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.white)
+                                .frame(width: 50, height: 50)
+                                .aspectRatio(contentMode: .fill)
+                                .myShadow(radiusShadow: 5)
+                            
+                            Image(cashSourceItem.iconName)
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .aspectRatio(contentMode: .fill)
+                                .delaysTouches(for: 0.2) {  }
+                                .draggable(zIndex: $firstZ,
+                                           isAlertShow: $expenseViewShow,
+                                           purchaseType: $purchaseType,
+                                           cashType: cashSourceItem.name,
+                                           cashSource: $cashSource,
+                                           draggingItem: $draggingItem)
                             
                         }
-                        .cornerRadius(15)
-                        .myShadow(radiusShadow: 5)
+                        
+                            
+                    default:
+                        ZStack{
+                            ZStack{
+                                Color.myGreen
+                                    .frame(width: 50, height: 50)
+                                
+                                Image(systemName: cashSourceItem.iconName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                
+                            }
+                            .cornerRadius(15)
+                            .myShadow(radiusShadow: 5)
+                            
+                            ZStack{
+                                Color.myGreen
+                                    .frame(width: 50, height: 50)
+                                
+                                Image(systemName: cashSourceItem.iconName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                
+                            }
+                            .cornerRadius(15)
+                            .zIndex(100)
+                            .delaysTouches(for: 0.2) {  }
+                            .draggable(zIndex: $firstZ,
+                                       isAlertShow: $expenseViewShow,
+                                       purchaseType: $purchaseType,
+                                       cashType: cashSourceItem.name,
+                                       cashSource: $cashSource,
+                                       draggingItem: $draggingItem)
+                            
+                        }
+                        
+                        
                         
                     }
                     Text(String(cashSourceItem.amount))
@@ -66,24 +108,25 @@ struct CashSourceView: View {
                                             .frame(width: 75)
                                             .frame(height: 10)
                                             .lineLimit(1)
+                                            .zIndex(-5)
                 }
                 .zIndex(Double(cashSourcesCount - index))
             }
             .frame(width: 75)
             
-        }
         
-        .background(Circle().fill(RadialGradient(colors: [.white, .clear],
-                                                 center: .center,
-                                                 startRadius: 20,
-                                                 endRadius: 30)).scaleEffect(2))
-        .delaysTouches(for: 0.2) {  }
-        .draggable(zIndex: $firstZ,
-                   isAlertShow: $expenseViewShow,
-                   purchaseType: $purchaseType,
-                   cashType: cashSourceItem.name,
-                   cashSource: $cashSource,
-                   draggingItem: $draggingItem)
+        
+//        .background(Circle().fill(RadialGradient(colors: [.white, .clear],
+//                                                 center: .center,
+//                                                 startRadius: 20,
+//                                                 endRadius: 30)).scaleEffect(2))
+//        .delaysTouches(for: 0.2) {  }
+//        .draggable(zIndex: $firstZ,
+//                   isAlertShow: $expenseViewShow,
+//                   purchaseType: $purchaseType,
+//                   cashType: cashSourceItem.name,
+//                   cashSource: $cashSource,
+//                   draggingItem: $draggingItem)
         
     }
 }

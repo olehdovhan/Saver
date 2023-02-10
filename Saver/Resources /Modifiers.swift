@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+
 
 struct ShadowCustom : ViewModifier{
     var radiusShadow: Int
@@ -16,8 +18,28 @@ struct ShadowCustom : ViewModifier{
 }
 
 
+struct LiftingViewAtKeyboardOpen: ViewModifier{
+    @State private var keyboardHeight: CGFloat = 0
+    func body(content: Content) -> some View {
+        content
+            .onReceive(Publishers.keyboardHeight) { value in
+                withAnimation() {
+                    self.keyboardHeight = value
+                }
+            }
+            .offset(y: keyboardHeight == 0 ? 0 : -keyboardHeight * 0.30)
+    }
+}
 
 extension View {
+    
+    func liftingViewAtKeyboardOpen() -> some View{
+        modifier(LiftingViewAtKeyboardOpen())
+    }
+    
+    func myShadow(radiusShadow: Int) -> some View {
+        modifier(ShadowCustom(radiusShadow: radiusShadow))
+    }
     
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -30,9 +52,7 @@ extension View {
         }
     }
     
-    func myShadow(radiusShadow: Int) -> some View {
-        modifier(ShadowCustom(radiusShadow: radiusShadow))
-    }
+    
     
     func draggable(zIndex: Binding<Double>,
                    isAlertShow: Binding<Bool>,

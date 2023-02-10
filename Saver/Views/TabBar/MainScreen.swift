@@ -46,16 +46,15 @@ struct MainScreen: View {
             GeometryReader { reader in
                 Color.myGreen
                     .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                    .ignoresSafeArea(edges: .top)
+                    .ignoresSafeArea(.all, edges: .top)
+                    .blur(radius: purchaseDetailViewShow ? 5 : 0 )
             }
             
             VStack(alignment: .center, spacing: 0) {
                 
                 BalanceView(showQuitAlert: $showQuitAlert).zIndex(4)
                 Spacer() .frame(height: 15)
-                    .onAppear(){
-                        print(UIScreen.main.bounds.width)
-                    }
+                    
                 
                 GeometryReader { geometry in
                     AdaptivePagingScrollView(addCashSourceViewShow: $addCashSourceViewShow,
@@ -152,15 +151,13 @@ struct MainScreen: View {
                                purchaseCategoryName: $expenseType,
                                editing: $editing,
                                cashSources: cashSources)
-                   .zIndex(10)
                }
             
             if incomeViewShow {
                 IncomeView(closeSelf: $incomeViewShow,
-                           cashSource: cashSource,
+                           cashSource: $cashSource,
                            editing: $editing,
                            cashSources: $cashSources)
-                .zIndex(10)
             }
             
             if addCashSourceViewShow {
@@ -183,26 +180,27 @@ struct MainScreen: View {
             }
         }
         
-        .onChange(of: addCashSourceViewShow, perform: { newValue in
+        .onChange(of: addCashSourceViewShow) { _ in
             isShowTabBar = !addCashSourceViewShow
-        })
-        .onChange(of: addPurchaseCategoryViewShow, perform: { newValue in
+        }
+        .onChange(of: addPurchaseCategoryViewShow) { _ in
             isShowTabBar = !addPurchaseCategoryViewShow
-        })
-        .onChange(of: purchaseDetailViewShow, perform: { newValue in
+        }
+        .onChange(of: purchaseDetailViewShow) { _ in
             isShowTabBar = !purchaseDetailViewShow
-        })
-        .onChange(of: incomeViewShow, perform: { newValue in
+        }
+        .onChange(of: incomeViewShow) { _ in
             isShowTabBar = !incomeViewShow
-        })
-        .onChange(of: expenseViewShow, perform: { newValue in
+        }
+        .onChange(of: expenseViewShow) { _ in
+            isShowTabBar = !expenseViewShow
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources
                 if sources.count != 0 {
                     cashSource = sources[0].name ?? ""
                 }
             }
-        })
+        }
         .onAppear() {
             
             
@@ -247,13 +245,13 @@ struct MainScreen: View {
                 viewModel.signOut()
             }
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") {
-                    editing = false
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItemGroup(placement: .keyboard) {
+//                Spacer()
+//                Button("Done") {
+//                    editing = false
+//                }
+//            }
+//        }
     }
 }

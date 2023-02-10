@@ -15,38 +15,14 @@ struct PurchaseCategoryDetailView: View {
     var body: some View {
         
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
-                .ignoresSafeArea()
+            SublayerView()
             
-            Color.white
-                .frame(width: wRatio(320),
-                       height: wRatio(320),
-                       alignment: .top)
-                .cornerRadius(25)
-                .shadow(radius: 25)
+            WhiteCanvasView(width: wRatio(320), height: wRatio(320))
             
         VStack(spacing: 0) {
             
-            HStack(spacing: 0){
-                ZStack{
-                    ZStack{
-                        Color.white
-                            .frame(width: 30, height: 30)
-                        
-                        Image(systemName: "\(category.iconName)")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.gray)
-                    }
-                    .cornerRadius(10)
-                    
-                    Image(category.iconName)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                }
-                .myShadow(radiusShadow: 5)
-                .padding(.trailing, wRatio(10))
+            HStack{
+                ImageCategoryView
                 
                 Text(category.name)
                     .foregroundColor(.myGrayDark)
@@ -55,33 +31,11 @@ struct PurchaseCategoryDetailView: View {
                 
                 Spacer()
                 
-                Button(role: .destructive) {
+                DeleteSelfButtonView {
                     deletePurchaseCategory()
-                } label: {
-                    ZStack{
-                        Circle()
-                            .fill(.red)
-                            .frame(width: wRatio(22))
-                            
-                        
-                        Image(systemName: "trash")
-                            .resizable()
-                            .frame(width: wRatio(10), height: wRatio(15))
-                            .foregroundColor(.white)
-                    }
-                    .myShadow(radiusShadow: 5)
-                    
                 }
-                .padding(.trailing, 10)
                 
-                Button {
-                    closeSelf = false
-                } label: {
-                    Image("btnClose")
-                        .resizable()
-                        .frame(width: wRatio(30), height: wRatio(30))
-                        .myShadow(radiusShadow: 2)
-                }
+                CloseSelfButtonView($closeSelf)
             }
             .fixedSize(horizontal: false, vertical: true)
             .padding(.trailing, wRatio(10))
@@ -153,6 +107,26 @@ struct PurchaseCategoryDetailView: View {
       }
    }
     
+    var ImageCategoryView: some View{
+        ZStack{
+            Color.white
+                .frame(width: 30, height: 30)
+                .cornerRadius(10)
+                .myShadow(radiusShadow: 5)
+            
+            Image(systemName: "\(category.iconName)")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+                .foregroundColor(.gray)
+                .cornerRadius(10)
+            
+            Image(category.iconName)
+                .resizable()
+                .frame(width: 30, height: 30)
+        }
+    }
+    
     func deletePurchaseCategory() {
         if var user = FirebaseUserManager.shared.userModel {
             var purchCats = user.purchaseCategories
@@ -178,7 +152,7 @@ struct Previews_PurchaseCategoryDetailView: PreviewProvider {
             .previewDevice(PreviewDevice(rawValue: "iPhone 7 Plus"))
             .previewDisplayName("iPhone 7 Plus")
         
-        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true)
+        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
             .previewDisplayName("iPhone 14 Pro")
     }
