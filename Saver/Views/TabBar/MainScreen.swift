@@ -46,13 +46,8 @@ struct MainScreen: View {
             GeometryReader { reader in
                 Color.myGreen
                     .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(edges: .top)
             }
-            VStack {
-                Color.myGreen.frame(height: 30)
-                Color.white
-            }
-            .zIndex(-3)
             
             VStack(alignment: .center, spacing: 0) {
                 
@@ -187,6 +182,7 @@ struct MainScreen: View {
                 LimitCashSourcesView(closeSelf: $limitCashSourcesViewShow)
             }
         }
+        
         .onChange(of: addCashSourceViewShow, perform: { newValue in
             isShowTabBar = !addCashSourceViewShow
         })

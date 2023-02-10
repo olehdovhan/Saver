@@ -19,7 +19,7 @@ struct BalanceView: View {
                            endPoint: .bottom )
             
             .frame(width: UIScreen.main.bounds.width, height: hRatio(130), alignment: .top)
-            .cornerRadius(30)
+            .cornerRadius(30, corners: [.bottomLeft, .bottomRight])
             
             VStack(){
                 Spacer().frame(height: 20)

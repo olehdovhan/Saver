@@ -367,7 +367,7 @@ struct SavingsGoalsDebtsView: View {
                 }
             }
         }
-//        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.top)
         .onAppear {
             if let currentUser = FirebaseUserManager.shared.userModel {
 //                user = currentUser

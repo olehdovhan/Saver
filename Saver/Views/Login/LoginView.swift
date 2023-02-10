@@ -25,11 +25,11 @@ struct LoginView: View {
                 GeometryReader { reader in
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                        .ignoresSafeArea()
+                        .ignoresSafeArea( edges: .top)
                 }
                 
                 Rectangle()
-                    .fill(Color.white)
+                    .fill(Color.yellow)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

@@ -80,9 +80,10 @@ struct PurchaseCategoryDetailView: View {
                     Image("btnClose")
                         .resizable()
                         .frame(width: wRatio(30), height: wRatio(30))
-                        .myShadow(radiusShadow: 5)
+                        .myShadow(radiusShadow: 2)
                 }
             }
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.trailing, wRatio(10))
             .padding(.leading, wRatio(30))
             
@@ -112,7 +113,6 @@ struct PurchaseCategoryDetailView: View {
                   }
             }
             
-//            .padding(.)
             .frame(width: wRatio(250), height: wRatio(80))
             .background(
                 RoundedRectangle(cornerRadius: 15).fill(.white)
@@ -175,11 +175,11 @@ struct PurchaseCategoryDetailView: View {
 struct Previews_PurchaseCategoryDetailView: PreviewProvider {
     static var previews: some View {
         MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
-            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-            .previewDisplayName("iPhone SE")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 7 Plus"))
+            .previewDisplayName("iPhone 7 Plus")
         
-//        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true)
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-//            .previewDisplayName("iPhone 14 Pro")
+        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
     }
 }

@@ -33,7 +33,7 @@ struct SaverApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            ZStack{
                 switch userState {
                 case .registeredAuthorized:
                     TabBarView()
@@ -43,15 +43,15 @@ struct SaverApp: App {
                     RegistrationView()
                 }
             }
-            .onAppear() {
-                Auth.auth().addStateDidChangeListener { (auth, user) in
-                    if user != nil {
-                        userState = .registeredAuthorized
-                    } else {
-                        userState = .registeredUnauthorized
+                .onAppear() {
+                    Auth.auth().addStateDidChangeListener { (auth, user) in
+                        if user != nil {
+                            userState = .registeredAuthorized
+                        } else {
+                            userState = .registeredUnauthorized
+                        }
                     }
                 }
-            }
         }
     }
 }
@@ -60,4 +60,12 @@ enum UserState {
     case registeredAuthorized, registeredUnauthorized, unRegistered
 }
 
-  
+//  
+//struct StartView: View {
+//    @Binding var userState: UserState
+//    
+//    var body: some View{
+//        
+//        
+//    }
+//}
