@@ -38,9 +38,7 @@ struct AddCashSourceView: View {
                     
                     HStack{
                         Text("Add new money source")
-                            .foregroundColor(.myGrayDark)
-                            .font(.custom("Lato-Bold", size: wRatio(18)))
-                            .lineLimit(1)
+                            .textHeaderStyle()
                         
                         Spacer()
                         

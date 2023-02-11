@@ -20,15 +20,25 @@ struct SublayerView: View{
 struct WhiteCanvasView: View{
     var width: CGFloat
     var height: CGFloat
+    
+    let gradient = LinearGradient(colors: [.myGreen, .myBlue],
+                                  startPoint: .topLeading,
+                                  endPoint: .bottomTrailing)
     var body: some View{
-        Color.white
+        ZStack{
+            Color.white
+                .frame(width: width,
+                       height: height)
+            VStack{
+                Rectangle().fill(gradient)
+                    .frame(width: width, height: wRatio(60))
+                Spacer()
+            }
             .frame(width: width,
                    height: height)
-            .cornerRadius(25)
-            .shadow(radius: 25)
-//            .onTapGesture {
-//                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//            }
+        }
+        .cornerRadius(25)
+        .shadow(radius: 25)
     }
 }
 

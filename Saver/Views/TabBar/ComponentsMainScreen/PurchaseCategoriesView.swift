@@ -14,6 +14,7 @@ struct PurchaseCategoriesView: View{
     
     @Binding var purchaseDetailViewShow :Bool
     @Binding var selectedCategory: PurchaseCategory?
+    @Binding var limitPurchaseCategoryViewShow: Bool
     
     let columns = [ GridItem(.flexible()),
                     GridItem(.flexible()),
@@ -22,8 +23,8 @@ struct PurchaseCategoriesView: View{
     
     var body: some View{
         
-        ZStack {
             ScrollView {
+                
                 Spacer()
                     .frame(height: 15)
                 LazyVGrid(columns: columns, alignment: .center, spacing: 15) {
@@ -51,6 +52,10 @@ struct PurchaseCategoriesView: View{
                                         .resizable()
                                         .frame(width: 50, height: 50)
                                         .myShadow(radiusShadow: 5)
+                                    
+                                    //
+                                    
+                                    
                                     
                                 default:
                                     ZStack{
@@ -87,7 +92,14 @@ struct PurchaseCategoriesView: View{
                         )
                     }
                     Button {
-                        addPurchaseCategoryShow = true
+                        
+//                        addPurchaseCategoryShow = true
+                        
+                        if purchaseCategories.count < 11 {
+                            addPurchaseCategoryShow = true
+                        } else {
+                            limitPurchaseCategoryViewShow = true
+                        }
                     } label: {
                         VStack(spacing: 0) {
                             Image("iconPlus")
@@ -99,10 +111,9 @@ struct PurchaseCategoriesView: View{
                         }
                     }
                 }
-//                Spacer()
-//                    .frame(height: 70)
             }
-            .padding(.bottom, 70)
-        }
+            
+            .padding(.bottom, wRatio(90))
+        
     }
 }

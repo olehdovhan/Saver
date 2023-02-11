@@ -45,10 +45,10 @@ struct TabBarView: View {
 //                .opacity(selectedTab == 4 ? 1 : 0)
         }
         .ignoresSafeArea(edges: .bottom)
-        .onAppear {
-            UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")
-            
-        }
+//        .onAppear {
+//            UIApplication.shared.statusBarUIView?.backgroundColor = UIColor(named: "myGreen")
+//            
+//        }
     }
 }
 

@@ -18,6 +18,7 @@ struct MainScreen: View {
     @State var addPurchaseCategoryViewShow = false
     @State var purchaseDetailViewShow = false
     @State var limitCashSourcesViewShow = false
+    @State var limitPurchaseCategoryViewShow = false
     @State var cashSource: String = ""
     @State var expenseType: String = ""
     @FocusState var editing: Bool
@@ -47,15 +48,15 @@ struct MainScreen: View {
                 Color.myGreen
                     .frame(height: reader.safeAreaInsets.top, alignment: .top)
                     .ignoresSafeArea(.all, edges: .top)
-                    .blur(radius: purchaseDetailViewShow ? 5 : 0 )
+
             }
             
             VStack(alignment: .center, spacing: 0) {
                 
-                BalanceView(showQuitAlert: $showQuitAlert).zIndex(4)
-                Spacer() .frame(height: 15)
+                BalanceView(showQuitAlert: $showQuitAlert)
+                    .zIndex(2)
+                    .padding(.bottom, 15)
                     
-                
                 GeometryReader { geometry in
                     AdaptivePagingScrollView(addCashSourceViewShow: $addCashSourceViewShow,
                                              incomeViewShow: $incomeViewShow,
@@ -70,6 +71,7 @@ struct MainScreen: View {
                                              itemPadding: self.itemPadding,
                                              pageWidth: geometry.size.width,
                                              limitCashSourcesViewShow: $limitCashSourcesViewShow) {
+                        
                         ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                             GeometryReader{ screen in
                                 CashSourceView(draggingItem: $draggingItem,
@@ -86,57 +88,38 @@ struct MainScreen: View {
                         }
                     }
                 }
-                .zIndex(draggingItem ? 10 : -2)
+//                .zIndex(draggingItem ? 10 : -2)
+                .zIndex(3)
                 .onChange(of: addCashSourceViewShow) { newValue in
                     if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources }
                 }
                 .frame(height: 100)
-                .overlay(
-                    HStack{
-                        Ellipse()
-                            .fill(
-                                .ellipticalGradient(colors: [.white, .clear])
-                            )
-                            .frame(width: itemPadding * 3)
-                            .frame(height: 140)
-                            .offset(x: -itemPadding)
-                        
-                        Spacer().zIndex(-10)
-                        
-                        Ellipse()
-                            .fill(
-                                .ellipticalGradient(colors: [.white, .clear])
-                            )
-                            .frame(width: itemPadding * 3)
-                            .frame(height: 140)
-                            .offset(x: itemPadding)
-                    }
-                )
 
                 Spacer() .frame(height: 15)
                 
 //                StatisticsPlace().zIndex(3)
                 //                    .background(.red)
                 
-                
-                
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,
                                endPoint: .trailing)
                 .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
-                .zIndex(2)
+                .zIndex(1)
                 
                 PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
                                        addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
                                        purchaseDetailViewShow: $purchaseDetailViewShow,
-                                       selectedCategory: $selectedCategory)
-                .zIndex(2)
+                                       selectedCategory: $selectedCategory,
+                                       limitPurchaseCategoryViewShow: $limitPurchaseCategoryViewShow)
+                .zIndex(1)
                 .onChange(of: addPurchaseCategoryViewShow) { newValue in
                     if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
                 }
                 
                 Spacer()
             }
+            .blur(radius: limitPurchaseCategoryViewShow ? 5 : 0 )
+            .blur(radius: limitCashSourcesViewShow ? 5 : 0 )
             .blur(radius: expenseViewShow ? 5 : 0 )
             .blur(radius: incomeViewShow ? 5 : 0 )
             .blur(radius: addCashSourceViewShow ? 5 : 0 )
@@ -178,8 +161,17 @@ struct MainScreen: View {
             if limitCashSourcesViewShow{
                 LimitCashSourcesView(closeSelf: $limitCashSourcesViewShow)
             }
+            
+            if limitPurchaseCategoryViewShow{
+                LimitPurchaseCategoryView(closeSelf: $limitPurchaseCategoryViewShow)
+            }
         }
-        
+        .onChange(of: limitPurchaseCategoryViewShow) { _ in
+            isShowTabBar = !limitPurchaseCategoryViewShow
+        }
+        .onChange(of: limitCashSourcesViewShow) { _ in
+            isShowTabBar = !limitCashSourcesViewShow
+        }
         .onChange(of: addCashSourceViewShow) { _ in
             isShowTabBar = !addCashSourceViewShow
         }

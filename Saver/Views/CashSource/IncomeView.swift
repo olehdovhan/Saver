@@ -32,14 +32,12 @@ struct IncomeView: View {
             SublayerView()
             
             Group{
-                WhiteCanvasView(width: wRatio(320), height: wRatio(320))
+                WhiteCanvasView(width: wRatio(320), height: wRatio(340))
                 
                 VStack(spacing: 0) {
                     HStack{
                         Text("Income")
-                            .foregroundColor(.myGrayDark)
-                            .font(.custom("Lato-Bold", size: wRatio(18)))
-                            .lineLimit(1)
+                            .textHeaderStyle()
                         
                         Spacer()
                         
@@ -64,15 +62,17 @@ struct IncomeView: View {
                             Spacer()
                             
                             TextField("", value: $income, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                                .foregroundColor(.black)
+                                .keyboardType(.decimalPad)
+                                .focused(editing)
+                                .foregroundColor(income == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
                                     .padding(.leading, wRatio(-10))
                                     .padding(.trailing, wRatio(-10))
                                 )
-                                .keyboardType(.decimalPad)
-                                .focused(editing)
+                               
+                                
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
@@ -85,18 +85,26 @@ struct IncomeView: View {
                             Spacer()
                             
                             if let cashSources = FirebaseUserManager.shared.userModel?.cashSources {
+                                
                                 Picker("", selection: $cashSource) {
                                     ForEach(cashSources ,id: \.self) {
                                         Text($0.name)
                                             .frame(width: wRatio(120), height: wRatio(30))
                                     }
                                 }
-                                .colorMultiply(.black)
+                                .pickerStyle(.menu)
+                                .opacity(0.025)
+//                                .colorMultiply(.black)
                                 .frame(width: wRatio(120), height: wRatio(30))
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
                                     .padding(.leading, wRatio(-10))
                                     .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text("\(cashSource)")
+                                        .foregroundColor(.myBlue)
+                                        .frame(width: wRatio(120), height: wRatio(30))
                                 )
                             }
                         }
@@ -113,17 +121,26 @@ struct IncomeView: View {
                             Image("Calendar")
                                 .resizable()
                                 .frame(width: wRatio(30), height: wRatio(30))
+                                .padding(.trailing, wRatio(10))
                             
                             DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
+                                .frame(width: wRatio(120), height: wRatio(30))
                                 .labelsHidden()
-                                .frame(height: wRatio(30))
+                                .opacity(0.025)
                                 .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text(expenseDate, format: Date.FormatStyle().year().month(.abbreviated).day())
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                        .foregroundColor(.myBlue)
                                 )
                                 .id(expenseDate)
                         }
                         .padding(.leading,  wRatio(10))
-                        .padding(.trailing, wRatio(16))
+                        .padding(.trailing, wRatio(25))
                         
                         HStack {
                             Text("Time")
@@ -143,16 +160,26 @@ struct IncomeView: View {
                                     .colorInvert()
                                     .colorMultiply(.gray)
                             }
+                            .padding(.trailing, wRatio(10))
                             
                             DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
+                                .frame(width: wRatio(120), height: wRatio(30))
                                 .labelsHidden()
                                 .frame(height: wRatio(30))
+                                .opacity(0.025)
                                 .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text(expenseDate, style: .time)
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                        .foregroundColor(.myBlue)
                                 )
                         }
                         .padding(.leading,  wRatio(10))
-                        .padding(.trailing, wRatio(16))
+                        .padding(.trailing, wRatio(25))
                         
                         HStack {
                             Text("Comment")
@@ -187,7 +214,7 @@ struct IncomeView: View {
                 }
                 .padding(.top, wRatio(10))
                 .frame(width: wRatio(320),
-                       height: wRatio(320))
+                       height: wRatio(340))
                 
             }
             .liftingViewAtKeyboardOpen()

@@ -8,6 +8,9 @@
 import SwiftUI
 import Combine
 
+fileprivate let wScreen = 390.0
+fileprivate let hScreen = 844.0
+
 
 struct ShadowCustom : ViewModifier{
     var radiusShadow: Int
@@ -30,8 +33,39 @@ struct LiftingViewAtKeyboardOpen: ViewModifier{
             .offset(y: keyboardHeight == 0 ? 0 : -keyboardHeight * 0.30)
     }
 }
+//    .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
+//    .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+//        .stroke( Color.myGreen, lineWidth: 1)
+//        .padding(.leading, wRatio(-10))
+//        .padding(.trailing, wRatio(-10))
+//    )
+
+struct TextHeaderStyle: ViewModifier{
+    let size: CGFloat = 18
+    @State var screenW: CGFloat = .zero
+    
+    func body(content: Content) -> some View {
+        let value = wScreen / size
+        let computedSize = screenW / value
+        
+        content
+            .onAppear(){
+                self.screenW = UIScreen.main.bounds.size.width
+            }
+            .foregroundColor(.white)
+            .font(.custom("Lato-Bold", size: computedSize))
+            .lineLimit(1)
+            
+    }
+}
+
 
 extension View {
+ 
+    
+    func textHeaderStyle() -> some View{
+        modifier(TextHeaderStyle())
+    }
     
     func liftingViewAtKeyboardOpen() -> some View{
         modifier(LiftingViewAtKeyboardOpen())
@@ -51,6 +85,7 @@ extension View {
             self
         }
     }
+    
     
     
     
@@ -216,14 +251,12 @@ extension View {
     }
     
     func wRatio(_ cW: CGFloat) -> CGFloat {
-        let wScreen = 390.0
         let value = wScreen / cW
         let ratio = screenW / value
         return ratio
     }
     
     func hRatio(_ cH: CGFloat) -> CGFloat {
-        let hScreen = 844.0
         let value = hScreen / cH
         let ratio = screenH / value
         return ratio

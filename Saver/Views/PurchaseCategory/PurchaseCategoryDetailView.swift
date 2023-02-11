@@ -25,9 +25,7 @@ struct PurchaseCategoryDetailView: View {
                 ImageCategoryView
                 
                 Text(category.name)
-                    .foregroundColor(.myGrayDark)
-                    .font(.custom("Lato-Bold", size: wRatio(18)))
-                    .lineLimit(1)
+                    .textHeaderStyle()
                 
                 Spacer()
                 

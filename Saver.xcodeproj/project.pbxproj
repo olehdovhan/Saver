@@ -105,6 +105,7 @@
 		FC89D6AF29955CED004FB4A1 /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */; };
 		FC89D6B029955CED004FB4A1 /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */; };
 		FC89D6B22996B416004FB4A1 /* Templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6B12996B416004FB4A1 /* Templates.swift */; };
+		FCA762422997FF380057D966 /* LimitPurchaseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +200,7 @@
 		FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
 		FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		FC89D6B12996B416004FB4A1 /* Templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Templates.swift; sourceTree = "<group>"; };
+		FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitPurchaseCategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +306,7 @@
 			children = (
 				0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */,
 				0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */,
+				FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */,
 			);
 			path = PurchaseCategory;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				FA6C156128C7778F0079AF6B /* CashSource.swift in Sources */,
 				0C979294294E1833000D80A2 /* AddPurchaseCategoryView.swift in Sources */,
 				B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */,
+				FCA762422997FF380057D966 /* LimitPurchaseCategoryView.swift in Sources */,
 				0C6A1B1C29489F13006E7C13 /* UIApplication+Extension.swift in Sources */,
 				0C4C60D1297F114F00D040DC /* TaskFirModel.swift in Sources */,
 				FC89D6AE29955CED004FB4A1 /* UIResponder+Current.swift in Sources */,

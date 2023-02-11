@@ -37,9 +37,7 @@ struct AddPurchaseCategoryView: View {
                     
                         HStack{
                             Text("Add new purchase category")
-                                .foregroundColor(.myGrayDark)
-                                .font(.custom("Lato-Bold", size: wRatio(18)))
-                                .lineLimit(1)
+                                .textHeaderStyle()
                             
                             Spacer()
                             
@@ -91,6 +89,7 @@ struct AddPurchaseCategoryView: View {
                                             Image(selectedCashIconName)
                                                 .resizable()
                                                 .frame(width: wRatio(50), height: wRatio(50))
+                                                .myShadow(radiusShadow: 5)
                                         default:
                                             ZStack{
                                                 Color.myGreen

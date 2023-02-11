@@ -1,5 +1,5 @@
 //
-//  LimitCashSourcesView.swift
+//  LimitPurchaseCategoryView.swift
 //  Saver
 //
 //  Created by Pryshliak Dmytro on 04.01.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LimitCashSourcesView: View {
+struct LimitPurchaseCategoryView: View {
     @Binding var closeSelf: Bool
     var body: some View {
         
@@ -43,7 +43,7 @@ struct LimitCashSourcesView: View {
                         .lineLimit(1)
                         .textCase(.uppercase)
                     
-                    Text("You have reached the maximum number of cash resources")
+                    Text("You have reached the maximum number of purchase category")
                         .foregroundColor(.myGrayDark)
                         .font(.custom("Lato-Regular", size: 14))
                         .multilineTextAlignment(.leading)
@@ -70,14 +70,4 @@ struct LimitCashSourcesView: View {
     }
 }
 
-struct Previews_Limitation: PreviewProvider {
-    
-    static var previews: some View {
-     
-        MainScreen(isShowTabBar: .constant(false),
-                   limitCashSourcesViewShow: true)
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-//            .previewDisplayName("iPhone 14 Pro")
-            
-    }
-}
+

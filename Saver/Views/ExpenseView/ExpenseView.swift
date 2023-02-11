@@ -21,7 +21,6 @@ struct ExpenseView: View {
     
     @ObservedObject private var viewModel = ExpenseViewModel()
     @State var cashSources: [String]
-    
       
     var body: some View {
         ZStack {
@@ -33,9 +32,7 @@ struct ExpenseView: View {
                 VStack(spacing: 0) {
                     HStack{
                         Text("Expense")
-                            .foregroundColor(.myGrayDark)
-                            .font(.custom("Lato-Bold", size: wRatio(18)))
-                            .lineLimit(1)
+                            .textHeaderStyle()
                         
                         Spacer()
                         
@@ -55,10 +52,10 @@ struct ExpenseView: View {
                             Spacer()
                             
                             TextField("", value: $viewModel.expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                                .foregroundColor(.black)
+                                .foregroundColor(viewModel.expense == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke( Color.myGreen, lineWidth: 1)
+                                    .stroke(Color.myGreen, lineWidth: 1)
                                     .padding(.leading, wRatio(-10))
                                     .padding(.trailing, wRatio(-10))
                                 )
@@ -82,13 +79,21 @@ struct ExpenseView: View {
                                         .frame(width: wRatio(120), height: wRatio(30))
                                 }
                             }
-                            .colorMultiply(.black)
+                            .pickerStyle(.menu)
+                            .opacity(0.025)
+//                            .colorMultiply(.black)
                                 .frame(width: wRatio(120), height: wRatio(30))
                             .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .stroke( Color.myGreen, lineWidth: 1)
                                 .padding(.leading, wRatio(-10))
                                 .padding(.trailing, wRatio(-10))
                             )
+                            .background(
+                                Text("\(cashSource)")
+                                    .foregroundColor(.myBlue)
+                                    .frame(width: wRatio(120), height: wRatio(30))
+                            )
+                            
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
@@ -108,12 +113,19 @@ struct ExpenseView: View {
                                         .frame(width: wRatio(120), height: wRatio(30))
                                 }
                             }
+                            .pickerStyle(.menu)
+                            .opacity(0.025)
                             .colorMultiply(.black)
                                 .frame(width: wRatio(120), height: wRatio(30))
                             .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .stroke( Color.myGreen, lineWidth: 1)
                                 .padding(.leading, wRatio(-10))
                                 .padding(.trailing, wRatio(-10))
+                            )
+                            .background(
+                                Text("\(purchaseCategoryName)")
+                                    .foregroundColor(.myBlue)
+                                    .frame(width: wRatio(120), height: wRatio(30))
                             )
                         }
                         .padding(.leading,  wRatio(10))
@@ -130,17 +142,26 @@ struct ExpenseView: View {
                             Image("Calendar")
                                 .resizable()
                                 .frame(width: wRatio(30), height: wRatio(30))
+                                .padding(.trailing, wRatio(10))
                             
                             DatePicker("", selection: $viewModel.expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
+                                .frame(width: wRatio(120), height: wRatio(30))
                                 .labelsHidden()
-                                .frame(height: wRatio(30))
+                                .opacity(0.025)
                                 .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text(viewModel.expenseDate, format: Date.FormatStyle().year().month(.abbreviated).day())
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                        .foregroundColor(.myBlue)
                                 )
                                 .id(viewModel.expenseDate)
                         }
                         .padding(.leading,  wRatio(10))
-                        .padding(.trailing, wRatio(16))
+                        .padding(.trailing, wRatio(25))
                         
                         HStack {
                             Text("Time")
@@ -159,17 +180,27 @@ struct ExpenseView: View {
                                     .frame(width: wRatio(20), height: wRatio(20))
                                     .colorInvert()
                                     .colorMultiply(.gray)
+                                
                             }
+                            .padding(.trailing, wRatio(10))
                             
                             DatePicker("", selection: $viewModel.expenseDate, displayedComponents: .hourAndMinute)
+                                .frame(width: wRatio(120), height: wRatio(30))
                                 .labelsHidden()
-                                .frame(height: wRatio(30))
+                                .opacity(0.025)
                                 .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text(viewModel.expenseDate, style: .time)
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                        .foregroundColor(.myBlue)
                                 )
                         }
                         .padding(.leading,  wRatio(10))
-                        .padding(.trailing, wRatio(16))
+                        .padding(.trailing, wRatio(25))
                         
                         HStack {
                             Text("Comment")
