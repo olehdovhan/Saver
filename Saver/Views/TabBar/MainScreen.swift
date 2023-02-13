@@ -40,6 +40,12 @@ struct MainScreen: View {
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
     
+    @State var progress = true
+    
+    var isBlur: Bool{
+        limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -118,13 +124,7 @@ struct MainScreen: View {
                 
                 Spacer()
             }
-            .blur(radius: limitPurchaseCategoryViewShow ? 5 : 0 )
-            .blur(radius: limitCashSourcesViewShow ? 5 : 0 )
-            .blur(radius: expenseViewShow ? 5 : 0 )
-            .blur(radius: incomeViewShow ? 5 : 0 )
-            .blur(radius: addCashSourceViewShow ? 5 : 0 )
-            .blur(radius: addPurchaseCategoryViewShow ? 5 : 0 )
-            .blur(radius: purchaseDetailViewShow ? 5 : 0 )
+            .blur(radius: isBlur ? 5 : 0)
             
             if expenseViewShow,
                let cashes = FirebaseUserManager.shared.userModel?.cashSources,
@@ -166,26 +166,15 @@ struct MainScreen: View {
                 LimitPurchaseCategoryView(closeSelf: $limitPurchaseCategoryViewShow)
             }
         }
-        .onChange(of: limitPurchaseCategoryViewShow) { _ in
-            isShowTabBar = !limitPurchaseCategoryViewShow
-        }
-        .onChange(of: limitCashSourcesViewShow) { _ in
-            isShowTabBar = !limitCashSourcesViewShow
-        }
-        .onChange(of: addCashSourceViewShow) { _ in
-            isShowTabBar = !addCashSourceViewShow
-        }
-        .onChange(of: addPurchaseCategoryViewShow) { _ in
-            isShowTabBar = !addPurchaseCategoryViewShow
-        }
-        .onChange(of: purchaseDetailViewShow) { _ in
-            isShowTabBar = !purchaseDetailViewShow
-        }
-        .onChange(of: incomeViewShow) { _ in
-            isShowTabBar = !incomeViewShow
-        }
-        .onChange(of: expenseViewShow) { _ in
-            isShowTabBar = !expenseViewShow
+        .overlay(overlayView: CustomProgressView(), show: $progress)
+        .onChange(of: progress) { isShowTabBar = !$0 }
+        .onChange(of: limitPurchaseCategoryViewShow) { isShowTabBar = !$0 }
+        .onChange(of: limitCashSourcesViewShow) { isShowTabBar = !$0 }
+        .onChange(of: addCashSourceViewShow) { isShowTabBar = !$0 }
+        .onChange(of: addPurchaseCategoryViewShow) { isShowTabBar = !$0 }
+        .onChange(of: purchaseDetailViewShow) { isShowTabBar = !$0 }
+        .onChange(of: incomeViewShow) { isShowTabBar = !$0 }
+        .onChange(of: expenseViewShow) { isShowTabBar = !$0
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources
                 if sources.count != 0 {
@@ -195,47 +184,65 @@ struct MainScreen: View {
         }
         .onAppear() {
             
-            
-            
             FirebaseUserManager.shared.observeUser {
                 if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                     cashSources = sources
-                    if sources.count != 0 { cashSource = sources[0].name }
+                    if sources.count != 0 {
+                        cashSource = sources[0].name
+                        progress = false
+                    }
                 }
                 if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
                     purchaseCategories = categories
+                    progress = false
                 }
             }
         }
-        .onDisappear() {
-            FirebaseUserManager.shared.userRef.removeAllObservers()
-        }
+        
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
-                let dataUserModel =
-                UserModel(avatarImgName: "person.circle",
-                          name: "Oleh Dovhan",
-                          email: user.email ,
-                          registrationDate: Int(Date().millisecondsSince1970),
-                          cashSources: [CashSource(name: "Bank card",
-                                                   amount: 0.0,
-                                                   iconName: "iconBankCard"),
-                                        CashSource(name: "Wallet",
-                                                   amount: 0.0,
-                                                   iconName: "iconWallet")],
-                          purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                               PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                               PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                               PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                               PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                               PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                               PurchaseCategory(name: "Health", iconName: "iconHealth")])
-                Database.database().reference(withPath: "users").child(user.uid).setValue(["userDataModel": dataUserModel.createDic()])
+                progress = true
+                FirebaseUserManager.shared.observeUser {
+                    if let sources = FirebaseUserManager.shared.userModel?.cashSources {
+                        cashSources = sources
+                        if sources.count != 0 {
+                            cashSource = sources[0].name
+                            progress = false
+                        }
+                    }
+                    if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
+                        purchaseCategories = categories
+                        progress = false
+                    }
+                    
+                }
+//                let dataUserModel =
+//                UserModel(avatarImgName: "person.circle",
+//                          name: "Oleh Dovhan",
+//                          email: user.email ,
+//                          registrationDate: Int(Date().millisecondsSince1970),
+//                          cashSources: [CashSource(name: "Bank card",
+//                                                   amount: 0.0,
+//                                                   iconName: "iconBankCard"),
+//                                        CashSource(name: "Wallet",
+//                                                   amount: 0.0,
+//                                                   iconName: "iconWallet")],
+//                          purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+//                                               PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+//                                               PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+//                                               PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+//                                               PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+//                                               PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+//                                               PurchaseCategory(name: "Health", iconName: "iconHealth")])
+//                Database.database().reference(withPath: "users").child(user.uid).setValue(["userDataModel": dataUserModel.createDic()])
             }
             
             Button("Yes", role: .destructive) {
                 viewModel.signOut()
             }
+        }
+        .onDisappear() {
+            FirebaseUserManager.shared.userRef.removeAllObservers()
         }
 //        .toolbar {
 //            ToolbarItemGroup(placement: .keyboard) {

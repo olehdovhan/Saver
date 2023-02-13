@@ -84,7 +84,6 @@ struct ForgotPasswordView: View {
                     Spacer()
                   
                 }
-                
             }
             .onReceive(Publishers.keyboardHeight) { value in
                 withAnimation() {

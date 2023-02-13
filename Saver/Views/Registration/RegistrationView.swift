@@ -38,7 +38,7 @@ struct RegistrationView: View {
                 } label: { }
                 
                 VStack( alignment: .center, spacing: 0){
-//                    Spacer(minLength: 50)
+                    //                    Spacer(minLength: 50)
                     Spacer()
                     
                     Text("Regisration")
@@ -47,11 +47,11 @@ struct RegistrationView: View {
                         .font(.custom("Lato-ExtraBold", size: 30))
                         .padding(.bottom, keyboardHeight == 0 ? wRatio(50) : wRatio(10))
                     //
-//                    Spacer()
+                    //                    Spacer()
                     
                     fieldsView
                     
-    
+                    
                     ZStack{
                         HStack{
                             Button {
@@ -82,8 +82,8 @@ struct RegistrationView: View {
                     .frame(width: wRatio(270), height: 40)
                     .padding(.top, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
                     .padding(.bottom, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
-               
-  
+                    
+                    
                     NavigationLink(isActive: $viewModel.willMoveToLogin) {
                         LoginView()
                     } label: {
@@ -94,7 +94,7 @@ struct RegistrationView: View {
                             .padding(.bottom, wRatio(28))
                     }
                     
-            
+                    
                     
                     
                     
@@ -120,6 +120,7 @@ struct RegistrationView: View {
                     Spacer()
                 }
             }
+            .navigationBarHidden(true)
             .onAppear() {
                 viewModel.ref = Database.database().reference(withPath: "users")
             }
@@ -127,8 +128,6 @@ struct RegistrationView: View {
                 withAnimation() {
                     self.keyboardHeight = value
                 }
-                
-                
             }
         
     }

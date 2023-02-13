@@ -10,7 +10,7 @@ import SwiftUI
 struct TabBarView: View {
     
     @State var selectedTab = 0
-    @State var isShowTabBar = true
+    @State var isShowTabBar = false
 
     var body: some View {
         CustomTabView(selection: $selectedTab, isShow: $isShowTabBar) {

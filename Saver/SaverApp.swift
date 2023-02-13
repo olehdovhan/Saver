@@ -30,42 +30,46 @@ struct SaverApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @State var userState = UserState.registeredUnauthorized
+    @State var progress = true
+    
     
     var body: some Scene {
         WindowGroup {
-            ZStack{
-                switch userState {
-                case .registeredAuthorized:
-                    TabBarView()
-                case .registeredUnauthorized:
-                    LoginView()
-                case .unRegistered:
-                    RegistrationView()
+            NavigationView{
+                ZStack{
+                    switch userState {
+                    case .registeredAuthorized:
+                        TabBarView()
+                    case .registeredUnauthorized:
+                        OnboardingView(userState: $userState)
+                    case .unRegistered:
+                        RegistrationView()
+                    case .acquainted:
+                        LoginView()
+                    }
+    //
                 }
-            }
+                .navigationBarHidden(true)
+                .overlay(overlayView: CustomProgressView(), show: $progress)
                 .onAppear() {
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if user != nil {
-                            userState = .registeredAuthorized
+                                userState = .registeredAuthorized
+                                progress = false
                         } else {
-                            userState = .registeredUnauthorized
+                                userState = .registeredUnauthorized
+                                progress = false
                         }
+                        
+                        
                     }
                 }
+            }
         }
     }
 }
 
 enum UserState {
-    case registeredAuthorized, registeredUnauthorized, unRegistered
+    case registeredAuthorized, registeredUnauthorized, unRegistered, acquainted
 }
 
-//  
-//struct StartView: View {
-//    @Binding var userState: UserState
-//    
-//    var body: some View{
-//        
-//        
-//    }
-//}

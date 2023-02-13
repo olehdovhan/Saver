@@ -12,9 +12,14 @@ fileprivate let wScreen = 390.0
 fileprivate let hScreen = 844.0
 
 
+
+
 struct ShadowCustom : ViewModifier{
     var radiusShadow: Int
     func body(content: Content) -> some View {
+        
+        
+        
         content
             .shadow(color: .black.opacity(0.15), radius: CGFloat(radiusShadow), x: 0, y: 0)
     }
@@ -121,7 +126,7 @@ struct DragGestureCustom: ViewModifier {
                     currentOffsetY = value.translation.height
                     isDraggingItem.toggle()
                 }
-                print(value.location.y)
+//                print(value.location.y)
                
             })
             .onEnded { gesture in

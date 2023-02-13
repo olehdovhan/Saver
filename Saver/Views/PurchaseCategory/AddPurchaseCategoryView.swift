@@ -92,14 +92,14 @@ struct AddPurchaseCategoryView: View {
                                                 .myShadow(radiusShadow: 5)
                                         default:
                                             ZStack{
-                                                Color.myGreen
+                                                Color.white
                                                     .frame(width: wRatio(50), height: wRatio(50))
                                                 
                                                 Image(systemName: selectedCashIconName)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(width: wRatio(30), height: wRatio(30))
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(.gray.opacity(0.75))
                                             }
                                             .cornerRadius(15)
                                             .myShadow(radiusShadow: 5)

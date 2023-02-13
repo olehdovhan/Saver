@@ -100,6 +100,7 @@
 		FABB4BC528B124420070F300 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC428B124420070F300 /* Preview Assets.xcassets */; };
 		FABB4BC728B124420070F300 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC628B124420070F300 /* Persistence.swift */; };
 		FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC828B124420070F300 /* Saver.xcdatamodeld */; };
+		FC4BE08D2999080E0086D8E5 /* CustomProgresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */; };
 		FC89D6A929955CC6004FB4A1 /* Shape+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6A829955CC5004FB4A1 /* Shape+Extension.swift */; };
 		FC89D6AE29955CED004FB4A1 /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */; };
 		FC89D6AF29955CED004FB4A1 /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */; };
@@ -195,6 +196,7 @@
 		FABB4BC428B124420070F300 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FABB4BC628B124420070F300 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FABB4BC928B124420070F300 /* Saver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Saver.xcdatamodel; sourceTree = "<group>"; };
+		FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgresView.swift; sourceTree = "<group>"; };
 		FC89D6A829955CC5004FB4A1 /* Shape+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Extension.swift"; sourceTree = "<group>"; };
 		FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				B458555628B1AB660047C81E /* CustomTabView.swift */,
+				FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				0C67F3B4293C961D002384D4 /* FirebaseUserManager.swift in Sources */,
 				FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */,
 				B4A9AA9B28B2708C001230BF /* BalanceView.swift in Sources */,
+				FC4BE08D2999080E0086D8E5 /* CustomProgresView.swift in Sources */,
 				B4E94DC328BDD93B0054B16F /* CustomAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

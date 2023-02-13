@@ -23,7 +23,7 @@ struct PurchaseCategoriesView: View{
     
     var body: some View{
         
-            ScrollView {
+            VStack {
                 
                 Spacer()
                     .frame(height: 15)
@@ -66,7 +66,7 @@ struct PurchaseCategoriesView: View{
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 30, height: 30)
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(.gray.opacity(0.75))
                                     }
                                     .cornerRadius(15)
                                     .myShadow(radiusShadow: 5)

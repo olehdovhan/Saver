@@ -20,7 +20,10 @@ struct LoginView: View {
     @State private var isShowRegister = false
     @State private var isForceClose = false
     
+    @State private var keyboardHeight: CGFloat = 0
+    
     var body: some View {
+        
             ZStack {
                 GeometryReader { reader in
                     Color.myGreen
@@ -29,15 +32,15 @@ struct LoginView: View {
                 }
                 
                 Rectangle()
-                    .fill(Color.yellow)
+                    .fill(Color.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
                 
-                VStack( alignment: .center){
+                VStack(alignment: .center, spacing: 0){
                     
-//
+                    //
                     Spacer()
                     
                     Text("Login")
@@ -53,17 +56,17 @@ struct LoginView: View {
                         .foregroundColor(.myGrayDark)
                     VStack(spacing: 20) {
                         AuthGoogleButton(image: "googleIco",
-                                     widthImg: 20,
-                                     heightImg: 20){
+                                         widthImg: 20,
+                                         heightImg: 20){
                             viewModel.signInGoogle()
                         }
-                        .frame(width: 230, height: 50)
+                                         .frame(width: 230, height: 50)
                         
                         AuthButton {
                         }
                         .frame(width: 230, height: 50)
                     }
-                    .padding(.top, wRatio(5))
+                    .padding(.top, wRatio(15))
                     .padding(.bottom, wRatio(30))
                     
                     NavigationLink {
@@ -108,8 +111,15 @@ struct LoginView: View {
                 
                 
             }
+            .onReceive(Publishers.keyboardHeight) { value in
+                withAnimation() {
+                    self.keyboardHeight = value
+                }
+            }
+            .navigationBarHidden(true)
             .keyboardAdaptive()
             .navigationBarBackButtonHidden(true)
+        
         }
     
     private var fieldsView: some View {

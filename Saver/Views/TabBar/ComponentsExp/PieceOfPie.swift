@@ -20,22 +20,27 @@ class PieceOfPieContainer: ObservableObject {
     
     @Published var chartData: [PieceOfPie] = []
     
-    private var chartLimitedColors: [Color] = [.red,
-                                               .orange,
-                                               .yellow,
-                                               .green,
-                                               .blue.opacity(0.5),
-                                               .blue,
-                                               .purple,
-                                               .gray,
-                                               .pink,
-                                               .brown]
+    private var chartLimitedColors: [Color] = [
+        .orange,
+        .yellow,
+        .green,
+        .blue,
+        .purple,
+        .gray,
+        .pink,
+        Color(hex: "#00FFFF"),
+        Color(hex: "#7CFC00"),
+        Color(hex: "800080"),
+        Color(hex: "4682B4"),
+        Color(hex: "000080"),
+        Color(hex: "FF00FF")
+    ]
     
     init () {
         guard let allPurchaseCategoriesSet = getAllExpenses() else { return }
         let allPurchaseCategories = Array(allPurchaseCategoriesSet)
         let expensesDict = createExpenseDict(from: allPurchaseCategories)
-//        print("III\(allPurchaseCategories.count)")
+        //        print("III\(allPurchaseCategories.count)")
         
         for (index, category) in allPurchaseCategories.enumerated() {
             let piece = PieceOfPie(color: chartLimitedColors[index],
@@ -68,7 +73,7 @@ class PieceOfPieContainer: ObservableObject {
             for item in filtered {
                 sum += item.amount
             }
-              dict[category] = sum
+            dict[category] = sum
         }
         return dict
     }
@@ -93,26 +98,38 @@ struct PieChart: View {
     
     @State var chartDataObject = PieceOfPieContainer()
     @State private var indexOfTappedSlice = -1
-    @State private var percentTapped = "UAH"
+    @State private var percentTapped = Locale.current.currencyCode ?? "USD"
     @Binding var selectedTab: Int
+    @Binding var isPercent: Bool
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             chartsCircleView
-                .frame(width: 100, height: 200)
+                .shadow(radius: 5)
+                .frame(width: wRatio(90), height: wRatio(180))
+                .padding(.bottom, 20)
                 .onChange(of: selectedTab, perform: { newValue in
-                    chartDataObject = PieceOfPieContainer()
-                    chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
-                    self.chartDataObject.calcOfPath()
+                    if selectedTab == 1{
+                        chartDataObject = PieceOfPieContainer()
+                        chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
+                        self.chartDataObject.calcOfPath()
+                        indexOfTappedSlice = -1
+                    }
                 })
                 .onAppear() {
                     chartDataObject = PieceOfPieContainer()
                     chartDataObject.chartData = chartDataObject.chartData.sorted{$0.amount > $1.amount}
                     self.chartDataObject.calcOfPath()
                 }
+            LinearGradient(colors: [.myGreen, .myBlue],
+                           startPoint: .leading,
+                           endPoint: .trailing)
+            .frame(width: UIScreen.main.bounds.width, height: 3)
+            
             chartListView
-                .padding(8)
-                .frame(width: 300, alignment: .leading)
+                .padding(.bottom, wRatio(85))
+                
+//                .frame(width: 300, alignment: .leading)
         }
     }
 }
@@ -120,31 +137,35 @@ struct PieChart: View {
 
 extension PieChart {
     
-        private var chartsCircleView: some View {
+    private var chartsCircleView: some View {
         ZStack{
             ForEach(0..<chartDataObject.chartData.count, id: \.self) { index in
                 Circle()
                     .trim(from: index == 0 ? 0.0 : chartDataObject.chartData[index - 1].value/100,
                           to: chartDataObject.chartData[index].value/100)
-                    .stroke(chartDataObject.chartData[index].color, lineWidth: 100)
+                    .stroke(chartDataObject.chartData[index].color, lineWidth: wRatio(90))
+//                    .shadow(color: .black.opacity(0.33), radius: 5, x: 0, y: 0)
                     .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
-                  //  .animation(.spring())
+                  .animation(.spring())
                     .onTapGesture {
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
-                        percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
-                }
-            }
+                        percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : Locale.current.currencyCode ?? "USD"
+                    }
+            }.rotationEffect(.degrees(-90))
             
             Circle()
-                .stroke(.white, lineWidth: 50)
-                .frame(width: 50, height: 50, alignment: .center)
+                .fill(.white)
+//                .stroke(.white, lineWidth: wRatio(40))
+                .frame(width: wRatio(80), height: wRatio(80), alignment: .center)
+                .shadow(radius: 5)
             
             Text(percentTapped)
                 .foregroundColor(.black)
                 .fontWeight(Font.Weight.light)
+                .disabled(true)
             
-            if percentTapped != "UAH" {
-                Text("UAH")
+            if percentTapped != (Locale.current.currencyCode ?? "USD") {
+                Text(Locale.current.currencyCode ?? "USD")
                     .foregroundColor(.black)
                     .fontWeight(Font.Weight.light)
                     .font(.system(size: 10))
@@ -156,26 +177,71 @@ extension PieChart {
     private var chartListView: some View {
         
         ScrollView(.vertical, showsIndicators: true){
-            VStack(alignment: HorizontalAlignment.leading){
+            VStack(alignment: .leading){
+                Spacer().frame(width: 3)
                 ForEach(0..<chartDataObject.chartData.count, id: \.self) { index in
-                    HStack{
-                        RoundedRectangle(cornerRadius: index == indexOfTappedSlice ? 0 : 10)
-                            .fill(chartDataObject.chartData[index].color)
-                            .frame(width: 20, height: 20)
-                          //  .animation(.spring())
-                        
-                        Text(String(format: "%.2f",
-                                    Double(chartDataObject.chartData[index].percent)) + "%" + " \(chartDataObject.chartData[index].name)")
-                        .font(indexOfTappedSlice == index ? Font.headline : Font.subheadline)
-                    }
+                    
+                        HStack(spacing: 0){
+                            //value of amount or percent
+                            HStack{
+                                Spacer()
+                                
+                                if isPercent{
+                                    Text(String(format: "%.2f", Double(chartDataObject.chartData[index].percent)) + "%")
+                                } else {
+                                    Text(String(Int(chartDataObject.chartData[index].amount)) + " " + (Locale.current.currencyCode ?? "USD"))
+                                }
+                                
+                                Spacer().frame(width: 5)
+                                
+                            }
+//                            .background(.blue.opacity(0.3))
+                            .frame(width: wRatio(120))
+                            
+                            Circle()
+                                .fill(chartDataObject.chartData[index].color)
+                                .frame(width: 20, height: 20)
+                                .overlay(
+                                    Circle()
+                                        .fill(Color.white)
+                                        .frame(width: 10, height: 10)
+                                        .scaleEffect(index == indexOfTappedSlice ? 0 : 1)
+                                        .animation(.spring())
+                                    )
+                            
+                            //name of purchase category
+                            HStack{
+                                Spacer().frame(width: 5)
+                                
+                                Text(" \(chartDataObject.chartData[index].name)")
+                                
+                                Spacer()
+                            }
+//                            .background(.blue.opacity(0.3))
+                            .frame(width: wRatio(240))
+                            
+                            Spacer()
+                        }
+                        .frame(width: wRatio(380))
+                        .font(.custom(indexOfTappedSlice == index ? "Lato-Bold" : "Lato-Regular" , size: 16))
                     
                     .onTapGesture {
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
-                        percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : "UAH"
+                        percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : Locale.current.currencyCode ?? "USD"
                     }
                 }
+                
+                Spacer().frame(width: 10)
             }
         }
-        .padding(.bottom, 300)
+        
+        
+        
+//        .preferredColorScheme(.dark)
+//        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.blue, lineWidth: 1))
+        
     }
 }
+
+
+

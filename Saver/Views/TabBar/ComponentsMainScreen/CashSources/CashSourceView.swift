@@ -110,6 +110,7 @@ struct CashSourceView: View {
                                             .lineLimit(1)
                                             .zIndex(-5)
                 }
+               
                 .zIndex(Double(cashSourcesCount - index))
             }
             .frame(width: 75)
