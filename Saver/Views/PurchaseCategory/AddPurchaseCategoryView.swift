@@ -95,7 +95,7 @@ struct AddPurchaseCategoryView: View {
                                                 Color.white
                                                     .frame(width: wRatio(50), height: wRatio(50))
                                                 
-                                                Image(systemName: selectedCashIconName)
+                                                Image(selectedCashIconName)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(width: wRatio(30), height: wRatio(30))

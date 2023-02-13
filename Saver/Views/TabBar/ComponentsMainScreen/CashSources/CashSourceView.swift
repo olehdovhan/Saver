@@ -66,11 +66,10 @@ struct CashSourceView: View {
                                 Color.myGreen
                                     .frame(width: 50, height: 50)
                                 
-                                Image(systemName: cashSourceItem.iconName)
-                                    .resizable()
+                                Image(cashSourceItem.iconName)
+//                                    .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
-                                    .foregroundColor(.white)
                                 
                             }
                             .cornerRadius(15)
@@ -80,11 +79,11 @@ struct CashSourceView: View {
                                 Color.myGreen
                                     .frame(width: 50, height: 50)
                                 
-                                Image(systemName: cashSourceItem.iconName)
-                                    .resizable()
+                                Image(cashSourceItem.iconName)
+//                                    .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
-                                    .foregroundColor(.white)
+//                                    .foregroundColor(.white)
                                 
                             }
                             .cornerRadius(15)

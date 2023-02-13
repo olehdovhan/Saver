@@ -79,14 +79,21 @@ struct AddIconsView: View {
                                     .frame(width: 50, height: 50)
                             default:
                                 ZStack{
-                                    Color.white
-                                        .frame(width: 50, height: 50)
+                                    switch type{
+                                    case .cashSource:
+                                        Color.myGreen
+                                            .frame(width: 50, height: 50)
+                                    case .purchaseCategory:
+                                        Color.white
+                                            .frame(width: 50, height: 50)
+                                    }
+                                        
                                     
-                                    Image(systemName: item)
+                                    Image(item)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 30, height: 30)
-                                        .foregroundColor(.gray.opacity(0.75))
+//                                        .foregroundColor(.gray.opacity(0.75))
                                 }
                                 .cornerRadius(15)
 //                                .myShadow(radiusShadow: 5)

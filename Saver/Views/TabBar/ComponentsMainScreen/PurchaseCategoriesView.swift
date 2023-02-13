@@ -62,7 +62,7 @@ struct PurchaseCategoriesView: View{
                                         Color.white
                                             .frame(width: 50, height: 50)
                                         
-                                        Image(systemName: item.iconName)
+                                        Image(item.iconName)
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 30, height: 30)

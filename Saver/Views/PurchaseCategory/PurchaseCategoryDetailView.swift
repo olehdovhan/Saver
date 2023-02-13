@@ -107,21 +107,54 @@ struct PurchaseCategoryDetailView: View {
     
     var ImageCategoryView: some View{
         ZStack{
-            Color.white
-                .frame(width: 30, height: 30)
-                .cornerRadius(10)
-                .myShadow(radiusShadow: 5)
-            
-            Image(systemName: "\(category.iconName)")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 20, height: 20)
-                .foregroundColor(.gray)
-                .cornerRadius(10)
-            
-            Image(category.iconName)
-                .resizable()
-                .frame(width: 30, height: 30)
+            switch category.iconName {
+            case "iconClothing",
+                "iconEntertainment",
+                "iconHealth",
+                "iconHousehold",
+                "iconProducts",
+                "iconRestaurant",
+                "iconTransport":
+                Image(category.iconName)
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                
+            default:
+                ZStack{
+                    Color.white
+                        .frame(width: 30, height: 30)
+                        .cornerRadius(10)
+                        .myShadow(radiusShadow: 5)
+                    
+                    Image(category.iconName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.gray)
+                        .cornerRadius(10)
+                    
+                }
+                
+            }
+//
+//
+//
+//
+//            Color.white
+//                .frame(width: 30, height: 30)
+//                .cornerRadius(10)
+//                .myShadow(radiusShadow: 5)
+//
+//            Image(systemName: "\(category.iconName)")
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 20, height: 20)
+//                .foregroundColor(.gray)
+//                .cornerRadius(10)
+//
+//            Image(category.iconName)
+//                .resizable()
+//                .frame(width: 30, height: 30)
         }
     }
     
