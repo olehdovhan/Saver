@@ -74,7 +74,7 @@ struct ExpenseView: View {
                             Spacer()
                             
                             Picker("", selection: $cashSource) {
-                                ForEach(cashSources ,id: \.self) {
+                                ForEach(cashSources, id: \.self) {
                                     Text($0)
                                         .frame(width: wRatio(120), height: wRatio(30))
                                 }
@@ -106,9 +106,9 @@ struct ExpenseView: View {
                             Spacer()
                             
                             Picker("", selection: $purchaseCategoryName) {
-                                Text("").tag("").frame(height: 1)
+//                                Text("").tag("").frame(height: 1)
                                 
-                                ForEach(purchaseCategories,id: \.self) {
+                                ForEach(purchaseCategories, id: \.self) {
                                     Text($0)
                                         .frame(width: wRatio(120), height: wRatio(30))
                                 }

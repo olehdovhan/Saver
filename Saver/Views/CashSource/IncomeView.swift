@@ -11,8 +11,8 @@ import Combine
 struct IncomeView: View {
     
     @Binding var closeSelf: Bool
-    @Binding  var cashSource: String
-    @State private var income = 0.0
+    @Binding  var cashSourceNameSelect: String
+    @State private var ammountIncome = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
@@ -20,7 +20,7 @@ struct IncomeView: View {
     @Binding var cashSources: [CashSource]
     
     private var enteredIncome: Bool {
-        switch income {
+        switch ammountIncome {
         case let x where x > 0.0:  return false
         default:                   return true
         }
@@ -61,10 +61,10 @@ struct IncomeView: View {
                             
                             Spacer()
                             
-                            TextField("", value: $income, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                            TextField("", value: $ammountIncome, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                                 .keyboardType(.decimalPad)
                                 .focused(editing)
-                                .foregroundColor(income == 0.0 ? .gray : .black)
+                                .foregroundColor(ammountIncome == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
@@ -84,29 +84,28 @@ struct IncomeView: View {
                             
                             Spacer()
                             
-                            if let cashSources = FirebaseUserManager.shared.userModel?.cashSources {
                                 
-                                Picker("", selection: $cashSource) {
-                                    ForEach(cashSources ,id: \.self) {
-                                        Text($0.name)
-                                            .frame(width: wRatio(120), height: wRatio(30))
-                                    }
-                                }
-                                .pickerStyle(.menu)
-                                .opacity(0.025)
-//                                .colorMultiply(.black)
-                                .frame(width: wRatio(120), height: wRatio(30))
-                                .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke( Color.myGreen, lineWidth: 1)
-                                    .padding(.leading, wRatio(-10))
-                                    .padding(.trailing, wRatio(-10))
-                                )
-                                .background(
-                                    Text("\(cashSource)")
-                                        .foregroundColor(.myBlue)
+                            Picker("", selection: $cashSourceNameSelect) {
+                                let cashSorcesNames = cashSources.map{$0.name}
+                                ForEach(cashSorcesNames, id: \.self) {
+                                    Text($0)
                                         .frame(width: wRatio(120), height: wRatio(30))
-                                )
+                                }
                             }
+                            .pickerStyle(.menu)
+                            .opacity(0.025)
+                            .frame(width: wRatio(120), height: wRatio(30))
+                            .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke( Color.myGreen, lineWidth: 1)
+                                .padding(.leading, wRatio(-10))
+                                .padding(.trailing, wRatio(-10))
+                            )
+                            .background(
+                                Text("\(cashSourceNameSelect)")
+                                    .foregroundColor(.myBlue)
+                                    .frame(width: wRatio(120), height: wRatio(30))
+                            )
+                            
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
@@ -207,7 +206,37 @@ struct IncomeView: View {
                     Spacer()
                     
                     DoneButtonView(isValid: enteredIncome) {
-                        print(enteredIncome)
+                        
+                        let incomeModel = IncomeModel(amount: ammountIncome,
+                                                      comment: comment,
+                                                      incomeDate: Date(),
+                                                      cashSource: cashSourceNameSelect)
+                        if var user = FirebaseUserManager.shared.userModel {
+                            if user.currentMonthIncoms == nil {
+                                var incomes = [IncomeModel]()
+                                incomes.append(incomeModel)
+                                user.currentMonthIncoms = incomes
+                            } else {
+                                user.currentMonthIncoms?.append(incomeModel)
+                            }
+                            
+                            var cashSourceIncreaseIndex: Int?
+                            for (index, source) in user.cashSources.enumerated() {
+                                if source.name == cashSourceNameSelect {
+                                    cashSourceIncreaseIndex = index
+                                }
+                            }
+                            
+                            if let index = cashSourceIncreaseIndex {
+                                user.cashSources[index].increaseAmmount(ammountIncome)
+                            }
+                            
+                            FirebaseUserManager.shared.userModel = user
+                        }
+                        
+                        
+                        
+                        closeSelf = false
                     }
                     
                     Spacer()
@@ -221,8 +250,8 @@ struct IncomeView: View {
             
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-        .onChange(of: cashSource) { _ in
-            print(cashSource)
+        .onChange(of: cashSourceNameSelect) { _ in
+            print(cashSourceNameSelect)
         }
     
     }
@@ -230,7 +259,7 @@ struct IncomeView: View {
         if var user = FirebaseUserManager.shared.userModel {
             var sources = user.cashSources
             for (index,source) in sources.enumerated() {
-                if source.name == cashSource {
+                if source.name == cashSourceNameSelect {
                     sources.remove(at: index)
                 }
             }
@@ -260,6 +289,5 @@ struct Previews_Icome: PreviewProvider {
             
     }
 }
-
 
 

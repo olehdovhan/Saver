@@ -103,9 +103,6 @@ struct MainScreen: View {
 
                 Spacer() .frame(height: 15)
                 
-//                StatisticsPlace().zIndex(3)
-                //                    .background(.red)
-                
                 LinearGradient(colors: [.myGreen, .myBlue],
                                startPoint: .leading,
                                endPoint: .trailing)
@@ -138,7 +135,7 @@ struct MainScreen: View {
             
             if incomeViewShow {
                 IncomeView(closeSelf: $incomeViewShow,
-                           cashSource: $cashSource,
+                           cashSourceNameSelect: $cashSource,
                            editing: $editing,
                            cashSources: $cashSources)
             }

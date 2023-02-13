@@ -104,10 +104,17 @@ struct PieChart: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            chartsCircleView
-                .shadow(radius: 5)
-                .frame(width: wRatio(90), height: wRatio(180))
-                .padding(.bottom, 20)
+            
+                chartsCircleView
+                    .scaleEffect(0.2)
+                    .scaleEffect(x: 7, y: 4, anchor: .center)
+                    .shadow(color: .black.opacity(0.33),
+                            radius: 5, x: 0, y: -2.5)
+//            chartsCircleView
+//                .shadow(radius: 5)
+//                .frame(width: wRatio(90), height: wRatio(180))
+//                .rotation3DEffect(.degrees(45), axis: (x: 1, y: 0, z: 0))
+//                .padding(.bottom, 20)
                 .onChange(of: selectedTab, perform: { newValue in
                     if selectedTab == 1{
                         chartDataObject = PieceOfPieContainer()
@@ -145,7 +152,7 @@ extension PieChart {
                           to: chartDataObject.chartData[index].value/100)
                     .stroke(chartDataObject.chartData[index].color, lineWidth: wRatio(90))
 //                    .shadow(color: .black.opacity(0.33), radius: 5, x: 0, y: 0)
-                    .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
+                    .scaleEffect(index == indexOfTappedSlice ? 1.2 : 1.0)
                   .animation(.spring())
                     .onTapGesture {
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
@@ -172,6 +179,7 @@ extension PieChart {
                     .offset(y: 15)
             }
         }
+        .frame(width: wRatio(90), height: wRatio(180))
     }
     
     private var chartListView: some View {
