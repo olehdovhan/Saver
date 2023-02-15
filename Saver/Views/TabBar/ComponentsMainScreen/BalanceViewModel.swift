@@ -5,4 +5,11 @@
 //  Created by Oleh on 15.02.2023.
 //
 
-import Foundation
+import SwiftUI
+
+class BalanceViewModel: ObservableObject{
+    
+    
+    
+    
+}
