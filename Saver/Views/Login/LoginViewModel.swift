@@ -11,16 +11,13 @@ import FirebaseCore
 import GoogleSignIn
 
 class LoginViewModel: ObservableObject {
-    @Published var progress = false
     
+    @Published var progress = false
     @Published var incorrectEmail = true
     @Published var incorrectPassword = true
-    
     @Published var errorMessage = false
-    
     @Published var loginIsEditing = false
     @Published var passwordIsEditing = false
-    
     @Published var willMoveToApp = false
     
     func signInGoogle() {
@@ -48,30 +45,34 @@ class LoginViewModel: ObservableObject {
             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
             Auth.auth().signIn(with: credential) { [weak self] authResult, error in
                 
-                
                 if let currentUser = Auth.auth().currentUser {
                     let firUser = UserFirModel(user: currentUser)
                     let userRef = Database.database().reference(withPath: "users")
                     userRef.child(firUser.uid).observe(.value) { snapshot in
                         if !snapshot.exists() {
-                              let dataUserModel = UserModel(avatarImgName: "person.circle",
-                                                            name: "Oleh Dovhan",
-                                                            email: firUser.email,
-                                                            registrationDate: Int(Date().millisecondsSince1970),
-                                                            cashSources: [CashSource(name: "Bank card",
-                                                                                     amount: 0.0,
-                                                                                     iconName: "iconBankCard"),
-                                                                          CashSource(name: "Wallet",
-                                                                                     amount: 0.0,
-                                                                                     iconName: "iconWallet")],
-                                                            purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                                                 PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                                                 PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                                                 PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                                                 PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                                                 PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                                                 PurchaseCategory(name: "Health", iconName: "iconHealth")])
-                            userRef.child(firUser.uid).setValue(["userDataModel": dataUserModel.createDic()])
+                            guard let img = UIImage(named: "avatar") else { return }
+                            FirebaseUserManager.shared.uploadImage(img: img) { urlStringToImage in
+                                guard let urlString = urlStringToImage else { return }
+                                
+                                let dataUserModel = UserModel(avatarUrlString: urlString,
+                                                              name: "Noname user",
+                                                              email: firUser.email,
+                                                              registrationDate: Int(Date().millisecondsSince1970),
+                                                              cashSources: [CashSource(name: "Bank card",
+                                                                                       amount: 0.0,
+                                                                                       iconName: "iconBankCard"),
+                                                                            CashSource(name: "Wallet",
+                                                                                       amount: 0.0,
+                                                                                       iconName: "iconWallet")],
+                                                              purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+                                                                                   PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                                                                   PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                                                                   PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                                                                   PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                                                                   PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                                                                   PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                                userRef.child(firUser.uid).setValue(["userDataModel": dataUserModel.createDic()])
+                            }
                             print("hasn`t child")
                         }
                     }

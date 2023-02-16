@@ -196,8 +196,6 @@ struct MainScreen: View {
         })
         .onAppear() {
             
-            
-            
             FirebaseUserManager.shared.observeUser {
                 if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                     cashSources = sources
@@ -213,25 +211,7 @@ struct MainScreen: View {
         }
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
-                let dataUserModel =
-                UserModel(avatarImgName: "person.circle",
-                          name: "Oleh Dovhan",
-                          email: user.email ,
-                          registrationDate: Int(Date().millisecondsSince1970),
-                          cashSources: [CashSource(name: "Bank card",
-                                                   amount: 0.0,
-                                                   iconName: "iconBankCard"),
-                                        CashSource(name: "Wallet",
-                                                   amount: 0.0,
-                                                   iconName: "iconWallet")],
-                          purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                               PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                               PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                               PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                               PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                               PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                               PurchaseCategory(name: "Health", iconName: "iconHealth")])
-                Database.database().reference(withPath: "users").child(user.uid).setValue(["userDataModel": dataUserModel.createDic()])
+
             }
             
             Button("Yes", role: .destructive) {

@@ -41,24 +41,30 @@ class RegistrationViewModel: ObservableObject {
             let currentUser = UserFirModel(user: newUser)
             let userRef = self?.ref.child(currentUser.uid)
             
-           let dataUserModel =  UserModel(avatarImgName: "person.circle",
-                                          name: "Oleh Dovhan",
-                                          email: self?.email ?? "",
-                                          registrationDate: Int(Date().millisecondsSince1970),
-                                          cashSources: [CashSource(name: "Bank card",
-                                                                   amount: 0.0,
-                                                                   iconName: "iconBankCard"),
-                                                        CashSource(name: "Wallet",
-                                                                   amount: 0.0,
-                                                                   iconName: "iconWallet")],
-                                          purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
-                                                               PurchaseCategory(name: "Transport", iconName: "iconTransport"),
-                                                               PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
-                                                               PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
-                                                               PurchaseCategory(name: "Household", iconName: "iconHousehold"),
-                                                               PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
-                                                               PurchaseCategory(name: "Health", iconName: "iconHealth")])
-            userRef?.setValue(["userDataModel": dataUserModel.createDic()])
+            guard let img = UIImage(named: "avatar") else { return }
+            FirebaseUserManager.shared.uploadImage(img: img) { urlStringToImage in
+                guard let urlString = urlStringToImage else { return }
+                
+                 let dataUserModel = UserModel(avatarUrlString: urlString,
+                                               name: "Noname user",
+                                               email: self?.email ?? "",
+                                               registrationDate: Int(Date().millisecondsSince1970),
+                                               cashSources: [CashSource(name: "Bank card",
+                                                                        amount: 0.0,
+                                                                        iconName: "iconBankCard"),
+                                                             CashSource(name: "Wallet",
+                                                                        amount: 0.0,
+                                                                        iconName: "iconWallet")],
+                                               purchaseCategories: [PurchaseCategory(name: "Products",iconName: "iconProducts"),
+                                                                    PurchaseCategory(name: "Transport", iconName: "iconTransport"),
+                                                                    PurchaseCategory(name: "Clothing", iconName: "iconClothing"),
+                                                                    PurchaseCategory(name: "Restaurant",iconName: "iconRestaurant"),
+                                                                    PurchaseCategory(name: "Household", iconName: "iconHousehold"),
+                                                                    PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
+                                                                    PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                
+                userRef?.setValue(["userDataModel": dataUserModel.createDic()])
+            }
         }
     }
 }
