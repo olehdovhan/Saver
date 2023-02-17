@@ -26,6 +26,9 @@ struct MainScreen: View {
     @State var purchaseCategories: [PurchaseCategory] = []
     @State var selectedCategory: PurchaseCategory?
     
+    @State var amountCurrentMonthSpendingSelectedCategory: String = "0.0"
+    @State var currentMonthSpendings = [ExpenseModel]()
+    
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
     @State private var activePageIndex: Int = 0
@@ -168,7 +171,8 @@ struct MainScreen: View {
                 if purchaseDetailViewShow, selectedCategory != nil {
                     PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
                                                purchaseCategories: $purchaseCategories,
-                                               category: selectedCategory!)
+                                               category: selectedCategory!,
+                                               monthlyAmount: amountCurrentMonthSpendingSelectedCategory)
                 }
                 
                 if limitCashSourcesViewShow{
@@ -189,6 +193,13 @@ struct MainScreen: View {
                 }
                 .zIndex(10)
             }
+        }
+        .onChange(of: selectedCategory) { _ in
+                    let ammount = currentMonthSpendings
+                        .filter { $0.spentCategory == selectedCategory?.name }
+                        .map { $0.amount }
+                        .reduce(0) { $0 + $1 }
+                    amountCurrentMonthSpendingSelectedCategory = String(ammount)
         }
         .overlay(overlayView: CustomProgressView(), show: $progress)
         .onChange(of: selectedImage) { _ in
@@ -211,8 +222,9 @@ struct MainScreen: View {
             }
         }
         .onAppear() {
-            
             FirebaseUserManager.shared.observeUser {
+                currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
+                
                 if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                     cashSources = sources
                     if sources.count != 0 {

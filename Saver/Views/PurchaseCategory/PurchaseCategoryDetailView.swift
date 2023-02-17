@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct PurchaseCategoryDetailView: View {
     
     @Binding var closeSelf: Bool
     @Binding var purchaseCategories: [PurchaseCategory]
     var category: PurchaseCategory
+    var monthlyAmount: String
+    @State var currentMonthSpendings: Double = .zero
     var body: some View {
         
         ZStack {
@@ -83,13 +86,12 @@ struct PurchaseCategoryDetailView: View {
                 
                 // TODO: make btn on tap open view with expenses for this category
                 
-                Text("0.0$")
+                Text(monthlyAmount + "$")
                     .foregroundColor(.myGrayDark)
                     .font(.custom("Lato-Regular", size: 14))
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                 
-                // TODO: fill from UD fact expenses
             }
             .frame(width: wRatio(250), height: wRatio(80))
             .background(
@@ -103,6 +105,7 @@ struct PurchaseCategoryDetailView: View {
         .frame(width: wRatio(320),
                height: wRatio(320))
       }
+    
    }
     
     var ImageCategoryView: some View{

@@ -35,6 +35,7 @@ class ExpenseViewModel: ObservableObject {
                 var spendings = [ExpenseModel]()
                 spendings.append(expenseModel)
                 user.currentMonthSpendings = spendings
+                
             } else  {
                 user.currentMonthSpendings?.append(expenseModel)
             }

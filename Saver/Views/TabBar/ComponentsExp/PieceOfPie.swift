@@ -106,15 +106,10 @@ struct PieChart: View {
         VStack(spacing: 0) {
             
                 chartsCircleView
-                    .scaleEffect(0.2)
-                    .scaleEffect(x: 7, y: 4, anchor: .center)
                     .shadow(color: .black.opacity(0.33),
                             radius: 5, x: 0, y: -2.5)
-//            chartsCircleView
-//                .shadow(radius: 5)
-//                .frame(width: wRatio(90), height: wRatio(180))
-//                .rotation3DEffect(.degrees(45), axis: (x: 1, y: 0, z: 0))
-//                .padding(.bottom, 20)
+                .frame(width: wRatio(90), height: wRatio(180))
+                .padding(.bottom, 20)
                 .onChange(of: selectedTab, perform: { newValue in
                     if selectedTab == 1{
                         chartDataObject = PieceOfPieContainer()
