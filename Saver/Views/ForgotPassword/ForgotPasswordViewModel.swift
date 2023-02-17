@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class ForgotPasswordViewModel: ObservableObject {
     
@@ -21,6 +22,17 @@ class ForgotPasswordViewModel: ObservableObject {
     
     func resetEmail(email: String, completion: @escaping ()->()) {
         incorrectEmail = email.textFieldValidatorEmail()
+        guard incorrectEmail else { return }
+        Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
+            if let error = error {
+                self?.errorMessage = error.localizedDescription
+                self?.showErrorMessage = true
+            } else {
+                self?.errorMessage = "A password reset email has been sent."
+                self?.showErrorMessage = true
+                completion()
+            }
+        }
         
 //        if email.textFieldValidatorEmail() {
 //            progress = true
@@ -35,7 +47,6 @@ class ForgotPasswordViewModel: ObservableObject {
 //            }
 //        }
     }
-    
 }
 
 

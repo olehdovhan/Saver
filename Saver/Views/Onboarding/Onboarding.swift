@@ -10,6 +10,8 @@ import SwiftUI
 struct OnboardingView: View {
     @State var showSecondOnboard = false
     @State var calculatedHeight: CGFloat = 0
+    @Binding var userState: UserState
+    @State var onAppear = false
     var body: some View {
         ZStack{
             TabView(selection: $showSecondOnboard){
@@ -31,7 +33,8 @@ struct OnboardingView: View {
                             description: "Shows where the money goes",
                             buttonText: "Go!",
                             calculatedHeight: $calculatedHeight) {
-                    print("Press Button <Next> in One Onboarding")
+                    print("Press Button <Go> in One Onboarding")
+                    userState = .acquainted
                 }
                             .tag(true)
             }
@@ -47,7 +50,7 @@ struct OnboardingView: View {
                         .frame(width: wRatio(20), height: wRatio(20))
                         
                         .onTapGesture {
-                            showSecondOnboard = false
+                                showSecondOnboard = false
                         }
                         .offset(x: -(wRatio(20)))
                     
@@ -56,7 +59,7 @@ struct OnboardingView: View {
                         .frame(width: wRatio(20), height: wRatio(20))
                         
                         .onTapGesture {
-                            showSecondOnboard = true
+                                showSecondOnboard = true
                         }
                         .offset(x: wRatio(20))
                     
@@ -64,10 +67,10 @@ struct OnboardingView: View {
                         .fill(Color.myGreen)
                         .frame(width: wRatio(20), height: wRatio(20))
                         .offset(x: showSecondOnboard ? wRatio(20) : -(wRatio(20)) )
-                       
-                        .animation(.spring())
+                        .opacity(onAppear ? 1 : 0)
+                        .animation(.linear(duration: 0.3))
                 }
-                
+                .scaleEffect(onAppear ? 1 : 0.025)
                 .offset(y: -(wRatio(30)))
                 
                 
@@ -75,12 +78,19 @@ struct OnboardingView: View {
             }
 
         }
+        .onAppear(){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                withAnimation(.easeOut(duration: 0.2)){
+                    onAppear = true
+                }
+            }
+        }
     }
 }
 
 struct Onboarding_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(userState: .constant(.registeredAuthorized))
     }
 }
 

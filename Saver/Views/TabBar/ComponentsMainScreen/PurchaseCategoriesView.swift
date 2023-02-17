@@ -14,6 +14,7 @@ struct PurchaseCategoriesView: View{
     
     @Binding var purchaseDetailViewShow :Bool
     @Binding var selectedCategory: PurchaseCategory?
+    @Binding var limitPurchaseCategoryViewShow: Bool
     
     let columns = [ GridItem(.flexible()),
                     GridItem(.flexible()),
@@ -22,8 +23,8 @@ struct PurchaseCategoriesView: View{
     
     var body: some View{
         
-        ZStack {
-            ScrollView {
+            VStack {
+                
                 Spacer()
                     .frame(height: 15)
                 LazyVGrid(columns: columns, alignment: .center, spacing: 15) {
@@ -52,16 +53,20 @@ struct PurchaseCategoriesView: View{
                                         .frame(width: 50, height: 50)
                                         .myShadow(radiusShadow: 5)
                                     
+                                    //
+                                    
+                                    
+                                    
                                 default:
                                     ZStack{
                                         Color.white
                                             .frame(width: 50, height: 50)
                                         
-                                        Image(systemName: item.iconName)
+                                        Image(item.iconName)
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 30, height: 30)
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(.gray.opacity(0.75))
                                     }
                                     .cornerRadius(15)
                                     .myShadow(radiusShadow: 5)
@@ -87,7 +92,14 @@ struct PurchaseCategoriesView: View{
                         )
                     }
                     Button {
-                        addPurchaseCategoryShow = true
+                        
+//                        addPurchaseCategoryShow = true
+                        
+                        if purchaseCategories.count < 11 {
+                            addPurchaseCategoryShow = true
+                        } else {
+                            limitPurchaseCategoryViewShow = true
+                        }
                     } label: {
                         VStack(spacing: 0) {
                             Image("iconPlus")
@@ -99,10 +111,9 @@ struct PurchaseCategoriesView: View{
                         }
                     }
                 }
-//                Spacer()
-//                    .frame(height: 70)
             }
-            .padding(.bottom, 70)
-        }
+            
+            .padding(.bottom, wRatio(90))
+        
     }
 }

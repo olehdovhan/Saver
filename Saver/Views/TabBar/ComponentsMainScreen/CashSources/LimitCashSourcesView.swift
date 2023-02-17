@@ -12,70 +12,56 @@ struct LimitCashSourcesView: View {
     var body: some View {
         
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.3)
-                .ignoresSafeArea()
+            SublayerView()
             
-            Color.white
-                .frame(width: UIScreen.main.bounds.width/1.2,
-                       height: UIScreen.main.bounds.height/1.5)
-                .cornerRadius(25)
-                .myShadow(radiusShadow: 5)
+            WhiteCanvasView(width: wRatio(320), height: wRatio(220))
             
             
-            VStack(spacing: 20) {
+            VStack(spacing: 0) {
                 
-                //Header
-                HStack(alignment: .center, spacing: 10){
+                HStack{
                     Text("Attention")
-                        .lineLimit(1)
-                        .textCase(.uppercase)
-                        .foregroundColor(.myGreen)
-                        .font(.custom("Lato-ExtraBold", size: 22))
-                        .frame(width: UIScreen.main.bounds.width/2.2)
+                        .textHeaderStyle()
+                        
                     
                     Spacer()
                     
-                    Button {
-                        closeSelf = false
-                    } label: {
-                        Image("btnClose")
-                            .resizable()
-                            .frame(width: 45, height: 45)
-                    }
+                    CloseSelfButtonView($closeSelf)
                 }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
+                
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.trailing, wRatio(10))
+                .padding(.leading, wRatio(30))
                 
                 Spacer()
                 
                 VStack(spacing: 10){
-                 
-                    
                     Text("Limitation")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Bold", size: 16))
+                        .font(.custom("Lato-Bold", size: 14))
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
                         .textCase(.uppercase)
                     
                     Text("You have reached the maximum number of cash resources")
                         .foregroundColor(.myGrayDark)
-                        .font(.custom("Lato-Regular", size: 16))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(4)
-                        .padding(.horizontal, 20)
+                        .font(.custom("Lato-Regular", size: 14))
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(2)
                 }
-                .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/5.5)
+                .frame(width: wRatio(220), height: wRatio(100))
+                .padding(10)
                 .background(
                     RoundedRectangle(cornerRadius: 15).fill(.white)
                         .myShadow(radiusShadow: 5)
                 )
                 
+                
                 Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width/1.2,
-                   height: UIScreen.main.bounds.height/1.5)
+            .padding(.top, wRatio(10))
+            .frame(width: wRatio(320),
+                   height: wRatio(220))
             
 
         }
@@ -84,3 +70,14 @@ struct LimitCashSourcesView: View {
     }
 }
 
+struct Previews_Limitation: PreviewProvider {
+    
+    static var previews: some View {
+     
+        MainScreen(isShowTabBar: .constant(false),
+                   limitCashSourcesViewShow: true)
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+//            .previewDisplayName("iPhone 14 Pro")
+            
+    }
+}

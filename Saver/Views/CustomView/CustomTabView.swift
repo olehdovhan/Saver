@@ -38,6 +38,7 @@ struct TabItem: Identifiable, Equatable{
 
 struct CustomTabView<Content: View>: View{
     @Binding var selection: Int
+    @Binding var isShow: Bool
     @State private var tabs: [TabItem] = [
         .init(text: "Home", icon: "tabIcon0"),
         .init(text: "Star", icon: "tabIcon1")
@@ -53,39 +54,33 @@ struct CustomTabView<Content: View>: View{
                 tabsView
             }
             
-            .frame(width: UIScreen.main.bounds.width, height: 140, alignment: .top)
-            .padding(.vertical, 5)
+            .frame(width: UIScreen.main.bounds.width, height: wRatio(90))
             .background(Color.white.ignoresSafeArea(edges: .bottom))
-            .cornerRadius(20)
-            .offset( y: 80)
+            .cornerRadius(20, corners: [.topLeft, .topRight])
             .shadow(color: Color.gray, radius: 15, x: 0, y: 0)
+            .opacity(isShow ? 1 : 0.0)
         }
         .onPreferenceChange(TabItemPreferenceKey.self) { value in
             self.tabs = value
         }
     }
     
-    init(selection: Binding<Int>, @ViewBuilder content: () -> Content) {
+    init(selection: Binding<Int>, isShow: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self.content = content()
         _selection = selection
+        _isShow = isShow
     }
     
     private var tabsView: some View{
         ForEach(Array(tabs.enumerated()), id: \.offset) { index, element in
             Spacer()
-            VStack(spacing: 5) {
                 Image(element.icon)
-                Text(element.text)
-                    .font(.system(size: 10))
-            }
-            .foregroundColor(selection == index ? .black : .green)
             .background(
                 ZStack{
                     if selection == index {
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 20)
                             .fill(.green.opacity(0.3))
-                            .frame(width: 60, height: 60, alignment: Alignment.top)
-                            .offset(y: -10)
+                            .frame(width: wRatio(80), height: wRatio(80))
                             .matchedGeometryEffect(id: "tabBarItem", in: tabBarItem)
                     }
                 }
@@ -94,7 +89,6 @@ struct CustomTabView<Content: View>: View{
             .onTapGesture {
                 withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.7)) {
                     selection = index
-                    print(index)
                 }
             }
             Spacer()
@@ -102,4 +96,16 @@ struct CustomTabView<Content: View>: View{
     }
     
     
+}
+
+struct CustomTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainScreen(isShowTabBar: .constant(true))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
+        
+        MainScreen(isShowTabBar: .constant(true))
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
+    }
 }

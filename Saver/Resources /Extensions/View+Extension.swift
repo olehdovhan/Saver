@@ -32,3 +32,33 @@ extension View {
         .navigationViewStyle(.stack)
     }
 }
+
+extension View {
+    func overlay<T: View>( overlayView: T, show: Binding<Bool>, ignoreSaveArea: Bool = true) -> some View {
+        self.modifier(Overlay.init(show: show, overlayView: overlayView, ignoreSaveArea: ignoreSaveArea))
+    }
+}
+
+struct Overlay<T: View>: ViewModifier {
+
+    @Binding var show: Bool
+    let overlayView: T
+    let ignoreSaveArea: Bool
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            if show {
+                if ignoreSaveArea {
+                    overlayView
+//                        .animation(.spring())
+                        .ignoresSafeArea(.all)
+                } else {
+                    overlayView
+                }
+            }
+        }
+    }
+}
+
+

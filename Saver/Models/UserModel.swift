@@ -57,6 +57,9 @@ struct UserModel: Codable {
     // Spendings
     var currentMonthSpendings: [ExpenseModel]?
     var previousMonthesSpendings: [ExpenseModel]?
+    
+    var currentMonthIncoms: [IncomeModel]?
+    var previousMonthesIncoms: [IncomeModel]?
 //    var totalDebtsPaymentPerMonth: Int {
 //        var sum = Int()
 //        for debt in debts {
@@ -173,6 +176,13 @@ struct ExpenseModel: Codable {
     var spentCategory: String
 }
 
+struct IncomeModel: Codable {
+    var amount: Double
+    var comment: String
+    var incomeDate: Date
+    var cashSource: String
+}
+
 struct DebtModel: Codable, Hashable {
     var whose: DebtEnum
     var name: String
@@ -203,6 +213,10 @@ struct CashSource: Codable, Hashable, Identifiable, Equatable {
     
     mutating func substractAmount(_ number: Double) {
         amount -= number
+    }
+    
+    mutating func increaseAmmount(_ number: Double){
+        amount += number
     }
 }
 

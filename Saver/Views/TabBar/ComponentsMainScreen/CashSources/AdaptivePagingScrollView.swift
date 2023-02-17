@@ -113,6 +113,7 @@ struct AdaptivePagingScrollView: View {
                 HStack(alignment: .top, spacing: itemSpacing) {
                     ForEach(items.indices, id: \.self) { itemIndex in
                         items[itemIndex].frame(width: itemWidth)
+//                            .opacity(<#T##opacity: Double##Double#>)
                     }
                     
                     
@@ -142,22 +143,24 @@ struct AdaptivePagingScrollView: View {
                 print("III  contentWidth \(contentWidth) coef \(contentWidth/UIScreen.main.bounds.width)")
                 print("III  itemPadding \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
                 print("III  leadingOffset \(leadingOffset) coef \(leadingOffset/UIScreen.main.bounds.width)")
-                  
                 print("III  currentScrollOffset \(currentScrollOffset) coef \(currentScrollOffset/UIScreen.main.bounds.width)")
                 print("III  gestureDragOffset \(gestureDragOffset) coef \(gestureDragOffset/UIScreen.main.bounds.width)")
             }
-            .background(Color.black.opacity(0.00001)) // hack - this allows gesture recognizing even when background is transparent
+            .background(Color.white.opacity(0.0025)) // hack - this allows gesture recognizing even when background is transparent
             .frame(width: contentWidth)
             .offset(x: self.currentScrollOffset, y: 0)
             .simultaneousGesture(
                 DragGesture(minimumDistance: 1, coordinateSpace: .local)
                     .onChanged { value in
+//                        if !expenseViewShow{
                         if draggingScroll == false {
                             gestureDragOffset = value.translation.width
                             currentScrollOffset = countCurrentScrollOffset()
-                        }
+//                        }
+                                    }
                     }
                     .onEnded { value in
+//                                                if !expenseViewShow{
                         let cleanOffset = (value.predictedEndTranslation.width - gestureDragOffset)
                         let velocityDiff = cleanOffset * scrollDampingFactor
                         
@@ -180,6 +183,7 @@ struct AdaptivePagingScrollView: View {
                             self.currentScrollOffset = self.countCurrentScrollOffset()
                         }
                     }
+//                    }
             )
        
         }

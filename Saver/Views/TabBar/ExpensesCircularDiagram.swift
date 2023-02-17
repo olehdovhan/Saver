@@ -10,33 +10,45 @@ import SwiftUI
 struct ExpensesCircularDiagram: View {
     
     @Binding var selectedTab: Int
+    @State var isPercent: Bool = true
     
     var body: some View {
-        ZStack {
-            VStack {
-                HStack {
-                    Text("Expenses")
-                        .foregroundColor(.black)
-                        .font(.custom("NotoSans-Regular", size: 16, relativeTo: .body))
-                    Spacer()
-                }
-                .padding(.leading, 28)
+        VStack(spacing: 0) {
+            HStack {
+                Text("Expenses".uppercased())
+                    .foregroundColor(.myGreen)
+                    .font(.custom("Lato-Bold", size: wRatio(25)))
+                Spacer()
                 
-                HStack {
-                    Spacer()
+                Button{
+                    isPercent = true
+                } label: {
                     Image("iconPercent")
                         .resizable()
                         .frame(width: 30, height: 30)
+                        .colorMultiply(isPercent ? .myGreen : .white)
+                        .shadow(radius: 5)
+                }
+                
+                Button{
+                    isPercent = false
+                } label: {
                     Image("iconDollar")
                         .resizable()
                         .frame(width: 30, height: 30)
+                        .colorMultiply(isPercent ? .white : .myGreen)
+                        .shadow(radius: 5)
                 }
-                .padding(.trailing, 27)
-                
-                PieChart(selectedTab: $selectedTab)
-                
-                Spacer()
             }
+            .padding(.horizontal, wRatio(25))
+            .padding(.top, 10)
+            
+            
+            PieChart(selectedTab: $selectedTab, isPercent: $isPercent)
+                
+            
+            Spacer()
         }
     }
 }
+

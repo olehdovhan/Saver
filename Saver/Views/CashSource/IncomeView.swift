@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct IncomeView: View {
     
     @Binding var closeSelf: Bool
-    @State  var cashSource: String
-    @State private var income = 0.0
+    @Binding  var cashSourceNameSelect: String
+    @State private var ammountIncome = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
@@ -19,165 +20,274 @@ struct IncomeView: View {
     @Binding var cashSources: [CashSource]
     
     private var enteredIncome: Bool {
-        switch income {
+        switch ammountIncome {
         case let x where x > 0.0:  return false
         default:                   return true
         }
     }
     
+    
     var body: some View {
         ZStack {
-            Color(hex: "C4C4C4").opacity(0.7)
-                .ignoresSafeArea()
+            SublayerView()
             
-            Color.white
-                .frame(width: 300,
-                       height: 500,
-                       alignment: .top)
-                .cornerRadius(25)
-                .shadow(radius: 25)
-            
-            VStack {
-                HStack {
-                    Text("Income")
-                        .foregroundColor(.black)
-                        .frame(alignment: .leading)
-                        .padding(.leading, 34)
-                    Spacer()
-                    Button {
-                        closeSelf = false
-                    }
-                     label: {
-                        Image("btnClose")
-                    }
-                     .frame( alignment: .trailing)
-                     .padding(.trailing, 16)
-                }
-                .frame(width: 300, alignment: .top)
-                .padding(.top, 24)
-            
-                TextField("Expense", value: $income, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                    .placeholder(when: income != 0.0) {
-                            Text("Expense").foregroundColor(.gray)
-                    }
+            Group{
+                WhiteCanvasView(width: wRatio(320), height: wRatio(340))
                 
-                    .foregroundColor(.black)
-                    .padding(.leading, 30)
-                    .padding(.trailing, 30)
-                    .keyboardType(.decimalPad)
-                    .focused(editing)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(editing.wrappedValue ? Color.red : Color.myGreen, lineWidth: 1)
-                    ).padding()
-                
-                HStack {
-                    Text("To")
-                        .foregroundColor(.black)
-                    Spacer()
-                    if let cashSources = FirebaseUserManager.shared.userModel?.cashSources {
-                        Picker("", selection: $cashSource) {
-                            ForEach(cashSources ,id: \.self) {
-                                Text($0.name)
-                            }
+                VStack(spacing: 0) {
+                    HStack{
+                        Text("Income")
+                            .textHeaderStyle()
+                        
+                        Spacer()
+                        
+                        DeleteSelfButtonView {
+                            deleteCashSource()
                         }
                         
-                        .colorMultiply(.black)
-                        
-                        .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                            .padding(.leading, -20)
-                            .padding(.trailing, -20)
-                        )
+                        CloseSelfButtonView($closeSelf)
                     }
-                }
-                .padding(.leading, 30)
-                .padding(.trailing, 60)
-                
-                
-                HStack {
-                    Text("Date")
-                        .foregroundColor(.black)
-                    Spacer()
-                    Image("calendar")
-                 
-                    DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
-                        .labelsHidden()
-                        .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                        )
-                        .id(expenseDate)
-                       // .foregroundColor(.red)
-                }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
-  
-                HStack {
-                    Text("Time")
-                        .foregroundColor(.black)
-                    Spacer()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.trailing, wRatio(10))
+                    .padding(.leading, wRatio(30))
+                    .padding(.bottom, wRatio(20))
                     
-                    DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
-                        .background( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                        )
-                }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
-                
-                HStack {
-                    Text("Comment")
-                        .foregroundColor(.black)
-                    Spacer()
-                    Spacer()
-                    Spacer()
-    
-                    TextField("Comment",text: $comment)
-                        .placeholder(when: comment.isEmpty) {
-                                Text("Comment").foregroundColor(.gray)
+                    VStack(spacing: 10){
+                        
+                        HStack{
+                            Text("Amount:")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                            TextField("", value: $ammountIncome, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                                .keyboardType(.decimalPad)
+                                .focused(editing)
+                                .foregroundColor(ammountIncome == 0.0 ? .gray : .black)
+                                .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
+                                .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                               
+                                
                         }
-                        .foregroundColor(.black)
-                        .frame(height: 50, alignment: .trailing)
-                        .overlay( RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .stroke( Color.myGreen, lineWidth: 1)
-                            .padding(.leading, -10)
-                            .padding(.trailing, -10)
-                        )
-                        .lineLimit(nil)
-                }
-                .padding(.leading,  30)
-                .padding(.trailing, 35)
-        
-                Spacer()
-                ImageButton(image: "btnDoneInactive", pressedImage: "btnDone", disabled: enteredIncome) {
-                    print("tap rap snap")
-                    print(enteredIncome)
-                }
-                Spacer()
-                Button("delete",role: .destructive) {
-                    
-                    if var user = FirebaseUserManager.shared.userModel {
-                        var sources = user.cashSources
-                        for (index,source) in sources.enumerated() {
-                            if source.name == cashSource {
-                                sources.remove(at: index)
+                        .padding(.leading,  wRatio(10))
+                        .padding(.trailing, wRatio(25))
+                        
+                        HStack {
+                            Text("To:")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                                
+                            Picker("", selection: $cashSourceNameSelect) {
+                                let cashSorcesNames = cashSources.map{$0.name}
+                                ForEach(cashSorcesNames, id: \.self) {
+                                    Text($0)
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                }
                             }
+                            .pickerStyle(.menu)
+                            .opacity(0.025)
+                            .frame(width: wRatio(120), height: wRatio(30))
+                            .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke( Color.myGreen, lineWidth: 1)
+                                .padding(.leading, wRatio(-10))
+                                .padding(.trailing, wRatio(-10))
+                            )
+                            .background(
+                                Text("\(cashSourceNameSelect)")
+                                    .foregroundColor(.myBlue)
+                                    .frame(width: wRatio(120), height: wRatio(30))
+                            )
+                            
                         }
-                        user.cashSources = sources
-                        FirebaseUserManager.shared.userModel = user
-                        if let cashes = FirebaseUserManager.shared.userModel?.cashSources {
-                            cashSources = cashes
+                        .padding(.leading,  wRatio(10))
+                        .padding(.trailing, wRatio(25))
+                        
+                        HStack {
+                            Text("Date")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                            Image("Calendar")
+                                .resizable()
+                                .frame(width: wRatio(30), height: wRatio(30))
+                                .padding(.trailing, wRatio(10))
+                            
+                            DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
+                                .frame(width: wRatio(120), height: wRatio(30))
+                                .labelsHidden()
+                                .opacity(0.025)
+                                .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                    .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text(expenseDate, format: Date.FormatStyle().year().month(.abbreviated).day())
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                        .foregroundColor(.myBlue)
+                                )
+                                .id(expenseDate)
                         }
+                        .padding(.leading,  wRatio(10))
+                        .padding(.trailing, wRatio(25))
+                        
+                        HStack {
+                            Text("Time")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke( Color.gray, lineWidth: 0.5)
+                                    .frame(width: wRatio(30), height: wRatio(30))
+                                
+                                Image("clock")
+                                    .resizable()
+                                    .frame(width: wRatio(20), height: wRatio(20))
+                                    .colorInvert()
+                                    .colorMultiply(.gray)
+                            }
+                            .padding(.trailing, wRatio(10))
+                            
+                            DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
+                                .frame(width: wRatio(120), height: wRatio(30))
+                                .labelsHidden()
+                                .frame(height: wRatio(30))
+                                .opacity(0.025)
+                                .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                    .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                                .background(
+                                    Text(expenseDate, style: .time)
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                        .foregroundColor(.myBlue)
+                                )
+                        }
+                        .padding(.leading,  wRatio(10))
+                        .padding(.trailing, wRatio(25))
+                        
+                        HStack {
+                            Text("Comment")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                            TextField("",text: $comment)
+                                .placeholder(when: comment.isEmpty) {
+                                    Text("Comment").foregroundColor(.gray)
+                                }
+                                .foregroundColor(.black)
+                                .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
+                                .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke( Color.myGreen, lineWidth: 1)
+                                    .padding(.leading, wRatio(-10))
+                                    .padding(.trailing, wRatio(-10))
+                                )
+                        }
+                        .padding(.leading,  wRatio(10))
+                        .padding(.trailing, wRatio(25))
+                    }
+                    
+                    Spacer()
+                    
+                    DoneButtonView(isValid: enteredIncome) {
+                        
+                        let incomeModel = IncomeModel(amount: ammountIncome,
+                                                      comment: comment,
+                                                      incomeDate: Date(),
+                                                      cashSource: cashSourceNameSelect)
+                        if var user = FirebaseUserManager.shared.userModel {
+                            if user.currentMonthIncoms == nil {
+                                var incomes = [IncomeModel]()
+                                incomes.append(incomeModel)
+                                user.currentMonthIncoms = incomes
+                            } else {
+                                user.currentMonthIncoms?.append(incomeModel)
+                            }
+                            
+                            var cashSourceIncreaseIndex: Int?
+                            for (index, source) in user.cashSources.enumerated() {
+                                if source.name == cashSourceNameSelect {
+                                    cashSourceIncreaseIndex = index
+                                }
+                            }
+                            
+                            if let index = cashSourceIncreaseIndex {
+                                user.cashSources[index].increaseAmmount(ammountIncome)
+                            }
+                            
+                            FirebaseUserManager.shared.userModel = user
+                        }
+                        
+                        
+                        
                         closeSelf = false
                     }
+                    
+                    Spacer()
                 }
+                .padding(.top, wRatio(10))
+                .frame(width: wRatio(320),
+                       height: wRatio(340))
+                
             }
-            .frame(width: 300,
-                   height: 500,
-                   alignment: .top)
+            .liftingViewAtKeyboardOpen()
+            
         }
-        .offset(y: -50)
+        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+        .onChange(of: cashSourceNameSelect) { _ in
+            print(cashSourceNameSelect)
+        }
     
     }
+    func deleteCashSource() -> Void{
+        if var user = FirebaseUserManager.shared.userModel {
+            var sources = user.cashSources
+            for (index,source) in sources.enumerated() {
+                if source.name == cashSourceNameSelect {
+                    sources.remove(at: index)
+                }
+            }
+            user.cashSources = sources
+            FirebaseUserManager.shared.userModel = user
+            if let cashes = FirebaseUserManager.shared.userModel?.cashSources {
+                cashSources = cashes
+            }
+            closeSelf = false
+        }
+    }
+    
 }
+
+struct Previews_Icome: PreviewProvider {
+    
+    static var previews: some View {
+     
+        MainScreen(isShowTabBar: .constant(false),
+                   incomeViewShow: true,
+                   cashSource: "Banc card",
+                   cashSources: [CashSource.init(name: "Banc card",
+                                                 amount: 1000,
+                                                 iconName: "")])
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
+            
+    }
+}
+
+

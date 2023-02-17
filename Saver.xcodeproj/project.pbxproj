@@ -94,13 +94,23 @@
 		FA9D14D328BC9D5100EEFA12 /* PurchaseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */; };
 		FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */; };
 		FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */; };
-		FAB594E328BB3F1A002D3916 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB594E228BB3F1A002D3916 /* Test.swift */; };
 		FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBD28B124410070F300 /* SaverApp.swift */; };
 		FABB4BC028B124410070F300 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BBF28B124410070F300 /* TabBarView.swift */; };
 		FABB4BC228B124420070F300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC128B124420070F300 /* Assets.xcassets */; };
 		FABB4BC528B124420070F300 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB4BC428B124420070F300 /* Preview Assets.xcassets */; };
 		FABB4BC728B124420070F300 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC628B124420070F300 /* Persistence.swift */; };
 		FABB4BCA28B124420070F300 /* Saver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FABB4BC828B124420070F300 /* Saver.xcdatamodeld */; };
+		FC4BE08D2999080E0086D8E5 /* CustomProgresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */; };
+		FC89D6A929955CC6004FB4A1 /* Shape+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6A829955CC5004FB4A1 /* Shape+Extension.swift */; };
+		FC89D6AE29955CED004FB4A1 /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */; };
+		FC89D6AF29955CED004FB4A1 /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */; };
+		FC89D6B029955CED004FB4A1 /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */; };
+		FC89D6B22996B416004FB4A1 /* Templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89D6B12996B416004FB4A1 /* Templates.swift */; };
+		FCA762422997FF380057D966 /* LimitPurchaseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */; };
+		FCD4A49E299C47880023BD55 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A49D299C47880023BD55 /* ImagePickerView.swift */; };
+		FCD4A4A0299C48A70023BD55 /* BalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A49F299C48A70023BD55 /* BalanceViewModel.swift */; };
+		FCD4A4A2299C57720023BD55 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A4A1299C57720023BD55 /* ImageCropper.swift */; };
+		FCD4A4A5299C58830023BD55 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = FCD4A4A4299C58830023BD55 /* CropViewController */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -183,7 +193,6 @@
 		FA9D14D228BC9D5100EEFA12 /* PurchaseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategory.swift; sourceTree = "<group>"; };
 		FA9D14D428BCCDE600EEFA12 /* PurchaseLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLocation.swift; sourceTree = "<group>"; };
 		FAB0DF0828C8C5AD006D78B9 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
-		FAB594E228BB3F1A002D3916 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		FABB4BBA28B124410070F300 /* Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABB4BBD28B124410070F300 /* SaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverApp.swift; sourceTree = "<group>"; };
 		FABB4BBF28B124410070F300 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -191,6 +200,16 @@
 		FABB4BC428B124420070F300 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FABB4BC628B124420070F300 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FABB4BC928B124420070F300 /* Saver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Saver.xcdatamodel; sourceTree = "<group>"; };
+		FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgresView.swift; sourceTree = "<group>"; };
+		FC89D6A829955CC5004FB4A1 /* Shape+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Extension.swift"; sourceTree = "<group>"; };
+		FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
+		FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
+		FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
+		FC89D6B12996B416004FB4A1 /* Templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Templates.swift; sourceTree = "<group>"; };
+		FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitPurchaseCategoryView.swift; sourceTree = "<group>"; };
+		FCD4A49D299C47880023BD55 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		FCD4A49F299C48A70023BD55 /* BalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewModel.swift; sourceTree = "<group>"; };
+		FCD4A4A1299C57720023BD55 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +223,7 @@
 				0CC4DC4D297BD6BB008D38EE /* FirebaseFirestoreSwift in Frameworks */,
 				0CC4DC47297BD6BB008D38EE /* FirebaseDatabase in Frameworks */,
 				0C44A0FC29910A020068DB27 /* GoogleSignInSwift in Frameworks */,
+				FCD4A4A5299C58830023BD55 /* CropViewController in Frameworks */,
 				0CC4DC4F297BD6BB008D38EE /* FirebaseStorage in Frameworks */,
 				0CC4DC41297BD6BB008D38EE /* FirebaseAnalytics in Frameworks */,
 				0CC4DC4B297BD6BB008D38EE /* FirebaseFirestore in Frameworks */,
@@ -242,12 +262,14 @@
 		0C6A1B1A29489ED7006E7C13 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FC89D6AA29955CEC004FB4A1 /* Keyboard */,
 				B4A9AA9528B26114001230BF /* Color+Extension.swift */,
 				0C6A1B1B29489F13006E7C13 /* UIApplication+Extension.swift */,
 				0C4343BB296418D300B511E8 /* Date+Extension.swift */,
 				0CA003812972CE1A00E9DF89 /* View+Extension.swift */,
 				0C967743298FBD2E00220018 /* Collection+Extension.swift */,
 				0C967745298FBE8C00220018 /* Encodable+Extension.swift */,
+				FC89D6A829955CC5004FB4A1 /* Shape+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -294,6 +316,7 @@
 			children = (
 				0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */,
 				0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */,
+				FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */,
 			);
 			path = PurchaseCategory;
 			sourceTree = "<group>";
@@ -433,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				B458555628B1AB660047C81E /* CustomTabView.swift */,
+				FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -445,6 +469,9 @@
 				66130993295DD7B100275F16 /* CashSources */,
 				B4A9AA9E28B27878001230BF /* StatisticsPlace.swift */,
 				B4A9AAA128B27EAB001230BF /* PurchaseCategoriesView.swift */,
+				FCD4A49D299C47880023BD55 /* ImagePickerView.swift */,
+				FCD4A49F299C48A70023BD55 /* BalanceViewModel.swift */,
+				FCD4A4A1299C57720023BD55 /* ImageCropper.swift */,
 			);
 			path = ComponentsMainScreen;
 			sourceTree = "<group>";
@@ -497,9 +524,9 @@
 				0CE7527D294F08A20092651C /* Debts */,
 				0CE75276294F082F0092651C /* Goals */,
 				FA7B94B928C61A3600772845 /* ExpenseView */,
-				FAB594E228BB3F1A002D3916 /* Test.swift */,
 				B41618B228B135CE002629F7 /* TabBar */,
 				B458555828B1AB7F0047C81E /* CustomView */,
+				FC89D6B12996B416004FB4A1 /* Templates.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -563,6 +590,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		FC89D6AA29955CEC004FB4A1 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				FC89D6AB29955CEC004FB4A1 /* UIResponder+Current.swift */,
+				FC89D6AC29955CEC004FB4A1 /* KeyboardHeightPublisher.swift */,
+				FC89D6AD29955CEC004FB4A1 /* KeyboardAdaptive.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -590,6 +627,7 @@
 				0CC4DC4E297BD6BB008D38EE /* FirebaseStorage */,
 				0C44A0F929910A020068DB27 /* GoogleSignIn */,
 				0C44A0FB29910A020068DB27 /* GoogleSignInSwift */,
+				FCD4A4A4299C58830023BD55 /* CropViewController */,
 			);
 			productName = Saver;
 			productReference = FABB4BBA28B124410070F300 /* Saver.app */;
@@ -622,6 +660,7 @@
 			packageReferences = (
 				0CC4DC3F297BD6BB008D38EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				0C44A0F829910A020068DB27 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				FCD4A4A3299C58830023BD55 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = FABB4BBB28B124410070F300 /* Products */;
 			projectDirPath = "";
@@ -661,9 +700,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C1B531297377B4008E1BAE /* ForgotPasswordView.swift in Sources */,
+				FC89D6A929955CC6004FB4A1 /* Shape+Extension.swift in Sources */,
 				B4A9AAA228B27EAB001230BF /* PurchaseCategoriesView.swift in Sources */,
 				66548D512972C077003D2AA0 /* RegistrationViewModel.swift in Sources */,
 				0C4343BC296418D300B511E8 /* Date+Extension.swift in Sources */,
+				FCD4A4A0299C48A70023BD55 /* BalanceViewModel.swift in Sources */,
 				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
 				66548D592972DEE1003D2AA0 /* TextField+Extension.swift in Sources */,
 				66130997295F579700275F16 /* CashSourceView.swift in Sources */,
@@ -675,13 +716,13 @@
 				0C967746298FBE8C00220018 /* Encodable+Extension.swift in Sources */,
 				66AA407729512692002A2359 /* Task.swift in Sources */,
 				0C6A1B1929488B37006E7C13 /* AddIconsView.swift in Sources */,
-				FAB594E328BB3F1A002D3916 /* Test.swift in Sources */,
 				0CE7527C294F08980092651C /* DetailGoalView.swift in Sources */,
 				66548D532972CA58003D2AA0 /* RegistrationTFState.swift in Sources */,
 				B4A9AA9928B269D1001230BF /* Modifiers.swift in Sources */,
 				66548D5F2973178C003D2AA0 /* LoginViewModel.swift in Sources */,
 				0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */,
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
+				FCD4A49E299C47880023BD55 /* ImagePickerView.swift in Sources */,
 				0CA0037F2972C00A00E9DF89 /* AuthView.swift in Sources */,
 				66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */,
 				0C4C60CC297EA30E00D040DC /* MainScreenViewModel.swift in Sources */,
@@ -701,15 +742,20 @@
 				FABB4BBE28B124410070F300 /* SaverApp.swift in Sources */,
 				B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */,
 				0C02F0D3293E109D0033ED65 /* IncomeView.swift in Sources */,
+				FC89D6AF29955CED004FB4A1 /* KeyboardHeightPublisher.swift in Sources */,
 				FA6C156128C7778F0079AF6B /* CashSource.swift in Sources */,
 				0C979294294E1833000D80A2 /* AddPurchaseCategoryView.swift in Sources */,
 				B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */,
+				FCA762422997FF380057D966 /* LimitPurchaseCategoryView.swift in Sources */,
 				0C6A1B1C29489F13006E7C13 /* UIApplication+Extension.swift in Sources */,
 				0C4C60D1297F114F00D040DC /* TaskFirModel.swift in Sources */,
+				FC89D6AE29955CED004FB4A1 /* UIResponder+Current.swift in Sources */,
 				66548D572972CD0B003D2AA0 /* AuthTextfieldModifier.swift in Sources */,
+				FC89D6B029955CED004FB4A1 /* KeyboardAdaptive.swift in Sources */,
 				0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */,
 				0C0220302973484600F5D030 /* AuthButton.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
+				FC89D6B22996B416004FB4A1 /* Templates.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,
 				66C1B53B2975BFE0008E1BAE /* Onboarding.swift in Sources */,
 				66AA4073295125CE002A2359 /* SpendingsCalendarView.swift in Sources */,
@@ -728,8 +774,10 @@
 				66AA407529512654002A2359 /* Transaction.swift in Sources */,
 				B41618B428B1361C002629F7 /* MainScreen.swift in Sources */,
 				0C67F3B4293C961D002384D4 /* FirebaseUserManager.swift in Sources */,
+				FCD4A4A2299C57720023BD55 /* ImageCropper.swift in Sources */,
 				FAB0DF0928C8C5AD006D78B9 /* ImageButton.swift in Sources */,
 				B4A9AA9B28B2708C001230BF /* BalanceView.swift in Sources */,
+				FC4BE08D2999080E0086D8E5 /* CustomProgresView.swift in Sources */,
 				B4E94DC328BDD93B0054B16F /* CustomAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -957,6 +1005,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		FCD4A4A3299C58830023BD55 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1009,6 +1065,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0CC4DC3F297BD6BB008D38EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		FCD4A4A4299C58830023BD55 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCD4A4A3299C58830023BD55 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
 		};
 /* End XCSwiftPackageProductDependency section */
 
