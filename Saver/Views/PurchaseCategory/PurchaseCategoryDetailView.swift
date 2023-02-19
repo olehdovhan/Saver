@@ -105,6 +105,7 @@ struct PurchaseCategoryDetailView: View {
         .frame(width: wRatio(320),
                height: wRatio(320))
       }
+        
     
    }
     
@@ -182,12 +183,16 @@ struct PurchaseCategoryDetailView: View {
 
 struct Previews_PurchaseCategoryDetailView: PreviewProvider {
     static var previews: some View {
-        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
+        PurchaseCategoryDetailView(closeSelf: .constant(false),
+                                   purchaseCategories: .constant([]),
+                                   category: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000), monthlyAmount: "2000", currentMonthSpendings: 1000)
+        
+//        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
             .previewDevice(PreviewDevice(rawValue: "iPhone 7 Plus"))
             .previewDisplayName("iPhone 7 Plus")
         
-        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-            .previewDisplayName("iPhone 14 Pro")
+//        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+//            .previewDisplayName("iPhone 14 Pro")
     }
 }

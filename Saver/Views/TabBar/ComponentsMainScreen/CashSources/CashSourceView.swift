@@ -14,8 +14,10 @@ struct CashSourceView: View {
     var index: Int
     @Binding var incomeViewShow: Bool
     @Binding var cashSource: String
+    @Binding var cashSourceReceiver: String
       var cashSourcesCount: Int
     @Binding var expenseViewShow: Bool
+    @Binding var isTransferViewShow: Bool
     @Binding var purchaseType: String
 
     
@@ -51,10 +53,12 @@ struct CashSourceView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .delaysTouches(for: 0.2) {  }
                                 .draggable(zIndex: $firstZ,
-                                           isAlertShow: $expenseViewShow,
+                                           isPurchaseDetected: $expenseViewShow,
+                                           isCashSourceReceiverDetected: $isTransferViewShow,
                                            purchaseType: $purchaseType,
                                            cashType: cashSourceItem.name,
                                            cashSource: $cashSource,
+                                           cashSourceReceiver: $cashSourceReceiver,
                                            draggingItem: $draggingItem)
                             
                         }
@@ -90,10 +94,12 @@ struct CashSourceView: View {
                             .zIndex(100)
                             .delaysTouches(for: 0.2) {  }
                             .draggable(zIndex: $firstZ,
-                                       isAlertShow: $expenseViewShow,
+                                       isPurchaseDetected: $expenseViewShow,
+                                       isCashSourceReceiverDetected: $isTransferViewShow,
                                        purchaseType: $purchaseType,
                                        cashType: cashSourceItem.name,
                                        cashSource: $cashSource,
+                                       cashSourceReceiver: $cashSourceReceiver,
                                        draggingItem: $draggingItem)
                             
                         }

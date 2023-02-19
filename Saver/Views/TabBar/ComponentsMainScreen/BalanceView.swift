@@ -73,6 +73,9 @@ struct BalanceView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-Bold", size: 16, relativeTo: .body))
                         }
+                        .onTapGesture {
+                            print("AAA locations: \(CashSourceLocation.standard.locations)")
+                        }
                         
                         Spacer()
                         

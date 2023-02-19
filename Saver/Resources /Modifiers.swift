@@ -11,7 +11,33 @@ import Combine
 fileprivate let wScreen = 390.0
 fileprivate let hScreen = 844.0
 
-
+struct GetLocationCashSourcesModifier: ViewModifier{
+    var source: CashSource
+    var offset: CGFloat
+    
+    func body(content: Content) -> some View {
+        
+        content
+            .overlay(
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear {
+                            updateLocation(proxy: geo)
+                            
+                        }
+                        .onChange(of: offset) { newValue in
+                            updateLocation(proxy: geo)
+                        }
+                }
+            )
+    }
+    
+    fileprivate func updateLocation(proxy: GeometryProxy) {
+        let location = CGPoint(x: proxy.frame(in: .global).midX,
+                               y: proxy.frame(in: .global).midY)
+        CashSourceLocation.standard.locations[source.name] = location
+    }
+}
 
 
 struct ShadowCustom : ViewModifier{
@@ -67,6 +93,10 @@ struct TextHeaderStyle: ViewModifier{
 
 extension View {
  
+    func getLocationCashSources(source: CashSource, offset: CGFloat) -> some View{
+        modifier(GetLocationCashSourcesModifier(source: source,
+                                                offset: offset))
+    }
     
     func textHeaderStyle() -> some View{
         modifier(TextHeaderStyle())
@@ -95,12 +125,22 @@ extension View {
     
     
     func draggable(zIndex: Binding<Double>,
-                   isAlertShow: Binding<Bool>,
+                   isPurchaseDetected: Binding<Bool>,
+                   isCashSourceReceiverDetected: Binding<Bool>,
                    purchaseType: Binding<String>,
                    cashType: String ,
                    cashSource: Binding<String>,
+                   cashSourceReceiver: Binding<String>,
                    draggingItem: Binding<Bool>) -> some View {
-        modifier(DragGestureCustom(zIndex: zIndex, isAlertShow: isAlertShow, purchaseType: purchaseType, cashType: cashType, cashSource: cashSource, draggingItem: draggingItem))
+        
+        modifier(DragGestureCustom(zIndex: zIndex,
+                                   isPurchaseDetected: isPurchaseDetected,
+                                   isCashSourceReceiverDetected: isCashSourceReceiverDetected,
+                                   purchaseType: purchaseType,
+                                   cashType: cashType,
+                                   cashSource: cashSource,
+                                   cashSourceReceiver: cashSourceReceiver,
+                                   draggingItem: draggingItem))
     }
 }
 
@@ -110,10 +150,12 @@ struct DragGestureCustom: ViewModifier {
     @State var currentOffsetX: CGFloat = 0
     @State var currentOffsetY: CGFloat = 0
     @Binding var zIndex: Double
-    @Binding var isAlertShow: Bool
+    @Binding var isPurchaseDetected: Bool
+    @Binding var isCashSourceReceiverDetected: Bool
     @Binding var purchaseType: String
     @State var cashType: String
     @Binding var cashSource: String
+    @Binding var cashSourceReceiver: String
     @Binding var draggingItem: Bool
    
     var drag: some Gesture{
@@ -121,38 +163,59 @@ struct DragGestureCustom: ViewModifier {
             .onChanged({ value in
                 draggingItem = true
                 withAnimation {
-                    zIndex = 5
+                    zIndex = 100
                     currentOffsetX = value.translation.width
                     currentOffsetY = value.translation.height
                     isDraggingItem.toggle()
                 }
 //                print(value.location.y)
                
+               
             })
             .onEnded { gesture in
                 draggingItem = false
-                var locs = PurchaseLocation.standard.locations
+                let purchaseLocations = PurchaseLocation.standard.locations
+//                let cashSourceLocations = CashSourceLocation.standard.locations
                 
-                for item in locs {
-                    let startXRange = item.value.x - 35
-                    let finisXRange = item.value.x + 35
+                for purchaseItem in purchaseLocations {
+                    let startXRange = purchaseItem.value.x - 35
+                    let finisXRange = purchaseItem.value.x + 35
                     let xRange = startXRange...finisXRange
                     
-                    let startYRange = item.value.y - 35
-                    let finishYRange = item.value.y + 35
+                    let startYRange = purchaseItem.value.y - 35
+                    let finishYRange = purchaseItem.value.y + 35
                     let yRange = startYRange...finishYRange
                     
                     if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
 
-                        purchaseType = item.key
+                        purchaseType = purchaseItem.key
                         cashSource = cashType
-                        isAlertShow.toggle()
+                        isPurchaseDetected.toggle()
+                    }
+                }
+                let cashSourceLocations = CashSourceLocation.standard.locations
+                for cashSourceItem in cashSourceLocations {
+                    let startXRange = cashSourceItem.value.x - 35
+                    let finisXRange = cashSourceItem.value.x + 35
+                    let xRange = startXRange...finisXRange
+
+                    let startYRange = cashSourceItem.value.y - 35
+                    let finishYRange = cashSourceItem.value.y + 35
+                    let yRange = startYRange...finishYRange
+
+                    if xRange.contains(gesture.location.x) && yRange.contains(gesture.location.y) {
+                        cashSourceReceiver = cashSourceItem.key
+                        cashSource = cashType
+                        
+                        print("AAA with \(cashSource) to \(cashSourceReceiver)")
+                        if cashSource != cashSourceReceiver{
+                            isCashSourceReceiverDetected.toggle()
+                        }
                     }
                 }
                     
                 if abs(gesture.location.x) > 49 && abs(gesture.location.x) < 95 && abs(gesture.location.y) > 419 && abs(gesture.location.y) < 470 {
                  
-                    print("moped")
                     withAnimation(.spring()) {
                         zIndex = 1
                         isDraggingItem.toggle()

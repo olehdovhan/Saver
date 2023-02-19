@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct CashSourceLocation {
+    
+    var locations: [String: CGPoint]
+    
+    static var standard = CashSourceLocation(locations: [String : CGPoint]())
+    
+}

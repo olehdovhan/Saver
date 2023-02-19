@@ -1,49 +1,38 @@
 //
-//  IncomeView.swift
+//  CashSourceTransferView.swift
 //  Saver
 //
-//  Created by Oleh Dovhan on 05.12.2022.
+//  Created by Oleh on 19.02.2023.
 //
 
 import SwiftUI
 import Combine
 
-struct IncomeView: View {
+struct CashSourceTransferView: View {
+    
+    @ObservedObject private var viewModel = CashSourceTransferViewModel()
     
     @Binding var closeSelf: Bool
-    @Binding  var cashSourceNameSelect: String
-    @State private var ammountIncome = 0.0
-    @State private var comment = ""
-    @State private var isDone = false
-    @State private var expenseDate = Date.now
+    @State var cashSourceProvider: String
+    @State var cashSourceReceiver: String
     @State var editing: FocusState<Bool>.Binding
-    @Binding var cashSources: [CashSource]
-    
-    private var enteredIncome: Bool {
-        switch ammountIncome {
-        case let x where x > 0.0:  return false
-        default:                   return true
-        }
-    }
-    
+    @State var cashSources: [String]
     
     var body: some View {
+        
         ZStack {
             SublayerView()
             
             Group{
-                WhiteCanvasView(width: wRatio(320), height: wRatio(340))
+                WhiteCanvasView(width: wRatio(320), height: wRatio(380))
                 
                 VStack(spacing: 0) {
+                  
                     HStack{
-                        Text("Income")
+                        Text("Transfer")
                             .textHeaderStyle()
                         
                         Spacer()
-                        
-                        DeleteSelfButtonView {
-                            deleteCashSource()
-                        }
                         
                         CloseSelfButtonView($closeSelf)
                     }
@@ -61,33 +50,29 @@ struct IncomeView: View {
                             
                             Spacer()
                             
-                            TextField("", value: $ammountIncome, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                                .keyboardType(.decimalPad)
-                                .focused(editing)
-                                .foregroundColor(ammountIncome == 0.0 ? .gray : .black)
+                            TextField("", value: $viewModel.transferAmount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                                .foregroundColor(viewModel.transferAmount == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke( Color.myGreen, lineWidth: 1)
+                                    .stroke(Color.myGreen, lineWidth: 1)
                                     .padding(.leading, wRatio(-10))
                                     .padding(.trailing, wRatio(-10))
                                 )
-                               
-                                
+                                .keyboardType(.decimalPad)
+                                .focused(editing)
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
                         
                         HStack {
-                            Text("To:")
+                            Text("From")
                                 .foregroundColor(.myGrayDark)
                                 .font(.custom("NotoSansDisplay-Medium", size: 14))
                             
                             Spacer()
                             
-                                
-                            Picker("", selection: $cashSourceNameSelect) {
-                                let cashSorcesNames = cashSources.map{$0.name}
-                                ForEach(cashSorcesNames, id: \.self) {
+                            Picker("", selection: $cashSourceProvider) {
+                                ForEach(cashSources, id: \.self) {
                                     Text($0)
                                         .frame(width: wRatio(120), height: wRatio(30))
                                 }
@@ -101,11 +86,42 @@ struct IncomeView: View {
                                 .padding(.trailing, wRatio(-10))
                             )
                             .background(
-                                Text("\(cashSourceNameSelect)")
+                                Text("\(cashSourceProvider)")
                                     .foregroundColor(.myBlue)
                                     .frame(width: wRatio(120), height: wRatio(30))
                             )
                             
+                        }
+                        .padding(.leading,  wRatio(10))
+                        .padding(.trailing, wRatio(25))
+                        
+                        HStack {
+                            Text("To")
+                                .foregroundColor(.myGrayDark)
+                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            
+                            Spacer()
+                            
+                            Picker("", selection: $cashSourceReceiver) {
+                                ForEach(cashSources, id: \.self) {
+                                    Text($0)
+                                        .frame(width: wRatio(120), height: wRatio(30))
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .opacity(0.025)
+                            .colorMultiply(.black)
+                                .frame(width: wRatio(120), height: wRatio(30))
+                            .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke( Color.myGreen, lineWidth: 1)
+                                .padding(.leading, wRatio(-10))
+                                .padding(.trailing, wRatio(-10))
+                            )
+                            .background(
+                                Text("\(cashSourceReceiver)")
+                                    .foregroundColor(.myBlue)
+                                    .frame(width: wRatio(120), height: wRatio(30))
+                            )
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
@@ -122,7 +138,7 @@ struct IncomeView: View {
                                 .frame(width: wRatio(30), height: wRatio(30))
                                 .padding(.trailing, wRatio(10))
                             
-                            DatePicker("", selection: $expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
+                            DatePicker("", selection: $viewModel.expenseDate,in: ...(Date.now + 86400) , displayedComponents: .date)
                                 .frame(width: wRatio(120), height: wRatio(30))
                                 .labelsHidden()
                                 .opacity(0.025)
@@ -132,11 +148,11 @@ struct IncomeView: View {
                                     .padding(.trailing, wRatio(-10))
                                 )
                                 .background(
-                                    Text(expenseDate, format: Date.FormatStyle().year().month(.abbreviated).day())
+                                    Text(viewModel.expenseDate, format: Date.FormatStyle().year().month(.abbreviated).day())
                                         .frame(width: wRatio(120), height: wRatio(30))
                                         .foregroundColor(.myBlue)
                                 )
-                                .id(expenseDate)
+                                .id(viewModel.expenseDate)
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
@@ -158,13 +174,13 @@ struct IncomeView: View {
                                     .frame(width: wRatio(20), height: wRatio(20))
                                     .colorInvert()
                                     .colorMultiply(.gray)
+                                
                             }
                             .padding(.trailing, wRatio(10))
                             
-                            DatePicker("", selection: $expenseDate, displayedComponents: .hourAndMinute)
+                            DatePicker("", selection: $viewModel.expenseDate, displayedComponents: .hourAndMinute)
                                 .frame(width: wRatio(120), height: wRatio(30))
                                 .labelsHidden()
-                                .frame(height: wRatio(30))
                                 .opacity(0.025)
                                 .overlay( RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
@@ -172,7 +188,7 @@ struct IncomeView: View {
                                     .padding(.trailing, wRatio(-10))
                                 )
                                 .background(
-                                    Text(expenseDate, style: .time)
+                                    Text(viewModel.expenseDate, style: .time)
                                         .frame(width: wRatio(120), height: wRatio(30))
                                         .foregroundColor(.myBlue)
                                 )
@@ -187,8 +203,8 @@ struct IncomeView: View {
                             
                             Spacer()
                             
-                            TextField("",text: $comment)
-                                .placeholder(when: comment.isEmpty) {
+                            TextField("",text: $viewModel.comment)
+                                .placeholder(when: viewModel.comment.isEmpty) {
                                     Text("Comment").foregroundColor(.gray)
                                 }
                                 .foregroundColor(.black)
@@ -201,94 +217,42 @@ struct IncomeView: View {
                         }
                         .padding(.leading,  wRatio(10))
                         .padding(.trailing, wRatio(25))
+                        
+                        
                     }
                     
                     Spacer()
-                    
-                    DoneButtonView(isValid: enteredIncome) {
                         
-                        let incomeModel = IncomeModel(amount: ammountIncome,
-                                                      comment: comment,
-                                                      incomeDate: Date(),
-                                                      cashSource: cashSourceNameSelect)
-                        if var user = FirebaseUserManager.shared.userModel {
-                            if user.currentMonthIncoms == nil {
-                                var incomes = [IncomeModel]()
-                                incomes.append(incomeModel)
-                                user.currentMonthIncoms = incomes
-                            } else {
-                                user.currentMonthIncoms?.append(incomeModel)
-                            }
-                            
-                            var cashSourceIncreaseIndex: Int?
-                            for (index, source) in user.cashSources.enumerated() {
-                                if source.name == cashSourceNameSelect {
-                                    cashSourceIncreaseIndex = index
-                                }
-                            }
-                            
-                            if let index = cashSourceIncreaseIndex {
-                                user.cashSources[index].increaseAmmount(ammountIncome)
-                            }
-                            
-                            FirebaseUserManager.shared.userModel = user
+                    DoneButtonView(isValid: viewModel.isEnteredTransferAmount) {
+                            viewModel.addAndCalculateTransferAmount(from: cashSourceProvider,
+                                                                    to: cashSourceReceiver)
+                            closeSelf = false
                         }
                         
                         
-                        
-                        closeSelf = false
-                    }
-                    
                     Spacer()
                 }
                 .padding(.top, wRatio(10))
                 .frame(width: wRatio(320),
-                       height: wRatio(340))
+                       height: wRatio(380))
                 
             }
             .liftingViewAtKeyboardOpen()
             
-        }
-        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-        .onChange(of: cashSourceNameSelect) { _ in
-            print(cashSourceNameSelect)
-        }
-       
-    
-    }
-    func deleteCashSource() -> Void{
-        if var user = FirebaseUserManager.shared.userModel {
-            var sources = user.cashSources
-            for (index,source) in sources.enumerated() {
-                if source.name == cashSourceNameSelect {
-                    sources.remove(at: index)
-                }
-            }
-            user.cashSources = sources
-            FirebaseUserManager.shared.userModel = user
-            if let cashes = FirebaseUserManager.shared.userModel?.cashSources {
-                cashSources = cashes
-            }
-            closeSelf = false
-        }
-    }
-    
-}
-
-struct Previews_Icome: PreviewProvider {
-    
-    static var previews: some View {
-     
-        MainScreen(isShowTabBar: .constant(false),
-                   incomeViewShow: true,
-                   cashSource: "Bank card",
-                   cashSources: [CashSource.init(name: "Bank card",
-                                                 amount: 1000,
-                                                 iconName: "")])
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-            .previewDisplayName("iPhone 14 Pro")
             
+            
+            
+            
+        }
+        .onAppear() {
+            
+        }
+        
     }
 }
 
-
+//struct CashSourceTransferView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CashSourceTransferView()
+//    }
+//}

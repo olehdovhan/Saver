@@ -13,13 +13,16 @@ struct MainScreen: View {
     
     @State var showQuitAlert = false
     @State var expenseViewShow = false
+    @State var isTransferViewShow = false
     @State var incomeViewShow = false
     @State var addCashSourceViewShow = false
     @State var addPurchaseCategoryViewShow = false
     @State var purchaseDetailViewShow = false
     @State var limitCashSourcesViewShow = false
     @State var limitPurchaseCategoryViewShow = false
+    @State var currentScrollOffset: CGFloat = 0
     @State var cashSource: String = ""
+    @State var cashSourceReceiver: String = ""
     @State var expenseType: String = ""
     @FocusState var editing: Bool
     @State var cashSources: [CashSource] = []
@@ -46,7 +49,7 @@ struct MainScreen: View {
     @State var progress = true
     
     var isBlur: Bool{
-        limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow
+        limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow || isTransferViewShow
     }
     
     @Environment(\.presentationMode) var presentationMode
@@ -79,19 +82,23 @@ struct MainScreen: View {
                         .padding(.bottom, 15)
                     
                     GeometryReader { geometry in
-                        AdaptivePagingScrollView(addCashSourceViewShow: $addCashSourceViewShow,
-                                                 incomeViewShow: $incomeViewShow,
-                                                 expenseViewShow: $expenseViewShow,
-                                                 purchaseType: $expenseType,
-                                                 cashSource: $cashSource,
-                                                 cashSources: $cashSources,
-                                                 currentPageIndex: self.$activePageIndex,
-                                                 draggingScroll: self.$draggingScroll,
-                                                 itemsAmount:    cashSources.count - 1,
-                                                 itemWidth: self.itemWidth,
-                                                 itemPadding: self.itemPadding,
-                                                 pageWidth: geometry.size.width,
-                                                 limitCashSourcesViewShow: $limitCashSourcesViewShow) {
+                        AdaptivePagingScrollView(
+                            addCashSourceViewShow: $addCashSourceViewShow,
+                            incomeViewShow: $incomeViewShow,
+                            expenseViewShow: $expenseViewShow,
+                            purchaseType: $expenseType,
+                            cashSource: $cashSource,
+                            cashSourceReceiver: $cashSourceReceiver,
+                            cashSources: $cashSources,
+                            currentPageIndex: self.$activePageIndex,
+                            draggingScroll: self.$draggingScroll,
+                            itemsAmount:    cashSources.count - 1,
+                            itemWidth: self.itemWidth,
+                            itemPadding: self.itemPadding,
+                            pageWidth: geometry.size.width,
+                            limitCashSourcesViewShow: $limitCashSourcesViewShow,
+                            currentScrollOffset: $currentScrollOffset
+                        ) {
                             
                             ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                                 GeometryReader{ screen in
@@ -100,16 +107,20 @@ struct MainScreen: View {
                                                    index: index,
                                                    incomeViewShow: $incomeViewShow,
                                                    cashSource: $cashSource,
+                                                   cashSourceReceiver: $cashSourceReceiver,
                                                    cashSourcesCount: cashSources.count,
                                                    expenseViewShow: $expenseViewShow,
+                                                   isTransferViewShow: $isTransferViewShow,
                                                    purchaseType: $expenseType
                                     )
+                                    .getLocationCashSources(source: source,
+                                                            offset: currentScrollOffset)
                                 }
                                 .frame(width: self.itemWidth, height: 70)
                             }
                         }
                     }
-                    //                .zIndex(draggingItem ? 10 : -2)
+                                    .zIndex(draggingItem ? 10 : -2)
                     .zIndex(3)
                     .onChange(of: addCashSourceViewShow) { newValue in
                         if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources }
@@ -175,6 +186,16 @@ struct MainScreen: View {
                                                monthlyAmount: amountCurrentMonthSpendingSelectedCategory)
                 }
                 
+                if isTransferViewShow,
+                   let cashes = FirebaseUserManager.shared.userModel?.cashSources,
+                   let cashSources = cashes.map { $0.name}{
+                    CashSourceTransferView(closeSelf: $isTransferViewShow,
+                                           cashSourceProvider: cashSource,
+                                           cashSourceReceiver: cashSourceReceiver,
+                                           editing: $editing,
+                                           cashSources: cashSources)
+                }
+                
                 if limitCashSourcesViewShow{
                     LimitCashSourcesView(closeSelf: $limitCashSourcesViewShow)
                 }
@@ -213,6 +234,12 @@ struct MainScreen: View {
         .onChange(of: addPurchaseCategoryViewShow) { isShowTabBar = !$0 }
         .onChange(of: purchaseDetailViewShow) { isShowTabBar = !$0 }
         .onChange(of: incomeViewShow) { isShowTabBar = !$0 }
+        .onChange(of: isTransferViewShow) { newValue in
+            if isTransferViewShow{
+                print("AAA: isTransferViewShow: with \(cashSource) to \(cashSourceReceiver)")
+            }
+            isShowTabBar = !isTransferViewShow
+        }
         .onChange(of: expenseViewShow) { isShowTabBar = !$0
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources
@@ -221,6 +248,7 @@ struct MainScreen: View {
                 }
             }
         }
+        
         .onAppear() {
             FirebaseUserManager.shared.observeUser {
                 currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
