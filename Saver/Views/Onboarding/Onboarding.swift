@@ -34,12 +34,11 @@ struct OnboardingView: View {
                             buttonText: "Go!",
                             calculatedHeight: $calculatedHeight) {
                     print("Press Button <Go> in One Onboarding")
-                    userState = .acquainted
+                    userState = .signedIn
                 }
-                            .tag(true)
+                    .tag(true)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            
             
             VStack(spacing: 0){
                 Rectangle().fill(.clear).frame(width: screenW, height: calculatedHeight).opacity(0.01)
@@ -50,7 +49,7 @@ struct OnboardingView: View {
                         .frame(width: wRatio(20), height: wRatio(20))
                         
                         .onTapGesture {
-                                showSecondOnboard = false
+                            showSecondOnboard = false
                         }
                         .offset(x: -(wRatio(20)))
                     
@@ -59,7 +58,7 @@ struct OnboardingView: View {
                         .frame(width: wRatio(20), height: wRatio(20))
                         
                         .onTapGesture {
-                                showSecondOnboard = true
+                            showSecondOnboard = true
                         }
                         .offset(x: wRatio(20))
                     
@@ -72,7 +71,6 @@ struct OnboardingView: View {
                 }
                 .scaleEffect(onAppear ? 1 : 0.025)
                 .offset(y: -(wRatio(30)))
-                
                 
                 Spacer()
             }
@@ -90,10 +88,9 @@ struct OnboardingView: View {
 
 struct Onboarding_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(userState: .constant(.registeredAuthorized))
+        OnboardingView(userState: .constant(.signedIn))
     }
 }
-
 
 struct OnboardView: View{
     @Binding var showSecondOnboard: Bool

@@ -29,22 +29,21 @@ struct SaverApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @State var userState = UserState.registeredUnauthorized
+    @State var userState = UserState.firstTimeSignedIn
     @State var progress = true
-    
     
     var body: some Scene {
         WindowGroup {
             NavigationView{
                 ZStack{
                     switch userState {
-                    case .registeredAuthorized:
+                    case .signedIn:
                         TabBarView()
-                    case .registeredUnauthorized:
+                    case .firstTimeSignedIn:
                         OnboardingView(userState: $userState)
-                    case .unRegistered:
+                    case .registration:
                         RegistrationView()
-                    case .acquainted:
+                    case .unAuthorized:
                         LoginView()
                     }
     //
@@ -52,12 +51,20 @@ struct SaverApp: App {
                 .navigationBarHidden(true)
                 .overlay(overlayView: CustomProgressView(), show: $progress)
                 .onAppear() {
+//                    Auth.auth().currentUser.i
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if user != nil {
-                                userState = .registeredAuthorized
-                                progress = false
+                            switch user?.metadata.creationDate?.millisecondsSince1970 == user?.metadata.lastSignInDate?.millisecondsSince1970 {
+                            case true:
+                                         userState = .firstTimeSignedIn
+                                         progress = false
+                                
+                            case false:   userState = .signedIn
+                                          progress = false
+                            }
+                               
                         } else {
-                                userState = .registeredUnauthorized
+                                userState = .unAuthorized
                                 progress = false
                         }
                         
@@ -70,6 +77,6 @@ struct SaverApp: App {
 }
 
 enum UserState {
-    case registeredAuthorized, registeredUnauthorized, unRegistered, acquainted
+    case signedIn, firstTimeSignedIn, registration, unAuthorized
 }
 

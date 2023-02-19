@@ -18,7 +18,7 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage = false
     @Published var loginIsEditing = false
     @Published var passwordIsEditing = false
-    @Published var willMoveToApp = false
+
     
     func signInGoogle() {
         self.progress = true
@@ -34,7 +34,6 @@ class LoginViewModel: ObservableObject {
         GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { [unowned self] (signResult, error) in
             
             if let error = error {
-                // ...
                 return
             }
             guard let user = signResult?.user,
@@ -44,6 +43,11 @@ class LoginViewModel: ObservableObject {
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
             Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+                
+                if let firstSignIn = authResult?.additionalUserInfo?.isNewUser,
+                   firstSignIn {
+                    print("WWWWWwork")
+                }
                 
                 if let currentUser = Auth.auth().currentUser {
                     let firUser = UserFirModel(user: currentUser)
@@ -97,7 +101,10 @@ class LoginViewModel: ObservableObject {
                         self?.progress = false
                     }
                     if user != nil {
-                        self?.willMoveToApp = true
+                        if let firstSignIn = user?.additionalUserInfo?.isNewUser,
+                           firstSignIn {
+                            print("WWWWWwork")
+                        }
                         self?.progress = false
                     }
                 }

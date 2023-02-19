@@ -62,8 +62,7 @@ struct LoginView: View {
                         }
                                          .frame(width: 230, height: 50)
                         
-                        AuthButton {
-                        }
+                        AuthWithAppleButton { }
                         .frame(width: 230, height: 50)
                     }
                     .padding(.top, wRatio(15))
@@ -158,7 +157,6 @@ struct LoginView: View {
                         .renderingMode(.template)
                         .foregroundColor(.green)
                 }
-                
             }
             .authTextField(isEditing: viewModel.passwordIsEditing, vState: .validated)
             .frame(width: wRatio(250))
