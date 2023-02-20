@@ -131,7 +131,9 @@ extension View {
                    cashType: String ,
                    cashSource: Binding<String>,
                    cashSourceReceiver: Binding<String>,
-                   draggingItem: Binding<Bool>) -> some View {
+                   draggingItem: Binding<Bool>,
+                   draggingIndex: Binding<Int?>,
+                   currentIndexCashSource: Binding<Int?>) -> some View {
         
         modifier(DragGestureCustom(zIndex: zIndex,
                                    isPurchaseDetected: isPurchaseDetected,
@@ -140,7 +142,10 @@ extension View {
                                    cashType: cashType,
                                    cashSource: cashSource,
                                    cashSourceReceiver: cashSourceReceiver,
-                                   draggingItem: draggingItem))
+                                   draggingItem: draggingItem,
+                                   draggingIndex: draggingIndex,
+                                   currentIndexCashSource: currentIndexCashSource
+                                  ))
     }
 }
 
@@ -157,18 +162,25 @@ struct DragGestureCustom: ViewModifier {
     @Binding var cashSource: String
     @Binding var cashSourceReceiver: String
     @Binding var draggingItem: Bool
+    @Binding var draggingIndex: Int?
+    @Binding var currentIndexCashSource: Int?
    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
                 draggingItem = true
+                
+                
+                
+                draggingIndex = currentIndexCashSource
                 withAnimation {
-                    zIndex = 100
+//                    zIndex = 100
                     currentOffsetX = value.translation.width
                     currentOffsetY = value.translation.height
                     isDraggingItem.toggle()
+                    
                 }
-//                print(value.location.y)
+                print("AAA draggingIndex \(String(describing: draggingIndex)) index \(String(describing: currentIndexCashSource))")
                
                
             })
@@ -207,7 +219,6 @@ struct DragGestureCustom: ViewModifier {
                         cashSourceReceiver = cashSourceItem.key
                         cashSource = cashType
                         
-                        print("AAA with \(cashSource) to \(cashSourceReceiver)")
                         if cashSource != cashSourceReceiver{
                             isCashSourceReceiverDetected.toggle()
                         }
@@ -217,7 +228,7 @@ struct DragGestureCustom: ViewModifier {
                 if abs(gesture.location.x) > 49 && abs(gesture.location.x) < 95 && abs(gesture.location.y) > 419 && abs(gesture.location.y) < 470 {
                  
                     withAnimation(.spring()) {
-                        zIndex = 1
+//                        zIndex = 1
                         isDraggingItem.toggle()
                         currentOffsetX = 0
                         currentOffsetY = 0
@@ -225,7 +236,7 @@ struct DragGestureCustom: ViewModifier {
                             
                 } else {
                     withAnimation(.spring()) {
-                        zIndex = 1
+//                        zIndex = 1
                         isDraggingItem.toggle()
                         currentOffsetX = 0
                         currentOffsetY = 0
@@ -234,6 +245,8 @@ struct DragGestureCustom: ViewModifier {
                 
                 currentOffsetX = 0
                 currentOffsetY = 0
+                
+                draggingIndex = nil
           }
     }
     

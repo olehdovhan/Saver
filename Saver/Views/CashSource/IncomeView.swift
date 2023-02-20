@@ -12,7 +12,7 @@ struct IncomeView: View {
     
     @Binding var closeSelf: Bool
     @Binding  var cashSourceNameSelect: String
-    @State private var ammountIncome = 0.0
+    @State private var amountIncome = 0.0
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
@@ -20,7 +20,7 @@ struct IncomeView: View {
     @Binding var cashSources: [CashSource]
     
     private var enteredIncome: Bool {
-        switch ammountIncome {
+        switch amountIncome {
         case let x where x > 0.0:  return false
         default:                   return true
         }
@@ -61,10 +61,10 @@ struct IncomeView: View {
                             
                             Spacer()
                             
-                            TextField("", value: $ammountIncome, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                            TextField("", value: $amountIncome, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                                 .keyboardType(.decimalPad)
                                 .focused(editing)
-                                .foregroundColor(ammountIncome == 0.0 ? .gray : .black)
+                                .foregroundColor(amountIncome == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
@@ -207,7 +207,7 @@ struct IncomeView: View {
                     
                     DoneButtonView(isValid: enteredIncome) {
                         
-                        let incomeModel = IncomeModel(amount: ammountIncome,
+                        let incomeModel = IncomeModel(amount: amountIncome,
                                                       comment: comment,
                                                       incomeDate: Date(),
                                                       cashSource: cashSourceNameSelect)
@@ -228,7 +228,7 @@ struct IncomeView: View {
                             }
                             
                             if let index = cashSourceIncreaseIndex {
-                                user.cashSources[index].increaseAmmount(ammountIncome)
+                                user.cashSources[index].increaseAmount(amountIncome)
                             }
                             
                             FirebaseUserManager.shared.userModel = user

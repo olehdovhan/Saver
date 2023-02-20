@@ -37,6 +37,8 @@ struct MainScreen: View {
     @State private var activePageIndex: Int = 0
     @State var draggingScroll = true
     @State var draggingItem = false
+//    @State var currentIndexCashSource: Int?
+    @State private var draggingIndex: Int?
     @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
     let itemPadding: CGFloat = 6
@@ -111,8 +113,11 @@ struct MainScreen: View {
                                                    cashSourcesCount: cashSources.count,
                                                    expenseViewShow: $expenseViewShow,
                                                    isTransferViewShow: $isTransferViewShow,
-                                                   purchaseType: $expenseType
+                                                   purchaseType: $expenseType,
+                                                   draggingIndex: $draggingIndex
                                     )
+                                   
+                                    
                                     .getLocationCashSources(source: source,
                                                             offset: currentScrollOffset)
                                 }
@@ -120,8 +125,8 @@ struct MainScreen: View {
                             }
                         }
                     }
-                                    .zIndex(draggingItem ? 10 : -2)
-                    .zIndex(3)
+                    
+                    .zIndex(draggingItem ? 30 : 1)
                     .onChange(of: addCashSourceViewShow) { newValue in
                         if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources }
                     }
@@ -133,14 +138,14 @@ struct MainScreen: View {
                                    startPoint: .leading,
                                    endPoint: .trailing)
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
-                    .zIndex(1)
+//                    .zIndex(1)
                     
                     PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
                                            addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
                                            purchaseDetailViewShow: $purchaseDetailViewShow,
                                            selectedCategory: $selectedCategory,
                                            limitPurchaseCategoryViewShow: $limitPurchaseCategoryViewShow)
-                    .zIndex(1)
+//                    .zIndex(1)
                     .onChange(of: addPurchaseCategoryViewShow) { newValue in
                         if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
                     }
@@ -149,7 +154,6 @@ struct MainScreen: View {
                 }
                 .blur(radius: isBlur ? 5 : 0)
                 .sheet(isPresented: $isImagePickerDisplay) {
-                    //                print("shet")
                     ImagePickerView(selectedImage: $selectedImage, onlyImage: true, sourceType: sourceType) { url in }
                 }
                 
@@ -209,18 +213,17 @@ struct MainScreen: View {
             //crop
             if showImageCropper {
                 ImageCropper(image: $selectedImage, visible: $showImageCropper, isCircle: true) { image in
-//                    viewModel.updateProfile(image: image)
                     print("crop")
                 }
                 .zIndex(10)
             }
         }
         .onChange(of: selectedCategory) { _ in
-                    let ammount = currentMonthSpendings
+                    let amount = currentMonthSpendings
                         .filter { $0.spentCategory == selectedCategory?.name }
                         .map { $0.amount }
                         .reduce(0) { $0 + $1 }
-                    amountCurrentMonthSpendingSelectedCategory = String(ammount)
+                    amountCurrentMonthSpendingSelectedCategory = String(amount)
         }
         .overlay(overlayView: CustomProgressView(), show: $progress)
         .onChange(of: selectedImage) { _ in
@@ -240,11 +243,14 @@ struct MainScreen: View {
             }
             isShowTabBar = !isTransferViewShow
         }
+        .onChange(of: draggingItem, perform: { newValue in
+            print("AAA drag: \(draggingItem)")
+        })
         .onChange(of: expenseViewShow) { isShowTabBar = !$0
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
                 cashSources = sources
                 if sources.count != 0 {
-                    cashSource = sources[0].name ?? ""
+                    cashSource = sources[0].name
                 }
             }
         }

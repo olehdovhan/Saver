@@ -11,7 +11,7 @@ struct CashSourceView: View {
     @State var firstZ: Double = 3
     @Binding var draggingItem : Bool
     var cashSourceItem: CashSource
-    var index: Int
+    @State var index: Int?
     @Binding var incomeViewShow: Bool
     @Binding var cashSource: String
     @Binding var cashSourceReceiver: String
@@ -19,6 +19,7 @@ struct CashSourceView: View {
     @Binding var expenseViewShow: Bool
     @Binding var isTransferViewShow: Bool
     @Binding var purchaseType: String
+    @Binding var draggingIndex: Int?
 
     
     
@@ -46,6 +47,7 @@ struct CashSourceView: View {
                                 .frame(width: 50, height: 50)
                                 .aspectRatio(contentMode: .fill)
                                 .myShadow(radiusShadow: 5)
+                                .zIndex(1)
                             
                             Image(cashSourceItem.iconName)
                                 .resizable()
@@ -59,7 +61,12 @@ struct CashSourceView: View {
                                            cashType: cashSourceItem.name,
                                            cashSource: $cashSource,
                                            cashSourceReceiver: $cashSourceReceiver,
-                                           draggingItem: $draggingItem)
+                                           draggingItem: $draggingItem,
+                                           draggingIndex: $draggingIndex,
+                                           currentIndexCashSource: $index)
+                                .zIndex(draggingIndex == index ? 15 : 10)
+//                                .zIndex(30)
+                                
                             
                         }
                         
@@ -91,7 +98,7 @@ struct CashSourceView: View {
                                 
                             }
                             .cornerRadius(15)
-                            .zIndex(100)
+//                            .zIndex(100)
                             .delaysTouches(for: 0.2) {  }
                             .draggable(zIndex: $firstZ,
                                        isPurchaseDetected: $expenseViewShow,
@@ -100,7 +107,9 @@ struct CashSourceView: View {
                                        cashType: cashSourceItem.name,
                                        cashSource: $cashSource,
                                        cashSourceReceiver: $cashSourceReceiver,
-                                       draggingItem: $draggingItem)
+                                       draggingItem: $draggingItem,
+                                       draggingIndex: $draggingIndex,
+                                       currentIndexCashSource: $index)
                             
                         }
                         
@@ -116,23 +125,11 @@ struct CashSourceView: View {
                                             .zIndex(-5)
                 }
                
-                .zIndex(Double(cashSourcesCount - index))
+//                .zIndex(Double(cashSourcesCount - index?))
             }
             .frame(width: 75)
             
         
-        
-//        .background(Circle().fill(RadialGradient(colors: [.white, .clear],
-//                                                 center: .center,
-//                                                 startRadius: 20,
-//                                                 endRadius: 30)).scaleEffect(2))
-//        .delaysTouches(for: 0.2) {  }
-//        .draggable(zIndex: $firstZ,
-//                   isAlertShow: $expenseViewShow,
-//                   purchaseType: $purchaseType,
-//                   cashType: cashSourceItem.name,
-//                   cashSource: $cashSource,
-//                   draggingItem: $draggingItem)
         
     }
 }

@@ -224,8 +224,10 @@ struct CashSourceTransferView: View {
                     Spacer()
                         
                     DoneButtonView(isValid: viewModel.isEnteredTransferAmount) {
-                            viewModel.addAndCalculateTransferAmount(from: cashSourceProvider,
-                                                                    to: cashSourceReceiver)
+//                        viewModel.transferBetweenCashSources(from: cashSourceProvider,
+//                                                                    to: cashSourceReceiver)
+                        viewModel.transferBetweenCashSources(from: cashSourceProvider,
+                                                             to: cashSourceReceiver)
                             closeSelf = false
                         }
                         

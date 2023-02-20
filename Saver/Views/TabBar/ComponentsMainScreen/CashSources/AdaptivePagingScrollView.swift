@@ -135,7 +135,7 @@ struct AdaptivePagingScrollView: View {
                                 Spacer().frame(width:  UIScreen.main.bounds.width * 0.1744, height: 15)
                             }
                         }
-                        .zIndex(1)
+//                        .zIndex(1)
                     
                 }
             }

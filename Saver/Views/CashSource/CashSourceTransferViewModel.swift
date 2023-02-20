@@ -21,9 +21,35 @@ class CashSourceTransferViewModel: ObservableObject {
         }
     }
     
-    func addAndCalculateTransferAmount(from cashSourceProvider: String, to cashSourceReceiver: String) {
+    func transferBetweenCashSources(from cashSourceProvider: String,
+                                    to cashSourceReceiver: String) -> Void {
         
-#warning("Must be created logic of transferring money between cashSources")
+        if var user = FirebaseUserManager.shared.userModel {
+            
+            var cashSourceSubtractIndex: Int?
+            var cashSourceIncreaseIndex: Int?
+            
+            for (index, source) in user.cashSources.enumerated() {
+                if source.name == cashSourceProvider {
+                    cashSourceSubtractIndex = index
+                }
+            }
+            
+            for (index, source) in user.cashSources.enumerated() {
+                if source.name == cashSourceReceiver {
+                    cashSourceIncreaseIndex = index
+                }
+            }
+            
+            if let indexSubtract = cashSourceSubtractIndex,
+               let indexIncrease = cashSourceIncreaseIndex{
+                user.cashSources[indexSubtract].subtractAmount(transferAmount)
+                user.cashSources[indexIncrease].increaseAmount(transferAmount)
+            }
+            
+            FirebaseUserManager.shared.userModel = user
+        }
+        
         
     }
     

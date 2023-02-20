@@ -22,7 +22,7 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
-    func addAndCalculateExpens(from cashSource: String, to spentCategory: String) {
+    func addAndCalculateExpense(from cashSource: String, to spentCategory: String) {
         let expenseModel = ExpenseModel(amount: expense,
                                    comment: comment,
                                  expenseDate: Date(),
@@ -40,14 +40,14 @@ class ExpenseViewModel: ObservableObject {
                 user.currentMonthSpendings?.append(expenseModel)
             }
             
-            var cashSourceSubstractIndex: Int?
+            var cashSourceSubtractIndex: Int?
             for (index, source) in user.cashSources.enumerated() {
                 if source.name == cashSource {
-                    cashSourceSubstractIndex = index
+                    cashSourceSubtractIndex = index
                 }
             }
-            if let index = cashSourceSubstractIndex {
-                user.cashSources[index].substractAmount(expense)
+            if let index = cashSourceSubtractIndex {
+                user.cashSources[index].subtractAmount(expense)
             }
             FirebaseUserManager.shared.userModel = user
         }

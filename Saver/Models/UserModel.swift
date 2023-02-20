@@ -211,11 +211,11 @@ struct CashSource: Codable, Hashable, Identifiable, Equatable {
     var amount: Double
     var iconName: String
     
-    mutating func substractAmount(_ number: Double) {
+    mutating func subtractAmount(_ number: Double) {
         amount -= number
     }
     
-    mutating func increaseAmmount(_ number: Double){
+    mutating func increaseAmount(_ number: Double){
         amount += number
     }
 }

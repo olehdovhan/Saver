@@ -229,7 +229,7 @@ struct ExpenseView: View {
                     Spacer()
                         
                         DoneButtonView(isValid: viewModel.enteredExpense) {
-                            viewModel.addAndCalculateExpens(from: cashSource,
+                            viewModel.addAndCalculateExpense(from: cashSource,
                                                             to: purchaseCategoryName)
                             closeSelf = false
                         }

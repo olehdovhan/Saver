@@ -111,7 +111,7 @@ struct AddCashSourceView: View {
                                 .font(.custom("NotoSansDisplay-Medium", size: 14))
                             Spacer()
                             
-                            
+                            #warning("check for a unique name")
                             TextField("",text: $cashSourceName)
                                 .placeholder(when: cashSourceName.isEmpty) {
                                     Text("enter name").foregroundColor(.gray)
