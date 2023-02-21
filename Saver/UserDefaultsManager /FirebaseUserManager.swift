@@ -13,13 +13,20 @@ import UIKit
 
 final class FirebaseUserManager {
     
-
-    
     var firUser: UserFirModel!
     var userRef: DatabaseReference!
     var userModel: UserModel? {
-        didSet{
+        didSet {
             updateUser(userModel)
+        }
+    }
+    
+    var finishedOnboarding: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "finishedOnboarding")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "finishedOnboarding")
         }
     }
     
@@ -95,7 +102,6 @@ final class FirebaseUserManager {
                             guard error == nil, let url = downloadUrl else { return }
                             completion(url.absoluteString)
                         }
-                
                     // your uploaded photo url.
                 }
             }

@@ -25,7 +25,7 @@ struct OnboardingView: View {
                     showSecondOnboard = true
                     print("Press Button <Next> in One Onboarding")
                 }
-                    .tag(false)
+                .tag(false)
                 
                 OnboardView(showSecondOnboard: $showSecondOnboard,
                             imageName: "onboardingSecond",
@@ -35,9 +35,10 @@ struct OnboardingView: View {
                             buttonText: "Go!",
                             calculatedHeight: $calculatedHeight) {
                     print("Press Button <Go> in One Onboarding")
-                    userState = .signedIn
+                    FirebaseUserManager.shared.finishedOnboarding = true
+                    userState = .unAuthorized
                 }
-                    .tag(true)
+                .tag(true)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             

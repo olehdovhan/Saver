@@ -29,7 +29,7 @@ struct SaverApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @State var userState = UserState.firstTimeSignedIn
+    @State var userState = UserState.showOnboarding
     @State var progress = true
     
     var body: some Scene {
@@ -39,7 +39,7 @@ struct SaverApp: App {
                     switch userState {
                     case .signedIn:
                         TabBarView()
-                    case .firstTimeSignedIn:
+                    case .showOnboarding:
                         OnboardingView(userState: $userState)
                     case .registration:
                         RegistrationView()
@@ -50,14 +50,20 @@ struct SaverApp: App {
                 .navigationBarHidden(true)
                 .overlay(overlayView: CustomProgressView(), show: $progress)
                 .onAppear() {
-                  //  Auth.auth().
+    
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if user != nil {
                                 userState = .signedIn
                                 progress = false
                         } else {
+                            if FirebaseUserManager.shared.finishedOnboarding {
                                 userState = .unAuthorized
                                 progress = false
+                            } else {
+                                userState = .showOnboarding
+                                progress = false
+                            }
+                               
                         }
                     }
                 }
@@ -67,6 +73,6 @@ struct SaverApp: App {
 }
 
 enum UserState {
-    case signedIn, firstTimeSignedIn, registration, unAuthorized
+    case signedIn, showOnboarding, registration, unAuthorized
 }
 
