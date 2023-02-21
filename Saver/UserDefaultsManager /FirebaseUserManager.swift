@@ -13,6 +13,8 @@ import UIKit
 
 final class FirebaseUserManager {
     
+
+    
     var firUser: UserFirModel!
     var userRef: DatabaseReference!
     var userModel: UserModel? {

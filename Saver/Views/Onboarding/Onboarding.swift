@@ -22,10 +22,11 @@ struct OnboardingView: View {
                             description: "Welcome to Saver - an application that will help you manage your income and expenses",
                             buttonText: "Next",
                             calculatedHeight: $calculatedHeight) {
-                showSecondOnboard = true
+                    showSecondOnboard = true
                     print("Press Button <Next> in One Onboarding")
                 }
-                            .tag(false)
+                    .tag(false)
+                
                 OnboardView(showSecondOnboard: $showSecondOnboard,
                             imageName: "onboardingSecond",
                             imageWidth: 250,

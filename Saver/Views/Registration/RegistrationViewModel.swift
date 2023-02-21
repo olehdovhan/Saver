@@ -37,10 +37,6 @@ class RegistrationViewModel: ObservableObject {
                 print(error?.localizedDescription ?? "")
                 return
             }
-            if let firstSignIn = user?.additionalUserInfo?.isNewUser,
-               firstSignIn {
-                print("WWWWWwork")
-            }
             
             let currentUser = UserFirModel(user: newUser)
             let userRef = self?.ref.child(currentUser.uid)

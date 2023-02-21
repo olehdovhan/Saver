@@ -116,12 +116,6 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
                                                     rawNonce: nonce)
           // Sign in with Firebase.
           Auth.auth().signIn(with: credential) { (authResult, error) in
-              
-              if let firstSignIn = authResult?.additionalUserInfo?.isNewUser,
-                 firstSignIn {
-                  print("WWWWWwork")
-              }
-              
               if let error = error {
                   print(error.localizedDescription)
               }

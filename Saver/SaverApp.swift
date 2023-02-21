@@ -46,29 +46,19 @@ struct SaverApp: App {
                     case .unAuthorized:
                         LoginView()
                     }
-    //
                 }
                 .navigationBarHidden(true)
                 .overlay(overlayView: CustomProgressView(), show: $progress)
                 .onAppear() {
-//                    Auth.auth().currentUser.i
+                  //  Auth.auth().
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if user != nil {
-                            switch user?.metadata.creationDate?.millisecondsSince1970 == user?.metadata.lastSignInDate?.millisecondsSince1970 {
-                            case true:
-                                         userState = .firstTimeSignedIn
-                                         progress = false
-                                
-                            case false:   userState = .signedIn
-                                          progress = false
-                            }
-                               
+                                userState = .signedIn
+                                progress = false
                         } else {
                                 userState = .unAuthorized
                                 progress = false
                         }
-                        
-                        
                     }
                 }
             }

@@ -43,12 +43,7 @@ class LoginViewModel: ObservableObject {
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
             Auth.auth().signIn(with: credential) { [weak self] authResult, error in
-                
-                if let firstSignIn = authResult?.additionalUserInfo?.isNewUser,
-                   firstSignIn {
-                    print("WWWWWwork")
-                }
-                
+                                
                 if let currentUser = Auth.auth().currentUser {
                     let firUser = UserFirModel(user: currentUser)
                     let userRef = Database.database().reference(withPath: "users")
@@ -101,10 +96,6 @@ class LoginViewModel: ObservableObject {
                         self?.progress = false
                     }
                     if user != nil {
-                        if let firstSignIn = user?.additionalUserInfo?.isNewUser,
-                           firstSignIn {
-                            print("WWWWWwork")
-                        }
                         self?.progress = false
                     }
                 }
