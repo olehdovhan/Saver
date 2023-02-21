@@ -41,10 +41,9 @@ class RegistrationViewModel: ObservableObject {
             let currentUser = UserFirModel(user: newUser)
             let userRef = self?.ref.child(currentUser.uid)
             
-            guard let img = UIImage(named: "avatar") else { return }
-            FirebaseUserManager.shared.uploadImage(img: img) { urlStringToImage in
+            guard let img = UIImage(systemName: "person.circle") else { return }
+            FirebaseUserManager.shared.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
                 guard let urlString = urlStringToImage else { return }
-                
                  let dataUserModel = UserModel(avatarUrlString: urlString,
                                                name: "Noname user",
                                                email: self?.email ?? "",
@@ -62,7 +61,6 @@ class RegistrationViewModel: ObservableObject {
                                                                     PurchaseCategory(name: "Household", iconName: "iconHousehold"),
                                                                     PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
                                                                     PurchaseCategory(name: "Health", iconName: "iconHealth")])
-                
                 userRef?.setValue(["userDataModel": dataUserModel.createDic()])
             }
         }

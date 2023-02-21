@@ -47,6 +47,7 @@ struct MainScreen: View {
     @State var user: UserFirModel!
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
+    @State var urlImage: URL?
     
     @State var progress = true
     
@@ -80,7 +81,8 @@ struct MainScreen: View {
                     
                     BalanceView(showQuitAlert: $showQuitAlert,
                                 sourceType: $sourceType, selectedImage: $selectedImage,
-                                isImagePickerDisplay: $isImagePickerDisplay)
+                                isImagePickerDisplay: $isImagePickerDisplay,
+                                urlImage: $urlImage)
                         .zIndex(2)
                         .padding(.bottom, 15)
                     
@@ -102,7 +104,6 @@ struct MainScreen: View {
                             limitCashSourcesViewShow: $limitCashSourcesViewShow,
                             currentScrollOffset: $currentScrollOffset
                         ) {
-                            
                             ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                                 GeometryReader{ screen in
                                     CashSourceView(draggingItem: $draggingItem,
@@ -117,8 +118,6 @@ struct MainScreen: View {
                                                    purchaseType: $expenseType,
                                                    draggingIndex: $draggingIndex
                                     )
-                                   
-                                    
                                     .getLocationCashSources(source: source,
                                                             offset: currentScrollOffset)
                                 }
@@ -255,10 +254,7 @@ struct MainScreen: View {
                 }
             }
         }
-        
-        
-        
-        
+    
         .onAppear() {
 
         FirebaseUserManager.shared.observeUser {
@@ -275,6 +271,10 @@ struct MainScreen: View {
                     purchaseCategories = categories
                     progress = false
                 }
+            
+            if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
+                urlImage = url
+            }
             }
         }
         
