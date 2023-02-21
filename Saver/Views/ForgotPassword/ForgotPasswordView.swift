@@ -23,8 +23,6 @@ struct ForgotPasswordView: View {
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
                         .ignoresSafeArea()
-                       
-                    
                 }
                 Rectangle()
                     .fill(Color.white)
@@ -60,6 +58,7 @@ struct ForgotPasswordView: View {
                         .padding(.bottom, keyboardHeight == 0 ? wRatio(60) : wRatio(20))
                     
                     Button{
+                       
                         viewModel.resetEmail(email: viewModel.email) {
                             presentationMode.wrappedValue.dismiss()
                         }

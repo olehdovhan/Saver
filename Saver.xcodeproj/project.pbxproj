@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C02202E2973476800F5D030 /* AppleAuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02202D2973476800F5D030 /* AppleAuthorizationVC.swift */; };
-		0C0220302973484600F5D030 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02202F2973484600F5D030 /* AuthButton.swift */; };
+		0C0220302973484600F5D030 /* AuthWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02202F2973484600F5D030 /* AuthWithAppleButton.swift */; };
 		0C02F0D3293E109D0033ED65 /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02F0D2293E109D0033ED65 /* IncomeView.swift */; };
 		0C4343BA2963687D00B511E8 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4343B92963687D00B511E8 /* ExpenseViewModel.swift */; };
 		0C4343BC296418D300B511E8 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4343BB296418D300B511E8 /* Date+Extension.swift */; };
@@ -118,7 +118,7 @@
 
 /* Begin PBXFileReference section */
 		0C02202D2973476800F5D030 /* AppleAuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationVC.swift; sourceTree = "<group>"; };
-		0C02202F2973484600F5D030 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		0C02202F2973484600F5D030 /* AuthWithAppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWithAppleButton.swift; sourceTree = "<group>"; };
 		0C02F0D2293E109D0033ED65 /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
 		0C4343B92963687D00B511E8 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		0C4343BB296418D300B511E8 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 			children = (
 				0CA0037E2972C00A00E9DF89 /* AuthView.swift */,
 				0C02202D2973476800F5D030 /* AppleAuthorizationVC.swift */,
-				0C02202F2973484600F5D030 /* AuthButton.swift */,
+				0C02202F2973484600F5D030 /* AuthWithAppleButton.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -765,7 +765,7 @@
 				66548D572972CD0B003D2AA0 /* AuthTextfieldModifier.swift in Sources */,
 				FC89D6B029955CED004FB4A1 /* KeyboardAdaptive.swift in Sources */,
 				0C6A1B1729488943006E7C13 /* CircleTextView.swift in Sources */,
-				0C0220302973484600F5D030 /* AuthButton.swift in Sources */,
+				0C0220302973484600F5D030 /* AuthWithAppleButton.swift in Sources */,
 				B458555728B1AB660047C81E /* CustomTabView.swift in Sources */,
 				FC89D6B22996B416004FB4A1 /* Templates.swift in Sources */,
 				FA9D14D528BCCDE600EEFA12 /* PurchaseLocation.swift in Sources */,

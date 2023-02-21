@@ -28,7 +28,21 @@ struct BalanceView: View {
                 VStack(){
                     Spacer().frame(height: 20)
                     HStack(){
-                        ZStack{
+                        VStack{
+                            
+                            Button{
+                                showQuitAlert = true
+                            } label: {
+                                
+                                Text("Log Out")
+                                
+//                                Image(systemName: "chevron.down.circle.fill")
+//                                    .resizable()
+//                                    .frame(width: hRatio(20), height: hRatio(20))
+//                                    .foregroundColor(.white)
+//                                    .offset(y: -hRatio(40))
+                            }
+                            
                             Button {
                                 sourceType = .photoLibrary
                                 isImagePickerDisplay.toggle()
@@ -50,16 +64,7 @@ struct BalanceView: View {
                             }
                             
                             
-                            Button{
-                                showQuitAlert = true
-                            } label: {
-                                
-                                Image(systemName: "chevron.down.circle.fill")
-                                    .resizable()
-                                    .frame(width: hRatio(20), height: hRatio(20))
-                                    .foregroundColor(.white)
-                                    .offset(y: -hRatio(40))
-                            }
+                  
                         }
                         
                         Spacer()

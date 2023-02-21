@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct AuthButton: UIViewControllerRepresentable {
+struct AuthWithAppleButton: UIViewControllerRepresentable {
 
     var closure: () -> ()
     

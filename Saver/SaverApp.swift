@@ -29,39 +29,42 @@ struct SaverApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @State var userState = UserState.registeredUnauthorized
+    @State var userState = UserState.showOnboarding
     @State var progress = true
-    
     
     var body: some Scene {
         WindowGroup {
             NavigationView{
                 ZStack{
                     switch userState {
-                    case .registeredAuthorized:
+                    case .signedIn:
                         TabBarView()
-                    case .registeredUnauthorized:
+                    case .showOnboarding:
                         OnboardingView(userState: $userState)
-                    case .unRegistered:
+                    case .registration:
                         RegistrationView()
-                    case .acquainted:
+                    case .unAuthorized:
                         LoginView()
                     }
-    //
                 }
                 .navigationBarHidden(true)
                 .overlay(overlayView: CustomProgressView(), show: $progress)
                 .onAppear() {
+    
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if user != nil {
-                                userState = .registeredAuthorized
+                                userState = .signedIn
                                 progress = false
                         } else {
-                                userState = .registeredUnauthorized
+                            if FirebaseUserManager.shared.finishedOnboarding {
+                                userState = .unAuthorized
                                 progress = false
+                            } else {
+                                userState = .showOnboarding
+                                progress = false
+                            }
+                               
                         }
-                        
-                        
                     }
                 }
             }
@@ -70,6 +73,6 @@ struct SaverApp: App {
 }
 
 enum UserState {
-    case registeredAuthorized, registeredUnauthorized, unRegistered, acquainted
+    case signedIn, showOnboarding, registration, unAuthorized
 }
 

@@ -15,7 +15,7 @@ struct UserModel: Codable {
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
-        avatarImgName = snapshotValue["avatarImgName"] as! String
+        avatarUrlString = snapshotValue["avatarUrlString"] as! String
         name = snapshotValue["name"] as! String
         email = snapshotValue["email"] as! String
         registrationDate = snapshotValue["registrationDate"] as! Int
@@ -24,14 +24,14 @@ struct UserModel: Codable {
      // ref = snapshot.ref
     }
     
-    init(avatarImgName: String,
+    init(avatarUrlString: String,
          name: String,
          email: String,
          registrationDate: Int,
          cashSources: [CashSource],
          purchaseCategories: [PurchaseCategory]) {
         
-        self.avatarImgName = avatarImgName
+        self.avatarUrlString = avatarUrlString
         self.name = name
         self.email = email
         self.registrationDate = registrationDate
@@ -43,7 +43,7 @@ struct UserModel: Codable {
     
  //   let ref: DatabaseReference?
     // TODO: add cashFlow( general) - Income - expense ( monthly budget) + cashFlow(full) Income - (expense + goals + debts)
-    var avatarImgName: String
+    var avatarUrlString: String
     var name: String
     var email: String
     var registrationDate: Int
