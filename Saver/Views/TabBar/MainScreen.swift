@@ -44,7 +44,6 @@ struct MainScreen: View {
     let itemPadding: CGFloat = 6
     var viewModel = MainScreenViewModel()
     
-    @State var user: UserFirModel!
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
     @State var urlImage: URL?
@@ -200,20 +199,32 @@ struct MainScreen: View {
                                            cashSources: cashSources)
                 }
                 
-                if limitCashSourcesViewShow{
+                if limitCashSourcesViewShow {
                     LimitCashSourcesView(closeSelf: $limitCashSourcesViewShow)
                 }
                 
-                if limitPurchaseCategoryViewShow{
+                if limitPurchaseCategoryViewShow {
                     LimitPurchaseCategoryView(closeSelf: $limitPurchaseCategoryViewShow)
                 }
-                    
             }
             
             //crop
             if showImageCropper {
                 ImageCropper(image: $selectedImage, visible: $showImageCropper, isCircle: true) { image in
-                    print("crop")
+                    if let currentUser = Auth.auth().currentUser {
+                        FirebaseUserManager.shared.uploadImage(img: image,
+                                                               uID: currentUser.uid) { imgUrlString in
+                            // 1. userModel
+                            if let imgUrlString = imgUrlString, var user = FirebaseUserManager.shared.userModel {
+                                user.avatarUrlString = imgUrlString
+                                FirebaseUserManager.shared.userModel = user
+                            }                            // 2.
+                            if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
+                                urlImage = url
+                            }
+                        }
+                    }
+                   
                 }
                 .zIndex(10)
             }
@@ -280,7 +291,6 @@ struct MainScreen: View {
         
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
-
                 progress = true
                 FirebaseUserManager.shared.observeUser {
                     if let sources = FirebaseUserManager.shared.userModel?.cashSources {
@@ -294,7 +304,6 @@ struct MainScreen: View {
                         purchaseCategories = categories
                         progress = false
                     }
-                    
                 }
             }
             
@@ -305,13 +314,5 @@ struct MainScreen: View {
         .onDisappear() {
             FirebaseUserManager.shared.userRef.removeAllObservers()
         }
-//        .toolbar {
-//            ToolbarItemGroup(placement: .keyboard) {
-//                Spacer()
-//                Button("Done") {
-//                    editing = false
-//                }
-//            }
-//        }
     }
 }
