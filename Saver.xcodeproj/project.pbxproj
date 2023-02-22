@@ -110,6 +110,7 @@
 		FCA762422997FF380057D966 /* LimitPurchaseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */; };
 		FCB4708829A28ADD00B9AABC /* CashSourceTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4708729A28ADC00B9AABC /* CashSourceTransferView.swift */; };
 		FCB4708A29A28E9300B9AABC /* CashSourceTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4708929A28E9300B9AABC /* CashSourceTransferViewModel.swift */; };
+		FCBD3EF629A66E4F00AB1589 /* SnackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD3EF529A66E4F00AB1589 /* SnackBarView.swift */; };
 		FCD4A49E299C47880023BD55 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A49D299C47880023BD55 /* ImagePickerView.swift */; };
 		FCD4A4A0299C48A70023BD55 /* BalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A49F299C48A70023BD55 /* BalanceViewModel.swift */; };
 		FCD4A4A2299C57720023BD55 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A4A1299C57720023BD55 /* ImageCropper.swift */; };
@@ -213,6 +214,7 @@
 		FCA762412997FF380057D966 /* LimitPurchaseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitPurchaseCategoryView.swift; sourceTree = "<group>"; };
 		FCB4708729A28ADC00B9AABC /* CashSourceTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSourceTransferView.swift; sourceTree = "<group>"; };
 		FCB4708929A28E9300B9AABC /* CashSourceTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashSourceTransferViewModel.swift; sourceTree = "<group>"; };
+		FCBD3EF529A66E4F00AB1589 /* SnackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarView.swift; sourceTree = "<group>"; };
 		FCD4A49D299C47880023BD55 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		FCD4A49F299C48A70023BD55 /* BalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewModel.swift; sourceTree = "<group>"; };
 		FCD4A4A1299C57720023BD55 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 			children = (
 				B458555628B1AB660047C81E /* CustomTabView.swift */,
 				FC4BE08C2999080E0086D8E5 /* CustomProgresView.swift */,
+				FCBD3EF529A66E4F00AB1589 /* SnackBarView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				FCD4A4A0299C48A70023BD55 /* BalanceViewModel.swift in Sources */,
 				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
 				66548D592972DEE1003D2AA0 /* TextField+Extension.swift in Sources */,
+				FCBD3EF629A66E4F00AB1589 /* SnackBarView.swift in Sources */,
 				66130997295F579700275F16 /* CashSourceView.swift in Sources */,
 				B4A9AA9D28B2770A001230BF /* CardsPlace.swift in Sources */,
 				FABB4BC728B124420070F300 /* Persistence.swift in Sources */,
