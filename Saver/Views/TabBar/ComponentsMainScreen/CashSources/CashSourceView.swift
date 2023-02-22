@@ -53,7 +53,7 @@ struct CashSourceView: View {
                                 .resizable()
                                 .frame(width: 50, height: 50)
                                 .aspectRatio(contentMode: .fill)
-                                .delaysTouches(for: 0.2) {  }
+//                                .delaysTouches(for: 0.1) {  }
                                 .draggable(zIndex: $firstZ,
                                            isPurchaseDetected: $expenseViewShow,
                                            isCashSourceReceiverDetected: $isTransferViewShow,
@@ -99,7 +99,7 @@ struct CashSourceView: View {
                             }
                             .cornerRadius(15)
 //                            .zIndex(100)
-                            .delaysTouches(for: 0.2) {  }
+//                            .delaysTouches(for: 0.1) {  }
                             .draggable(zIndex: $firstZ,
                                        isPurchaseDetected: $expenseViewShow,
                                        isCashSourceReceiverDetected: $isTransferViewShow,

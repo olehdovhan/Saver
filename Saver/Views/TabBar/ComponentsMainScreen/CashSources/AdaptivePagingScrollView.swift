@@ -141,44 +141,36 @@ struct AdaptivePagingScrollView: View {
             }
             .onAppear {
                 currentScrollOffset =  countOffset(for: currentPageIndex)
-//                print("III  itemSpacing \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
-//                print("III  contentWidth \(contentWidth) coef \(contentWidth/UIScreen.main.bounds.width)")
-//                print("III  itemPadding \(itemPadding) coef \(itemPadding/UIScreen.main.bounds.width)")
-//                print("III  leadingOffset \(leadingOffset) coef \(leadingOffset/UIScreen.main.bounds.width)")
-//                print("III  currentScrollOffset \(currentScrollOffset) coef \(currentScrollOffset/UIScreen.main.bounds.width)")
-//                print("III  gestureDragOffset \(gestureDragOffset) coef \(gestureDragOffset/UIScreen.main.bounds.width)")
-                
-                
             }
-            .background(Color.white.opacity(0.0025)) // hack - this allows gesture recognizing even when background is transparent
-            .frame(width: contentWidth)
+            .background(Color.white.opacity(0.0025))
+//           hack - this allows gesture recognizing even when background is transparent
+//          .frame(width: contentWidth)
             .offset(x: self.currentScrollOffset, y: 0)
+        
+            //swipe gesture
             .simultaneousGesture(
-                DragGesture(minimumDistance: 1, coordinateSpace: .local)
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
                     .onChanged { value in
-//                        if !expenseViewShow{
                         if draggingScroll == false {
                             gestureDragOffset = value.translation.width
                             currentScrollOffset = countCurrentScrollOffset()
-//                        }
                                     }
                     }
                     .onEnded { value in
-//                                                if !expenseViewShow{
                         let cleanOffset = (value.predictedEndTranslation.width - gestureDragOffset)
                         let velocityDiff = cleanOffset * scrollDampingFactor
-                        
+
                         var newPageIndex = countPageIndex(for: currentScrollOffset + velocityDiff)
-                        
+
                         let currentItemOffset = CGFloat(currentPageIndex) * (itemWidth + itemPadding)
-                        
+
                         if currentScrollOffset < -(currentItemOffset),
                            newPageIndex == currentPageIndex {
                             newPageIndex += 1
                         }
-                        
+
                         gestureDragOffset = 0
-                        
+
                         withAnimation(.interpolatingSpring(mass: 0.1,
                                                            stiffness: 20,
                                                            damping: 1.5,
