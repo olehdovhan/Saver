@@ -49,8 +49,8 @@ final class FirebaseUserManager {
                     }
                 } else {
                     //  let user
-                    guard let img = UIImage(named: "avatar") else { return }
-                    self?.uploadImage(img: img) { urlStringToImage in
+                    guard let img = UIImage(systemName: "person.circle") else { return }
+                    self?.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
                         guard let urlString = urlStringToImage else { return }
                         let dataUserModel =  UserModel(avatarUrlString: urlString,
                                                        name: "Noname user",
@@ -87,8 +87,8 @@ final class FirebaseUserManager {
         }
     }
     
-    func uploadImage(img: UIImage, completion: @escaping (String?) -> ()) {
-        let storageRef = Storage.storage().reference().child("person.circle")
+    func uploadImage(img: UIImage, uID: String, completion: @escaping (String?) -> ()) {
+        let storageRef = Storage.storage().reference().child(uID)
         //Storage.storage().reference().child("myImage.png")
         if let uploadData = img.pngData(){
             storageRef.putData(uploadData, metadata: nil) { (metadata, error) in

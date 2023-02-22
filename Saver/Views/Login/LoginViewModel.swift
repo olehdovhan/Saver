@@ -49,8 +49,8 @@ class LoginViewModel: ObservableObject {
                     let userRef = Database.database().reference(withPath: "users")
                     userRef.child(firUser.uid).observe(.value) { snapshot in
                         if !snapshot.exists() {
-                            guard let img = UIImage(named: "avatar") else { return }
-                            FirebaseUserManager.shared.uploadImage(img: img) { urlStringToImage in
+                            guard let img = UIImage(systemName: "person.circle") else { return }
+                            FirebaseUserManager.shared.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
                                 guard let urlString = urlStringToImage else { return }
                                 
                                 let dataUserModel = UserModel(avatarUrlString: urlString,
