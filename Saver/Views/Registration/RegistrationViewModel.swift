@@ -25,6 +25,10 @@ class RegistrationViewModel: ObservableObject {
     @Published var repeatPasswordIsEditing = false
     @Published var willMoveToLogin =         false
     @Published var willMoveToTabBar =        false
+    
+    @Published var showErrorMessage = false
+    @Published var errorMessage = ""
+    
     var ref: DatabaseReference!
     
     func registerUser() {
@@ -34,6 +38,8 @@ class RegistrationViewModel: ObservableObject {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
             
             guard error == nil, let newUser = user?.user else {
+                self?.showErrorMessage = true
+                self?.errorMessage = error?.localizedDescription ?? "error user"
                 print(error?.localizedDescription ?? "")
                 return
             }
@@ -43,7 +49,12 @@ class RegistrationViewModel: ObservableObject {
             
             guard let img = UIImage(systemName: "person.circle") else { return }
             FirebaseUserManager.shared.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
-                guard let urlString = urlStringToImage else { return }
+                guard let urlString = urlStringToImage else {
+                    self?.showErrorMessage = true
+                    self?.errorMessage = error?.localizedDescription ?? "error urlStringToImage"
+                    return
+                    
+                }
                  let dataUserModel = UserModel(avatarUrlString: urlString,
                                                name: "Noname user",
                                                email: self?.email ?? "",

@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct MainScreen: View {
+    @StateObject var viewModel = MainScreenViewModel()
     @Binding var isShowTabBar: Bool
     
     @State var showQuitAlert = false
@@ -42,7 +43,7 @@ struct MainScreen: View {
     @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
     let itemPadding: CGFloat = 6
-    var viewModel = MainScreenViewModel()
+    
     
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
@@ -127,7 +128,10 @@ struct MainScreen: View {
                     
                     .zIndex(draggingItem ? 30 : 1)
                     .onChange(of: addCashSourceViewShow) { newValue in
-                        if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources }
+                        if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources } else {
+                            viewModel.errorMessage = "error sources"
+                            viewModel.showErrorMessage = true
+                        }
                     }
                     .frame(height: 100)
                     
@@ -146,7 +150,10 @@ struct MainScreen: View {
                                            limitPurchaseCategoryViewShow: $limitPurchaseCategoryViewShow)
 //                    .zIndex(1)
                     .onChange(of: addPurchaseCategoryViewShow) { newValue in
-                        if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories }
+                        if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories } else {
+                            viewModel.errorMessage = "error purchCategories"
+                            viewModel.showErrorMessage = true
+                        }
                     }
                     
                     Spacer()
@@ -218,11 +225,14 @@ struct MainScreen: View {
                             if let imgUrlString = imgUrlString, var user = FirebaseUserManager.shared.userModel {
                                 user.avatarUrlString = imgUrlString
                                 FirebaseUserManager.shared.userModel = user
-                            }                            // 2.
+                            }                             // 2.
                             if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
                                 urlImage = url
                             }
                         }
+                    } else {
+                        viewModel.errorMessage = "error currentUser"
+                        viewModel.showErrorMessage = true
                     }
                    
                 }
@@ -236,7 +246,6 @@ struct MainScreen: View {
                         .reduce(0) { $0 + $1 }
                     amountCurrentMonthSpendingSelectedCategory = String(amount)
         }
-        .overlay(overlayView: CustomProgressView(), show: $progress)
         .onChange(of: selectedImage) { _ in
             showImageCropper.toggle()
         }
@@ -262,9 +271,23 @@ struct MainScreen: View {
                 cashSources = sources
                 if sources.count != 0 {
                     cashSource = sources[0].name
+                } else {
+                    viewModel.errorMessage = "error sources.count"
+                    viewModel.showErrorMessage = true
                 }
+            } else {
+                viewModel.errorMessage = "error sources"
+                viewModel.showErrorMessage = true
             }
         }
+        .overlay(overlayView: CustomProgressView(), show: $progress)
+        .overlay(overlayView: SnackBarView(show: $viewModel.showErrorMessage,
+                                           model: SnackBarModel(type: .warning,
+                                                                text: viewModel.errorMessage,
+                                                                alignment: .leading,
+                                                                bottomPadding: 20)),
+                 show: $viewModel.showErrorMessage,
+                 ignoreSaveArea: false)
     
         .onAppear() {
 
@@ -277,14 +300,23 @@ struct MainScreen: View {
                         cashSource = sources[0].name
                         progress = false
                     }
-                }
+            } else {
+                viewModel.errorMessage = "error sources"
+                viewModel.showErrorMessage = true
+            }
                 if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
                     purchaseCategories = categories
                     progress = false
+                } else {
+                    viewModel.errorMessage = "error categories"
+                    viewModel.showErrorMessage = true
                 }
             
             if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
                 urlImage = url
+            } else {
+                viewModel.errorMessage = "error urlString"
+                viewModel.showErrorMessage = true
             }
             }
         }
@@ -298,11 +330,20 @@ struct MainScreen: View {
                         if sources.count != 0 {
                             cashSource = sources[0].name
                             progress = false
+                        } else {
+                            viewModel.errorMessage = "error sources.count"
+                            viewModel.showErrorMessage = true
                         }
+                    } else {
+                        viewModel.errorMessage = "error source"
+                        viewModel.showErrorMessage = true
                     }
                     if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
                         purchaseCategories = categories
                         progress = false
+                    } else {
+                        viewModel.errorMessage = "error categories"
+                        viewModel.showErrorMessage = true
                     }
                 }
             }

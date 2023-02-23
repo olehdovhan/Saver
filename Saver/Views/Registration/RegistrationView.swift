@@ -129,6 +129,13 @@ struct RegistrationView: View {
                     self.keyboardHeight = value
                 }
             }
+            .overlay(overlayView: SnackBarView(show: $viewModel.showErrorMessage,
+                                               model: SnackBarModel(type: .warning,
+                                                                    text: viewModel.errorMessage,
+                                                                    alignment: .leading,
+                                                                    bottomPadding: 20)),
+                     show: $viewModel.showErrorMessage,
+                     ignoreSaveArea: false)
         
     }
     

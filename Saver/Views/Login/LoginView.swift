@@ -50,6 +50,7 @@ struct LoginView: View {
                         .foregroundColor(.myGreen)
                         .font(.custom("Lato-ExtraBold", size: 30))
                         .padding(.bottom, 20)
+                    
                     fieldsView
                     
                     Text("or")
@@ -120,7 +121,13 @@ struct LoginView: View {
             .navigationBarHidden(true)
             .keyboardAdaptive()
             .navigationBarBackButtonHidden(true)
-        
+            .overlay(overlayView: SnackBarView(show: $viewModel.showErrorMessage,
+                                               model: SnackBarModel(type: .warning,
+                                                                    text: viewModel.errorMessage,
+                                                                    alignment: .leading,
+                                                                    bottomPadding: 20)),
+                     show: $viewModel.showErrorMessage,
+                     ignoreSaveArea: false)
         }
     
     private var fieldsView: some View {
