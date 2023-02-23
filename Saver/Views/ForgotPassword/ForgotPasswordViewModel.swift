@@ -10,7 +10,7 @@ import Firebase
 
 class ForgotPasswordViewModel: ObservableObject {
     
-    @Published var incorrectEmail = true
+    @Published var incorrectEmail = false
     @Published var progress = false
     @Published var errorMessage = ""
     @Published var showErrorMessage = false
@@ -21,7 +21,7 @@ class ForgotPasswordViewModel: ObservableObject {
     @Published var correctEmail: RegistrationTFState = .validated
     
     func resetEmail(email: String, completion: @escaping ()->()) {
-        incorrectEmail = email.textFieldValidatorEmail()
+//        incorrectEmail = email.textFieldValidatorEmail()
         guard incorrectEmail else { return }
         Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
             if let error = error {

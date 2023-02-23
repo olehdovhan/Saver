@@ -64,20 +64,23 @@ struct ForgotPasswordView: View {
                         }
                     } label: {
                         ZStack{
-                            RoundedRectangle(cornerRadius: 10).fill(
-                                LinearGradient(colors: [.myGreen, .myBlue],
-                                               startPoint: .leading,
-                                               endPoint: .trailing)
-                            )
-                            .frame(width: wRatio(270), height: 50)
-                            
-                            Text("Continue!")
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(
+                                        LinearGradient(colors: [.myGreen, .myBlue],
+                                                       startPoint: .leading,
+                                                       endPoint: .trailing)
+                                    )
+                                    .frame(width: wRatio(270), height: 50)
+                                    .saturation(viewModel.incorrectEmail ? 1 : 0)
+                           
+                            Text("Reset Password")
                                 .lineLimit(1)
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-ExtraBold", size: 26))
                         }
                         
                     }
+                    .disabled(viewModel.incorrectEmail ? false : true)
                     .padding(.bottom, wRatio(30))
                     
                     Spacer()
@@ -90,6 +93,8 @@ struct ForgotPasswordView: View {
                 }
                 
                 
+            }
+            .onChange(of: viewModel.email) { viewModel.incorrectEmail = $0.textFieldValidatorEmail()
             }
             .keyboardAdaptive()
             .overlay(overlayView: SnackBarView(show: $viewModel.showErrorMessage,
