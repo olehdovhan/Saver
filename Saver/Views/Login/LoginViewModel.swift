@@ -69,8 +69,8 @@ class LoginViewModel: ObservableObject {
                             guard let img = UIImage(systemName: "person.circle") else { return }
                             FirebaseUserManager.shared.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
                                 guard let urlString = urlStringToImage else {
-                                    errorMessage = "error urlStringToImage"
-                                    showErrorMessage = true
+                                    self?.errorMessage = "error urlStringToImage"
+                                    self?.showErrorMessage = true
                                     return }
                                 
                                 let dataUserModel = UserModel(avatarUrlString: urlString,
@@ -118,13 +118,13 @@ class LoginViewModel: ObservableObject {
                 self.showErrorMessage = false
                 Auth.auth().signIn(withEmail: login, password: password) { [weak self]  (user, error) in
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print(error?.localizedDescription ?? "error user")
                         self?.progress = false
                         self?.errorMessage = error?.localizedDescription ?? "error currentUser"
                         self?.showErrorMessage = true
                     }
                     if user != nil {
-                        print(error?.localizedDescription)
+                        print(error?.localizedDescription ?? "error user")
                         self?.progress = false
                         self?.errorMessage = error?.localizedDescription ?? "error currentUser"
                         self?.showErrorMessage = true
