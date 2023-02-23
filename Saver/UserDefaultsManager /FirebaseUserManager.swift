@@ -93,8 +93,7 @@ final class FirebaseUserManager {
         if let uploadData = img.pngData(){
             storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
-                    print(error?.localizedDescription)
-                    print("error")
+                    print(error?.localizedDescription ?? "error putData")
                     completion(nil)
                 } else {
                 //    if let metadata = metadata {
