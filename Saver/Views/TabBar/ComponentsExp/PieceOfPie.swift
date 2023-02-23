@@ -40,7 +40,6 @@ class PieceOfPieContainer: ObservableObject {
         guard let allPurchaseCategoriesSet = getAllExpenses() else { return }
         let allPurchaseCategories = Array(allPurchaseCategoriesSet)
         let expensesDict = createExpenseDict(from: allPurchaseCategories)
-        //        print("III\(allPurchaseCategories.count)")
         
         for (index, category) in allPurchaseCategories.enumerated() {
             let piece = PieceOfPie(color: chartLimitedColors[index],
@@ -105,9 +104,9 @@ struct PieChart: View {
     var body: some View {
         VStack(spacing: 0) {
             
-                chartsCircleView
-                    .shadow(color: .black.opacity(0.33),
-                            radius: 5, x: 0, y: -2.5)
+            chartsCircleView
+            //                    .shadow(color: .black.opacity(0.33),
+            //                            radius: 5, x: 0, y: -2.5)
                 .frame(width: wRatio(90), height: wRatio(180))
                 .padding(.bottom, 20)
                 .onChange(of: selectedTab, perform: { newValue in
@@ -130,8 +129,8 @@ struct PieChart: View {
             
             chartListView
                 .padding(.bottom, wRatio(85))
-                
-//                .frame(width: 300, alignment: .leading)
+            
+            //                .frame(width: 300, alignment: .leading)
         }
     }
 }
@@ -146,9 +145,9 @@ extension PieChart {
                     .trim(from: index == 0 ? 0.0 : chartDataObject.chartData[index - 1].value/100,
                           to: chartDataObject.chartData[index].value/100)
                     .stroke(chartDataObject.chartData[index].color, lineWidth: wRatio(90))
-//                    .shadow(color: .black.opacity(0.33), radius: 5, x: 0, y: 0)
+                //                    .shadow(color: .black.opacity(0.33), radius: 5, x: 0, y: 0)
                     .scaleEffect(index == indexOfTappedSlice ? 1.2 : 1.0)
-                  .animation(.spring())
+                    .animation(.spring())
                     .onTapGesture {
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
                         percentTapped = indexOfTappedSlice == index ? String(Int(chartDataObject.chartData[index].amount)) : Locale.current.currencyCode ?? "USD"
@@ -157,9 +156,9 @@ extension PieChart {
             
             Circle()
                 .fill(.white)
-//                .stroke(.white, lineWidth: wRatio(40))
+            //                .stroke(.white, lineWidth: wRatio(40))
                 .frame(width: wRatio(80), height: wRatio(80), alignment: .center)
-                .shadow(radius: 5)
+            //                .shadow(radius: 5)
             
             Text(percentTapped)
                 .foregroundColor(.black)
@@ -184,49 +183,49 @@ extension PieChart {
                 Spacer().frame(width: 3)
                 ForEach(0..<chartDataObject.chartData.count, id: \.self) { index in
                     
-                        HStack(spacing: 0){
-                            //value of amount or percent
-                            HStack{
-                                Spacer()
-                                
-                                if isPercent{
-                                    Text(String(format: "%.2f", Double(chartDataObject.chartData[index].percent)) + "%")
-                                } else {
-                                    Text(String(Int(chartDataObject.chartData[index].amount)) + " " + (Locale.current.currencyCode ?? "USD"))
-                                }
-                                
-                                Spacer().frame(width: 5)
-                                
-                            }
-//                            .background(.blue.opacity(0.3))
-                            .frame(width: wRatio(120))
+                    HStack(spacing: 0){
+                        //value of amount or percent
+                        HStack{
+                            Spacer()
                             
-                            Circle()
-                                .fill(chartDataObject.chartData[index].color)
-                                .frame(width: 20, height: 20)
-                                .overlay(
-                                    Circle()
-                                        .fill(Color.white)
-                                        .frame(width: 10, height: 10)
-                                        .scaleEffect(index == indexOfTappedSlice ? 0 : 1)
-                                        .animation(.spring())
-                                    )
-                            
-                            //name of purchase category
-                            HStack{
-                                Spacer().frame(width: 5)
-                                
-                                Text(" \(chartDataObject.chartData[index].name)")
-                                
-                                Spacer()
+                            if isPercent{
+                                Text(String(format: "%.2f", Double(chartDataObject.chartData[index].percent)) + "%")
+                            } else {
+                                Text(String(Int(chartDataObject.chartData[index].amount)) + " " + (Locale.current.currencyCode ?? "USD"))
                             }
-//                            .background(.blue.opacity(0.3))
-                            .frame(width: wRatio(240))
+                            
+                            Spacer().frame(width: 5)
+                            
+                        }
+                        //                            .background(.blue.opacity(0.3))
+                        .frame(width: wRatio(120))
+                        
+                        Circle()
+                            .fill(chartDataObject.chartData[index].color)
+                            .frame(width: 20, height: 20)
+                            .overlay(
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: 10, height: 10)
+                                    .scaleEffect(index == indexOfTappedSlice ? 0 : 1)
+                                    .animation(.spring())
+                            )
+                        
+                        //name of purchase category
+                        HStack{
+                            Spacer().frame(width: 5)
+                            
+                            Text(" \(chartDataObject.chartData[index].name)")
                             
                             Spacer()
                         }
-                        .frame(width: wRatio(380))
-                        .font(.custom(indexOfTappedSlice == index ? "Lato-Bold" : "Lato-Regular" , size: 16))
+                        //                            .background(.blue.opacity(0.3))
+                        .frame(width: wRatio(240))
+                        
+                        Spacer()
+                    }
+                    .frame(width: wRatio(380))
+                    .font(.custom(indexOfTappedSlice == index ? "Lato-Bold" : "Lato-Regular" , size: 16))
                     
                     .onTapGesture {
                         indexOfTappedSlice = (indexOfTappedSlice == index ? -1 : index)
@@ -240,8 +239,8 @@ extension PieChart {
         
         
         
-//        .preferredColorScheme(.dark)
-//        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.blue, lineWidth: 1))
+        //        .preferredColorScheme(.dark)
+        //        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.blue, lineWidth: 1))
         
     }
 }
