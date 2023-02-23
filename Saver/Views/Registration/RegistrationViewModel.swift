@@ -18,6 +18,7 @@ class RegistrationViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var repeatPassword = ""
+    @Published var isSecure = true
     
     @Published var privacyTermsAccepted =    false
     @Published var emailIsEditing =          false

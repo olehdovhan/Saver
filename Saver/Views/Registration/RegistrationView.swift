@@ -157,13 +157,27 @@ struct RegistrationView: View {
                 .foregroundColor(.red)
                 .opacity(viewModel.correctEmail == .validated ? 0.0 : 1.0)
             
-            TextField("Password", text: $viewModel.password, onEditingChanged: { changed in
-                viewModel.passwordIsEditing = changed
-                if viewModel.createAccountOnceTapped {
-                 let _ = viewModel.inputValidated()
+            HStack {
+                if viewModel.isSecure {
+                    TextField("Password", text: $viewModel.password , onEditingChanged: { changed in
+                        viewModel.passwordIsEditing = changed
+                      })
+                     .secure(true)
+                } else {
+                    TextField("Password", text: $viewModel.password, onEditingChanged: { changed in
+                        viewModel.passwordIsEditing = changed
+                      })
                 }
-              })
-                .secure(true)
+                Spacer()
+                
+                Button {
+                    viewModel.isSecure.toggle()
+                } label: {
+                    Image(viewModel.isSecure ? "login_show_pass_ic" : "login_hidden_pass_ic")
+                        .renderingMode(.template)
+                        .foregroundColor(.green)
+                }
+            }
                
                 .authTextField(isEditing: viewModel.passwordIsEditing,
                                vState: viewModel.correctPassword)

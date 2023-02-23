@@ -94,7 +94,6 @@ final class FirebaseUserManager {
             storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
                     print(error?.localizedDescription)
-                    print("error")
                     completion(nil)
                 } else {
                 //    if let metadata = metadata {
