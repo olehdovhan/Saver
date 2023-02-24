@@ -34,6 +34,7 @@ struct AdaptivePagingScrollView: View {
 
     @Binding var currentScrollOffset: CGFloat
     @State private var gestureDragOffset: CGFloat = 0
+    @Binding var isNotSwipeGesture: Bool
 
     private func countOffset(for pageIndex: Int) -> CGFloat {
 
@@ -81,6 +82,7 @@ struct AdaptivePagingScrollView: View {
         pageWidth: CGFloat,
         limitCashSourcesViewShow: Binding<Bool>,
         currentScrollOffset: Binding<CGFloat>,
+        isNotSwipeGesture: Binding<Bool>,
         @ViewBuilder content: () -> A) {
 
         let views = content()
@@ -109,6 +111,7 @@ struct AdaptivePagingScrollView: View {
             self._limitCashSourcesViewShow = limitCashSourcesViewShow
 //            self._leadingOffsetScroll = leadingOffsetScroll
             self._currentScrollOffset = currentScrollOffset
+            self._isNotSwipeGesture = isNotSwipeGesture
             
     }
 
@@ -150,33 +153,35 @@ struct AdaptivePagingScrollView: View {
             //swipe gesture
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .onChanged { value in
-                        if draggingScroll == false {
-                            gestureDragOffset = value.translation.width
-                            currentScrollOffset = countCurrentScrollOffset()
-                                    }
-                    }
+//                    .onChanged { value in
+//                        if draggingScroll == false {
+//                            gestureDragOffset = value.translation.width
+//                            currentScrollOffset = countCurrentScrollOffset()
+//                                    }
+//                    }
                     .onEnded { value in
-                        let cleanOffset = (value.predictedEndTranslation.width - gestureDragOffset)
-                        let velocityDiff = cleanOffset * scrollDampingFactor
-
-                        var newPageIndex = countPageIndex(for: currentScrollOffset + velocityDiff)
-
-                        let currentItemOffset = CGFloat(currentPageIndex) * (itemWidth + itemPadding)
-
-                        if currentScrollOffset < -(currentItemOffset),
-                           newPageIndex == currentPageIndex {
-                            newPageIndex += 1
-                        }
-
-                        gestureDragOffset = 0
-
-                        withAnimation(.interpolatingSpring(mass: 0.1,
-                                                           stiffness: 20,
-                                                           damping: 1.5,
-                                                           initialVelocity: 0)) {
-                            self.currentPageIndex = newPageIndex
-                            self.currentScrollOffset = self.countCurrentScrollOffset()
+                        if isNotSwipeGesture == true{
+                            let cleanOffset = (value.predictedEndTranslation.width - gestureDragOffset)
+                            let velocityDiff = cleanOffset * scrollDampingFactor
+                            
+                            var newPageIndex = countPageIndex(for: currentScrollOffset + velocityDiff)
+                            
+                            let currentItemOffset = CGFloat(currentPageIndex) * (itemWidth + itemPadding)
+                            
+                            if currentScrollOffset < -(currentItemOffset),
+                               newPageIndex == currentPageIndex {
+                                newPageIndex += 1
+                            }
+                            
+                            gestureDragOffset = 0
+                            
+                            withAnimation(.interpolatingSpring(mass: 0.1,
+                                                               stiffness: 20,
+                                                               damping: 1.5,
+                                                               initialVelocity: 0)) {
+                                self.currentPageIndex = newPageIndex
+                                self.currentScrollOffset = self.countCurrentScrollOffset()
+                            }
                         }
                     }
             )

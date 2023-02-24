@@ -133,7 +133,8 @@ extension View {
                    cashSourceReceiver: Binding<String>,
                    draggingItem: Binding<Bool>,
                    draggingIndex: Binding<Int?>,
-                   currentIndexCashSource: Binding<Int?>) -> some View {
+                   currentIndexCashSource: Binding<Int?>,
+                   isNotSwipeGesture: Binding<Bool>) -> some View {
         
         modifier(DragGestureCustom(zIndex: zIndex,
                                    isPurchaseDetected: isPurchaseDetected,
@@ -144,7 +145,8 @@ extension View {
                                    cashSourceReceiver: cashSourceReceiver,
                                    draggingItem: draggingItem,
                                    draggingIndex: draggingIndex,
-                                   currentIndexCashSource: currentIndexCashSource
+                                   currentIndexCashSource: currentIndexCashSource,
+                                   isNotSwipeGesture: isNotSwipeGesture
                                   ))
     }
 }
@@ -164,28 +166,42 @@ struct DragGestureCustom: ViewModifier {
     @Binding var draggingItem: Bool
     @Binding var draggingIndex: Int?
     @Binding var currentIndexCashSource: Int?
+    @Binding var isNotSwipeGesture: Bool
    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
                 draggingItem = true
+                isDraggingItem.toggle()
+                
+//                if value.translation.height < 50{
+                    isNotSwipeGesture = value.translation.height < 50 ? true : false
+                    print("isNotSwipeGesture = \(isNotSwipeGesture), height: \(value.translation.height)")
+                
+//                }
                 
                 
                 
-                draggingIndex = currentIndexCashSource
-                withAnimation {
-//                    zIndex = 100
+                withAnimation() {
+                    
                     currentOffsetX = value.translation.width
-                    currentOffsetY = value.translation.height
-                    isDraggingItem.toggle()
+                    if value.translation.height > -50{
+                        currentOffsetY = value.translation.height
+                        
+                    }
+                    
                     
                 }
-                print("AAA draggingIndex \(String(describing: draggingIndex)) index \(String(describing: currentIndexCashSource))")
+//                print("AAA draggingIndex \(String(describing: draggingIndex)) index \(String(describing: currentIndexCashSource))")
                
                
             })
             .onEnded { gesture in
-                draggingItem = false
+                draggingIndex = currentIndexCashSource
+                withAnimation {
+                    isDraggingItem = false
+                    draggingItem = false
+                }
                 let purchaseLocations = PurchaseLocation.standard.locations
 //                let cashSourceLocations = CashSourceLocation.standard.locations
                 

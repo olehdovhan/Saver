@@ -20,6 +20,7 @@ struct CashSourceView: View {
     @Binding var isTransferViewShow: Bool
     @Binding var purchaseType: String
     @Binding var draggingIndex: Int?
+    @Binding var isNotSwipeGesture: Bool
 
     
     
@@ -48,6 +49,7 @@ struct CashSourceView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .myShadow(radiusShadow: 5)
                                 .zIndex(1)
+                                .saturation(0)
                             
                             Image(cashSourceItem.iconName)
                                 .resizable()
@@ -63,7 +65,8 @@ struct CashSourceView: View {
                                            cashSourceReceiver: $cashSourceReceiver,
                                            draggingItem: $draggingItem,
                                            draggingIndex: $draggingIndex,
-                                           currentIndexCashSource: $index)
+                                           currentIndexCashSource: $index,
+                                           isNotSwipeGesture: $isNotSwipeGesture)
                                 .zIndex(draggingIndex == index ? 15 : 10)
 //                                .zIndex(30)
                                 
@@ -74,13 +77,16 @@ struct CashSourceView: View {
                     default:
                         ZStack{
                             ZStack{
-                                Color.myGreen
+                                Rectangle().foregroundColor(draggingItem ? .myGrayCapsule : .myGreen)
+//                                Color.myGrayCapsule
                                     .frame(width: 50, height: 50)
+                                    .animation(.easeIn(duration: 1))
                                 
                                 Image(cashSourceItem.iconName)
 //                                    .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
+                                    
                                 
                             }
                             .cornerRadius(15)
@@ -109,7 +115,8 @@ struct CashSourceView: View {
                                        cashSourceReceiver: $cashSourceReceiver,
                                        draggingItem: $draggingItem,
                                        draggingIndex: $draggingIndex,
-                                       currentIndexCashSource: $index)
+                                       currentIndexCashSource: $index,
+                                       isNotSwipeGesture: $isNotSwipeGesture)
                             
                         }
                         

@@ -38,7 +38,7 @@ struct MainScreen: View {
     @State private var activePageIndex: Int = 0
     @State var draggingScroll = true
     @State var draggingItem = false
-//    @State var currentIndexCashSource: Int?
+    @State var isNotSwipeGesture: Bool = false
     @State private var draggingIndex: Int?
     @State var leadingOffsetScroll: CGFloat = 0
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
@@ -102,7 +102,8 @@ struct MainScreen: View {
                             itemPadding: self.itemPadding,
                             pageWidth: geometry.size.width,
                             limitCashSourcesViewShow: $limitCashSourcesViewShow,
-                            currentScrollOffset: $currentScrollOffset
+                            currentScrollOffset: $currentScrollOffset,
+                            isNotSwipeGesture: $isNotSwipeGesture
                         ) {
                             ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
                                 GeometryReader{ screen in
@@ -116,7 +117,8 @@ struct MainScreen: View {
                                                    expenseViewShow: $expenseViewShow,
                                                    isTransferViewShow: $isTransferViewShow,
                                                    purchaseType: $expenseType,
-                                                   draggingIndex: $draggingIndex
+                                                   draggingIndex: $draggingIndex,
+                                                   isNotSwipeGesture: $isNotSwipeGesture
                                     )
                                     .getLocationCashSources(source: source,
                                                             offset: currentScrollOffset)
@@ -288,7 +290,9 @@ struct MainScreen: View {
                                                                 bottomPadding: 20)),
                  show: $viewModel.showErrorMessage,
                  ignoreSaveArea: false)
-    
+        .onChange(of: draggingItem, perform: { newValue in
+            print(" dragingItem: \(draggingItem)")
+        })
         .onAppear() {
 
         FirebaseUserManager.shared.observeUser {
