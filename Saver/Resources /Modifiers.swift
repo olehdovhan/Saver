@@ -408,3 +408,12 @@ extension StringProtocol {
         self[index(startIndex, offsetBy: offset)]
     }
 }
+
+
+extension String{
+    func commaToDot() -> String {
+            let textDouble = Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0
+            // If the Textfield is empty, 0 will be returned
+            return String(format: "%.2f", textDouble)
+        }
+}

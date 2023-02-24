@@ -273,11 +273,7 @@ struct IncomeView: View {
             
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-      
-        .onChange(of: amountIncome) { newValue in
-            print(amountIncome)
-            print("dot: \(String(describing: Double(amountIncome.commaToDot())))")
-        }
+    
        
     
     }
@@ -323,10 +319,3 @@ struct Previews_Income: PreviewProvider {
 }
 
 
-extension String{
-    func commaToDot() -> String {
-            let textDouble = Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0
-            // If the Textfield is empty, 0 will be returned
-            return String(format: "%.2f", textDouble)
-        }
-}
