@@ -12,7 +12,7 @@ struct IncomeView: View {
     
     @Binding var closeSelf: Bool
     @Binding  var cashSourceNameSelect: String
-    @State private var amountIncome = 0.0
+    @State private var amountIncome = ""
     @State private var comment = ""
     @State private var isDone = false
     @State private var expenseDate = Date.now
@@ -21,8 +21,11 @@ struct IncomeView: View {
     
     private var enteredIncome: Bool {
         switch amountIncome {
-        case let x where x > 0.0:  return false
-        default:                   return true
+            
+        case let x where Double(x.commaToDot())! > 0.0:
+            return false
+        default:
+            return true
         }
     }
     
@@ -61,16 +64,36 @@ struct IncomeView: View {
                             
                             Spacer()
                             
-                            TextField("", value: $amountIncome, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke( Color.gray, lineWidth: 0.5)
+                                    .frame(width: wRatio(30), height: wRatio(30))
+                                
+                                Text(Locale.current.currencyCode ?? "USD")
+                                    .foregroundColor(Color.gray)
+                                    .font(.custom("NotoSans-Regular", size: 30))
+                                    .minimumScaleFactor(0.01)
+                                    .frame(width: wRatio(30), height: wRatio(30))
+                                
+                            }
+                            .padding(.trailing, wRatio(10))
+                            .opacity(amountIncome.isEmpty ? 0 : 1)
+                            
+                            TextField("",text: $amountIncome)
+                                .placeholder(when: amountIncome.isEmpty) {
+                                    Text("0 " + (Locale.current.currencyCode ?? "USD")).foregroundColor(.gray)
+                                }
+                                .numbersOnly($amountIncome, includeDecimal: true)
                                 .keyboardType(.decimalPad)
                                 .focused(editing)
-                                .foregroundColor(amountIncome == 0.0 ? .gray : .black)
+                                .foregroundColor(Double(amountIncome.commaToDot())! == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke( Color.myGreen, lineWidth: 1)
                                     .padding(.leading, wRatio(-10))
                                     .padding(.trailing, wRatio(-10))
                                 )
+                                
                                
                                 
                         }
@@ -207,7 +230,7 @@ struct IncomeView: View {
                     
                     DoneButtonView(isValid: enteredIncome) {
                         
-                        let incomeModel = IncomeModel(amount: amountIncome,
+                        let incomeModel = IncomeModel(amount: Double(amountIncome.commaToDot())!,
                                                       comment: comment,
                                                       incomeDate: Date(),
                                                       cashSource: cashSourceNameSelect)
@@ -228,7 +251,7 @@ struct IncomeView: View {
                             }
                             
                             if let index = cashSourceIncreaseIndex {
-                                user.cashSources[index].increaseAmount(amountIncome)
+                                user.cashSources[index].increaseAmount(Double(amountIncome.commaToDot())!)
                             }
                             
                             FirebaseUserManager.shared.userModel = user
@@ -250,12 +273,17 @@ struct IncomeView: View {
             
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-        .onChange(of: cashSourceNameSelect) { _ in
-            print(cashSourceNameSelect)
+      
+        .onChange(of: amountIncome) { newValue in
+            print(amountIncome)
+            print("dot: \(String(describing: Double(amountIncome.commaToDot())))")
         }
        
     
     }
+    
+    
+    
     func deleteCashSource() -> Void{
         if var user = FirebaseUserManager.shared.userModel {
             var sources = user.cashSources
@@ -275,7 +303,7 @@ struct IncomeView: View {
     
 }
 
-struct Previews_Icome: PreviewProvider {
+struct Previews_Income: PreviewProvider {
     
     static var previews: some View {
      
@@ -284,11 +312,21 @@ struct Previews_Icome: PreviewProvider {
                    cashSource: "Bank card",
                    cashSources: [CashSource.init(name: "Bank card",
                                                  amount: 1000,
-                                                 iconName: "")])
+                                                 iconName: "")],
+                   progress: false)
+        
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
             .previewDisplayName("iPhone 14 Pro")
+        
             
     }
 }
 
 
+extension String{
+    func commaToDot() -> String {
+            let textDouble = Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0
+            // If the Textfield is empty, 0 will be returned
+            return String(format: "%.2f", textDouble)
+        }
+}

@@ -10,20 +10,22 @@ import SwiftUI
 
 class ExpenseViewModel: ObservableObject {
     
-    @Published var expense = 0.0
+    @Published var expense = ""
     @Published var comment = ""
     @Published var isDone = false
     @Published var expenseDate = Date.now
     
     var enteredExpense: Bool {
         switch expense {
-        case let x where x > 0.0:  return false
-        default:                   return true
+        case let x where Double(x.commaToDot())! > 0.0:
+            return false
+        default:
+            return true
         }
     }
     
     func addAndCalculateExpense(from cashSource: String, to spentCategory: String) {
-        let expenseModel = ExpenseModel(amount: expense,
+        let expenseModel = ExpenseModel(amount: Double(expense.commaToDot())!,
                                    comment: comment,
                                  expenseDate: Date(),
                                  cashSource: cashSource,
@@ -47,7 +49,7 @@ class ExpenseViewModel: ObservableObject {
                 }
             }
             if let index = cashSourceSubtractIndex {
-                user.cashSources[index].subtractAmount(expense)
+                user.cashSources[index].subtractAmount(Double(expense.commaToDot())!)
             }
             FirebaseUserManager.shared.userModel = user
         }

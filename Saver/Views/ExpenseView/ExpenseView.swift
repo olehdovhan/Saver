@@ -51,8 +51,27 @@ struct ExpenseView: View {
                             
                             Spacer()
                             
-                            TextField("", value: $viewModel.expense, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                                .foregroundColor(viewModel.expense == 0.0 ? .gray : .black)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke( Color.gray, lineWidth: 0.5)
+                                    .frame(width: wRatio(30), height: wRatio(30))
+                                
+                                Text(Locale.current.currencyCode ?? "USD")
+                                    .foregroundColor(Color.gray)
+                                    .font(.custom("NotoSans-Regular", size: 30))
+                                    .minimumScaleFactor(0.01)
+                                    .frame(width: wRatio(30), height: wRatio(30))
+                                
+                            }
+                            .padding(.trailing, wRatio(10))
+                            .opacity(viewModel.expense.isEmpty ? 0 : 1)
+                            
+                            TextField("", text: $viewModel.expense)
+                                .placeholder(when: viewModel.expense.isEmpty) {
+                                    Text("0 " + (Locale.current.currencyCode ?? "USD")).foregroundColor(.gray)
+                                }
+                                .numbersOnly($viewModel.expense, includeDecimal: true)
+                                .foregroundColor(Double(viewModel.expense.commaToDot())! == 0.0 ? .gray : .black)
                                 .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
                                 .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke(Color.myGreen, lineWidth: 1)
