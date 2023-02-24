@@ -11,8 +11,6 @@ struct BalanceView: View {
     
     @State var isDragging = false
     @Binding var showQuitAlert: Bool
-    
-//  @Binding var showImageCropper: Bool
     @Binding var sourceType: UIImagePickerController.SourceType //
     @Binding var selectedImage: UIImage? //
     @Binding var isImagePickerDisplay: Bool //
@@ -28,15 +26,24 @@ struct BalanceView: View {
                 .frame(width: UIScreen.main.bounds.width, height: hRatio(130), alignment: .top)
                 .cornerRadius(30, corners: [.bottomLeft, .bottomRight])
                 
-                VStack(){
-                    Spacer().frame(height: 20)
+                VStack(spacing: 0){
                     HStack(){
-                        VStack{
+                        VStack(spacing: hRatio(15)){
                             Button {
                                 showQuitAlert = true
                             } label: {
-                                Text("Log Out")
+                                ZStack{
+                                    Color.white.opacity(0.0025)
+                                        .frame(width: hRatio(50), height: hRatio(30))
+                                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                                        .resizable()
+                                        .frame(width: hRatio(20), height: hRatio(20))
+                                        .foregroundColor(.white)
+                                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                                }
+                                
                             }
+                            
                             Button {
                                 sourceType = .photoLibrary
                                 isImagePickerDisplay.toggle()
@@ -45,7 +52,7 @@ struct BalanceView: View {
                                     Image(uiImage: img)
                                         .resizable()
                                         .frame(width: hRatio(50), height: hRatio(50))
-                                        .foregroundColor(.white)
+                                        .clipShape(Circle())
                                 } else if selectedImage != nil{
                                     Image(uiImage: selectedImage!)
                                         .resizable()
@@ -53,7 +60,12 @@ struct BalanceView: View {
                                         .clipShape(Circle())
                                 }
                             }
+                            
+                            
+                            
+                            
                         }
+                        
                         Spacer()
                         VStack{
                             Text("Balance")
@@ -70,7 +82,7 @@ struct BalanceView: View {
                         
                         Spacer()
                         VStack{
-                            Text("Expence")
+                            Text("Expense")
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                             
@@ -119,3 +131,4 @@ struct BalanceView_Previews: PreviewProvider {
             .previewDisplayName("iPhone 14 Pro")
     }
 }
+
