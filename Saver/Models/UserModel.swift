@@ -55,11 +55,11 @@ struct UserModel: Codable {
     var purchaseCategories: [PurchaseCategory]
     
     // Spendings
-    var currentMonthSpendings: [ExpenseModel]?
-    var previousMonthesSpendings: [ExpenseModel]?
+    var currentMonthSpendings: [ExpenseModel]? //використовується в Firebase
+//    var previousMonthesSpendings: [ExpenseModel]?
     
     var currentMonthIncoms: [IncomeModel]?
-    var previousMonthesIncoms: [IncomeModel]?
+//    var previousMonthesIncoms: [IncomeModel]?
 //    var totalDebtsPaymentPerMonth: Int {
 //        var sum = Int()
 //        for debt in debts {
@@ -168,7 +168,7 @@ struct PlanBudgetCategory: Codable {
     var sum: Int
 }
 
-struct ExpenseModel: Codable {
+struct ExpenseModel: Codable, Hashable {
     var amount: Double
     var comment: String
     var expenseDate: Date
@@ -176,11 +176,19 @@ struct ExpenseModel: Codable {
     var spentCategory: String
 }
 
-struct IncomeModel: Codable {
+struct IncomeModel: Codable, Hashable {
     var amount: Double
     var comment: String
     var incomeDate: Date
     var cashSource: String
+}
+
+struct TransactionsModel: Codable, Hashable{
+    var time: String
+    var amount: String
+    var category: String
+    var comment: String
+    
 }
 
 struct DebtModel: Codable, Hashable {

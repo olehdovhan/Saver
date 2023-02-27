@@ -14,6 +14,10 @@ class SpendingsCalendarViewModel: ObservableObject {
     @Published var monthOffset: CGSize = .zero
     @Published var dayOffset: CGSize = .zero
     
+    @Published var currentMonthSpendings = [ExpenseModel]()
+    @Published var currentMonthIncoms = [IncomeModel]()
+    @Published var dailyTransactions = [TransactionsModel]()
+    
     var tasks: [TaskMetaData] = []
     
     let lengthDay = UIScreen.main.bounds.width / 8
@@ -98,47 +102,73 @@ class SpendingsCalendarViewModel: ObservableObject {
     }
     
     init() {
-        // fill tasks
-        if let spendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings {
-            for spending in spendings {
-                let thisDaySpents = spendings.filter({isSameDay(date1: $0.expenseDate,
-                                                                date2: spending.expenseDate)})
-                print(thisDaySpents.count)
-                var tsks: [Task] = []
-                for spent in thisDaySpents {
-                    let task = Task(title: spent.spentCategory,
-                                    valueUSD: String(Int(spent.amount)))
-                    tsks.append(task)
-                }
-               let tsk = TaskMetaData(tasks: tsks,
-                                      taskDate: spending.expenseDate)
-                tasks.append(tsk)
-            }
+        FirebaseUserManager.shared.observeUser {
+            self.currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
+            self.currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms ?? []
         }
-//        tasks = [
-////            TaskMetaData(tasks: [
-////                Task(title: "To the bank card", valueUSD: "+300.00"),
-////                Task(title: "To the bank card", valueUSD: "+154.89"),
-////                Task(title: "Product", valueUSD: "-900.00")
-////            ], taskDate: getSampleDate(offset: 0)),
-//
-//            TaskMetaData(tasks: [
-//                Task(title: "Product", valueUSD: "+200.00")
-//            ], taskDate: getSampleDate(offset: -2)),
-//
-//            TaskMetaData(tasks: [
-//                Task(title: "Product", valueUSD: "+700.00")
-//            ], taskDate: getSampleDate(offset: 15)),
-//            //
-//            TaskMetaData(tasks: [
-//                Task(title: "To the bank card", valueUSD: "-1200.00")
-//            ], taskDate: getSampleDate(offset: 0)),
-//            //
-//            TaskMetaData(tasks: [
-//                Task(title: "To the bank card", valueUSD: "100.00")
-//            ], taskDate: getSampleDate(offset: +18))
-//            ]
+    
     }
+    
+    func isSpendOnThis(day date: Date) -> Bool{
+        return !currentMonthSpendings.filter{isSameDay(date1: $0.expenseDate, date2: date)}.isEmpty
+    }
+    
+    func isIncomeOnThis(day date: Date) -> Bool{
+        return !currentMonthIncoms.filter{isSameDay(date1: $0.incomeDate, date2: date)}.isEmpty
+    }
+    
+    
+    
+
+//    func getDailyTransactions() -> [TransactionsModel]{
+//        let dailySpendings = currentMonthSpendings.filter{isSameDay(date1: $0.expenseDate, date2: selectedDate)}
+//        let dailyIncomes = currentMonthIncoms.filter{isSameDay(date1: $0.incomeDate, date2: selectedDate)}
+//        var transactions: [TransactionsModel] = []
+//
+//        for spending in dailySpendings {
+//            transactions.append(TransactionsModel(time: spending.expenseDate.filterTime(),
+//                                                  amount: "-\(spending.amount.clean)",
+//                                                  category: spending.spentCategory,
+//                                                  comment: spending.comment))
+//        }
+//
+//        for income in dailyIncomes {
+//            transactions.append(TransactionsModel(time: income.incomeDate.filterTime(),
+//                                                  amount: "+\(income.amount.clean)",
+//                                                  category: income.cashSource,
+//                                                  comment: income.comment))
+//        }
+//
+//        return transactions.sortedAtTime()
+//    }
+    
+    func updateDailyTransactions() -> (){
+        dailyTransactions = []
+        let dailySpendings = currentMonthSpendings.filter{isSameDay(date1: $0.expenseDate, date2: selectedDate)}
+        let dailyIncomes = currentMonthIncoms.filter{isSameDay(date1: $0.incomeDate, date2: selectedDate)}
+        var transactions: [TransactionsModel] = []
+        
+        for spending in dailySpendings {
+            transactions.append(TransactionsModel(time: spending.expenseDate.filterTime(),
+                                                  amount: "-\(spending.amount.clean)",
+                                                  category: spending.spentCategory,
+                                                  comment: spending.comment))
+        }
+        
+        for income in dailyIncomes {
+            transactions.append(TransactionsModel(time: income.incomeDate.filterTime(),
+                                                  amount: "+\(income.amount.clean)",
+                                                  category: income.cashSource,
+                                                  comment: income.comment))
+        }
+        
+        dailyTransactions = transactions.sortedAtTime()
+        
+        
+//        return transactions.sortedAtTime()
+    }
+
+    
     //sample Date for Testing...
     func getSampleDate(offset: Int) -> Date {
         let calendar = Calendar.current
@@ -199,4 +229,30 @@ class SpendingsCalendarViewModel: ObservableObject {
         print(time24)
         return time24
     }
+}
+
+extension Date{
+    func filterTime()->String{
+        let formatter3 = DateFormatter()
+        formatter3.dateFormat = "HH:mm"
+        return formatter3.string(from: self)
+    }
+}
+
+extension [TransactionsModel]{
+    
+    func sortedAtTime() -> [TransactionsModel]{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        return self.sorted { (transaction1, transaction2) -> Bool in
+             guard let date1 = formatter.date(from: transaction1.time),
+                   let date2 = formatter.date(from: transaction2.time) else {
+                 return false
+             }
+             return date1 < date2
+         }
+    }
+    
+   
 }
