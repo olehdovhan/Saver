@@ -13,11 +13,6 @@ struct SpendingsCalendarView: View {
     
     @ObservedObject private var viewModel = SpendingsCalendarViewModel()
     
-    
-//    @State var currentMonthSpendings = [ExpenseModel]()
-//    @State var currentMonthIncoms = [IncomeModel]()
-    
-    
     var body: some View {
         VStack(spacing: 10){
             HStack(spacing: 0) {
@@ -77,25 +72,9 @@ struct SpendingsCalendarView: View {
             LazyVGrid(columns: columns, spacing: 5) {
                 ForEach(viewModel.extractDate()) {value in
                     cardView(value: value)
-                        .background {
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(viewModel.isSameDay(date1: value.date,
-                                                  date2: viewModel.selectedDate) ? .green : .gray.opacity(0.3),
-                                        lineWidth: viewModel.isSameDay(date1: value.date,
-                                                             date2: viewModel.selectedDate) ? 2 : 1)
-                        }
                         .onTapGesture {
-//                            print("value = \(value)")
-                            print("xxx selectedDate = \(value.date)")
-                        
                             viewModel.selectedDate = value.date
                             viewModel.updateDailyTransactions()
-                            
-//                            print(viewModel.currentMonthSpendings)
-//                            let kkk = transactions[2].date
-//                            let check = viewModel.isSameDay(date1: kkk ,
-//                                                            date2: viewModel.selectedDate)
-////
                         }
                 }
             }
@@ -122,75 +101,20 @@ struct SpendingsCalendarView: View {
                     }
                 }
                 
-//                let dailySpendings = currentMonthSpendings.filter{viewModel.isSameDay(date1: $0.expenseDate, date2: viewModel.selectedDate)}
-//                let dailyIncomes = currentMonthIncoms.filter{viewModel.isSameDay(date1: $0.incomeDate, date2: viewModel.selectedDate)}
-                let dailyTransactions = viewModel.dailyTransactions
+                
                 //transactions
                 ScrollView(.horizontal, showsIndicators: false){
-                VStack(spacing: 12){
-                   
-                    if !dailyTransactions.isEmpty{
-                        //                    if !dailySpendings.isEmpty || !dailyIncomes.isEmpty{
-                        HStack(spacing: 0){
-                            
-                            HStack{
-                                Text("Time")
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(1)
-                                    .font(.custom("Lato-Bold", size: 12))
-                                Spacer()
-                            }
-                            .frame(width: UIScreen.main.bounds.width/7)
-                            
-                            Spacer().frame(width: 5)
-                            
-                            HStack{
-                                Text(Locale.current.currencyCode ?? "USD")
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.leading)
-                                    .font(.custom("Lato-Bold", size: 12))
-                                Spacer()
-                            }
-                            .frame(width: UIScreen.main.bounds.width/4)
-                            
-                            Spacer().frame(width: 5)
-                            
-                            HStack{
-                                Text("Category" )
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(1)
-                                    .font(.custom("Lato-Bold", size: 12))
-                                Spacer()
-                            }
-                            .frame(width: UIScreen.main.bounds.width/4)
-                            
-                            Spacer().frame(width: 5)
-                            
-                            HStack{
-                                Text("Note")
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(1)
-                                    .font(.custom("Lato-Bold", size: 12))
-                                //                                Spacer()
-                            }
-                            
-                            Spacer()
-                        }
+                    VStack(spacing: 12){
                         
-                        ForEach(dailyTransactions, id: \.self) { transaction in
-                            
-                            //                    }
-                            //
+                        if !viewModel.dailyTransactions.isEmpty{
                             HStack(spacing: 0){
+                                
                                 HStack{
-                                    Text(transaction.time)
-                                        .foregroundColor(Color(hex: "A9A9A9"))
+                                    Text("Time")
+                                        .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
-                                        .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
+                                        .font(.custom("Lato-Bold", size: 12))
                                     Spacer()
                                 }
                                 .frame(width: UIScreen.main.bounds.width/7)
@@ -198,14 +122,10 @@ struct SpendingsCalendarView: View {
                                 Spacer().frame(width: 5)
                                 
                                 HStack{
-                                    Text(transaction.amount)
-                                        .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen
-                                            //                                        (Float(task.valueUSD) ?? 0) < 0.0 ?  Color.myRed :  Color.myGreen
-//                                            Color.blue
-                                        )
+                                    Text(Locale.current.currencyCode ?? "USD")
+                                        .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                        .font(.custom("Lato-Bold", size: 12))
                                     Spacer()
                                 }
                                 .frame(width: UIScreen.main.bounds.width/4)
@@ -213,14 +133,11 @@ struct SpendingsCalendarView: View {
                                 Spacer().frame(width: 5)
                                 
                                 HStack{
-                                    Text("\(transaction.category)" )
-                                        .foregroundColor(
-                                                                                    transaction.amount.first == "-" ? .myRed : .myGreen
-//                                            Color.blue
-                                        )
+                                    Text("Category" )
+                                        .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
-                                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                        .font(.custom("Lato-Bold", size: 12))
                                     Spacer()
                                 }
                                 .frame(width: UIScreen.main.bounds.width/4)
@@ -228,104 +145,79 @@ struct SpendingsCalendarView: View {
                                 Spacer().frame(width: 5)
                                 
                                 HStack{
-                                    Text(transaction.comment)
-                                        .foregroundColor(
-                                                                                transaction.amount.first == "-" ? .myRed : .myGreen
-//                                            Color.blue
-                                        )
+                                    Text("Note")
+                                        .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
-                                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                                    Spacer()
+                                        .font(.custom("Lato-Bold", size: 12))
                                 }
+                                
                                 Spacer()
                             }
                             
+                            ForEach(viewModel.dailyTransactions, id: \.self) { transaction in
+                                
+                                HStack(spacing: 0){
+                                    HStack{
+                                        Text(transaction.time.filterTime())
+                                            .foregroundColor(Color(hex: "A9A9A9"))
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
+                                            .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
+                                        Spacer()
+                                    }
+                                    .frame(width: UIScreen.main.bounds.width/7)
+                                    
+                                    Spacer().frame(width: 5)
+                                    
+                                    HStack{
+                                        Text(transaction.amount)
+                                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
+                                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                        Spacer()
+                                    }
+                                    .frame(width: UIScreen.main.bounds.width/4)
+                                    
+                                    Spacer().frame(width: 5)
+                                    
+                                    HStack{
+                                        Text("\(transaction.category)" )
+                                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
+                                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                        Spacer()
+                                    }
+                                    .frame(width: UIScreen.main.bounds.width/4)
+                                    
+                                    Spacer().frame(width: 5)
+                                    
+                                    HStack{
+                                        Text(transaction.comment)
+                                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
+                                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                }
+                                
+                            }
+                        }
+                        
+                        
+                        else {
+                            Text("No Transaction Found")
+                                .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                         }
                     }
-                    
-//                    if !dailySpendings.isEmpty{
-//                        ForEach(currentMonthIncoms, id: \.self) { incom in
-//                            HStack(spacing: 0){
-//                                HStack{
-//                                    Text(incom.incomeDate.filterTime())
-//                                        .foregroundColor(Color(hex: "A9A9A9"))
-//                                        .multilineTextAlignment(.leading)
-//                                        .lineLimit(1)
-//                                        .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
-//                                    Spacer()
-//                                }
-//                                .frame(width: UIScreen.main.bounds.width/7)
-//
-//                                Spacer().frame(width: 5)
-//
-//                                HStack{
-//                                    Text("-\(incom.amount.clean)")
-//                                        .foregroundColor(
-//                                            //                                        (Float(task.valueUSD) ?? 0) < 0.0 ?  Color.myRed :  Color.myGreen
-//                                            Color.myGreen
-//                                        )
-//                                        .multilineTextAlignment(.leading)
-//                                        .lineLimit(1)
-//                                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-//                                    Spacer()
-//                                }
-//                                .frame(width: UIScreen.main.bounds.width/4)
-//
-//                                Spacer().frame(width: 5)
-//
-//                                HStack{
-//                                    Text("\(incom.cashSource)" )
-//                                        .foregroundColor(
-//                                            //                                        (Float(task.valueUSD) ?? 0) < 0.0 ?  Color.myRed :  Color.myGreen
-//                                            Color.myGreen
-//                                        )
-//                                        .multilineTextAlignment(.leading)
-//                                        .lineLimit(1)
-//                                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-//                                    Spacer()
-//                                }
-//                                .frame(width: UIScreen.main.bounds.width/4)
-//
-//                                Spacer().frame(width: 5)
-//
-//                                HStack{
-//                                    Text(incom.comment)
-//                                        .foregroundColor(
-//                                            //                                    (Float(task.valueUSD) ?? 0) < 0.0 ?  Color.myRed :  Color.myGreen)
-//                                            Color.myGreen
-//                                        )
-//                                        .multilineTextAlignment(.leading)
-//                                        .lineLimit(1)
-//                                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-//                                    Spacer()
-//                                }
-//                                Spacer()
-//                            }
-//
-//                        }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//                    }
-                    
-                   
-                    else {
-                        Text("No Transaction Found")
-                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                    }
-                }
                 }
                 .padding(.top, 22)
-//                .offset(x: viewModel.dayOffset.width)
-//                .gesture(dayDragGesture)
+                //                .offset(x: viewModel.dayOffset.width)
+                //                .gesture(dayDragGesture)
             }
             .padding(.top, 10)
             
@@ -338,7 +230,7 @@ struct SpendingsCalendarView: View {
                 viewModel.selectedDate = viewModel.getCurrentMonth()
             }
         }
-  
+        
     }
     
     var monthDragGesture: some Gesture{
@@ -353,7 +245,6 @@ struct SpendingsCalendarView: View {
             .onEnded({ value in
                 if value.translation.width > 0 {
                     if value.translation.width > 100{
-                        print("future")
                         self.viewModel.currentMonth += 1
                     }
                 } else if value.translation.width < 0 {
@@ -394,10 +285,20 @@ struct SpendingsCalendarView: View {
     
     @ViewBuilder
     func cardView(value: DateValue) -> some View {
-
+        
         VStack{
             if value.day != -1 {
                 ZStack{
+                    
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.white)
+                    
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(viewModel.isSameDay(date1: value.date,
+                                                    date2: viewModel.selectedDate) ? .green : .gray.opacity(0.3),
+                                lineWidth: viewModel.isSameDay(date1: value.date,
+                                                               date2: viewModel.selectedDate) ? 2 : 1)
+                    
                     VStack{
                         HStack{
                             Spacer()
@@ -447,12 +348,12 @@ struct CustomDatePicker3_Previews: PreviewProvider {
 
 extension Float {
     var clean: String {
-       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
 
 extension Double {
     var clean: String {
-       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }

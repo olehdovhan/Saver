@@ -106,13 +106,9 @@ struct ExpensesCircularDiagram: View {
         .onChange(of: selectedTab) { newValue in
             if FirebaseUserManager.shared.userModel?.currentMonthSpendings != nil &&
                FirebaseUserManager.shared.userModel?.currentMonthSpendings?.count != 0 {
-                //є наповнення
                 isNoExpenses = false
-                print("isNoExpenses: \(isNoExpenses)")
             } else {
-                //немає наповнення
                 isNoExpenses = true
-                print("isNoExpenses: \(isNoExpenses)")
             }
         }
         

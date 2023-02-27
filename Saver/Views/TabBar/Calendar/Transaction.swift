@@ -9,29 +9,29 @@ import Foundation
 
 import SwiftUI
 
-enum CashSourceOld: String {
-    case wallet = "Wallet"
-    case bankCard = "Bank Card"
-}
-
-enum PurchaseCategoryOld: String {
-    case products
-    case transport
-    case clouthing
-    case restaurant
-}
-
-
-enum Currency{
-    case USD
-    case EUR
-    case UAH
-}
-
-enum TransactionType{
-    case income
-    case expense
-}
+//enum CashSourceOld: String {
+//    case wallet = "Wallet"
+//    case bankCard = "Bank Card"
+//}
+//
+//enum PurchaseCategoryOld: String {
+//    case products
+//    case transport
+//    case clouthing
+//    case restaurant
+//}
+//
+//
+//enum Currency{
+//    case USD
+//    case EUR
+//    case UAH
+//}
+//
+//enum TransactionType{
+//    case income
+//    case expense
+//}
 
 
 //struct TransactionModel: Identifiable{
@@ -46,8 +46,7 @@ enum TransactionType{
 //}
 
 
-let calendar = Calendar.current
-let date = Date()
+
 
 //Цей масив, який визначає дні витратрат і надходжень у вигляді точок нам календарю
 //var transactions: [TransactionModel] = [

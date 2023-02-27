@@ -183,11 +183,28 @@ struct AddCashSourceView: View {
     
     func doneAction() -> Void {
         if !fieldsEmpty{
-            let newCashSource = CashSource(name: cashSourceName, amount: Double(currentMoneyAmount) ?? 0.0, iconName: selectedCashIconName)
+            let newCashSource = CashSource(name: cashSourceName,
+                                           amount: Double(currentMoneyAmount) ?? 0.0,
+                                           iconName: selectedCashIconName)
+            let incomeModel = IncomeModel(amount: Double(currentMoneyAmount.commaToDot())!,
+                                          comment: "initial",
+                                          incomeDate: Date(),
+                                          cashSource: cashSourceName)
+            
             if var copyUser = FirebaseUserManager.shared.userModel {
+                if copyUser.currentMonthIncoms == nil {
+                    var incomes = [IncomeModel]()
+                    incomes.append(incomeModel)
+                    copyUser.currentMonthIncoms = incomes
+                } else {
+                    copyUser.currentMonthIncoms?.append(incomeModel)
+                }
+                
+                
+                
                 copyUser.cashSources.append(newCashSource)
                 FirebaseUserManager.shared.userModel? = copyUser
-                print("AAAA\(newCashSource)")
+//                print("AAAA\(newCashSource)")
             }
             closeSelf = false
         }
