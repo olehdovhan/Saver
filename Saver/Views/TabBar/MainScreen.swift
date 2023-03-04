@@ -22,16 +22,16 @@ struct MainScreen: View {
     @State var limitCashSourcesViewShow = false
     @State var limitPurchaseCategoryViewShow = false
     @State var currentScrollOffset: CGFloat = 0
-    @State var cashSource: String = ""
+//    @State var cashSource: String = ""
     @State var cashSourceReceiver: String = ""
     @State var expenseType: String = ""
     @FocusState var editing: Bool
-    @State var cashSources: [CashSource] = []
-    @State var purchaseCategories: [PurchaseCategory] = []
+//    @State var cashSources: [CashSource] = []
+//    @State var purchaseCategories: [PurchaseCategory] = []
     @State var selectedCategory: PurchaseCategory?
     
     @State var amountCurrentMonthSpendingSelectedCategory: String = "0.0"
-    @State var currentMonthSpendings = [ExpenseModel]()
+//    @State var currentMonthSpendings = [ExpenseModel]()
     
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
@@ -47,13 +47,13 @@ struct MainScreen: View {
     
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
-    @State var urlImage: URL?
+//    @State var urlImage: URL?
     
-    @State var progress = true
+//    @State var progress = true
     
-    @State var userName: String = "User Name"
-    @State var totalIncome: Double = .zero
-    @State var totalExpense: Double = .zero
+//    @State var userName: String = "User Name"
+//    @State var totalIncome: Double = .zero
+//    @State var totalExpense: Double = .zero
     
     var isBlur: Bool{
         limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow || isTransferViewShow
@@ -87,10 +87,10 @@ struct MainScreen: View {
                                 sourceType: $sourceType,
                                 selectedImage: $selectedImage,
                                 isImagePickerDisplay: $isImagePickerDisplay,
-                                urlImage: $urlImage,
-                                userName: $userName,
-                                totalIncome: $totalIncome,
-                                totalExpense: $totalExpense)
+                                urlImage: $viewModel.urlImage,
+                                userName: $viewModel.userName,
+                                totalIncome: $viewModel.totalIncome,
+                                totalExpense: $viewModel.totalExpense)
                         .zIndex(2)
                         .padding(.bottom, 15)
                     
@@ -100,12 +100,12 @@ struct MainScreen: View {
                             incomeViewShow: $incomeViewShow,
                             expenseViewShow: $expenseViewShow,
                             purchaseType: $expenseType,
-                            cashSource: $cashSource,
+                            cashSource: $viewModel.cashSource,
                             cashSourceReceiver: $cashSourceReceiver,
-                            cashSources: $cashSources,
+                            cashSources: $viewModel.cashSources,
                             currentPageIndex: self.$activePageIndex,
                             draggingScroll: self.$draggingScroll,
-                            itemsAmount:    cashSources.count - 1,
+                            itemsAmount:    viewModel.cashSources.count - 1,
                             itemWidth: self.itemWidth,
                             itemPadding: self.itemPadding,
                             pageWidth: geometry.size.width,
@@ -113,15 +113,15 @@ struct MainScreen: View {
                             currentScrollOffset: $currentScrollOffset,
                             isNotSwipeGesture: $isNotSwipeGesture
                         ) {
-                            ForEach(Array(cashSources.enumerated()), id: \.offset) { index, source in
+                            ForEach(Array(viewModel.cashSources.enumerated()), id: \.offset) { index, source in
                                 GeometryReader{ screen in
                                     CashSourceView(draggingItem: $draggingItem,
                                                    cashSourceItem: source,
                                                    index: index,
                                                    incomeViewShow: $incomeViewShow,
-                                                   cashSource: $cashSource,
+                                                   cashSource: $viewModel.cashSource,
                                                    cashSourceReceiver: $cashSourceReceiver,
-                                                   cashSourcesCount: cashSources.count,
+                                                   cashSourcesCount: viewModel.cashSources.count,
                                                    expenseViewShow: $expenseViewShow,
                                                    isTransferViewShow: $isTransferViewShow,
                                                    purchaseType: $expenseType,
@@ -138,7 +138,9 @@ struct MainScreen: View {
                     
                     .zIndex(draggingItem ? 30 : 1)
                     .onChange(of: addCashSourceViewShow) { newValue in
-                        if let sources = FirebaseUserManager.shared.userModel?.cashSources { cashSources = sources } else {
+                        if let sources = FirebaseUserManager.shared.userModel?.cashSources {
+                            viewModel.cashSources = sources
+                        } else {
                             viewModel.errorMessage = "error sources"
                             viewModel.showErrorMessage = true
                         }
@@ -153,14 +155,15 @@ struct MainScreen: View {
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
 //                    .zIndex(1)
                     
-                    PurchaseCategoriesView(purchaseCategories: $purchaseCategories,
+                    PurchaseCategoriesView(purchaseCategories: $viewModel.purchaseCategories,
                                            addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
                                            purchaseDetailViewShow: $purchaseDetailViewShow,
                                            selectedCategory: $selectedCategory,
                                            limitPurchaseCategoryViewShow: $limitPurchaseCategoryViewShow)
 //                    .zIndex(1)
                     .onChange(of: addPurchaseCategoryViewShow) { newValue in
-                        if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { purchaseCategories = purchCategories } else {
+                        if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { viewModel.purchaseCategories = purchCategories
+                        } else {
                             viewModel.errorMessage = "error purchCategories"
                             viewModel.showErrorMessage = true
                         }
@@ -177,7 +180,7 @@ struct MainScreen: View {
                    let cashes = FirebaseUserManager.shared.userModel?.cashSources,
                    let cashSources = cashes.map { $0.name} {
                        ExpenseView(closeSelf: $expenseViewShow,
-                                   cashSource: cashSource,
+                                   cashSource: viewModel.cashSource,
                                    purchaseCategoryName: $expenseType,
                                    editing: $editing,
                                    cashSources: cashSources)
@@ -185,9 +188,9 @@ struct MainScreen: View {
                 
                 if incomeViewShow {
                     IncomeView(closeSelf: $incomeViewShow,
-                               cashSourceNameSelect: $cashSource,
+                               cashSourceNameSelect: $viewModel.cashSource,
                                editing: $editing,
-                               cashSources: $cashSources)
+                               cashSources: $viewModel.cashSources)
                 }
                 
                 if addCashSourceViewShow {
@@ -201,7 +204,7 @@ struct MainScreen: View {
                 
                 if purchaseDetailViewShow, selectedCategory != nil {
                     PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
-                                               purchaseCategories: $purchaseCategories,
+                                               purchaseCategories: $viewModel.purchaseCategories,
                                                category: selectedCategory!,
                                                monthlyAmount: amountCurrentMonthSpendingSelectedCategory)
                 }
@@ -210,7 +213,7 @@ struct MainScreen: View {
                    let cashes = FirebaseUserManager.shared.userModel?.cashSources,
                    let cashSources = cashes.map { $0.name}{
                     CashSourceTransferView(closeSelf: $isTransferViewShow,
-                                           cashSourceProvider: cashSource,
+                                           cashSourceProvider: viewModel.cashSource,
                                            cashSourceReceiver: cashSourceReceiver,
                                            editing: $editing,
                                            cashSources: cashSources)
@@ -237,7 +240,7 @@ struct MainScreen: View {
                                 FirebaseUserManager.shared.userModel = user
                             }                             // 2.
                             if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
-                                urlImage = url
+                                viewModel.urlImage = url
                             }
                         }
                     } else {
@@ -250,7 +253,7 @@ struct MainScreen: View {
             }
         }
         .onChange(of: selectedCategory) { _ in
-                    let amount = currentMonthSpendings
+            let amount = viewModel.currentMonthSpendings
                         .filter { $0.spentCategory == selectedCategory?.name }
                         .map { $0.amount }
                         .reduce(0) { $0 + $1 }
@@ -260,27 +263,21 @@ struct MainScreen: View {
             showImageCropper.toggle()
         }
         .onChange(of: showImageCropper) { isShowTabBar = !$0}
-        .onChange(of: progress) { isShowTabBar = !$0 }
+        .onChange(of: viewModel.progress) { isShowTabBar = !$0 }
         .onChange(of: limitPurchaseCategoryViewShow) { isShowTabBar = !$0 }
         .onChange(of: limitCashSourcesViewShow) { isShowTabBar = !$0 }
         .onChange(of: addCashSourceViewShow) { isShowTabBar = !$0 }
         .onChange(of: addPurchaseCategoryViewShow) { isShowTabBar = !$0 }
         .onChange(of: purchaseDetailViewShow) { isShowTabBar = !$0 }
         .onChange(of: incomeViewShow) { isShowTabBar = !$0 }
-        .onChange(of: isTransferViewShow) { newValue in
-            if isTransferViewShow{
-                print("AAA: isTransferViewShow: with \(cashSource) to \(cashSourceReceiver)")
-            }
-            isShowTabBar = !isTransferViewShow
-        }
-        .onChange(of: draggingItem, perform: { newValue in
-            print("AAA drag: \(draggingItem)")
-        })
+        .onChange(of: isTransferViewShow) { isShowTabBar = !$0 }
+
         .onChange(of: expenseViewShow) { isShowTabBar = !$0
+            
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
-                cashSources = sources
+                viewModel.cashSources = sources
                 if sources.count != 0 {
-                    cashSource = sources[0].name
+                    viewModel.cashSource = sources[0].name
                 } else {
                     viewModel.errorMessage = "error sources.count"
                     viewModel.showErrorMessage = true
@@ -290,7 +287,7 @@ struct MainScreen: View {
                 viewModel.showErrorMessage = true
             }
         }
-        .overlay(overlayView: CustomProgressView(), show: $progress)
+        .overlay(overlayView: CustomProgressView(), show: $viewModel.progress)
         .overlay(overlayView: SnackBarView(show: $viewModel.showErrorMessage,
                                            model: SnackBarModel(type: .warning,
                                                                 text: viewModel.errorMessage,
@@ -298,58 +295,17 @@ struct MainScreen: View {
                                                                 bottomPadding: 20)),
                  show: $viewModel.showErrorMessage,
                  ignoreSaveArea: false)
-        .onChange(of: draggingItem, perform: { newValue in
-            print(" dragingItem: \(draggingItem)")
-        })
-        .onAppear() {
-
-        FirebaseUserManager.shared.observeUser {
-            userName = FirebaseUserManager.shared.userModel?.name ?? "First Name"
-            currentMonthSpendings =  FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
-            totalExpense = currentMonthSpendings.reduce(0, {$0 + $1.amount})
-            
-            if let currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms{
-                print(currentMonthIncoms)
-                totalIncome = currentMonthIncoms.reduce(0, {$0 + $1.amount})
-            }
-            
-            if let sources = FirebaseUserManager.shared.userModel?.cashSources {
-
-                    cashSources = sources
-                    if sources.count != 0 {
-                        cashSource = sources[0].name
-                        progress = false
-                    }
-            } else {
-                viewModel.errorMessage = "error sources"
-                viewModel.showErrorMessage = true
-            }
-                if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
-                    purchaseCategories = categories
-                    progress = false
-                } else {
-                    viewModel.errorMessage = "error categories"
-                    viewModel.showErrorMessage = true
-                }
-            
-            if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
-                urlImage = url
-            } else {
-                viewModel.errorMessage = "error urlString"
-                viewModel.showErrorMessage = true
-            }
-            }
-        }
+     
         
         .alert("Do you want to sign out?", isPresented: $showQuitAlert) {
             Button("No", role: .cancel) {
-                progress = true
+                viewModel.progress = true
                 FirebaseUserManager.shared.observeUser {
                     if let sources = FirebaseUserManager.shared.userModel?.cashSources {
-                        cashSources = sources
+                        viewModel.cashSources = sources
                         if sources.count != 0 {
-                            cashSource = sources[0].name
-                            progress = false
+                            viewModel.cashSource = sources[0].name
+                            viewModel.progress = false
                         } else {
                             viewModel.errorMessage = "error sources.count"
                             viewModel.showErrorMessage = true
@@ -359,8 +315,8 @@ struct MainScreen: View {
                         viewModel.showErrorMessage = true
                     }
                     if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
-                        purchaseCategories = categories
-                        progress = false
+                        viewModel.purchaseCategories = categories
+                        viewModel.progress = false
                     } else {
                         viewModel.errorMessage = "error categories"
                         viewModel.showErrorMessage = true

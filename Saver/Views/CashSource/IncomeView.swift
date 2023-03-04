@@ -299,23 +299,23 @@ struct IncomeView: View {
     
 }
 
-struct Previews_Income: PreviewProvider {
-    
-    static var previews: some View {
-     
-        MainScreen(isShowTabBar: .constant(false),
-                   incomeViewShow: true,
-                   cashSource: "Bank card",
-                   cashSources: [CashSource.init(name: "Bank card",
-                                                 amount: 1000,
-                                                 iconName: "")],
-                   progress: false)
-        
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-            .previewDisplayName("iPhone 14 Pro")
-        
-            
-    }
-}
+//struct Previews_Income: PreviewProvider {
+//    
+//    static var previews: some View {
+//     
+//        MainScreen(isShowTabBar: .constant(false),
+//                   incomeViewShow: true,
+//                   cashSource: "Bank card",
+//                   cashSources: [CashSource.init(name: "Bank card",
+//                                                 amount: 1000,
+//                                                 iconName: "")],
+//                   progress: false)
+//        
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+//            .previewDisplayName("iPhone 14 Pro")
+//        
+//            
+//    }
+//}
 
 
