@@ -159,7 +159,7 @@ struct SpendingsCalendarView: View {
                                 
                                 HStack(spacing: 0){
                                     HStack{
-                                        Text(transaction.time.filterTime())
+                                        Text(transaction.time.formatTime())
                                             .foregroundColor(Color(hex: "A9A9A9"))
                                             .multilineTextAlignment(.leading)
                                             .lineLimit(1)

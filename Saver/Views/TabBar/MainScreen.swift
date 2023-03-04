@@ -51,6 +51,10 @@ struct MainScreen: View {
     
     @State var progress = true
     
+    @State var userName: String = "User Name"
+    @State var totalIncome: Double = .zero
+    @State var totalExpense: Double = .zero
+    
     var isBlur: Bool{
         limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow || isTransferViewShow
     }
@@ -80,9 +84,13 @@ struct MainScreen: View {
                 VStack(alignment: .center, spacing: 0) {
                     
                     BalanceView(showQuitAlert: $showQuitAlert,
-                                sourceType: $sourceType, selectedImage: $selectedImage,
+                                sourceType: $sourceType,
+                                selectedImage: $selectedImage,
                                 isImagePickerDisplay: $isImagePickerDisplay,
-                                urlImage: $urlImage)
+                                urlImage: $urlImage,
+                                userName: $userName,
+                                totalIncome: $totalIncome,
+                                totalExpense: $totalExpense)
                         .zIndex(2)
                         .padding(.bottom, 15)
                     
@@ -296,7 +304,15 @@ struct MainScreen: View {
         .onAppear() {
 
         FirebaseUserManager.shared.observeUser {
-            currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
+            userName = FirebaseUserManager.shared.userModel?.name ?? "First Name"
+            currentMonthSpendings =  FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
+            totalExpense = currentMonthSpendings.reduce(0, {$0 + $1.amount})
+            
+            if let currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms{
+                print(currentMonthIncoms)
+                totalIncome = currentMonthIncoms.reduce(0, {$0 + $1.amount})
+            }
+            
             if let sources = FirebaseUserManager.shared.userModel?.cashSources {
 
                     cashSources = sources

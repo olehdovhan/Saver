@@ -21,12 +21,9 @@ struct CashSourceView: View {
     @Binding var purchaseType: String
     @Binding var draggingIndex: Int?
     @Binding var isNotSwipeGesture: Bool
-
-    
     
     var body: some View {
        
-            
             Button {
                 incomeViewShow = true
                 cashSource = cashSourceItem.name
@@ -117,13 +114,10 @@ struct CashSourceView: View {
                                        draggingIndex: $draggingIndex,
                                        currentIndexCashSource: $index,
                                        isNotSwipeGesture: $isNotSwipeGesture)
-                            
                         }
-                        
-                        
-                        
+
                     }
-                    Text(String(cashSourceItem.amount))
+                    Text(String(cashSourceItem.amount.formatted()))
                                             .foregroundColor(.black)
                                             .font(.custom("Lato-Regular", size: 12, relativeTo: .body))
                                             .frame(width: 75)

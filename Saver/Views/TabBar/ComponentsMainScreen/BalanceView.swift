@@ -16,6 +16,9 @@ struct BalanceView: View {
     @Binding var isImagePickerDisplay: Bool //
     @Binding var urlImage: URL?
     @State var userModelImage: UIImage?
+    @Binding var userName: String
+    @Binding var totalIncome: Double
+    @Binding var totalExpense: Double
     
     var body: some View {
         ZStack{
@@ -72,12 +75,9 @@ struct BalanceView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                             
-                            Text("+45.000")
+                            Text("\(totalIncome.formatted()) \(Locale.current.currencyCode ?? "USD")")
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-Bold", size: 16, relativeTo: .body))
-                        }
-                        .onTapGesture {
-                            print("AAA locations: \(CashSourceLocation.standard.locations)")
                         }
                         
                         Spacer()
@@ -86,19 +86,17 @@ struct BalanceView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                             
-                            Text("15.250")
+                            Text("\(totalExpense.formatted()) \(Locale.current.currencyCode ?? "USD")")
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-Bold", size: 16, relativeTo: .body))
                         }
                     }
                     
                     HStack(){
-                        if let user = FirebaseUserManager.shared.userModel {
-                            Text("\(user.name)")
+                            Text("\(userName)")
                                 .foregroundColor(.white)
                                 .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
                                 .lineLimit(1)
-                        }
                         Spacer()
                     }
                 }

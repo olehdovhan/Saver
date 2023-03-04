@@ -205,10 +205,15 @@ class SpendingsCalendarViewModel: ObservableObject {
 }
 
 extension Date{
-    func filterTime()->String{
-        let formatter3 = DateFormatter()
-        formatter3.dateFormat = "HH:mm"
-        return formatter3.string(from: self)
+    func formatTime()->String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
+    func formatDateAndTime()->String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM HH:mm"
+        return formatter.string(from: self)
     }
 }
 
