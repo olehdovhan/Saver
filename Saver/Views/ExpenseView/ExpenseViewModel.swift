@@ -51,7 +51,9 @@ class ExpenseViewModel: ObservableObject {
             if let index = cashSourceSubtractIndex {
                 user.cashSources[index].subtractAmount(Double(expense.commaToDot())!)
             }
+            
             FirebaseUserManager.shared.userModel = user
+            
         }
     }
 }

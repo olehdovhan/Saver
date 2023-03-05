@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct AddPurchaseCategoryView: View {
-    
+    @Binding var user: UserModel?
     @Binding var closeSelf: Bool
     @State var cashSourceName = ""
     @State var currentMoneyAmount = ""
@@ -192,10 +192,12 @@ struct AddPurchaseCategoryView: View {
             let newPurchaseCategory = PurchaseCategory(name: cashSourceName,
                                                        iconName: selectedCashIconName,
                                                        planSpentPerMonth: Double(currentMoneyAmount) ?? 0.0)
-            if var copyUser = FirebaseUserManager.shared.userModel {
-                copyUser.purchaseCategories.append(newPurchaseCategory)
-                FirebaseUserManager.shared.userModel? = copyUser
-            }
+            
+            
+//            if var copyUser = FirebaseUserManager.shared.userModel {
+                user?.purchaseCategories.append(newPurchaseCategory)
+                FirebaseUserManager.shared.userModel = user
+//            }
             closeSelf = false
         }
     }

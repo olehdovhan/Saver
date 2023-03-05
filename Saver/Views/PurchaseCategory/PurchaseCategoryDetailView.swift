@@ -213,6 +213,23 @@ struct PurchaseCategoryDetailView: View {
                                 (index <= offsets.count - 1) ? offsets[index + 1].width = .zero : ()
                                 
                                 if var user = FirebaseUserManager.shared.userModel {
+                                    
+                                    //return cash
+                                    let cashSourceReturn = latterMonthlyExpensesCategory[index].cashSource
+                                    let amountReturn = latterMonthlyExpensesCategory[index].amount
+                                    
+                                    var cashSourceIncreaseIndex: Int?
+                                    for (index, source) in user.cashSources.enumerated() {
+                                        if source.name == cashSourceReturn {
+                                            cashSourceIncreaseIndex = index
+                                        }
+                                    }
+                                    
+                                    if let index = cashSourceIncreaseIndex {
+                                        user.cashSources[index].increaseAmount(amountReturn)
+                                    }
+                                    
+                                    //delete spend
                                     var currentMonthSpendings = user.currentMonthSpendings
                                     
                                     if let indexDel = currentMonthSpendings?
@@ -222,6 +239,7 @@ struct PurchaseCategoryDetailView: View {
                                     }
                                     
                                     user.currentMonthSpendings = currentMonthSpendings
+                                    
                                     FirebaseUserManager.shared.userModel = user
                                  
                                     
@@ -251,6 +269,7 @@ struct PurchaseCategoryDetailView: View {
                height: wRatio(440))
       }
         .onAppear(){
+#warning("return ammount to Incomes")
             if let currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings{
                 let monthCategorySpendings = currentMonthSpendings.filter{$0.spentCategory == category.name}
                 if !monthCategorySpendings.isEmpty{
@@ -310,6 +329,7 @@ struct PurchaseCategoryDetailView: View {
                     purchCats.remove(at: index)
                 }
             }
+            
             user.purchaseCategories = purchCats
             FirebaseUserManager.shared.userModel = user
             if let cashes = FirebaseUserManager.shared.userModel?.purchaseCategories {

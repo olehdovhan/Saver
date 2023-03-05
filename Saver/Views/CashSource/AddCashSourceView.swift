@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct AddCashSourceView: View {
-    
+    @Binding var user: UserModel?
     @Binding var closeSelf: Bool
     @State var cashSourceName = ""
     @State var currentMoneyAmount = ""
@@ -17,6 +17,8 @@ struct AddCashSourceView: View {
     
     @State var showIconsCashSource = false
     @State var selectedCashIconName = ""
+//    private let updateUserNotification = NotificationCenter.default.publisher(for: Notifications.updateUserNotification)
+    
     
     var fieldsEmpty: Bool {
         if selectedCashIconName != "",
@@ -191,21 +193,36 @@ struct AddCashSourceView: View {
                                           incomeDate: Date(),
                                           cashSource: cashSourceName)
             
-            if var copyUser = FirebaseUserManager.shared.userModel {
-                if copyUser.currentMonthIncoms == nil {
-                    var incomes = [IncomeModel]()
-                    incomes.append(incomeModel)
-                    copyUser.currentMonthIncoms = incomes
-                } else {
-                    copyUser.currentMonthIncoms?.append(incomeModel)
-                }
-                
-                
-                
-                copyUser.cashSources.append(newCashSource)
-                FirebaseUserManager.shared.userModel? = copyUser
-//                print("AAAA\(newCashSource)")
+            
+            if user?.currentMonthIncoms == nil {
+                var incomes = [IncomeModel]()
+                incomes.append(incomeModel)
+                user?.currentMonthIncoms = incomes
+                user?.cashSources.append(newCashSource)
+                FirebaseUserManager.shared.userModel = user
+            } else {
+                user?.currentMonthIncoms?.append(incomeModel)
+                user?.cashSources.append(newCashSource)
+                FirebaseUserManager.shared.userModel = user
             }
+            
+            
+            
+//            if var copyUser = FirebaseUserManager.shared.userModel {
+//                if copyUser.currentMonthIncoms == nil {
+//                    var incomes = [IncomeModel]()
+//                    incomes.append(incomeModel)
+//                    copyUser.currentMonthIncoms = incomes
+//                } else {
+//                    copyUser.currentMonthIncoms?.append(incomeModel)
+//                }
+                
+                
+                
+//                copyUser.cashSources.append(newCashSource)
+//                FirebaseUserManager.shared.userModel? = copyUser
+//                print("AAAA\(newCashSource)")
+//            }
             closeSelf = false
         }
     }

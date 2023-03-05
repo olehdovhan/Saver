@@ -93,8 +93,6 @@ struct PurchaseCategoriesView: View{
                     }
                     Button {
                         
-//                        addPurchaseCategoryShow = true
-                        
                         if purchaseCategories.count < 11 {
                             addPurchaseCategoryShow = true
                         } else {

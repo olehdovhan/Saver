@@ -22,16 +22,12 @@ struct MainScreen: View {
     @State var limitCashSourcesViewShow = false
     @State var limitPurchaseCategoryViewShow = false
     @State var currentScrollOffset: CGFloat = 0
-//    @State var cashSource: String = ""
     @State var cashSourceReceiver: String = ""
     @State var expenseType: String = ""
     @FocusState var editing: Bool
-//    @State var cashSources: [CashSource] = []
-//    @State var purchaseCategories: [PurchaseCategory] = []
     @State var selectedCategory: PurchaseCategory?
     
     @State var amountCurrentMonthSpendingSelectedCategory: String = "0.0"
-//    @State var currentMonthSpendings = [ExpenseModel]()
     
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
@@ -47,13 +43,6 @@ struct MainScreen: View {
     
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
-//    @State var urlImage: URL?
-    
-//    @State var progress = true
-    
-//    @State var userName: String = "User Name"
-//    @State var totalIncome: Double = .zero
-//    @State var totalExpense: Double = .zero
     
     var isBlur: Bool{
         limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow || isTransferViewShow
@@ -89,7 +78,7 @@ struct MainScreen: View {
                                 isImagePickerDisplay: $isImagePickerDisplay,
                                 urlImage: $viewModel.urlImage,
                                 userName: $viewModel.userName,
-                                totalIncome: $viewModel.totalIncome,
+                                totalIncome: $viewModel.cashBalance,
                                 totalExpense: $viewModel.totalExpense)
                         .zIndex(2)
                         .padding(.bottom, 15)
@@ -137,14 +126,9 @@ struct MainScreen: View {
                     }
                     
                     .zIndex(draggingItem ? 30 : 1)
-                    .onChange(of: addCashSourceViewShow) { newValue in
-                        if let sources = FirebaseUserManager.shared.userModel?.cashSources {
-                            viewModel.cashSources = sources
-                        } else {
-                            viewModel.errorMessage = "error sources"
-                            viewModel.showErrorMessage = true
-                        }
-                    }
+//                    .onChange(of: addCashSourceViewShow) { newValue in
+//                        viewModel.getCashSources2()
+//                    }
                     .frame(height: 100)
                     
                     Spacer() .frame(height: 15)
@@ -153,21 +137,16 @@ struct MainScreen: View {
                                    startPoint: .leading,
                                    endPoint: .trailing)
                     .frame(width: UIScreen.main.bounds.width, height: 3, alignment: .top)
-//                    .zIndex(1)
                     
                     PurchaseCategoriesView(purchaseCategories: $viewModel.purchaseCategories,
                                            addPurchaseCategoryShow: $addPurchaseCategoryViewShow,
                                            purchaseDetailViewShow: $purchaseDetailViewShow,
                                            selectedCategory: $selectedCategory,
                                            limitPurchaseCategoryViewShow: $limitPurchaseCategoryViewShow)
-//                    .zIndex(1)
-                    .onChange(of: addPurchaseCategoryViewShow) { newValue in
-                        if let purchCategories = FirebaseUserManager.shared.userModel?.purchaseCategories { viewModel.purchaseCategories = purchCategories
-                        } else {
-                            viewModel.errorMessage = "error purchCategories"
-                            viewModel.showErrorMessage = true
-                        }
-                    }
+//                    .onChange(of: addPurchaseCategoryViewShow) { newValue in
+//                        //передавати значення в user
+//                        viewModel.getCashSources2()
+//                    }
                     
                     Spacer()
                 }
@@ -194,11 +173,13 @@ struct MainScreen: View {
                 }
                 
                 if addCashSourceViewShow {
-                    AddCashSourceView(closeSelf: $addCashSourceViewShow,
+                    AddCashSourceView(user: $viewModel.user,
+                                      closeSelf: $addCashSourceViewShow,
                                       editing: $editing)
                 }
                 if addPurchaseCategoryViewShow {
-                    AddPurchaseCategoryView(closeSelf: $addPurchaseCategoryViewShow,
+                    AddPurchaseCategoryView(user: $viewModel.user,
+                        closeSelf: $addPurchaseCategoryViewShow,
                                             editing: $editing)
                 }
                 
