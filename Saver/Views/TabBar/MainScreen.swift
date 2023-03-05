@@ -27,7 +27,7 @@ struct MainScreen: View {
     @FocusState var editing: Bool
     @State var selectedCategory: PurchaseCategory?
     
-    @State var amountCurrentMonthSpendingSelectedCategory: String = "0.0"
+//    @State var amountCurrentMonthSpendingSelectedCategory: String = "0.0"
     
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
@@ -184,10 +184,10 @@ struct MainScreen: View {
                 }
                 
                 if purchaseDetailViewShow, selectedCategory != nil {
-                    PurchaseCategoryDetailView(closeSelf: $purchaseDetailViewShow,
-                                               purchaseCategories: $viewModel.purchaseCategories,
-                                               category: selectedCategory!,
-                                               monthlyAmount: amountCurrentMonthSpendingSelectedCategory)
+                    PurchaseCategoryDetailView(user: $viewModel.user,
+                                               closeSelf: $purchaseDetailViewShow,
+//                                               purchaseCategories: $viewModel.purchaseCategories,
+                                               category: selectedCategory!)
                 }
                 
                 if isTransferViewShow,
@@ -233,13 +233,13 @@ struct MainScreen: View {
                 .zIndex(10)
             }
         }
-        .onChange(of: selectedCategory) { _ in
-            let amount = viewModel.currentMonthSpendings
-                        .filter { $0.spentCategory == selectedCategory?.name }
-                        .map { $0.amount }
-                        .reduce(0) { $0 + $1 }
-                    amountCurrentMonthSpendingSelectedCategory = String(amount)
-        }
+//        .onChange(of: selectedCategory) { _ in
+//            let amount = viewModel.currentMonthSpendings
+//                        .filter { $0.spentCategory == selectedCategory?.name }
+//                        .map { $0.amount }
+//                        .reduce(0) { $0 + $1 }
+//                    amountCurrentMonthSpendingSelectedCategory = String(amount)
+//        }
         .onChange(of: selectedImage) { _ in
             showImageCropper.toggle()
         }

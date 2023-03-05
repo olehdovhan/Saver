@@ -10,14 +10,22 @@ import Firebase
 
 struct PurchaseCategoryDetailView: View {
     
+    @Binding var user: UserModel?
     @Binding var closeSelf: Bool
-    @Binding var purchaseCategories: [PurchaseCategory]
     var category: PurchaseCategory
-    var monthlyAmount: String
-//    @State var currentMonthSpendings: Double = .zero
-    @State var latterMonthlyExpensesCategory: [ExpenseModel] = []
-    @State var offsets = [CGSize] (repeating: CGSize.zero, count: 1000)
+    @State var monthlyCategoryExpenses: [ExpenseModel] = []
+    @State var offsets = [CGSize] (repeating: CGSize.zero, count: 3)
     @State var currentOffsetY: CGFloat = 0
+    
+    var latterMonthly3ExpensesCategory: [ExpenseModel]{
+        monthlyCategoryExpenses.suffix(3)
+    }
+    
+    var monthlyAmount: String{
+        String(monthlyCategoryExpenses.map { $0.amount }.reduce(0) { $0 + $1 })
+    }
+    
+    
     var body: some View {
         
         ZStack {
@@ -103,14 +111,9 @@ struct PurchaseCategoryDetailView: View {
             )
             
             Spacer().frame(height: 15)
-            
-//            if
-                let recentExpenses = latterMonthlyExpensesCategory
-//                    ,
-//               !recentExpenses.isEmpty{
-                
+
                 VStack(spacing: 10){
-                    ForEach(Array(latterMonthlyExpensesCategory.enumerated()), id: \.offset) { index, expense in
+                    ForEach(Array(latterMonthly3ExpensesCategory.enumerated()), id: \.offset) { index, expense in
                         ZStack{
                             RoundedRectangle(cornerRadius: 5).fill(.red)
                                 .frame(width: wRatio(280), height: wRatio(40))
@@ -215,8 +218,8 @@ struct PurchaseCategoryDetailView: View {
                                 if var user = FirebaseUserManager.shared.userModel {
                                     
                                     //return cash
-                                    let cashSourceReturn = latterMonthlyExpensesCategory[index].cashSource
-                                    let amountReturn = latterMonthlyExpensesCategory[index].amount
+                                    let cashSourceReturn = latterMonthly3ExpensesCategory[index].cashSource
+                                    let amountReturn = latterMonthly3ExpensesCategory[index].amount
                                     
                                     var cashSourceIncreaseIndex: Int?
                                     for (index, source) in user.cashSources.enumerated() {
@@ -233,16 +236,14 @@ struct PurchaseCategoryDetailView: View {
                                     var currentMonthSpendings = user.currentMonthSpendings
                                     
                                     if let indexDel = currentMonthSpendings?
-                                        .firstIndex(where: {$0 == latterMonthlyExpensesCategory[index]}){
+                                        .firstIndex(where: {$0 == latterMonthly3ExpensesCategory[index]}){
                                         currentMonthSpendings?.remove(at: indexDel)
-                                        latterMonthlyExpensesCategory.remove(at: index)
                                     }
                                     
                                     user.currentMonthSpendings = currentMonthSpendings
                                     
                                     FirebaseUserManager.shared.userModel = user
-                                 
-                                    
+
                                 }
                                 
                             } else {
@@ -258,32 +259,24 @@ struct PurchaseCategoryDetailView: View {
                     
                     
                 }
-                
-                
-//            }
-            
+
             Spacer()
         }
         .padding(.top, wRatio(10))
         .frame(width: wRatio(320),
                height: wRatio(440))
+            
       }
-        .onAppear(){
-#warning("return ammount to Incomes")
-            if let currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings{
-                let monthCategorySpendings = currentMonthSpendings.filter{$0.spentCategory == category.name}
-                if !monthCategorySpendings.isEmpty{
-                    latterMonthlyExpensesCategory = Array(monthCategorySpendings.suffix(3))
-                    print(latterMonthlyExpensesCategory as Any)
-                }
-                
-                
-            }
-        }
         
-    
+        .onAppear(){
+            updateExpenses()
+        }
+        .onChange(of: user) { _ in
+            updateExpenses()
+        }
+
    }
-    
+
     var ImageCategoryView: some View{
         ZStack{
             switch category.iconName {
@@ -315,10 +308,13 @@ struct PurchaseCategoryDetailView: View {
                 }
                 
             }
-//
-//
-//
+
         }
+    }
+    
+    func updateExpenses() -> Void{
+        guard let currentMonthSpendings = user?.currentMonthSpendings else {return}
+        monthlyCategoryExpenses = currentMonthSpendings.filter{$0.spentCategory == category.name}
     }
     
     func deletePurchaseCategory() {
@@ -332,27 +328,25 @@ struct PurchaseCategoryDetailView: View {
             
             user.purchaseCategories = purchCats
             FirebaseUserManager.shared.userModel = user
-            if let cashes = FirebaseUserManager.shared.userModel?.purchaseCategories {
-                purchaseCategories = cashes
-            }
+            
             closeSelf = false
         }
     }
 }
 
 
-struct Previews_PurchaseCategoryDetailView: PreviewProvider {
-    static var previews: some View {
-        PurchaseCategoryDetailView(closeSelf: .constant(false),
-                                   purchaseCategories: .constant([]),
-                                   category: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000), monthlyAmount: "2000")
-        
-//        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
-            .previewDevice(PreviewDevice(rawValue: "iPhone 7 Plus"))
-            .previewDisplayName("iPhone 7 Plus")
-        
-//        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-//            .previewDisplayName("iPhone 14 Pro")
-    }
-}
+//struct Previews_PurchaseCategoryDetailView: PreviewProvider {
+//    static var previews: some View {
+//        PurchaseCategoryDetailView(closeSelf: .constant(false),
+//                                   purchaseCategories: .constant([]),
+//                                   category: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000), monthlyAmount: "2000")
+//
+////        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 7 Plus"))
+//            .previewDisplayName("iPhone 7 Plus")
+//
+////        MainScreen(isShowTabBar: .constant(false), purchaseDetailViewShow: true, selectedCategory: PurchaseCategory.init(name: "Products", iconName: "iconProducts", planSpentPerMonth: 1000))
+////            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+////            .previewDisplayName("iPhone 14 Pro")
+//    }
+//}

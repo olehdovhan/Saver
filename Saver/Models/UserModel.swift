@@ -11,7 +11,13 @@ import Firebase
 
 
 
-struct UserModel: Codable {
+struct UserModel: Codable
+, Equatable
+{
+    static func == (lhs: UserModel, rhs: UserModel) -> Bool {
+        return lhs.currentMonthSpendings == rhs.currentMonthSpendings
+    }
+    
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
