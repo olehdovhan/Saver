@@ -11,19 +11,20 @@ import Combine
 struct AddCashSourceView: View {
     @Binding var user: UserModel?
     @Binding var closeSelf: Bool
-    @State var cashSourceName = ""
+    @State var newCashSourceName = ""
     @State var currentMoneyAmount = ""
     @State var editing: FocusState<Bool>.Binding
     
     @State var showIconsCashSource = false
     @State var selectedCashIconName = ""
-//    private let updateUserNotification = NotificationCenter.default.publisher(for: Notifications.updateUserNotification)
-    
+    @State var cashSourceNames: [String] = []
+    @State var isUniqueName: Bool = true
     
     var fieldsEmpty: Bool {
         if selectedCashIconName != "",
-           cashSourceName != "",
-           currentMoneyAmount != "" {
+           newCashSourceName != "",
+           currentMoneyAmount != "",
+           isUniqueName {
             return false
         } else { return true }
     }
@@ -108,14 +109,28 @@ struct AddCashSourceView: View {
                         }
                         
                         HStack {
-                            Text("Name:")
-                                .foregroundColor(.myGrayDark)
-                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            ZStack{
+                                HStack {
+                                    Text("Name:")
+                                        .foregroundColor(.myGrayDark)
+                                        .font(.custom("NotoSansDisplay-Medium", size: 14))
+                                    
+                                    Spacer()
+                                }
+                                
+                                HStack {
+                                Text("Enter a unique name")
+                                        .foregroundColor(isUniqueName ? .clear : .red)
+                                    .font(.custom("Noto-Regular", size: 10))
+                                    .offset(y: 15)
+                                    
+                                    Spacer()
+                                }
+                            }
                             Spacer()
                             
-                            #warning("check for a unique name")
-                            TextField("",text: $cashSourceName)
-                                .placeholder(when: cashSourceName.isEmpty) {
+                            TextField("",text: $newCashSourceName)
+                                .placeholder(when: newCashSourceName.isEmpty) {
                                     Text("enter name").foregroundColor(.gray)
                                 }
                                 .foregroundColor(.black)
@@ -181,17 +196,23 @@ struct AddCashSourceView: View {
                 
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+        .onAppear(){
+            cashSourceNames = user!.cashSources.map{$0.name}
+        }
+        .onChange(of: newCashSourceName) { newValue in
+        isUniqueName = !cashSourceNames.contains(newCashSourceName)
+        }
     }
     
     func doneAction() -> Void {
         if !fieldsEmpty{
-            let newCashSource = CashSource(name: cashSourceName,
+            let newCashSource = CashSource(name: newCashSourceName,
                                            amount: Double(currentMoneyAmount) ?? 0.0,
                                            iconName: selectedCashIconName)
             let incomeModel = IncomeModel(amount: Double(currentMoneyAmount.commaToDot())!,
                                           comment: "initial",
                                           incomeDate: Date(),
-                                          cashSource: cashSourceName)
+                                          cashSource: newCashSourceName)
             
             
             if user?.currentMonthIncoms == nil {
@@ -205,24 +226,7 @@ struct AddCashSourceView: View {
                 user?.cashSources.append(newCashSource)
                 FirebaseUserManager.shared.userModel = user
             }
-            
-            
-            
-//            if var copyUser = FirebaseUserManager.shared.userModel {
-//                if copyUser.currentMonthIncoms == nil {
-//                    var incomes = [IncomeModel]()
-//                    incomes.append(incomeModel)
-//                    copyUser.currentMonthIncoms = incomes
-//                } else {
-//                    copyUser.currentMonthIncoms?.append(incomeModel)
-//                }
-                
-                
-                
-//                copyUser.cashSources.append(newCashSource)
-//                FirebaseUserManager.shared.userModel? = copyUser
-//                print("AAAA\(newCashSource)")
-//            }
+         
             closeSelf = false
         }
     }

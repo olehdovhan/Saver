@@ -52,12 +52,18 @@ struct BalanceView: View {
                                 isImagePickerDisplay.toggle()
                             } label: {
                                 if  let img = userModelImage{
+                                    
                                     Image(uiImage: img)
                                         .resizable()
                                         .frame(width: hRatio(50), height: hRatio(50))
                                         .clipShape(Circle())
                                 } else if selectedImage != nil{
                                     Image(uiImage: selectedImage!)
+                                        .resizable()
+                                        .frame(width: hRatio(50), height: hRatio(50))
+                                        .clipShape(Circle())
+                                } else {
+                                    Image("logo")
                                         .resizable()
                                         .frame(width: hRatio(50), height: hRatio(50))
                                         .clipShape(Circle())
@@ -109,11 +115,16 @@ struct BalanceView: View {
                         let data = try Data(contentsOf: url)
                         userModelImage = UIImage(data: data)
                     } catch let error {
-                        print(error.localizedDescription)
+                        print(error.localizedDescription) // -<
                     }
                     //userModelImage = UIImage(data: Data(contentsOf: url))
                 }
             })
+            .onAppear(){
+                print(userModelImage) //nil
+                print(selectedImage) //nil
+                print(urlImage)
+            }
         }
     }
 }

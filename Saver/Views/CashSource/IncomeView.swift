@@ -30,6 +30,7 @@ struct IncomeView: View {
     }
     
     
+    
     var body: some View {
         ZStack {
             SublayerView()

@@ -11,17 +11,21 @@ import Combine
 struct AddPurchaseCategoryView: View {
     @Binding var user: UserModel?
     @Binding var closeSelf: Bool
-    @State var cashSourceName = ""
+    @State var newCategoryName = ""
     @State var currentMoneyAmount = ""
     @State var editing: FocusState<Bool>.Binding
   
     @State var showIconsCategory = false
-    @State var selectedCashIconName = ""
+    @State var selectedCategoryIconName = ""
+    
+    @State var categoryNames: [String] = []
+    @State var isUniqueName: Bool = true
     
     var fieldsEmpty: Bool {
-      if selectedCashIconName != "",
-               cashSourceName != "",
-            currentMoneyAmount != "" {
+      if selectedCategoryIconName != "",
+         newCategoryName != "",
+         currentMoneyAmount != "",
+         isUniqueName {
           return false
       } else { return true }
     }
@@ -67,7 +71,7 @@ struct AddPurchaseCategoryView: View {
                                 Button {
                                     showIconsCategory = true
                                 } label: {
-                                    if selectedCashIconName == "" {
+                                    if selectedCategoryIconName == "" {
                                         RoundedRectangle(cornerRadius: 15)
                                             .stroke(Color.myGreen, lineWidth: 1)
                                             .frame(width: wRatio(50), height: wRatio(50))
@@ -78,7 +82,7 @@ struct AddPurchaseCategoryView: View {
                                                 
                                             )
                                     } else {
-                                        switch selectedCashIconName {
+                                        switch selectedCategoryIconName {
                                         case "iconClothing",
                                             "iconEntertainment",
                                             "iconHealth",
@@ -86,7 +90,7 @@ struct AddPurchaseCategoryView: View {
                                             "iconProducts",
                                             "iconRestaurant",
                                             "iconTransport":
-                                            Image(selectedCashIconName)
+                                            Image(selectedCategoryIconName)
                                                 .resizable()
                                                 .frame(width: wRatio(50), height: wRatio(50))
                                                 .myShadow(radiusShadow: 5)
@@ -95,7 +99,7 @@ struct AddPurchaseCategoryView: View {
                                                 Color.white
                                                     .frame(width: wRatio(50), height: wRatio(50))
                                                 
-                                                Image(selectedCashIconName)
+                                                Image(selectedCategoryIconName)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(width: wRatio(30), height: wRatio(30))
@@ -112,13 +116,29 @@ struct AddPurchaseCategoryView: View {
                         }
                         
                         HStack {
-                            Text("Name:")
-                                .foregroundColor(.myGrayDark)
-                                .font(.custom("NotoSansDisplay-Medium", size: 14))
+                            ZStack{
+                                HStack {
+                                    Text("Name:")
+                                        .foregroundColor(.myGrayDark)
+                                        .font(.custom("NotoSansDisplay-Medium", size: 14))
+                                    
+                                    Spacer()
+                                }
+                                
+                                HStack {
+                                Text("Enter a unique name")
+                                        .foregroundColor(isUniqueName ? .clear : .red)
+                                    .font(.custom("Noto-Regular", size: 10))
+                                    .offset(y: 15)
+                                    
+                                    Spacer()
+                                }
+                            }
+                            
                             Spacer()
                             
-                            TextField("",text: $cashSourceName)
-                                .placeholder(when: cashSourceName.isEmpty) {
+                            TextField("",text: $newCategoryName)
+                                .placeholder(when: newCategoryName.isEmpty) {
                                     Text("enter name").foregroundColor(.gray)
                                 }
                                 .foregroundColor(.black)
@@ -178,7 +198,7 @@ struct AddPurchaseCategoryView: View {
                 if showIconsCategory {
                     AddIconsView(closeSelf: $showIconsCategory,
                                  type: .purchaseCategory) { iconName in
-                        selectedCashIconName = iconName
+                        selectedCategoryIconName = iconName
                     }
                 }
                 
@@ -186,18 +206,24 @@ struct AddPurchaseCategoryView: View {
             .liftingViewAtKeyboardOpen()
         }
         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+        .onAppear(){
+            categoryNames = user!.purchaseCategories.map{$0.name}
+        }
+        .onChange(of: newCategoryName) { newValue in
+        isUniqueName = !categoryNames.contains(newCategoryName)
+        }
     }
+    
+    
     func doneAction() -> Void{
         if !fieldsEmpty{
-            let newPurchaseCategory = PurchaseCategory(name: cashSourceName,
-                                                       iconName: selectedCashIconName,
+            let newPurchaseCategory = PurchaseCategory(name: newCategoryName,
+                                                       iconName: selectedCategoryIconName,
                                                        planSpentPerMonth: Double(currentMoneyAmount) ?? 0.0)
-            
-            
-//            if var copyUser = FirebaseUserManager.shared.userModel {
+      
                 user?.purchaseCategories.append(newPurchaseCategory)
                 FirebaseUserManager.shared.userModel = user
-//            }
+
             closeSelf = false
         }
     }
