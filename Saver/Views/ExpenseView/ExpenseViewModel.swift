@@ -26,10 +26,10 @@ class ExpenseViewModel: ObservableObject {
     
     func addAndCalculateExpense(from cashSource: String, to spentCategory: String) {
         let expenseModel = ExpenseModel(amount: Double(expense.commaToDot())!,
-                                   comment: comment,
-                                 expenseDate: Date(),
-                                 cashSource: cashSource,
-                                 spentCategory: spentCategory)
+                                        comment: comment.isEmpty ? "no comment" : comment,
+                                        expenseDate: expenseDate,
+                                        cashSource: cashSource,
+                                        spentCategory: spentCategory)
         if var user = FirebaseUserManager.shared.userModel {
             
             // change spendings

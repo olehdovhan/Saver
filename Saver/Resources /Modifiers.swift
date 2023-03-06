@@ -182,7 +182,7 @@ struct DragGestureCustom: ViewModifier {
                 
                 
                 
-                withAnimation() {
+                withAnimation(.linear) {
                     
                     currentOffsetX = value.translation.width
                     if value.translation.height > -50{
@@ -244,19 +244,16 @@ struct DragGestureCustom: ViewModifier {
                 if abs(gesture.location.x) > 49 && abs(gesture.location.x) < 95 && abs(gesture.location.y) > 419 && abs(gesture.location.y) < 470 {
                  
                     withAnimation(.spring()) {
-//                        zIndex = 1
                         isDraggingItem.toggle()
-                        currentOffsetX = 0
-                        currentOffsetY = 0
+                        
                     }
                             
                 } else {
                     withAnimation(.spring()) {
-//                        zIndex = 1
                         isDraggingItem.toggle()
-                        currentOffsetX = 0
-                        currentOffsetY = 0
+                        
                     }
+                    
                 }
                 
                 currentOffsetX = 0

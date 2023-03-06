@@ -102,122 +102,7 @@ struct SpendingsCalendarView: View {
                 }
                 
                 
-                //transactions
-                ScrollView(.horizontal, showsIndicators: false){
-                    VStack(spacing: 12){
-                        
-                        if !viewModel.dailyTransactions.isEmpty{
-                            HStack(spacing: 0){
-                                
-                                HStack{
-                                    Text("Time")
-                                        .foregroundColor(.black)
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-Bold", size: 12))
-                                    Spacer()
-                                }
-                                .frame(width: UIScreen.main.bounds.width/7)
-                                
-                                Spacer().frame(width: 5)
-                                
-                                HStack{
-                                    Text(Locale.current.currencyCode ?? "USD")
-                                        .foregroundColor(.black)
-                                        .multilineTextAlignment(.leading)
-                                        .font(.custom("Lato-Bold", size: 12))
-                                    Spacer()
-                                }
-                                .frame(width: UIScreen.main.bounds.width/4)
-                                
-                                Spacer().frame(width: 5)
-                                
-                                HStack{
-                                    Text("Category" )
-                                        .foregroundColor(.black)
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-Bold", size: 12))
-                                    Spacer()
-                                }
-                                .frame(width: UIScreen.main.bounds.width/4)
-                                
-                                Spacer().frame(width: 5)
-                                
-                                HStack{
-                                    Text("Note")
-                                        .foregroundColor(.black)
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-Bold", size: 12))
-                                }
-                                
-                                Spacer()
-                            }
-                            
-                            ForEach(viewModel.dailyTransactions, id: \.self) { transaction in
-                                
-                                HStack(spacing: 0){
-                                    HStack{
-                                        Text(transaction.time.formatTime())
-                                            .foregroundColor(Color(hex: "A9A9A9"))
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
-                                            .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
-                                        Spacer()
-                                    }
-                                    .frame(width: UIScreen.main.bounds.width/7)
-                                    
-                                    Spacer().frame(width: 5)
-                                    
-                                    HStack{
-                                        Text(transaction.amount)
-                                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
-                                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                                        Spacer()
-                                    }
-                                    .frame(width: UIScreen.main.bounds.width/4)
-                                    
-                                    Spacer().frame(width: 5)
-                                    
-                                    HStack{
-                                        Text("\(transaction.category)" )
-                                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
-                                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                                        Spacer()
-                                    }
-                                    .frame(width: UIScreen.main.bounds.width/4)
-                                    
-                                    Spacer().frame(width: 5)
-                                    
-                                    HStack{
-                                        Text(transaction.comment)
-                                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
-                                            .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                                        Spacer()
-                                    }
-                                    Spacer()
-                                }
-                                
-                            }
-                        }
-                        
-                        
-                        else {
-                            Text("No Transaction Found")
-                                .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
-                        }
-                    }
-                }
-                .padding(.top, 22)
-                //                .offset(x: viewModel.dayOffset.width)
-                //                .gesture(dayDragGesture)
+                transactionsView
             }
             .padding(.top, 10)
             
@@ -228,6 +113,7 @@ struct SpendingsCalendarView: View {
         .onChange(of: viewModel.currentMonth) { newValue in
             withAnimation {
                 viewModel.selectedDate = viewModel.getCurrentMonth()
+                viewModel.updateDailyTransactions()
             }
         }
         
@@ -281,6 +167,73 @@ struct SpendingsCalendarView: View {
                     self.viewModel.dayOffset = .zero
                 }
             })
+    }
+    
+    var transactionsView: some View{
+            VStack(alignment: .leading, spacing: 12){
+                
+                if !viewModel.dailyTransactions.isEmpty{
+                    
+                    HStack(spacing: 5){
+                        
+                            Text("Time")
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: wRatio(80))
+                 
+                            Text(Locale.current.currencyCode ?? "USD")
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+//
+                            Text("Category" )
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+//
+                    }
+                    .font(.callout)
+                    .foregroundColor(.gray)
+                    
+                    ForEach(viewModel.dailyTransactions, id: \.self) { transaction in
+                        VStack{
+                            Divider().foregroundColor(.myBlue)
+                            
+                            HStack(spacing: 5){
+                                
+                                Text(transaction.time.formatTime())
+                                    .frame(maxWidth: wRatio(80))
+                                
+                                Text(transaction.amount)
+                                    .frame(maxWidth: .infinity)
+                                
+                                Text("\(transaction.category)")
+                                    .frame(maxWidth: .infinity)
+                                
+                            }
+                            .font(.custom("Lato-Regular", size: 16))
+                            .foregroundColor( transaction.amount.first == "-" ? .myRed : .myGreen)
+                            
+                            HStack{
+                                
+                            Text("Note: " + transaction.comment)
+                                .italic()
+                                .foregroundColor(.gray)
+                                .font(.system(size: 12))
+                            
+                            Spacer()
+                        }
+                        }
+                        
+                        
+                    }
+                }
+                
+                
+                else {
+                    Text("No Transaction Found")
+                        .font(.custom("Lato-SemiBold", size: 16, relativeTo: .body))
+                }
+            }
+            .lineLimit(1)
+        .padding(.top, 22)
     }
     
     @ViewBuilder

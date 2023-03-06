@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct PurchaseCategoryDetailView: View {
+    @State private var height: CGFloat = 0
     
     @Binding var user: UserModel?
     @Binding var closeSelf: Bool
@@ -31,7 +32,7 @@ struct PurchaseCategoryDetailView: View {
         ZStack {
             SublayerView()
             
-            WhiteCanvasView(width: wRatio(320), height: wRatio(440))
+            WhiteCanvasView(width: wRatio(320), height: wRatio(320) + height)
             
         VStack(spacing: 0) {
             
@@ -53,7 +54,7 @@ struct PurchaseCategoryDetailView: View {
             .padding(.trailing, wRatio(10))
             .padding(.leading, wRatio(30))
             
-            Spacer()
+            Spacer().frame(height: wRatio(35))
             
             VStack(spacing: 10){
                 Text("Budget month plan:")
@@ -78,14 +79,13 @@ struct PurchaseCategoryDetailView: View {
                         .lineLimit(2)
                   }
             }
-            
             .frame(width: wRatio(250), height: wRatio(80))
             .background(
                 RoundedRectangle(cornerRadius: 15).fill(.white)
                     .myShadow(radiusShadow: 5)
             )
             
-            Spacer()
+            Spacer().frame(height: wRatio(20))
             
             VStack(spacing: 10){
                 Text("Spending this Month:")
@@ -110,15 +110,57 @@ struct PurchaseCategoryDetailView: View {
                     .myShadow(radiusShadow: 5)
             )
             
-            Spacer().frame(height: 15)
+            
+            if !latterMonthly3ExpensesCategory.isEmpty{
+                latter3ExpensesView
+            }
+            
 
-                VStack(spacing: 10){
-                    ForEach(Array(latterMonthly3ExpensesCategory.enumerated()), id: \.offset) { index, expense in
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 5).fill(.red)
-                                .frame(width: wRatio(280), height: wRatio(40))
-                                .myShadow(radiusShadow: 5)
-                            
+            Spacer()
+        }
+        .padding(.top, wRatio(10))
+        .frame(width: wRatio(320),
+               height: wRatio(320 ) + height)
+            
+      }
+ 
+        
+        .onAppear(){
+            updateExpenses()
+        }
+        .onChange(of: user) { _ in
+            updateExpenses()
+        }
+
+   }
+    
+    var latter3ExpensesView: some View{
+        VStack(spacing: 10){
+            Spacer().frame(height: 20)
+            
+            HStack(spacing: 5){
+                
+                    Text("Time")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: wRatio(80))
+         
+                    Text(Locale.current.currencyCode ?? "USD")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+//
+                    Text("Category" )
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+//
+            }
+            .font(.callout)
+            .foregroundColor(.gray)
+            .frame(width: wRatio(250))
+
+            ForEach(Array(latterMonthly3ExpensesCategory.enumerated()), id: \.offset) { index, expense in
+                ZStack{
+                    Rectangle().fill(.red)
+                        .overlay{
                             HStack{
                                 Spacer()
                                 Label {
@@ -130,152 +172,136 @@ struct PurchaseCategoryDetailView: View {
                                 }
                                 .padding(.trailing, 10)
                             }
-                            .frame(width: wRatio(280), height: wRatio(40))
-                            
-                            
-                            
-                        VStack(spacing: 0){
-                            HStack(spacing: 0) {
-                                
-                                HStack{
-                                    Spacer().frame(width: 5)
-                                    Text(expense.expenseDate.formatDateAndTime())
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-Regular", size: 14))
-                                    Spacer()
-                                }
-                                .frame(width: wRatio(90))
-                                
-                                Spacer().frame(width: 5)
-                                
-                                HStack{
-                                    Text(expense.amount.formatted())
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-SemiBold", size: 14, relativeTo: .body))
-                                    Spacer()
-                                }
-                                .frame(width: wRatio(90))
-                                //
-                                Spacer().frame(width: 5)
-                                
-                                HStack{
-                                    Text(expense.cashSource)
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .font(.custom("Lato-SemiBold", size: 14, relativeTo: .body))
-                                    
-                                    Spacer(minLength: 5)
-                                }
-                                .frame(width: wRatio(90))
-                                //
-                            }
-                            
-                            HStack(spacing: 0){
-                                Spacer()
-                                Text("Comment: \(expense.comment)")
-                                    .foregroundColor(.myGrayDark)
-                                    .multilineTextAlignment(.trailing)
-                                    .lineLimit(1)
-                                    .font(.custom("Lato-Regular", size: 14))
-                                    .foregroundColor(Color(hex: "A9A9A9"))
-                                    .opacity(!expense.comment.isEmpty ? 1 : 0)
-                            }
-                            .frame(width: wRatio(250))
-                            
-                            
-                            
                         }
                         .frame(width: wRatio(280), height: wRatio(40))
-                        .background(
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(self.offsets[index].width < -100 ? Color(hex: "ffc0cb") : .white )
-                                .frame(width: wRatio(280), height: wRatio(40))
-                                
-                        )
-                        .offset(x: offsets[index].width)
-                        .gesture(DragGesture() .onChanged { gesture in
-                            if gesture.translation.width < 0 {
-                                if gesture.translation.width >= -120 {
-                                    withAnimation(Animation.easeIn(duration: 0.3)) {
-                                        self.offsets[index] = gesture.translation
-                                        if offsets[index].width > 50 {
-                                            self.offsets[index] = .zero
-                                            
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                        }.onEnded { _ in
-                            if self.offsets[index].width < -100 {
-                                
-                                offsets[index].width = .zero
-                                (index >= 1) ? offsets[index - 1].width = .zero : ()
-                                (index <= offsets.count - 1) ? offsets[index + 1].width = .zero : ()
-                                
-                                if var user = FirebaseUserManager.shared.userModel {
-                                    
-                                    //return cash
-                                    let cashSourceReturn = latterMonthly3ExpensesCategory[index].cashSource
-                                    let amountReturn = latterMonthly3ExpensesCategory[index].amount
-                                    
-                                    var cashSourceIncreaseIndex: Int?
-                                    for (index, source) in user.cashSources.enumerated() {
-                                        if source.name == cashSourceReturn {
-                                            cashSourceIncreaseIndex = index
-                                        }
-                                    }
-                                    
-                                    if let index = cashSourceIncreaseIndex {
-                                        user.cashSources[index].increaseAmount(amountReturn)
-                                    }
-                                    
-                                    //delete spend
-                                    var currentMonthSpendings = user.currentMonthSpendings
-                                    
-                                    if let indexDel = currentMonthSpendings?
-                                        .firstIndex(where: {$0 == latterMonthly3ExpensesCategory[index]}){
-                                        currentMonthSpendings?.remove(at: indexDel)
-                                    }
-                                    
-                                    user.currentMonthSpendings = currentMonthSpendings
-                                    
-                                    FirebaseUserManager.shared.userModel = user
-
-                                }
-                                
-                            } else {
-                                withAnimation(Animation.easeIn(duration: 0.3)) {
-                                    offsets[index].width = .zero
-                                }
-                            }
-                        })
-                    }
-                        
-                        
-                    }
                     
+                    
+                VStack(){
+                    
+                    
+                    Divider().foregroundColor(.myBlue)
+                    HStack(spacing: 5) {
+                        
+                       
+                            Text(expense.expenseDate.formatDateAndTime())
+                                .frame(maxWidth: wRatio(80))
+                       
+                            Text(expense.amount.formatted())
+                                .frame(maxWidth: .infinity)
+                      
+                        
+                            Text(expense.cashSource)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .font(.custom("Lato-Regular", size: wRatio(14)))
+                    
+                    HStack(spacing: 0){
+                        
+                        Text("Note: \(expense.comment)")
+                            .italic()
+                            .foregroundColor(.gray)
+                            .font(.system(size: 12))
+                        
+                        Spacer()
+                    }
                     
                 }
+                .blur(radius: abs(offsets[index].width) * 0.015)
+                .lineLimit(1)
+                .frame(width: wRatio(250))
+                .background(
+                    Rectangle()
+                        .fill(self.offsets[index].width < -100 ? Color(hex: "ffc0cb") : .white )
+                        .frame(width: wRatio(280), height: wRatio(40))
+                        
+                )
+                .offset(x: offsets[index].width)
+                .gesture(DragGesture() .onChanged { gesture in
+                    if gesture.translation.width < 0 {
+                        if gesture.translation.width >= -120 {
+                            withAnimation(Animation.easeIn(duration: 0.3)) {
+                                self.offsets[index] = gesture.translation
+                                if offsets[index].width > 50 {
+                                    self.offsets[index] = .zero
+                                    
+                                }
+                            }
+                            
+                        }
+                    }
+                }.onEnded { _ in
+                    if self.offsets[index].width < -100 {
+                        
+                        offsets[index].width = .zero
+                        (index >= 1) ? offsets[index - 1].width = .zero : ()
+//                        (index <= offsets.count - 1) ? offsets[index + 1].width = .zero : ()
+                        
+                        if var user = FirebaseUserManager.shared.userModel {
+                            
+                            //return cash
+                            let cashSourceReturn = latterMonthly3ExpensesCategory[index].cashSource
+                            let amountReturn = latterMonthly3ExpensesCategory[index].amount
+                            
+                            var cashSourceIncreaseIndex: Int?
+                            for (index, source) in user.cashSources.enumerated() {
+                                if source.name == cashSourceReturn {
+                                    cashSourceIncreaseIndex = index
+                                }
+                            }
+                            
+                            if let index = cashSourceIncreaseIndex {
+                                user.cashSources[index].increaseAmount(amountReturn)
+                            }
+                            
+                            //delete spend
+                            var currentMonthSpendings = user.currentMonthSpendings
+                            
+                            if let indexDel = currentMonthSpendings?
+                                .firstIndex(where: {$0 == latterMonthly3ExpensesCategory[index]}){
+                                currentMonthSpendings?.remove(at: indexDel)
+                            }
+                            
+                            user.currentMonthSpendings = currentMonthSpendings
+                            
+                            FirebaseUserManager.shared.userModel = user
 
-            Spacer()
-        }
-        .padding(.top, wRatio(10))
-        .frame(width: wRatio(320),
-               height: wRatio(440))
+                        }
+                        
+                    } else {
+                        withAnimation(Animation.easeIn(duration: 0.3)) {
+                            offsets[index].width = .zero
+                        }
+                    }
+                })
+            }
+                
+                
+            }
             
-      }
-        
-        .onAppear(){
-            updateExpenses()
+            
         }
-        .onChange(of: user) { _ in
-            updateExpenses()
-        }
+        .background(GeometryReader { proxy in
+            Color.clear
+                .onChange(of: proxy.size.height, perform: { newValue in
+                    withAnimation(Animation.easeIn(duration: 0.5)) {
+                        self.height = proxy.size.height
+                    }
 
-   }
+                })
+                .onAppear {
+                self.height = proxy.size.height
+            }
+                .onDisappear{
+                    withAnimation(Animation.easeIn(duration: 0.5)) {
+                        self.height = 0
+                    }
+                    }
+
+        }
+        )
+        
+        
+    }
 
     var ImageCategoryView: some View{
         ZStack{

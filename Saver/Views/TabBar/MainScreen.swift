@@ -126,9 +126,7 @@ struct MainScreen: View {
                     }
                     
                     .zIndex(draggingItem ? 30 : 1)
-//                    .onChange(of: addCashSourceViewShow) { newValue in
-//                        viewModel.getCashSources2()
-//                    }
+
                     .frame(height: 100)
                     
                     Spacer() .frame(height: 15)
@@ -143,11 +141,7 @@ struct MainScreen: View {
                                            purchaseDetailViewShow: $purchaseDetailViewShow,
                                            selectedCategory: $selectedCategory,
                                            limitPurchaseCategoryViewShow: $limitPurchaseCategoryViewShow)
-//                    .onChange(of: addPurchaseCategoryViewShow) { newValue in
-//                        //передавати значення в user
-//                        viewModel.getCashSources2()
-//                    }
-                    
+
                     Spacer()
                 }
                 .blur(radius: isBlur ? 5 : 0)
