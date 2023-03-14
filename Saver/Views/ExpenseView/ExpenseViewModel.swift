@@ -26,7 +26,7 @@ class ExpenseViewModel: ObservableObject {
     
     func addAndCalculateExpense(from cashSource: String, to spentCategory: String) {
         let expenseModel = ExpenseModel(amount: Double(expense.commaToDot())!,
-                                        comment: comment.isEmpty ? "no comment" : comment,
+                                        comment: comment.isEmpty ? "" : comment,
                                         expenseDate: expenseDate,
                                         cashSource: cashSource,
                                         spentCategory: spentCategory)

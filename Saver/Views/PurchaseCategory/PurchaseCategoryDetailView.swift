@@ -201,6 +201,7 @@ struct PurchaseCategoryDetailView: View {
                             .italic()
                             .foregroundColor(.gray)
                             .font(.system(size: 12))
+                            .opacity(expense.comment.isEmpty ? 0 : 1)
                         
                         Spacer()
                     }

@@ -102,7 +102,7 @@ struct CashSourceView: View {
                             }
                             .cornerRadius(15)
 //                            .zIndex(100)
-//                            .delaysTouches(for: 0.1) {  }
+                            .delaysTouches(for: 0.2) {  }
                             .draggable(zIndex: $firstZ,
                                        isPurchaseDetected: $expenseViewShow,
                                        isCashSourceReceiverDetected: $isTransferViewShow,

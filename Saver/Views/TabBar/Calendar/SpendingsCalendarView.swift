@@ -217,6 +217,7 @@ struct SpendingsCalendarView: View {
                                 .italic()
                                 .foregroundColor(.gray)
                                 .font(.system(size: 12))
+                                .opacity(transaction.comment.isEmpty ? 0 : 1)
                             
                             Spacer()
                         }

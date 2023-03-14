@@ -9,15 +9,17 @@ import SwiftUI
 
 class CashSourceTransferViewModel: ObservableObject {
     
-    @Published var transferAmount = 0.0
+    @Published var transferAmount: String = ""
     @Published var comment = ""
     @Published var isDone = false
     @Published var expenseDate = Date.now
     
     var isEnteredTransferAmount: Bool {
         switch transferAmount {
-        case let x where x > 0.0:  return false
-        default:                   return true
+        case let x where Double(x.commaToDot())! > 0.0:
+            return false
+        default:
+            return true
         }
     }
     
@@ -43,8 +45,8 @@ class CashSourceTransferViewModel: ObservableObject {
             
             if let indexSubtract = cashSourceSubtractIndex,
                let indexIncrease = cashSourceIncreaseIndex{
-                user.cashSources[indexSubtract].subtractAmount(transferAmount)
-                user.cashSources[indexIncrease].increaseAmount(transferAmount)
+                user.cashSources[indexSubtract].subtractAmount(Double(transferAmount.commaToDot())!)
+                user.cashSources[indexIncrease].increaseAmount(Double(transferAmount.commaToDot())!)
             }
             
             FirebaseUserManager.shared.userModel = user
