@@ -59,6 +59,7 @@ struct MainScreen: View {
         }
     }
     @State var isImagePickerDisplay: Bool = false
+    @State private var positions: [CGSize] = Array(repeating: .zero, count: 10)
     
     var body: some View {
         ZStack {
@@ -80,7 +81,7 @@ struct MainScreen: View {
                                 userName: $viewModel.userName,
                                 totalIncome: $viewModel.cashBalance,
                                 totalExpense: $viewModel.totalExpense)
-                        .zIndex(2)
+//                        .zIndex(2)
                         .padding(.bottom, 15)
                     
                     GeometryReader { geometry in
@@ -115,17 +116,22 @@ struct MainScreen: View {
                                                    isTransferViewShow: $isTransferViewShow,
                                                    purchaseType: $expenseType,
                                                    draggingIndex: $draggingIndex,
-                                                   isNotSwipeGesture: $isNotSwipeGesture
+                                                   isNotSwipeGesture: $isNotSwipeGesture,
+                                                   positions: $positions
+                                        
                                     )
                                     .getLocationCashSources(source: source,
                                                             offset: currentScrollOffset)
                                 }
+                                .zIndex(positions[index] == .zero ? 1 : 10)
                                 .frame(width: self.itemWidth, height: 70)
                             }
                         }
                     }
                     
-                    .zIndex(draggingItem ? 30 : 1)
+//                    .zIndex(positions[index] == .zero ? 10 : 100)
+                    
+                    .zIndex(draggingItem ? 10 : 1)
 
                     .frame(height: 100)
                     

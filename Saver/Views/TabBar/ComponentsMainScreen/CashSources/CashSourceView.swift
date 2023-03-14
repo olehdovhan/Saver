@@ -21,6 +21,7 @@ struct CashSourceView: View {
     @Binding var purchaseType: String
     @Binding var draggingIndex: Int?
     @Binding var isNotSwipeGesture: Bool
+    @Binding var positions: [CGSize]
     
     var body: some View {
        
@@ -45,15 +46,14 @@ struct CashSourceView: View {
                                 .frame(width: 50, height: 50)
                                 .aspectRatio(contentMode: .fill)
                                 .myShadow(radiusShadow: 5)
-                                .zIndex(1)
                                 .saturation(0)
                             
                             Image(cashSourceItem.iconName)
                                 .resizable()
                                 .frame(width: 50, height: 50)
                                 .aspectRatio(contentMode: .fill)
-//                                .delaysTouches(for: 0.1) {  }
-                                .draggable(zIndex: $firstZ,
+//                                .delaysTouches(for: 0.1) {}
+                                .draggable(positions: $positions,
                                            isPurchaseDetected: $expenseViewShow,
                                            isCashSourceReceiverDetected: $isTransferViewShow,
                                            purchaseType: $purchaseType,
@@ -61,26 +61,22 @@ struct CashSourceView: View {
                                            cashSource: $cashSource,
                                            cashSourceReceiver: $cashSourceReceiver,
                                            draggingItem: $draggingItem,
-                                           draggingIndex: $draggingIndex,
                                            currentIndexCashSource: $index,
                                            isNotSwipeGesture: $isNotSwipeGesture)
-                                .zIndex(draggingIndex == index ? 15 : 10)
-//                                .zIndex(30)
                                 
                             
                         }
+                        
                         
                             
                     default:
                         ZStack{
                             ZStack{
                                 Rectangle().foregroundColor(draggingItem ? .myGrayCapsule : .myGreen)
-//                                Color.myGrayCapsule
                                     .frame(width: 50, height: 50)
                                     .animation(.easeIn(duration: 1))
                                 
                                 Image(cashSourceItem.iconName)
-//                                    .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
                                     
@@ -94,16 +90,13 @@ struct CashSourceView: View {
                                     .frame(width: 50, height: 50)
                                 
                                 Image(cashSourceItem.iconName)
-//                                    .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
-//                                    .foregroundColor(.white)
                                 
                             }
                             .cornerRadius(15)
-//                            .zIndex(100)
-                            .delaysTouches(for: 0.2) {  }
-                            .draggable(zIndex: $firstZ,
+//                            .delaysTouches(for: 0.1) {  }
+                            .draggable(positions: $positions,
                                        isPurchaseDetected: $expenseViewShow,
                                        isCashSourceReceiverDetected: $isTransferViewShow,
                                        purchaseType: $purchaseType,
@@ -111,7 +104,6 @@ struct CashSourceView: View {
                                        cashSource: $cashSource,
                                        cashSourceReceiver: $cashSourceReceiver,
                                        draggingItem: $draggingItem,
-                                       draggingIndex: $draggingIndex,
                                        currentIndexCashSource: $index,
                                        isNotSwipeGesture: $isNotSwipeGesture)
                         }
@@ -126,7 +118,6 @@ struct CashSourceView: View {
                                             .zIndex(-5)
                 }
                
-//                .zIndex(Double(cashSourcesCount - index?))
             }
             .frame(width: 75)
             

@@ -64,13 +64,6 @@ struct LiftingViewAtKeyboardOpen: ViewModifier{
             .offset(y: keyboardHeight == 0 ? 0 : -keyboardHeight * 0.30)
     }
 }
-//    .frame(width: wRatio(120), height: wRatio(30),  alignment: .trailing)
-//    .overlay( RoundedRectangle(cornerRadius: 10, style: .continuous)
-//        .stroke( Color.myGreen, lineWidth: 1)
-//        .padding(.leading, wRatio(-10))
-//        .padding(.trailing, wRatio(-10))
-//    )
-
 struct TextHeaderStyle: ViewModifier{
     let size: CGFloat = 18
     @State var screenW: CGFloat = .zero
@@ -124,7 +117,8 @@ extension View {
     
     
     
-    func draggable(zIndex: Binding<Double>,
+    func draggable(
+        positions: Binding<[CGSize]>,
                    isPurchaseDetected: Binding<Bool>,
                    isCashSourceReceiverDetected: Binding<Bool>,
                    purchaseType: Binding<String>,
@@ -132,11 +126,10 @@ extension View {
                    cashSource: Binding<String>,
                    cashSourceReceiver: Binding<String>,
                    draggingItem: Binding<Bool>,
-                   draggingIndex: Binding<Int?>,
                    currentIndexCashSource: Binding<Int?>,
                    isNotSwipeGesture: Binding<Bool>) -> some View {
         
-        modifier(DragGestureCustom(zIndex: zIndex,
+        modifier(DragGestureCustom(positions: positions,
                                    isPurchaseDetected: isPurchaseDetected,
                                    isCashSourceReceiverDetected: isCashSourceReceiverDetected,
                                    purchaseType: purchaseType,
@@ -144,7 +137,6 @@ extension View {
                                    cashSource: cashSource,
                                    cashSourceReceiver: cashSourceReceiver,
                                    draggingItem: draggingItem,
-                                   draggingIndex: draggingIndex,
                                    currentIndexCashSource: currentIndexCashSource,
                                    isNotSwipeGesture: isNotSwipeGesture
                                   ))
@@ -152,11 +144,7 @@ extension View {
 }
 
 struct DragGestureCustom: ViewModifier {
-    
-    @State var isDraggingItem = false
-    @State var currentOffsetX: CGFloat = 0
-    @State var currentOffsetY: CGFloat = 0
-    @Binding var zIndex: Double
+    @Binding var positions: [CGSize]
     @Binding var isPurchaseDetected: Bool
     @Binding var isCashSourceReceiverDetected: Bool
     @Binding var purchaseType: String
@@ -164,46 +152,32 @@ struct DragGestureCustom: ViewModifier {
     @Binding var cashSource: String
     @Binding var cashSourceReceiver: String
     @Binding var draggingItem: Bool
-    @Binding var draggingIndex: Int?
     @Binding var currentIndexCashSource: Int?
     @Binding var isNotSwipeGesture: Bool
-   
+    
+    func body(content: Content) -> some View {
+              content
+            .offset(positions[currentIndexCashSource!])
+            .gesture(drag)
+    }
+    
     var drag: some Gesture{
         DragGesture(coordinateSpace: .global)
             .onChanged({ value in
                 draggingItem = true
-                isDraggingItem.toggle()
-                
-//                if value.translation.height < 50{
-                    isNotSwipeGesture = value.translation.height < 50 ? true : false
-                    print("isNotSwipeGesture = \(isNotSwipeGesture), height: \(value.translation.height)")
-                
-//                }
-                
-                
-                
+                isNotSwipeGesture = value.translation.height < 50 ? true : false
                 withAnimation(.linear) {
-                    
-                    currentOffsetX = value.translation.width
                     if value.translation.height > -50{
-                        currentOffsetY = value.translation.height
-                        
+                        positions[currentIndexCashSource!] = value.translation
                     }
-                    
-                    
                 }
-//                print("AAA draggingIndex \(String(describing: draggingIndex)) index \(String(describing: currentIndexCashSource))")
-               
-               
             })
             .onEnded { gesture in
-                draggingIndex = currentIndexCashSource
+                positions[currentIndexCashSource!] = .zero
                 withAnimation {
-                    isDraggingItem = false
                     draggingItem = false
                 }
                 let purchaseLocations = PurchaseLocation.standard.locations
-//                let cashSourceLocations = CashSourceLocation.standard.locations
                 
                 for purchaseItem in purchaseLocations {
                     let startXRange = purchaseItem.value.x - 35
@@ -240,34 +214,7 @@ struct DragGestureCustom: ViewModifier {
                         }
                     }
                 }
-                    
-                if abs(gesture.location.x) > 49 && abs(gesture.location.x) < 95 && abs(gesture.location.y) > 419 && abs(gesture.location.y) < 470 {
-                 
-                    withAnimation(.spring()) {
-                        isDraggingItem.toggle()
-                        
-                    }
-                            
-                } else {
-                    withAnimation(.spring()) {
-                        isDraggingItem.toggle()
-                        
-                    }
-                    
-                }
-                
-                currentOffsetX = 0
-                currentOffsetY = 0
-                
-                draggingIndex = nil
           }
-    }
-    
-    func body(content: Content) -> some View {
-              content
-            .offset(x: currentOffsetX)
-            .offset(y: currentOffsetY)
-            .gesture(drag)
     }
 }
 
