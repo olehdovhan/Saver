@@ -15,16 +15,19 @@ struct RegistrationView: View {
     @StateObject private var viewModel = RegistrationViewModel()
     
     @State private var keyboardHeight: CGFloat = 0
+    @State private var showPrivacyWebView = false
+    @State private var showTermsWebView = false
     
     let validCharsPass = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
     
     var body: some View {
+        
             ZStack {
+                
                 GeometryReader { reader in
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
                         .ignoresSafeArea()
-                    
                 }
                 Rectangle()
                     .fill(Color.white)
@@ -35,10 +38,12 @@ struct RegistrationView: View {
                 
                 NavigationLink(isActive: $viewModel.willMoveToTabBar) {
                     TabBarView()
-                } label: { }
+                } label: {
+                    
+                }
                 
                 VStack( alignment: .center, spacing: 0){
-                    //                    Spacer(minLength: 50)
+    //                    Spacer(minLength: 50)
                     Spacer()
                     
                     Text("Regisration")
@@ -51,37 +56,36 @@ struct RegistrationView: View {
                     
                     fieldsView
                     
-                    
-                    ZStack{
-                        HStack{
-                            Button {
-                                viewModel.privacyTermsAccepted.toggle()
-                                if viewModel.privacyTermsAccepted {
-                                    viewModel.validatedPrivacy = .validated
-                                }
-                            } label: {
-                                Image(viewModel.privacyTermsAccepted ? "registration_checkmark_green_full" : "registration_checkmark_green_empty")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                            }
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 3)
-                                    .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myRed, lineWidth: 2)
-                            )
-                            Spacer()
-                        }
-                        
-                        HStack{
-                            Spacer().frame(width: 27)
-                            Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
-                                .font(.custom("Lato-Regular", size: 13))
-                                .lineLimit(3)
-                                .multilineTextAlignment(.center)
-                        }
-                    }
-                    .frame(width: wRatio(270), height: 40)
-                    .padding(.top, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
-                    .padding(.bottom, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
+//                    ZStack{
+//                        HStack{
+//                            Button {
+//                                viewModel.privacyTermsAccepted.toggle()
+//                                if viewModel.privacyTermsAccepted {
+//                                    viewModel.validatedPrivacy = .validated
+//                                }
+//                            } label: {
+//                                Image(viewModel.privacyTermsAccepted ? "registration_checkmark_green_full" : "registration_checkmark_green_empty")
+//                                    .resizable()
+//                                    .frame(width: 20, height: 20)
+//                            }
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 3)
+//                                    .stroke(viewModel.validatedPrivacy == .validated ? Color.clear : Color.myRed, lineWidth: 2)
+//                            )
+//                            Spacer()
+//                        }
+//
+//                        HStack{
+//                            Spacer().frame(width: 27)
+//                            Text("With conditions  [User agreement](https://policies.google.com/terms?hl=en-US) and [Policy of confeditionity](https://policies.google.com/privacy?hl=en-US) familiarized")
+//                                .font(.custom("Lato-Regular", size: 13))
+//                                .lineLimit(3)
+//                                .multilineTextAlignment(.center)
+//                        }
+//                    }
+//                    .frame(width: wRatio(270), height: 40)
+//                    .padding(.top, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
+//                    .padding(.bottom, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
                     
                     
                     NavigationLink(isActive: $viewModel.willMoveToLogin) {
@@ -93,11 +97,7 @@ struct RegistrationView: View {
                             .font(.custom("Lato-Regular", size: 16))
                             .padding(.bottom, wRatio(28))
                     }
-                    
-                    
-                    
-                    
-                    
+                  //  Spacer().frame(height: 50)
                     Button {
                         viewModel.createAccountOnceTapped = true
                         let inputTFCorrect = viewModel.inputValidated()
@@ -118,7 +118,32 @@ struct RegistrationView: View {
                         }
                     }
                     Spacer()
+                    HStack {
+                        Button {
+                            showPrivacyWebView = true
+                        } label: {
+                             Text("Privacy policy")
+                            .lineLimit(1)
+                            .foregroundColor(.myGreen)
+                            .font(.custom("Lato-Regular", size: 13))
+                        }
+                        Spacer().frame(width: 50)
+                        Button {
+                            showTermsWebView = true
+                        } label: {
+                             Text("Terms of use")
+                                .lineLimit(1)
+                                .foregroundColor(.myGreen)
+                                .font(.custom("Lato-Regular", size: 13))
+                        }
+                    }
                 }
+            }
+            .sheet(isPresented: $showTermsWebView) {
+                WebView(url: URL(string: "https://www.app-privacy-policy.com/live.php?token=CtkKClEp0a49NTZdtC1zkswBXscvbBc7")!)
+            }
+            .sheet(isPresented: $showPrivacyWebView) {
+                WebView(url: URL(string: "https://www.termsfeed.com/live/85a4e8c2-e755-43e8-a134-9226a6017dfe")!)
             }
             .navigationBarHidden(true)
             .onAppear() {

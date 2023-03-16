@@ -43,9 +43,6 @@ struct GetLocationCashSourcesModifier: ViewModifier{
 struct ShadowCustom : ViewModifier{
     var radiusShadow: Int
     func body(content: Content) -> some View {
-        
-        
-        
         content
             .shadow(color: .black.opacity(0.15), radius: CGFloat(radiusShadow), x: 0, y: 0)
     }
@@ -305,11 +302,6 @@ extension View {
     
 }
 
-
-
-
-
-
 struct NumbersOnlyViewModifier: ViewModifier {
     
     @Binding var text: String
@@ -344,7 +336,6 @@ struct NumbersOnlyViewModifier: ViewModifier {
                     }
                 }
 
-                
                 if newValue.first == "," || newValue.first == "."{
                     self.text = String("0" + newValue)
                 }
@@ -352,7 +343,6 @@ struct NumbersOnlyViewModifier: ViewModifier {
 //                if newValue.count >= 2 && newValue.prefix(2) == "00" {
 //                    self.text.removeFirst()
 //               }
-                
             }
     }
 }
@@ -368,7 +358,6 @@ extension StringProtocol {
         self[index(startIndex, offsetBy: offset)]
     }
 }
-
 
 extension String{
     func commaToDot() -> String {

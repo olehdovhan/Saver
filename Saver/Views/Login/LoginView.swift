@@ -24,6 +24,9 @@ struct LoginView: View {
     
     @State private var keyboardHeight: CGFloat = 0
     
+    @State private var showPrivacyWebView = false
+    @State private var showTermsWebView = false
+    
     var body: some View {
         
             ZStack {
@@ -109,9 +112,34 @@ struct LoginView: View {
                             .font(.custom("Lato-Regular", size: 16))
                     }
                     Spacer()
+                    
+                    HStack {
+                        Button {
+                           showPrivacyWebView = true 
+                        } label: {
+                             Text("Privacy policy")
+                            .lineLimit(1)
+                            .foregroundColor(.myGreen)
+                            .font(.custom("Lato-Regular", size: 13))
+                        }
+                        Spacer().frame(width: 50)
+                        Button {
+                            showTermsWebView = true
+                        } label: {
+                             Text("Terms of use")
+                                .lineLimit(1)
+                                .foregroundColor(.myGreen)
+                                .font(.custom("Lato-Regular", size: 13))
+                        }
+                    }
                 }
                 
-                
+            }
+            .sheet(isPresented: $showTermsWebView) {
+                WebView(url: URL(string: "https://www.app-privacy-policy.com/live.php?token=CtkKClEp0a49NTZdtC1zkswBXscvbBc7")!)
+            }
+            .sheet(isPresented: $showPrivacyWebView) {
+                WebView(url: URL(string: "https://www.termsfeed.com/live/85a4e8c2-e755-43e8-a134-9226a6017dfe")!)
             }
             .onReceive(Publishers.keyboardHeight) { value in
                 withAnimation() {
