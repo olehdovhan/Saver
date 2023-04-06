@@ -86,8 +86,7 @@ struct RegistrationView: View {
 //                    .frame(width: wRatio(270), height: 40)
 //                    .padding(.top, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
 //                    .padding(.bottom, keyboardHeight == 0 ? wRatio(20) : wRatio(10))
-                    
-                    
+            
                     NavigationLink(isActive: $viewModel.willMoveToLogin) {
                         LoginView()
                     } label: {
@@ -97,11 +96,12 @@ struct RegistrationView: View {
                             .font(.custom("Lato-Regular", size: 16))
                             .padding(.bottom, wRatio(28))
                     }
-                  //  Spacer().frame(height: 50)
                     Button {
                         viewModel.createAccountOnceTapped = true
                         let inputTFCorrect = viewModel.inputValidated()
-                        if inputTFCorrect && viewModel.privacyTermsAccepted { viewModel.registerUser() }
+                        if inputTFCorrect {
+                            viewModel.registerUser()
+                        }
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 10).fill(

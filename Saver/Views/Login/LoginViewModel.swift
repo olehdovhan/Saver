@@ -74,7 +74,7 @@ class LoginViewModel: ObservableObject {
                                     return }
                                 
                                 let dataUserModel = UserModel(avatarUrlString: urlString,
-                                                              name: "Noname user",
+                                                              name: "UserName26",
                                                               email: firUser.email,
                                                               registrationDate: Int(Date().millisecondsSince1970),
                                                               cashSources: [CashSource(name: "Bank card",

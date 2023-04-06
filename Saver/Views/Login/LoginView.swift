@@ -11,8 +11,6 @@ import Combine
 
 struct LoginView: View {
     
-    
-    
     @ObservedObject private var viewModel = LoginViewModel()
     
     @State private var email = ""
@@ -133,7 +131,6 @@ struct LoginView: View {
                         }
                     }
                 }
-                
             }
             .sheet(isPresented: $showTermsWebView) {
                 WebView(url: URL(string: "https://www.app-privacy-policy.com/live.php?token=CtkKClEp0a49NTZdtC1zkswBXscvbBc7")!)

@@ -53,7 +53,7 @@ final class FirebaseUserManager {
                     self?.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
                         guard let urlString = urlStringToImage else { return }
                         let dataUserModel =  UserModel(avatarUrlString: urlString,
-                                                       name: "Noname user",
+                                                       name: "UserName26",
                                                        email: self?.firUser.email  ?? "no Email",
                                                        registrationDate: Int(Date().millisecondsSince1970),
                                                        cashSources: [CashSource(name: "Bank card",

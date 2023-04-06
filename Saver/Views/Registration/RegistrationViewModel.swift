@@ -57,7 +57,7 @@ class RegistrationViewModel: ObservableObject {
                     
                 }
                  let dataUserModel = UserModel(avatarUrlString: urlString,
-                                               name: "Noname user",
+                                               name: "UserName26",
                                                email: self?.email ?? "",
                                                registrationDate: Int(Date().millisecondsSince1970),
                                                cashSources: [CashSource(name: "Bank card",
@@ -115,7 +115,7 @@ extension RegistrationViewModel: ValidateInputProtocol {
         }
        
         let validated = correctEmail == .validated &&
-        correctPassword == .validated && validatedPrivacy == .validated
+        correctPassword == .validated //&& validatedPrivacy == .validated
         return validated
     }
 }
