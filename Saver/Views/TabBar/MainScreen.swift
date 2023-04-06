@@ -156,14 +156,18 @@ struct MainScreen: View {
                 }
                 
                 if expenseViewShow,
-                   let cashes = FirebaseUserManager.shared.userModel?.cashSources,
-                   let cashSources = cashes.map { $0.name} {
-                       ExpenseView(closeSelf: $expenseViewShow,
-                                   cashSource: viewModel.cashSource,
-                                   purchaseCategoryName: $expenseType,
-                                   editing: $editing,
-                                   cashSources: cashSources)
-                   }
+                   let cashes = FirebaseUserManager.shared.userModel?.cashSources{
+                    if cashes.count > 0{
+                        let cashSources = cashes.map { $0.name}
+                        ExpenseView(closeSelf: $expenseViewShow,
+                                    cashSource: viewModel.cashSource,
+                                    purchaseCategoryName: $expenseType,
+                                    editing: $editing,
+                                    cashSources: cashSources)
+                        
+                    }
+                }
+                   
                 
                 if incomeViewShow {
                     IncomeView(closeSelf: $incomeViewShow,
@@ -191,13 +195,16 @@ struct MainScreen: View {
                 }
                 
                 if isTransferViewShow,
-                   let cashes = FirebaseUserManager.shared.userModel?.cashSources,
-                   let cashSources = cashes.map { $0.name}{
-                    CashSourceTransferView(closeSelf: $isTransferViewShow,
-                                           cashSourceProvider: viewModel.cashSource,
-                                           cashSourceReceiver: cashSourceReceiver,
-                                           editing: $editing,
-                                           cashSources: cashSources)
+                   let cashes = FirebaseUserManager.shared.userModel?.cashSources{
+                    if cashes.count > 0{
+                        let cashSources = cashes.map{ $0.name}
+                         CashSourceTransferView(closeSelf: $isTransferViewShow,
+                                                cashSourceProvider: viewModel.cashSource,
+                                                cashSourceReceiver: cashSourceReceiver,
+                                                editing: $editing,
+                                                cashSources: cashSources)
+                    }
+                    
                 }
                 
                 if limitCashSourcesViewShow {
