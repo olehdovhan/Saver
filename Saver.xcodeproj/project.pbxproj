@@ -612,9 +612,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FABB4BB928B124410070F300 /* Saver */ = {
+		FABB4BB928B124410070F300 /*     */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "Saver" */;
+			buildConfigurationList = FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "   " */;
 			buildPhases = (
 				FABB4BB628B124410070F300 /* Sources */,
 				FABB4BB728B124410070F300 /* Frameworks */,
@@ -624,7 +624,7 @@
 			);
 			dependencies = (
 			);
-			name = Saver;
+			name = "   ";
 			packageProductDependencies = (
 				0CC4DC40297BD6BB008D38EE /* FirebaseAnalytics */,
 				0CC4DC42297BD6BB008D38EE /* FirebaseAnalyticsSwift */,
@@ -675,7 +675,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FABB4BB928B124410070F300 /* Saver */,
+				FABB4BB928B124410070F300 /*     */,
 			);
 		};
 /* End PBXProject section */
@@ -918,7 +918,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
@@ -937,7 +937,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.olehdovhan.app.Saver;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Saver;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -951,7 +951,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
@@ -970,7 +970,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.olehdovhan.app.Saver;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Saver;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -989,7 +989,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "Saver" */ = {
+		FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "   " */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FABB4BCE28B124420070F300 /* Debug */,

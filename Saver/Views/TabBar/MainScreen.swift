@@ -156,8 +156,8 @@ struct MainScreen: View {
                 }
                 
                 if expenseViewShow,
-                   let cashes = FirebaseUserManager.shared.userModel?.cashSources,
-                   let cashSources = cashes.map { $0.name} {
+                   let cashes = FirebaseUserManager.shared.userModel?.cashSources {
+                    let cashSources = cashes.map({ $0.name})
                        ExpenseView(closeSelf: $expenseViewShow,
                                    cashSource: viewModel.cashSource,
                                    purchaseCategoryName: $expenseType,
@@ -191,8 +191,8 @@ struct MainScreen: View {
                 }
                 
                 if isTransferViewShow,
-                   let cashes = FirebaseUserManager.shared.userModel?.cashSources,
-                   let cashSources = cashes.map { $0.name}{
+                   let cashes = FirebaseUserManager.shared.userModel?.cashSources {
+                    let cashSources = cashes.map({ $0.name})
                     CashSourceTransferView(closeSelf: $isTransferViewShow,
                                            cashSourceProvider: viewModel.cashSource,
                                            cashSourceReceiver: cashSourceReceiver,
