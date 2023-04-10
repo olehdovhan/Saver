@@ -30,10 +30,7 @@ struct SaverApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @State private var userState = UserState.showOnboarding
-    @State private var progress = true
-    
-    @State private var showErrorMessage = false
-    @State private var errorMessage = ""
+    @State private var progress = false 
     
     
     var body: some Scene {
@@ -52,15 +49,7 @@ struct SaverApp: App {
                     }
                 }
                 .navigationBarHidden(true)
-                .overlay(overlayView: CustomProgressView(), show: $progress)
-                .overlay(overlayView: SnackBarView(show: $showErrorMessage,
-                                                   model: SnackBarModel(type: .warning,
-                                                                        text: errorMessage,
-                                                                        alignment: .leading,
-                                                                        bottomPadding: 20)),
-                         show: $showErrorMessage,
-                         ignoreSaveArea: false)
-                
+                .overlay(overlayView: CustomProgressView(), show: $progress)                
                 .onAppear() {
     
                     Auth.auth().addStateDidChangeListener { (auth, user) in

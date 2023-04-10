@@ -29,7 +29,6 @@
 		0C967746298FBE8C00220018 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C967745298FBE8C00220018 /* Encodable+Extension.swift */; };
 		0C979294294E1833000D80A2 /* AddPurchaseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */; };
 		0C979297294E3774000D80A2 /* PurchaseCategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */; };
-		0CA0037F2972C00A00E9DF89 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0037E2972C00A00E9DF89 /* AuthView.swift */; };
 		0CA003822972CE1A00E9DF89 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003812972CE1A00E9DF89 /* View+Extension.swift */; };
 		0CB5F8AE29803A500000FF17 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB5F8AD29803A500000FF17 /* TabBarViewModel.swift */; };
 		0CC4DC3E297BD575008D38EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CC4DC3D297BD575008D38EE /* GoogleService-Info.plist */; };
@@ -137,7 +136,6 @@
 		0C967745298FBE8C00220018 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		0C979293294E1833000D80A2 /* AddPurchaseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseCategoryView.swift; sourceTree = "<group>"; };
 		0C979296294E3774000D80A2 /* PurchaseCategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCategoryDetailView.swift; sourceTree = "<group>"; };
-		0CA0037E2972C00A00E9DF89 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		0CA003802972C04D00E9DF89 /* Saver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Saver.entitlements; sourceTree = "<group>"; };
 		0CA003812972CE1A00E9DF89 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		0CB5F8AD29803A500000FF17 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 		0CA0037D2972BAD800E9DF89 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				0CA0037E2972C00A00E9DF89 /* AuthView.swift */,
 				0C02202D2973476800F5D030 /* AppleAuthorizationVC.swift */,
 				0C02202F2973484600F5D030 /* AuthWithAppleButton.swift */,
 			);
@@ -735,7 +732,6 @@
 				0CE75281294F08CC0092651C /* DetailDebtView.swift in Sources */,
 				B4FA432928C88A6600FA19DB /* CustomDatePicker.swift in Sources */,
 				FCD4A49E299C47880023BD55 /* ImagePickerView.swift in Sources */,
-				0CA0037F2972C00A00E9DF89 /* AuthView.swift in Sources */,
 				66130995295F2D1300275F16 /* CashSourcesData.swift in Sources */,
 				0C4C60CC297EA30E00D040DC /* MainScreenViewModel.swift in Sources */,
 				66C1B533297377CB008E1BAE /* ForgotPasswordViewModel.swift in Sources */,

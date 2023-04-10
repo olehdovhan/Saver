@@ -66,7 +66,10 @@ struct LoginView: View {
                         }
                                          .frame(width: 230, height: 50)
                         
-                        AuthWithAppleButton { }
+                        AuthWithAppleButton { errorMessage in
+                            viewModel.errorMessage = errorMessage
+                            viewModel.showErrorMessage = true
+                        }
                         .frame(width: 230, height: 50)
                     }
                     .padding(.top, wRatio(15))
@@ -219,7 +222,8 @@ struct LoginView_Previews: PreviewProvider {
 }
 
 
-struct AuthGoogleButton: View{
+struct AuthGoogleButton: View {
+    
     let image: String
     let widthImg: CGFloat
     let heightImg: CGFloat

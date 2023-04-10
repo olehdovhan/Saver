@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AuthWithAppleButton: UIViewControllerRepresentable {
 
-    var closure: () -> ()
+    var closure: (String) -> ()
     
     func makeUIViewController(context: Context) -> AppleAuthorizationVC {
         let vc = AppleAuthorizationVC()

@@ -10,6 +10,7 @@ import Foundation
 
 
 class MainScreenViewModel: ObservableObject {
+    
     @Published var user: UserModel?
     
     @Published var showErrorMessage = false
@@ -42,36 +43,38 @@ class MainScreenViewModel: ObservableObject {
         }
     }
     
-    func getUser() -> Void{
-        FirebaseUserManager.shared.observeUser {
-            
+    func getUser() -> () {
+        FirebaseUserManager.shared.observeUser { [weak self] in
             if let user = FirebaseUserManager.shared.userModel {
-                self.user = user
+                self?.user = user
                 
-                self.getUserName2()
-                self.getUrlImage2()
+                self?.getUserName2()
+                self?.getUrlImage2()
                 
-                self.getCurrentMonthSpendings2()
-                self.getCurrentMonthIncoms2()
+                self?.getCurrentMonthSpendings2()
+                self?.getCurrentMonthIncoms2()
                 
-                self.getCashSources2()
-                self.getPurchaseCategories2()
+                self?.getCashSources2()
+                self?.getPurchaseCategories2()
                 
+            } else {
+                self?.errorMessage = "User is absent"
+                self?.showErrorMessage = true
             }
         }
     }
     
-    func setUser() -> Void{
+    func setUser() -> () {
         guard let user = user else { return }
         FirebaseUserManager.shared.userModel = user
     }
     
-    func getUserName2() -> Void{
+    func getUserName2() -> (){
         guard let user = user else { return }
         userName = user.name
     }
     
-    func getUrlImage2() -> Void{
+    func getUrlImage2() -> (){
         guard let url = URL(string: user!.avatarUrlString) else {
             errorMessage = "error urlString"
             showErrorMessage = true
@@ -80,28 +83,27 @@ class MainScreenViewModel: ObservableObject {
         urlImage = url
     }
     
-    
-    func getCurrentMonthSpendings2() -> Void{
+    func getCurrentMonthSpendings2() -> () {
         guard let currentMonthSpendings = user!.currentMonthSpendings else { return }
         self.currentMonthSpendings =  currentMonthSpendings
         self.getTotalExpense2()
     }
     
-    func getCurrentMonthIncoms2() -> Void{
+    func getCurrentMonthIncoms2() -> () {
         guard let currentMonthIncoms = user!.currentMonthIncoms else { return }
         self.currentMonthIncoms =  currentMonthIncoms
         
     }
     
-    func getTotalExpense2() -> Void{
+    func getTotalExpense2() -> () {
         totalExpense = currentMonthSpendings.reduce(0, {$0 + $1.amount})
     }
     
-    func getBalance() -> Void{
+    func getBalance() -> () {
         cashBalance = cashSources.reduce(0, {$0 + $1.amount})
     }
     
-    func getCashSources2() -> Void{
+    func getCashSources2() -> () {
         guard let user = user else {
             errorMessage = "error sources"
             showErrorMessage = true
@@ -114,10 +116,9 @@ class MainScreenViewModel: ObservableObject {
             cashSource = cashSources[0].name
             progress = false
         }
-
     }
     
-    func getPurchaseCategories2() -> Void{
+    func getPurchaseCategories2() -> () {
         guard let user = user else {
             errorMessage = "error categories"
             showErrorMessage = true
@@ -126,61 +127,5 @@ class MainScreenViewModel: ObservableObject {
         purchaseCategories = user.purchaseCategories
         progress = false
     }
-    
-//    func getUrlImage() -> Void{
-//        if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString,
-//           let url = URL(string: urlString) {
-//            urlImage = url
-//        } else {
-//            errorMessage = "error urlString"
-//            showErrorMessage = true
-//        }
-//    }
-    
-    //    func getUserName() -> Void{
-    //        userName = FirebaseUserManager.shared.userModel?.name ?? "First Name"
-    //    }
-    
-    //    func getCurrentMonthSpendings() -> Void{
-    //        currentMonthSpendings =  FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
-    //    }
-    
-//    func getTotalExpense() -> Void{
-//        totalExpense = currentMonthSpendings.reduce(0, {$0 + $1.amount})
-//    }
-    
-//    func getTotalIncome() -> Void{
-//        if let currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms{
-//            totalIncome = currentMonthIncoms.reduce(0, {$0 + $1.amount})
-//        }
-//    }
-    
-//    func getCashSources() -> Void{
-//        if let sources = FirebaseUserManager.shared.userModel?.cashSources {
-//
-//                cashSources = sources
-//                if sources.count != 0 {
-//                    cashSource = sources[0].name
-//                    progress = false
-//                }
-//        } else {
-//            errorMessage = "error sources"
-//            showErrorMessage = true
-//        }
-//    }
-    
-//    func getPurchaseCategories() -> Void{
-//        if let categories = FirebaseUserManager.shared.userModel?.purchaseCategories {
-//            purchaseCategories = categories
-//            progress = false
-//        } else {
-//            errorMessage = "error categories"
-//            showErrorMessage = true
-//        }
-//    }
 }
 
-//struct Notifications {
-//      static let updateUserNotification: NSNotification.Name = NSNotification.Name("updateUserNotification")
-//
-//    }

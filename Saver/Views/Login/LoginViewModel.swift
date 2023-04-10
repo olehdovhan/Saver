@@ -4,7 +4,6 @@
 //
 //  Created by Pryshliak Dmytro on 14.01.2023.
 //
-
 import Firebase
 import Foundation
 import FirebaseCore
@@ -20,8 +19,8 @@ class LoginViewModel: ObservableObject {
     @Published var passwordIsEditing = false
     @Published var errorMessage = ""
 
-    
     func signInGoogle() {
+        
         self.progress = true
         
         guard let clientID = FirebaseApp.app()?.options.clientID else {
@@ -96,7 +95,6 @@ class LoginViewModel: ObservableObject {
                         } else {
                             self?.errorMessage = error?.localizedDescription ?? "error snapshot"
                             self?.showErrorMessage = true
-                            
                         }
                     }
                 } else {

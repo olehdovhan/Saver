@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct MainScreen: View {
+    
     @StateObject var viewModel = MainScreenViewModel()
     @Binding var isShowTabBar: Bool
     
@@ -26,9 +27,7 @@ struct MainScreen: View {
     @State var expenseType: String = ""
     @FocusState var editing: Bool
     @State var selectedCategory: PurchaseCategory?
-    
-//    @State var amountCurrentMonthSpendingSelectedCategory: String = "0.0"
-    
+
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
     @State private var activePageIndex: Int = 0
@@ -40,11 +39,10 @@ struct MainScreen: View {
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
     let itemPadding: CGFloat = 6
     
-    
     @State var userRef: DatabaseReference!
     @State var tasks = [TaskFirModel]()
     
-    var isBlur: Bool{
+    var isBlur: Bool {
         limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow || isTransferViewShow
     }
     
@@ -55,7 +53,6 @@ struct MainScreen: View {
     @State var selectedImage: UIImage? {
         didSet {
             showImageCropper.toggle()
-            //TODO: - send to storage  
         }
     }
     @State var isImagePickerDisplay: Bool = false
@@ -63,12 +60,11 @@ struct MainScreen: View {
     
     var body: some View {
         ZStack {
-            ZStack{
+            ZStack {
                 GeometryReader { reader in
                     Color.myGreen
                         .frame(height: reader.safeAreaInsets.top, alignment: .top)
                         .ignoresSafeArea(.all, edges: .top)
-                    
                 }
                 
                 VStack(alignment: .center, spacing: 0) {
@@ -81,7 +77,6 @@ struct MainScreen: View {
                                 userName: $viewModel.userName,
                                 totalIncome: $viewModel.cashBalance,
                                 totalExpense: $viewModel.totalExpense)
-//                        .zIndex(2)
                         .padding(.bottom, 15)
                     
                     GeometryReader { geometry in
@@ -128,9 +123,6 @@ struct MainScreen: View {
                             }
                         }
                     }
-                    
-//                    .zIndex(positions[index] == .zero ? 10 : 100)
-                    
                     .zIndex(draggingItem ? 10 : 1)
 
                     .frame(height: 100)
@@ -152,7 +144,9 @@ struct MainScreen: View {
                 }
                 .blur(radius: isBlur ? 5 : 0)
                 .sheet(isPresented: $isImagePickerDisplay) {
-                    ImagePickerView(selectedImage: $selectedImage, onlyImage: true, sourceType: sourceType) { url in }
+                    ImagePickerView(selectedImage: $selectedImage,
+                                    onlyImage: true,
+                                    sourceType: sourceType) { url in }
                 }
                 
                 if expenseViewShow,
@@ -232,13 +226,6 @@ struct MainScreen: View {
                 .zIndex(10)
             }
         }
-//        .onChange(of: selectedCategory) { _ in
-//            let amount = viewModel.currentMonthSpendings
-//                        .filter { $0.spentCategory == selectedCategory?.name }
-//                        .map { $0.amount }
-//                        .reduce(0) { $0 + $1 }
-//                    amountCurrentMonthSpendingSelectedCategory = String(amount)
-//        }
         .onChange(of: selectedImage) { _ in
             showImageCropper.toggle()
         }

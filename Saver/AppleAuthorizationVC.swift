@@ -16,7 +16,7 @@ class AppleAuthorizationVC: UIViewController {
     fileprivate var currentNonce: String?
 
     private let signInButton = ASAuthorizationAppleIDButton()
-    var closure: (() -> ())?
+    var closure: ((String) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +51,19 @@ class AppleAuthorizationVC: UIViewController {
         Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
       var result = ""
       var remainingLength = length
-
       while remainingLength > 0 {
         let randoms: [UInt8] = (0 ..< 16).map { _ in
           var random: UInt8 = 0
           let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
           if errorCode != errSecSuccess {
+              if closure != nil {
+                  closure!("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+              }
+              
             fatalError(
               "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
             )
+              
           }
           return random
         }
@@ -93,21 +97,35 @@ class AppleAuthorizationVC: UIViewController {
 extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("failed")
+        if closure != nil {
+            closure!(error.localizedDescription)
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
           guard let nonce = currentNonce else {
+              if closure != nil {
+                  closure!("Invalid state: A login callback was received, but no login request was sent.")
+              }
             fatalError("Invalid state: A login callback was received, but no login request was sent.")
           }
+            
           guard let appleIDToken = appleIDCredential.identityToken else {
             print("Unable to fetch identity token")
+              if closure != nil {
+                  closure!("Unable to fetch identity token")
+              }
             return
           }
+            
           guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
             print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+              if closure != nil {
+                  closure!("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+              }
+
             return
           }
           // Initialize a Firebase credential.
@@ -115,9 +133,13 @@ extension AppleAuthorizationVC: ASAuthorizationControllerDelegate {
                                                     idToken: idTokenString,
                                                     rawNonce: nonce)
           // Sign in with Firebase.
-          Auth.auth().signIn(with: credential) { (authResult, error) in
+          Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
+      
               if let error = error {
                   print(error.localizedDescription)
+                  if self?.closure != nil {
+                      self?.closure!(error.localizedDescription)
+                  }
               }
           }
         }
