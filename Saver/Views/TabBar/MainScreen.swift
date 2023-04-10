@@ -228,7 +228,6 @@ struct MainScreen: View {
                         viewModel.errorMessage = "error currentUser"
                         viewModel.showErrorMessage = true
                     }
-                   
                 }
                 .zIndex(10)
             }

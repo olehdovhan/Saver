@@ -612,9 +612,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FABB4BB928B124410070F300 /*     */ = {
+		FABB4BB928B124410070F300 /* Saver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "   " */;
+			buildConfigurationList = FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "Saver" */;
 			buildPhases = (
 				FABB4BB628B124410070F300 /* Sources */,
 				FABB4BB728B124410070F300 /* Frameworks */,
@@ -624,7 +624,7 @@
 			);
 			dependencies = (
 			);
-			name = "   ";
+			name = Saver;
 			packageProductDependencies = (
 				0CC4DC40297BD6BB008D38EE /* FirebaseAnalytics */,
 				0CC4DC42297BD6BB008D38EE /* FirebaseAnalyticsSwift */,
@@ -675,7 +675,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FABB4BB928B124410070F300 /*     */,
+				FABB4BB928B124410070F300 /* Saver */,
 			);
 		};
 /* End PBXProject section */
@@ -918,17 +918,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Saver/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Saver;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -951,17 +953,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Saver/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Saver;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -989,7 +993,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "   " */ = {
+		FABB4BCD28B124420070F300 /* Build configuration list for PBXNativeTarget "Saver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FABB4BCE28B124420070F300 /* Debug */,
