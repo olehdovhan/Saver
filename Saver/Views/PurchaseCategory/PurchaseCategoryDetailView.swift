@@ -217,20 +217,24 @@ struct PurchaseCategoryDetailView: View {
                         
                 )
                 .offset(x: offsets[index].width)
-                .gesture(DragGesture() .onChanged { gesture in
-                    if gesture.translation.width < 0 {
-                        if gesture.translation.width >= -120 {
-                            withAnimation(Animation.easeIn(duration: 0.3)) {
-                                self.offsets[index] = gesture.translation
-                                if offsets[index].width > 50 {
-                                    self.offsets[index] = .zero
-                                    
+                .gesture(DragGesture()
+                    .onChanged { gesture in
+                        print(index)
+                        if gesture.translation.width < 0 {
+                            if gesture.translation.width >= -120 {
+                                withAnimation(Animation.easeIn(duration: 0.3)) {
+                                    self.offsets[index] = gesture.translation
+                                    if offsets[index].width > 50 {
+                                        self.offsets[index] = .zero
+                                        
+                                    }
                                 }
+                                
                             }
-                            
                         }
                     }
-                }.onEnded { _ in
+                    .onEnded { _ in
+                        
                     if self.offsets[index].width < -100 {
                         
                         offsets[index].width = .zero
@@ -273,7 +277,8 @@ struct PurchaseCategoryDetailView: View {
                             offsets[index].width = .zero
                         }
                     }
-                })
+                }
+                )
             }
                 
                 
@@ -340,7 +345,10 @@ struct PurchaseCategoryDetailView: View {
     }
     
     func updateExpenses() -> Void{
-        guard let currentMonthSpendings = user?.currentMonthSpendings else {return}
+        guard let currentMonthSpendings = user?.currentMonthSpendings else {
+            monthlyCategoryExpenses = []
+            return
+        }
         monthlyCategoryExpenses = currentMonthSpendings.filter{$0.spentCategory == category.name}
     }
     
