@@ -17,11 +17,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     FirebaseApp.configure()
     return true
   }
-    func application(_ application: UIApplication, open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey: Any])
-      -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
-    }
+//    func application(_ application: UIApplication, open url: URL,
+//                     options: [UIApplication.OpenURLOptionsKey: Any])
+//      -> Bool {
+//      return GIDSignIn.sharedInstance.handle(url)
+//    }
 }
 
 @main
@@ -29,9 +29,8 @@ struct SaverApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @State private var userState = UserState.showOnboarding
+    @State private var userState = UserState.unAuthorized
     @State private var progress = false 
-    
     
     var body: some Scene {
         WindowGroup {
@@ -51,7 +50,7 @@ struct SaverApp: App {
                 .navigationBarHidden(true)
                 .overlay(overlayView: CustomProgressView(), show: $progress)                
                 .onAppear() {
-    
+
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if user != nil {
                                 userState = .signedIn
@@ -64,7 +63,7 @@ struct SaverApp: App {
                                 userState = .showOnboarding
                                 progress = false
                             }
-                               
+
                         }
                     }
                 }

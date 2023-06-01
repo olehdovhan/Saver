@@ -21,7 +21,7 @@ class MainScreenViewModel: ObservableObject {
     @Published var totalExpense: Double = .zero
     @Published var cashBalance: Double = .zero
     
-    @Published var progress = true
+    @Published var progress = false 
     
     @Published var cashSource: String = ""
     @Published var cashSources: [CashSource] = []
@@ -30,7 +30,7 @@ class MainScreenViewModel: ObservableObject {
     @Published var urlImage: URL?
     
     init(){
-        self.getUser()
+     //   self.getUser()
     }
     
     func signOut() {

@@ -295,7 +295,11 @@ struct MainScreen: View {
                 viewModel.signOut()
             }
         }
+        .onAppear() {
+            print("here")
+        }
         .onDisappear() {
+            guard FirebaseUserManager.shared.userRef != nil else { return }
             FirebaseUserManager.shared.userRef.removeAllObservers()
         }
     }

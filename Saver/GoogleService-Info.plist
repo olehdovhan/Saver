@@ -2,22 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>399211891487-s1n4sear33h8913h731i0dh697umq292.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.399211891487-s1n4sear33h8913h731i0dh697umq292</string>
 	<key>API_KEY</key>
-	<string>AIzaSyANt4dlzpZT8hLLcLXSLc3XuAP-q-d-H7o</string>
+	<string>AIzaSyDbS_3RXo8gqGbj4qcN9SJzv_bUdcuiH2E</string>
 	<key>GCM_SENDER_ID</key>
-	<string>399211891487</string>
+	<string>805772766287</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.olehdovhan.app.Saver</string>
 	<key>PROJECT_ID</key>
-	<string>saver-2d11d</string>
+	<string>saver-8c9c4</string>
 	<key>STORAGE_BUCKET</key>
-	<string>saver-2d11d.appspot.com</string>
+	<string>saver-8c9c4.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:399211891487:ios:5dd73d9ba9018dd35fbe2a</string>
+	<string>1:805772766287:ios:7767f5e1b4544c59850e3a</string>
 </dict>
 </plist>

@@ -102,11 +102,11 @@ class SpendingsCalendarViewModel: ObservableObject {
     }
     
     init() {
-        FirebaseUserManager.shared.observeUser {
-            self.currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
-            self.currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms ?? []
-            self.updateDailyTransactions()
-        }
+//        FirebaseUserManager.shared.observeUser {
+//            self.currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
+//            self.currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms ?? []
+//            self.updateDailyTransactions()
+//        }
     }
     
     func isSpendOnThis(day date: Date) -> Bool{
