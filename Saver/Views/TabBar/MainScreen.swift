@@ -40,7 +40,6 @@ struct MainScreen: View {
     let itemPadding: CGFloat = 6
     
     @State var userRef: DatabaseReference!
-    @State var tasks = [TaskFirModel]()
     
     var isBlur: Bool {
         limitPurchaseCategoryViewShow || limitCashSourcesViewShow || expenseViewShow || incomeViewShow || addCashSourceViewShow || addPurchaseCategoryViewShow || purchaseDetailViewShow || isTransferViewShow

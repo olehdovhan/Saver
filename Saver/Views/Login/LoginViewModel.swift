@@ -89,6 +89,7 @@ class LoginViewModel: ObservableObject {
                                                                                    PurchaseCategory(name: "Household", iconName: "iconHousehold"),
                                                                                    PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
                                                                                    PurchaseCategory(name: "Health", iconName: "iconHealth")])
+                                
                                 userRef.child(firUser.uid).setValue(["userDataModel": dataUserModel.createDic()])
                             }
                             print("hasn`t child")
