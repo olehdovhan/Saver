@@ -30,7 +30,7 @@ class MainScreenViewModel: ObservableObject {
     @Published var urlImage: URL?
     
     init(){
-     //   self.getUser()
+        self.getUser()
     }
     
     func signOut() {

@@ -102,11 +102,11 @@ class SpendingsCalendarViewModel: ObservableObject {
     }
     
     init() {
-//        FirebaseUserManager.shared.observeUser {
-//            self.currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
-//            self.currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms ?? []
-//            self.updateDailyTransactions()
-//        }
+        FirebaseUserManager.shared.observeUser {
+            self.currentMonthSpendings = FirebaseUserManager.shared.userModel?.currentMonthSpendings ?? []
+            self.currentMonthIncoms = FirebaseUserManager.shared.userModel?.currentMonthIncoms ?? []
+            self.updateDailyTransactions()
+        }
     }
     
     func isSpendOnThis(day date: Date) -> Bool{
@@ -122,7 +122,7 @@ class SpendingsCalendarViewModel: ObservableObject {
         let dailySpendings = currentMonthSpendings.filter{isSameDay(date1: $0.expenseDate, date2: selectedDate)}
         let dailyIncomes = currentMonthIncoms.filter{isSameDay(date1: $0.incomeDate, date2: selectedDate)}
         var transactions: [TransactionsModel] = []
-//        spending.expenseDate.filterTime()
+//      spending.expenseDate.filterTime()
         for spending in dailySpendings {
             transactions.append(TransactionsModel(time: spending.expenseDate,
                                                   amount: "-\(spending.amount.clean)",
@@ -136,12 +136,9 @@ class SpendingsCalendarViewModel: ObservableObject {
                                                   category: income.cashSource,
                                                   comment: income.comment))
         }
-        
         dailyTransactions = transactions.sorted{$0.time > $1.time}
-        
     }
 
-    
     //sample Date for Testing...
     func getSampleDate(offset: Int) -> Date {
         let calendar = Calendar.current
@@ -162,7 +159,6 @@ class SpendingsCalendarViewModel: ObservableObject {
         let date = formatter.string(from: selectedDate)
         return date.components(separatedBy: " ")
     }
-
     
     func getCurrentMonth() -> Date {
         guard let currentMonth = calendar.date(byAdding: .month,
@@ -205,12 +201,12 @@ class SpendingsCalendarViewModel: ObservableObject {
 }
 
 extension Date{
-    func formatTime()->String{
+    func formatTime() -> String{
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: self)
     }
-    func formatDateAndTime()->String{
+    func formatDateAndTime() -> String{
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM HH:mm"
         return formatter.string(from: self)

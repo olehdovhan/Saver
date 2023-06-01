@@ -48,14 +48,14 @@ class RegistrationViewModel: ObservableObject {
             let currentUser = UserFirModel(user: newUser)
             let userRef = self?.ref.child(currentUser.uid)
             
-//            guard let img = UIImage(systemName: "person.circle") else { return }
-//            FirebaseUserManager.shared.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
-//                guard let urlString = urlStringToImage else {
-//                    self?.showErrorMessage = true
-//                    self?.errorMessage = error?.localizedDescription ?? "error urlStringToImage"
-//                    return
-//                }
-                 let dataUserModel = UserModel(avatarUrlString: "urlString",
+            guard let img = UIImage(systemName: "person.circle") else { return }
+            FirebaseUserManager.shared.uploadImage(img: img, uID: currentUser.uid) { urlStringToImage in
+                guard let urlString = urlStringToImage else {
+                    self?.showErrorMessage = true
+                    self?.errorMessage = error?.localizedDescription ?? "error urlStringToImage"
+                    return
+                }
+                 let dataUserModel = UserModel(avatarUrlString: urlString,
                                                name: "UserName26",
                                                email: self?.email ?? "",
                                                registrationDate: Int(Date().millisecondsSince1970),
@@ -73,7 +73,7 @@ class RegistrationViewModel: ObservableObject {
                                                                     PurchaseCategory(name: "Entertainment", iconName: "iconEntertainment"),
                                                                     PurchaseCategory(name: "Health", iconName: "iconHealth")])
                 userRef?.setValue(["userDataModel": dataUserModel.createDic()])
-          //  }
+            }
         }
     }
 }
