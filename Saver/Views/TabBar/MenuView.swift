@@ -18,17 +18,20 @@ struct MenuView: View {
     var body: some View {
             VStack {
                 Spacer().frame(height: 20)
-                if  let img = userModelImage{
-                    
-                    Image(uiImage: img)
-                        .resizable()
+              ZStack {
+                if let img = userModelImage {
+                        Image(uiImage: img)
+                            .resizable()
+                            .frame(width: hRatio(250), height: hRatio(250))
+                            .clipShape(Circle())
+                    } else {
+                        ZStack{
+                            Color.white
+                            ProgressView()
+                        }
                         .frame(width: hRatio(250), height: hRatio(250))
                         .clipShape(Circle())
-                } else {
-                    Image("logo")
-                        .resizable()
-                        .frame(width: hRatio(250), height: hRatio(250))
-                        .clipShape(Circle())
+                    }
                 }
                 Spacer().frame(height: 18)
                 Text(FirebaseUserManager.shared.userModel?.name ?? "Account_name")

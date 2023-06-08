@@ -38,6 +38,8 @@ struct MainScreen: View {
     let itemWidth: CGFloat = UIScreen.main.bounds.width * 0.2325
     let itemPadding: CGFloat = 6
     
+    @State private var avatarIsChanging = false
+    
     @State var userRef: DatabaseReference!
     
     var isBlur: Bool {
@@ -74,7 +76,8 @@ struct MainScreen: View {
                                 urlImage: $viewModel.urlImage,
                                 userName: $viewModel.userName,
                                 totalIncome: $viewModel.cashBalance,
-                                totalExpense: $viewModel.totalExpense)
+                                totalExpense: $viewModel.totalExpense,
+                                avatarIsChanging: $avatarIsChanging)
                         .padding(.bottom, 15)
                     
                     GeometryReader { geometry in
@@ -204,6 +207,7 @@ struct MainScreen: View {
             //crop
             if showImageCropper {
                 ImageCropper(image: $selectedImage, visible: $showImageCropper, isCircle: true) { image in
+                    avatarIsChanging = true
                     if let currentUser = Auth.auth().currentUser {
                         FirebaseUserManager.shared.uploadImage(img: image,
                                                                uID: currentUser.uid) { imgUrlString in
@@ -214,11 +218,13 @@ struct MainScreen: View {
                             }                             // 2.
                             if let urlString = FirebaseUserManager.shared.userModel?.avatarUrlString, let url = URL(string: urlString) {
                                 viewModel.urlImage = url
+                                avatarIsChanging = false
                             }
                         }
                     } else {
                         viewModel.errorMessage = "error currentUser"
                         viewModel.showErrorMessage = true
+                        avatarIsChanging = false
                     }
                 }
                 .zIndex(10)

@@ -19,6 +19,7 @@ struct BalanceView: View {
     @Binding var userName: String
     @Binding var totalIncome: Double
     @Binding var totalExpense: Double
+    @Binding var avatarIsChanging: Bool
     
     var body: some View {
         ZStack{
@@ -50,22 +51,25 @@ struct BalanceView: View {
                                 sourceType = .photoLibrary
                                 isImagePickerDisplay.toggle()
                             } label: {
-                                if  let img = userModelImage{
-                                    
-                                    Image(uiImage: img)
-                                        .resizable()
-                                        .frame(width: hRatio(50), height: hRatio(50))
-                                        .clipShape(Circle())
-                                } else if selectedImage != nil{
-                                    Image(uiImage: selectedImage!)
-                                        .resizable()
-                                        .frame(width: hRatio(50), height: hRatio(50))
-                                        .clipShape(Circle())
-                                } else {
-                                    Image("logo")
-                                        .resizable()
-                                        .frame(width: hRatio(50), height: hRatio(50))
-                                        .clipShape(Circle())
+                                ZStack {
+                                    if let img = userModelImage {
+                                        Image(uiImage: img)
+                                            .resizable()
+                                            .frame(width: hRatio(50), height: hRatio(50))
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image("logo")
+                                            .resizable()
+                                            .frame(width: hRatio(50), height: hRatio(50))
+                                            .clipShape(Circle())
+                                    }
+                                    ZStack{
+                                        Color.white
+                                        ProgressView()
+                                    }
+                                    .frame(width: hRatio(50), height: hRatio(50))
+                                    .clipShape(Circle())
+                                    .opacity(avatarIsChanging ? 1 : 0)
                                 }
                             }
                         }
@@ -91,7 +95,6 @@ struct BalanceView: View {
                                 .font(.custom("Lato-Bold", size: 16, relativeTo: .body))
                         }
                     }
-                    
                     HStack(){
                             Text("\(userName)")
                                 .foregroundColor(.white)
