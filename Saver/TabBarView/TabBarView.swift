@@ -37,12 +37,12 @@ struct TabBarView: View {
 //                    TabItem(text: "", icon: "tabIcon3")
 //                }
 //                .opacity(selectedTab == 3 ? 1 : 0)
-//
-//            Menu()
-//                .myTabItem {
-//                    TabItem(text: "", icon: "tabIcon4")
-//                }
-//                .opacity(selectedTab == 4 ? 1 : 0)
+
+              MenuView(selectedTab: $selectedTab)
+                .myTabItem {
+                    TabItem(text: "", icon: "tabIcon4")
+                }
+                .opacity(selectedTab == 3 ? 1 : 0)
         }
         .ignoresSafeArea(edges: .bottom)
 //        .onAppear {

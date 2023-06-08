@@ -21,7 +21,7 @@ class MainScreenViewModel: ObservableObject {
     @Published var totalExpense: Double = .zero
     @Published var cashBalance: Double = .zero
     
-    @Published var progress = false 
+    @Published var progress = true
     
     @Published var cashSource: String = ""
     @Published var cashSources: [CashSource] = []

@@ -76,7 +76,7 @@
 		B41618B428B1361C002629F7 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B328B1361C002629F7 /* MainScreen.swift */; };
 		B41618B628B1379A002629F7 /* ExpensesCircularDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */; };
 		B41618BA28B13962002629F7 /* SavingsGoalsDebtsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */; };
-		B41618BC28B139A6002629F7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* Menu.swift */; };
+		B41618BC28B139A6002629F7 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41618BB28B139A6002629F7 /* MenuView.swift */; };
 		B419BB6028C0CBB8002F58EC /* PieceOfPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */; };
 		B458555728B1AB660047C81E /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B458555628B1AB660047C81E /* CustomTabView.swift */; };
 		B4A9AA9628B26114001230BF /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A9AA9528B26114001230BF /* Color+Extension.swift */; };
@@ -174,7 +174,7 @@
 		B41618B328B1361C002629F7 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		B41618B528B1379A002629F7 /* ExpensesCircularDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCircularDiagram.swift; sourceTree = "<group>"; };
 		B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsDebtsView.swift; sourceTree = "<group>"; };
-		B41618BB28B139A6002629F7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		B41618BB28B139A6002629F7 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B419BB5F28C0CBB8002F58EC /* PieceOfPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceOfPie.swift; sourceTree = "<group>"; };
 		B458555628B1AB660047C81E /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		B4A9AA9528B26114001230BF /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 				66AA406F29512557002A2359 /* Calendar */,
 				B4FA432728C88A1A00FA19DB /* ComponentsCalendar */,
 				B41618B928B13962002629F7 /* SavingsGoalsDebtsView.swift */,
-				B41618BB28B139A6002629F7 /* Menu.swift */,
+				B41618BB28B139A6002629F7 /* MenuView.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -703,7 +703,7 @@
 				0C4343BC296418D300B511E8 /* Date+Extension.swift in Sources */,
 				FCB4708A29A28E9300B9AABC /* CashSourceTransferViewModel.swift in Sources */,
 				FCD4A4A0299C48A70023BD55 /* BalanceViewModel.swift in Sources */,
-				B41618BC28B139A6002629F7 /* Menu.swift in Sources */,
+				B41618BC28B139A6002629F7 /* MenuView.swift in Sources */,
 				66548D592972DEE1003D2AA0 /* TextField+Extension.swift in Sources */,
 				FCBD3EF629A66E4F00AB1589 /* SnackBarView.swift in Sources */,
 				66130997295F579700275F16 /* CashSourceView.swift in Sources */,
@@ -902,7 +902,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;
@@ -937,7 +937,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Saver/Saver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Saver/Preview Content\"";
 				DEVELOPMENT_TEAM = R53Z54YJ8K;
 				ENABLE_PREVIEWS = YES;

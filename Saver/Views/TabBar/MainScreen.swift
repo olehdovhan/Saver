@@ -27,7 +27,6 @@ struct MainScreen: View {
     @State var expenseType: String = ""
     @FocusState var editing: Bool
     @State var selectedCategory: PurchaseCategory?
-
     @State var cashSourcesData = CashSourcesData()
     @State private var scrollEffectValue: Double = 13
     @State private var activePageIndex: Int = 0
@@ -89,7 +88,7 @@ struct MainScreen: View {
                             cashSources: $viewModel.cashSources,
                             currentPageIndex: self.$activePageIndex,
                             draggingScroll: self.$draggingScroll,
-                            itemsAmount:    viewModel.cashSources.count - 1,
+                            itemsAmount: viewModel.cashSources.count - 1,
                             itemWidth: self.itemWidth,
                             itemPadding: self.itemPadding,
                             pageWidth: geometry.size.width,

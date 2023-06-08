@@ -35,7 +35,7 @@ struct BalanceView: View {
                             Button {
                                 showQuitAlert = true
                             } label: {
-                                ZStack{
+                                ZStack {
                                     Color.white.opacity(0.0025)
                                         .frame(width: hRatio(50), height: hRatio(30))
                                     Image(systemName: "rectangle.portrait.and.arrow.right")
@@ -44,7 +44,6 @@ struct BalanceView: View {
                                         .foregroundColor(.white)
                                         .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                                 }
-                                
                             }
                             
                             Button {
@@ -69,12 +68,7 @@ struct BalanceView: View {
                                         .clipShape(Circle())
                                 }
                             }
-                            
-                            
-                            
-                            
                         }
-                        
                         Spacer()
                         VStack{
                             Text("Balance")

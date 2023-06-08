@@ -107,6 +107,20 @@ final class FirebaseUserManager {
         }
     }
     
+    func deleteUser() {
+        if let currentUser = Auth.auth().currentUser {
+            currentUser.delete { error in
+                if let error = error {
+                    // An error occurred while deleting the user account
+                    print("Error deleting user account:", error.localizedDescription)
+                } else {
+                    // User account deleted successfully
+                    print("User account deleted successfully.")
+                }
+            }
+        }
+    }
+    
     private init () { }
 }
 
